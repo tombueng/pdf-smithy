@@ -72,12 +72,12 @@ QString detailOf(const PageObject &object)
     switch (object.kind) {
     case PageObject::Kind::Text:
         return i18nc(
-            "@info:shell what a text object says, in which font and at which size", "“%1”  %2 %3 pt", object.text,
+            "@info:shell what a text object says, in which font and at which size", "“%1” · %2 %3 pt", object.text,
             object.fontResource.isEmpty() ? i18nc("@item the object names no font", "none") : object.fontResource,
             points(object.fontSize));
     case PageObject::Kind::Image:
     case PageObject::Kind::InlineImage:
-        return i18nc("@info:shell a picture: its resource name and how many pixels it holds", "%1  %2 × %3 px",
+        return i18nc("@info:shell a picture: its resource name and how many pixels it holds", "%1 · %2 × %3 px",
                      object.resourceName.isEmpty() ? i18nc("@item the picture has no resource name", "none")
                                                    : object.resourceName,
                      object.pixelSize.width(), object.pixelSize.height());
@@ -85,7 +85,7 @@ QString detailOf(const PageObject &object)
     case PageObject::Kind::Shading:
         return object.resourceName.isEmpty() ? QString() : object.resourceName;
     case PageObject::Kind::Path:
-        return i18nc("@info:shell how a shape is painted", "fill %1  stroke %2  %3 pt", colourText(object.fill),
+        return i18nc("@info:shell how a shape is painted", "fill %1 · stroke %2 · %3 pt", colourText(object.fill),
                      colourText(object.stroke), points(object.lineWidth));
     }
     return {};

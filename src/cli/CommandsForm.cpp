@@ -699,7 +699,7 @@ int listAction(const QString &input, bool asJson)
 
         if (field.page >= 0 && !field.rect.isEmpty()) {
             out() << QStringLiteral("      ")
-                  << i18nc("@info where a field sits and how big it is, in points", "at %1,%2  %3 × %4 pt",
+                  << i18nc("@info where a field sits and how big it is, in points", "at %1,%2 · %3 × %4 pt",
                            points(field.rect.x()), points(field.rect.y()), points(field.rect.width()),
                            points(field.rect.height()))
                   << Qt::endl;

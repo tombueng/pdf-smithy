@@ -193,7 +193,7 @@ void reportSizes(const QString &input, const QString &output)
     const qint64 before = QFileInfo(input).size();
     const qint64 after = QFileInfo(output).size();
     if (before > 0 && after > 0 && after < before) {
-        out() << i18n("%1 → %2  (%3% smaller)", humanSize(before), humanSize(after),
+        out() << i18n("%1 → %2 (%3% smaller)", humanSize(before), humanSize(after),
                       QString::number((before - after) * 100 / before))
               << Qt::endl;
     } else if (before > 0 && after > 0) {

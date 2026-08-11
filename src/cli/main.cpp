@@ -343,7 +343,7 @@ int commandCompress(const QStringList &arguments, const QString &output, const Q
         return Success;
     }
 
-    out() << i18n("%1 → %2  (%3% smaller)", humanSize(report.originalBytes), humanSize(report.compressedBytes),
+    out() << i18n("%1 → %2 (%3% smaller)", humanSize(report.originalBytes), humanSize(report.compressedBytes),
                   QString::number(report.savedPercent()))
           << Qt::endl;
     return Success;

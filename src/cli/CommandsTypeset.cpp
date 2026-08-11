@@ -616,7 +616,7 @@ int commandMeasure(const QStringList &arguments, const QCommandLineParser &parse
         return Success;
     }
 
-    out() << i18nc("@info a measured width in points and in millimetres", "%1 pt  (%2 mm)",
+    out() << i18nc("@info a measured width in points and in millimetres", "%1 pt (%2 mm)",
                    QString::number(width, 'f', 2), QString::number(width / MillimetresToPoints, 'f', 2))
           << Qt::endl;
     return Success;

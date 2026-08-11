@@ -25,10 +25,17 @@
       <contents>Ask the warden whether the March figure includes the second island.</contents>
     </text>
 
+    <!-- The strokes go in child elements, one <gesture> per stroke, because
+         that is what XFDF says and what the reader looks for. Written as an
+         attribute instead they are quietly ignored, and what lands on the page
+         is an Ink annotation with an empty /InkList: a freehand mark that draws
+         nothing, which is exactly the thing this page exists to show. -->
     <ink page="0" rect="70,470,300,540" color="#118ab2" width="1.6"
-         title="Wren Halloway" creationdate="D:20260214094500+01'00'"
-         inklist="82,486;110,522;138,478;166,520;194,482;222,516;250,488">
+         title="Wren Halloway" creationdate="D:20260214094500+01'00'">
       <contents>The shape of the season, sketched.</contents>
+      <inklist>
+        <gesture>82,486;110,522;138,478;166,520;194,482;222,516;250,488</gesture>
+      </inklist>
     </ink>
 
     <square page="0" rect="70,300,330,440" color="#06d6a0" width="2.0"
