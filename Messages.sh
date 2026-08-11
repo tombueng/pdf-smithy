@@ -13,7 +13,10 @@ mkdir -p "$podir"
 
 python3 - <<'PY' > rc.cpp
 import glob, re, html
-for path in glob.glob('src/**/*.rc', recursive=True):
+# Sorted, because a filesystem hands its entries back in whatever
+# order it likes and an unsorted list makes the template come out
+# different on every machine.
+for path in sorted(glob.glob('src/**/*.rc', recursive=True)):
     for line in open(path, encoding='utf-8'):
         m = re.search(r'<text(?:\s+context="([^"]*)")?\s*>(.*?)</text>', line)
         if not m:
@@ -38,7 +41,7 @@ xgettext \
     --msgid-bugs-address="tombueng@gmail.com" \
     --copyright-holder="Tom Bueng" \
     -o "$podir/pdf-smithy.pot" \
-    $(find src -name '*.cpp' -o -name '*.h') rc.cpp
+    $(find src -name '*.cpp' -o -name '*.h' | LC_ALL=C sort) rc.cpp
 
 rm -f rc.cpp
 echo "Wrote $podir/pdf-smithy.pot"

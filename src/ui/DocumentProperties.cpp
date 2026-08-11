@@ -364,10 +364,12 @@ DocumentFacts readDocument(const Document *document)
         const QPDFObjectHandle names = root.getKey("/Names");
         facts.javaScript = names.isDictionary() && names.getKey("/JavaScript").isDictionary();
 
-        // The shared helper rather than one of our own: building one validates
-        // the whole EmbeddedFiles name tree, and this is read on every rebuild
-        // of the panel.
-        QPDFEmbeddedFileDocumentHelper &attachments = QPDFEmbeddedFileDocumentHelper::get(pdf);
+        // Built here rather than through the shared accessor: QPDF grew a
+        // static get() only in 12.3, and the distributions this is packaged
+        // for are still on 12.2. Constructing one costs a walk of the
+        // EmbeddedFiles name tree, which is why the shared one exists, but a
+        // panel that will not compile everywhere is the worse trade.
+        QPDFEmbeddedFileDocumentHelper attachments(pdf);
         if (attachments.hasEmbeddedFiles()) {
             facts.attachments = int(attachments.getEmbeddedFiles().size());
         }

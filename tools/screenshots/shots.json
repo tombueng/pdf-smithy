@@ -128,11 +128,24 @@
         },
         {
             "name": "properties-a-form-field",
-            "shows": "The properties sidebar with a field of the form chosen while it is being designed: its place and size, its name and label, its rules and how it looks",
+            "shows": "The properties sidebar with a field chosen while the form is being designed: its place and size, its name and label, its rules and how it looks, all of it editable. Clicked rather than picked by name, because clicking is what reaches the layer that lays the form out",
             "used-in": "properties, form-properties",
             "size": "1600x950",
             "steps": [
                 "action:mode_form",
+                "off:show_thumbnails",
+                "on:show_inspector",
+                "dock:inspector_dock,400",
+                "click:12,278,461"
+            ]
+        },
+        {
+            "name": "properties-filling-a-field-in",
+            "shows": "The properties sidebar with a field chosen while the form is being filled in: the same field, shown rather than changed, because its name and rules are the form author's and the one thing that is yours is given on the page",
+            "used-in": "properties",
+            "size": "1600x950",
+            "steps": [
+                "action:mode_view",
                 "off:show_thumbnails",
                 "on:show_inspector",
                 "dock:inspector_dock,400",
@@ -182,35 +195,35 @@
             "shows": "Trimming: the page where the grid was and the four measurements in a panel at the edge of the window",
             "used-in": "arranging-trimming",
             "size": "1500x900",
-            "steps": ["page:4", "action:page_crop"]
+            "steps": ["action:page_crop"]
         },
         {
             "name": "redact",
             "shows": "Redaction: the marking tools, the list of marked areas, the words that will be destroyed, and the box saying what this does and does not do",
             "used-in": "redaction, redaction-marking",
             "size": "1500x900",
-            "steps": ["page:3", "action:page_redact"]
+            "steps": ["action:page_redact"]
         },
         {
             "name": "sign",
             "shows": "Signing: the stored signatures on one side and the page to put one on beside them",
             "used-in": "signing, signing-placing",
             "size": "1500x900",
-            "steps": ["page:13", "action:page_sign"]
+            "steps": ["action:page_sign"]
         },
         {
             "name": "watermark",
             "shows": "A watermark previewed on the page itself, drawn the way it will be written",
             "used-in": "signing-watermark",
             "size": "1500x900",
-            "steps": ["page:5", "action:page_watermark"]
+            "steps": ["action:page_watermark"]
         },
         {
             "name": "page-numbers",
             "shows": "Page numbers and Bates stamping, with the stamp shown where it will land and a line saying what this page will say",
             "used-in": "signing-numbering",
             "size": "1500x900",
-            "steps": ["page:5", "action:page_number"]
+            "steps": ["action:page_number"]
         },
 
         {
@@ -290,7 +303,7 @@
             "name": "check-the-document",
             "shows": "The preflight check: a profile, what it found grouped so that anything which would get the file rejected is at the top, and the box headed what was not checked",
             "used-in": "tools-preflight",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_preflight"]
@@ -299,7 +312,7 @@
             "name": "fonts",
             "shows": "Every font the document uses, whether it travels with the file, whether only part of it is there, and whether its text can be copied out",
             "used-in": "tools-fonts",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_fonts"]
@@ -308,7 +321,7 @@
             "name": "colour",
             "shows": "What the document does with colour: its spaces, its spot inks, whether it carries a profile, and how thin its thinnest stroke is",
             "used-in": "tools-colour",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_colour"]
@@ -317,7 +330,7 @@
             "name": "pictures",
             "shows": "Every picture in the document with its effective resolution on the page rather than its pixel count",
             "used-in": "tools-pictures",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_images"]
@@ -326,7 +339,7 @@
             "name": "page-setup",
             "shows": "The five boxes a page can carry, per page and in millimetres, saying absent where a page defines none",
             "used-in": "tools-layout",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_layout"]
@@ -335,7 +348,7 @@
             "name": "the-page-as-a-list",
             "shows": "What a page draws, as a list, topmost first, with the boxes on the page and the rows beside it being the same list twice",
             "used-in": "tools-object-list",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_object_list"]
@@ -344,7 +357,7 @@
             "name": "set-text-as-pages",
             "shows": "Making a document out of typed or pasted text, with the preview written by the same engine that writes the finished document",
             "used-in": "tools-typeset",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_typeset"]
@@ -353,7 +366,7 @@
             "name": "form-behaviour-and-answers",
             "shows": "The parts of a form that are not a gesture on a page: its fields, the tab order, behaviour, the answers, and placing a field by its four numbers",
             "used-in": "form-behaviour",
-            "grab": "both",
+            "grab": "active",
             "dialogs": "leave",
             "final-settle": 3000,
             "steps": ["action:tool_form_behaviour"]
