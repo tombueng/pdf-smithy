@@ -181,7 +181,9 @@ QWidget *WatermarkEditor::buildPanel()
     sizeRow->addWidget(new QLabel(i18nc("@label:chooser", "Colour:"), textPage));
     sizeRow->addWidget(m_colourButton, 1);
     textLayout->addLayout(sizeRow);
-    textLayout->addWidget(new QLabel(i18nc("@label:slider", "How faint:"), textPage));
+    // The slider carries opacity, so it runs from faint on the left to solid on
+    // the right. The caption has to run the same way round.
+    textLayout->addWidget(new QLabel(i18nc("@label:slider how solid the watermark is", "How strong:"), textPage));
     textLayout->addWidget(m_opacity);
     textLayout->addWidget(new QLabel(i18nc("@label:slider", "Angle:"), textPage));
     textLayout->addWidget(m_angle);
@@ -375,7 +377,9 @@ bool WatermarkEditor::commit(QString *error)
     }
     if (!m_processor) {
         if (error) {
-            *error = i18n("This editor has nothing to stamp with.");
+            *error = i18nc("@info a fault inside the program, not anything the reader did",
+                           "Nothing was stamped: this editor has no document behind it. That is a fault in the "
+                           "program, not in your file.");
         }
         return false;
     }

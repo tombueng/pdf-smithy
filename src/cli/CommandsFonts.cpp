@@ -255,8 +255,8 @@ int listFonts(const QStringList &arguments, const QCommandLineParser &parser)
               << Qt::endl;
     }
     if (noUnicode > 0) {
-        out() << i18np("%1 has no /ToUnicode map, so its text cannot be copied out or searched.",
-                       "%1 have no /ToUnicode map, so their text cannot be copied out or searched.", noUnicode)
+        out() << i18np("%1 of them has no /ToUnicode map, so its text cannot be copied out or searched.",
+                       "%1 of them have no /ToUnicode map, so their text cannot be copied out or searched.", noUnicode)
               << Qt::endl;
     }
     if (total > 0) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-08-11 08:16+0200\n"
+"POT-Creation-Date: 2026-08-11 08:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -539,7 +539,7 @@ msgstr ""
 #: src/cli/CommandsForm.cpp:941 src/cli/CommandsImages.cpp:839
 #: src/cli/CommandsObjects.cpp:321 src/cli/CommandsTypeset.cpp:738
 #: src/cli/main.cpp:910 src/cli/main.cpp:1268 src/cli/main.cpp:1368
-#: src/cli/main.cpp:1551 src/cli/main.cpp:1790
+#: src/cli/main.cpp:1551 src/cli/main.cpp:1803
 #, kde-format
 msgid "Note: %1"
 msgstr ""
@@ -733,9 +733,12 @@ msgstr[1] ""
 
 #: src/cli/CommandsFonts.cpp:258
 #, kde-format
-msgid "%1 has no /ToUnicode map, so its text cannot be copied out or searched."
+msgid ""
+"%1 of them has no /ToUnicode map, so its text cannot be copied out or "
+"searched."
 msgid_plural ""
-"%1 have no /ToUnicode map, so their text cannot be copied out or searched."
+"%1 of them have no /ToUnicode map, so their text cannot be copied out or "
+"searched."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1042,16 +1045,16 @@ msgstr ""
 #, kde-format
 msgid ""
 "Give the field a name with --name. That is the name filling in addresses, "
-"and a full stop in it makes a group: Adresse.Strasse and Adresse.Ort belong "
-"together."
+"and a full stop in it makes a group: “Address.Street” and “Address.Town” "
+"belong together."
 msgstr ""
 
 #: src/cli/CommandsForm.cpp:348 src/cli/CommandsForm.cpp:922
 #: src/cli/CommandsImages.cpp:67 src/cli/CommandsLayout.cpp:708
 #: src/cli/CommandsLayout.cpp:816 src/cli/CommandsObjects.cpp:203
 #: src/cli/CommandsObjects.cpp:450 src/cli/main.cpp:972
-#: src/core/PageRange.cpp:93 src/core/PageRange.cpp:115
-#: src/core/PageRange.cpp:121
+#: src/core/PageRange.cpp:158 src/core/PageRange.cpp:180
+#: src/core/PageRange.cpp:186
 #, kde-format
 msgid "“%1” is not a page number."
 msgstr ""
@@ -3142,7 +3145,7 @@ msgid "Say which picture with --image."
 msgstr ""
 
 #: src/cli/CommandsObjects.cpp:818 src/cli/main.cpp:414
-#: src/ui/SignEditor.cpp:269 src/ui/WatermarkEditor.cpp:328
+#: src/ui/SignEditor.cpp:271 src/ui/WatermarkEditor.cpp:330
 #, kde-format
 msgid "“%1” could not be read as an image."
 msgstr ""
@@ -4792,12 +4795,47 @@ msgid_plural "Redacted %1 areas."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1773
+#: src/cli/main.cpp:1775
 #, kde-format
-msgid "Removed  %1 characters, %2 pictures, %3 drawings, %4 annotations"
-msgstr ""
+msgctxt "@item one entry in the list of what a redaction removed"
+msgid "%1 character"
+msgid_plural "%1 characters"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/cli/main.cpp:1777
+#, kde-format
+msgctxt "@item one entry in the list of what a redaction removed"
+msgid "%1 picture"
+msgid_plural "%1 pictures"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/main.cpp:1779
+#, kde-format
+msgctxt "@item one entry in the list of what a redaction removed"
+msgid "%1 drawing"
+msgid_plural "%1 drawings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/main.cpp:1781
+#, kde-format
+msgctxt "@item one entry in the list of what a redaction removed"
+msgid "%1 annotation"
+msgid_plural "%1 annotations"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/main.cpp:1784
+#, kde-format
+msgctxt ""
+"@info each argument is already a count with its own noun, such as “3 "
+"pictures”"
+msgid "Removed %1, %2, %3, %4"
+msgstr ""
+
+#: src/cli/main.cpp:1787
 #, kde-format
 msgctxt "@info"
 msgid "Edited %1 picture pixel by pixel."
@@ -4805,58 +4843,62 @@ msgid_plural "Edited %1 pictures pixel by pixel."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1786
+#: src/cli/main.cpp:1797
 #, kde-format
-msgid "Flattened to an image, losing selectable text: page %1"
-msgstr ""
+msgctxt "@info %2 is a comma-separated list of page numbers"
+msgid "Flattened one page to an image, losing its selectable text: page %2"
+msgid_plural ""
+"Flattened %1 pages to an image, losing their selectable text: pages %2"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/cli/main.cpp:1800
+#: src/cli/main.cpp:1813
 #, kde-format
 msgid "ocr needs a file."
 msgstr ""
 
-#: src/cli/main.cpp:1803
+#: src/cli/main.cpp:1816
 #, kde-format
 msgid "ocr needs an output file (-o)."
 msgstr ""
 
-#: src/cli/main.cpp:1817
+#: src/cli/main.cpp:1830
 #, kde-format
 msgid "Page %1 of %2…"
 msgstr ""
 
-#: src/cli/main.cpp:1830
+#: src/cli/main.cpp:1843
 #, kde-format
 msgid "Recognised %1 word."
 msgid_plural "Recognised %1 words."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1832
+#: src/cli/main.cpp:1845
 #, kde-format
 msgid "Skipped %1 page that already had text."
 msgid_plural "Skipped %1 pages that already had text."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1837
+#: src/cli/main.cpp:1850
 #, kde-format
 msgid "Straightened %1 page, worst tilt %2°."
 msgid_plural "Straightened %1 pages, worst tilt %2°."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1909
+#: src/cli/main.cpp:1922
 #, kde-format
 msgid "Edit PDF documents from the command line."
 msgstr ""
 
-#: src/cli/main.cpp:1910 src/main.cpp:35
+#: src/cli/main.cpp:1923 src/main.cpp:35
 #, kde-format
 msgid "© 2026 Tom Bueng"
 msgstr ""
 
-#: src/cli/main.cpp:1915
+#: src/cli/main.cpp:1928
 #, kde-format
 msgid ""
 "PDF Smithy (command line)\n"
@@ -4894,7 +4936,7 @@ msgid ""
 "archival\n"
 msgstr ""
 
-#: src/cli/main.cpp:1943
+#: src/cli/main.cpp:1956
 #, kde-format
 msgid ""
 "\n"
@@ -4945,189 +4987,189 @@ msgid ""
 "so \"pages FILE --keep 1,1,2-4\" writes page 1 twice."
 msgstr ""
 
-#: src/cli/main.cpp:1982
+#: src/cli/main.cpp:1995
 #, kde-format
 msgid "The command to run."
 msgstr ""
 
-#: src/cli/main.cpp:1987
+#: src/cli/main.cpp:2000
 #, kde-format
 msgid "Where to write the result."
 msgstr ""
 
-#: src/cli/main.cpp:1988
+#: src/cli/main.cpp:2001
 #, kde-format
 msgid "Machine-readable output."
 msgstr ""
 
-#: src/cli/main.cpp:1989
+#: src/cli/main.cpp:2002
 #, kde-format
 msgid "Pages to keep, e.g. 1-3,7,9-last."
 msgstr ""
 
-#: src/cli/main.cpp:1991
+#: src/cli/main.cpp:2004
 #, kde-format
 msgid "Rotate pages, e.g. 1-3:90,7:180."
 msgstr ""
 
-#: src/cli/main.cpp:1993
+#: src/cli/main.cpp:2006
 #, kde-format
 msgid "Split into chunks of this many pages."
 msgstr ""
 
-#: src/cli/main.cpp:1996
+#: src/cli/main.cpp:2009
 #, kde-format
 msgid "Split into one file per range, e.g. 1-3,4-9."
 msgstr ""
 
-#: src/cli/main.cpp:1998
+#: src/cli/main.cpp:2011
 #, kde-format
 msgid "Split into pieces no larger than this, e.g. 5M."
 msgstr ""
 
-#: src/cli/main.cpp:2000
+#: src/cli/main.cpp:2013
 #, kde-format
 msgid "Compression: lossless, balanced, strong or extreme."
 msgstr ""
 
-#: src/cli/main.cpp:2001
+#: src/cli/main.cpp:2014
 #, kde-format
 msgid "Convert to grayscale while compressing."
 msgstr ""
 
-#: src/cli/main.cpp:2002
+#: src/cli/main.cpp:2015
 #, kde-format
 msgid "OCR languages, e.g. deu+eng."
 msgstr ""
 
-#: src/cli/main.cpp:2004
+#: src/cli/main.cpp:2017
 #, kde-format
 msgid "Correct crooked scans."
 msgstr ""
 
-#: src/cli/main.cpp:2005
+#: src/cli/main.cpp:2018
 #, kde-format
 msgid "Signature image to stamp."
 msgstr ""
 
-#: src/cli/main.cpp:2007
+#: src/cli/main.cpp:2020
 #, kde-format
 msgid "Where to put it: bottom-right, centre, top-left…"
 msgstr ""
 
-#: src/cli/main.cpp:2009
+#: src/cli/main.cpp:2022
 #, kde-format
 msgid "Width as a fraction of the page, e.g. 0.3."
 msgstr ""
 
-#: src/cli/main.cpp:2015
+#: src/cli/main.cpp:2028
 #, kde-format
 msgid "Distance from the page edge, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2017
+#: src/cli/main.cpp:2030
 #, kde-format
 msgid "Watermark text."
 msgstr ""
 
-#: src/cli/main.cpp:2018
+#: src/cli/main.cpp:2031
 #, kde-format
 msgid "Watermark angle in degrees."
 msgstr ""
 
-#: src/cli/main.cpp:2020
+#: src/cli/main.cpp:2033
 #, kde-format
 msgid "Watermark strength, 1 to 100 percent."
 msgstr ""
 
-#: src/cli/main.cpp:2022
+#: src/cli/main.cpp:2035
 #, kde-format
 msgid "Watermark colour, a name or #rrggbb."
 msgstr ""
 
-#: src/cli/main.cpp:2025
+#: src/cli/main.cpp:2038
 #, kde-format
 msgid "Draw the watermark as an outline, keeping the page readable."
 msgstr ""
 
-#: src/cli/main.cpp:2026
+#: src/cli/main.cpp:2039
 #, kde-format
 msgid "Which pages, e.g. 1-3,last. Default: all."
 msgstr ""
 
-#: src/cli/main.cpp:2029
+#: src/cli/main.cpp:2042
 #, kde-format
 msgid "Fit images into a4, a3, a5, letter or legal."
 msgstr ""
 
-#: src/cli/main.cpp:2030
+#: src/cli/main.cpp:2043
 #, kde-format
 msgid "Resolution for image export, in dots per inch."
 msgstr ""
 
-#: src/cli/main.cpp:2032
+#: src/cli/main.cpp:2045
 #, kde-format
 msgid "Image format: png, jpeg or tiff."
 msgstr ""
 
-#: src/cli/main.cpp:2035
+#: src/cli/main.cpp:2048
 #, kde-format
 msgid "JPEG quality when importing, 0 keeps the pixels."
 msgstr ""
 
-#: src/cli/main.cpp:2038
+#: src/cli/main.cpp:2051
 #, kde-format
 msgid "Strip metadata, JavaScript and embedded files."
 msgstr ""
 
-#: src/cli/main.cpp:2039
+#: src/cli/main.cpp:2052
 #, kde-format
 msgid "Password to set."
 msgstr ""
 
-#: src/cli/main.cpp:2042
+#: src/cli/main.cpp:2055
 #, kde-format
 msgid "Password the input already has, if any."
 msgstr ""
 
-#: src/cli/main.cpp:2044
+#: src/cli/main.cpp:2057
 #, kde-format
 msgid "Remove the password instead of setting one."
 msgstr ""
 
-#: src/cli/main.cpp:2045
+#: src/cli/main.cpp:2058
 #, kde-format
 msgid "Ask readers not to print."
 msgstr ""
 
-#: src/cli/main.cpp:2046
+#: src/cli/main.cpp:2059
 #, kde-format
 msgid "Ask readers not to copy text."
 msgstr ""
 
-#: src/cli/main.cpp:2047
+#: src/cli/main.cpp:2060
 #, kde-format
 msgid "Split wherever a bookmark starts."
 msgstr ""
 
-#: src/cli/main.cpp:2050
+#: src/cli/main.cpp:2063
 #, kde-format
 msgid ""
 "A colour profile to embed: sRGB for “archive”, a CMYK printing condition for "
 "“to-pdfx”. Leave out to look for one on the system."
 msgstr ""
 
-#: src/cli/main.cpp:2053
+#: src/cli/main.cpp:2066
 #, kde-format
 msgid "Document title to write."
 msgstr ""
 
-#: src/cli/main.cpp:2055
+#: src/cli/main.cpp:2068
 #, kde-format
 msgid "Document author to write."
 msgstr ""
 
-#: src/cli/main.cpp:2059
+#: src/cli/main.cpp:2072
 #, kde-format
 msgid ""
 "How different two pixels may be before they count as changed, in levels of "
@@ -5135,196 +5177,196 @@ msgid ""
 "between 0 and 1."
 msgstr ""
 
-#: src/cli/main.cpp:2063
+#: src/cli/main.cpp:2076
 #, kde-format
 msgid "Treat a different line break as a change."
 msgstr ""
 
-#: src/cli/main.cpp:2065
+#: src/cli/main.cpp:2078
 #, kde-format
 msgid "Write a side-by-side picture of one page, with -o."
 msgstr ""
 
-#: src/cli/main.cpp:2067
+#: src/cli/main.cpp:2080
 #, kde-format
 msgid "Folder to write the finished files into."
 msgstr ""
 
-#: src/cli/main.cpp:2070
+#: src/cli/main.cpp:2083
 #, kde-format
 msgid ""
 "What to do to each file: compress, sanitize, flatten-comments, flatten-form "
 "or ocr."
 msgstr ""
 
-#: src/cli/main.cpp:2074
+#: src/cli/main.cpp:2087
 #, kde-format
 msgid "Replace a line, as PAGE:LINE=New text. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2076
+#: src/cli/main.cpp:2089
 #, kde-format
 msgid "Which page to list the text of."
 msgstr ""
 
-#: src/cli/main.cpp:2079
+#: src/cli/main.cpp:2092
 #, kde-format
 msgid "Fill in a field, as NAME=VALUE. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2081
+#: src/cli/main.cpp:2094
 #, kde-format
 msgid "Add a bookmark, as PAGE:Title. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2083
+#: src/cli/main.cpp:2096
 #, kde-format
 msgid "Replace the table of contents from a JSON file, as --json writes it."
 msgstr ""
 
-#: src/cli/main.cpp:2086
+#: src/cli/main.cpp:2099
 #, kde-format
 msgid "Write the comments to an XFDF file, without the document."
 msgstr ""
 
-#: src/cli/main.cpp:2089
+#: src/cli/main.cpp:2102
 #, kde-format
 msgid "Read comments from an XFDF file and add them."
 msgstr ""
 
-#: src/cli/main.cpp:2090
+#: src/cli/main.cpp:2103
 #, kde-format
 msgid "Show the comments instead of changing them."
 msgstr ""
 
-#: src/cli/main.cpp:2092
+#: src/cli/main.cpp:2105
 #, kde-format
 msgid "Highlight an area, as PAGE:X,Y,WIDTH,HEIGHT. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2094
+#: src/cli/main.cpp:2107
 #, kde-format
 msgid "Put a note marker at PAGE:X,Y. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2099
+#: src/cli/main.cpp:2112
 #, kde-format
 msgid "Take every comment out, leaving form fields alone."
 msgstr ""
 
-#: src/cli/main.cpp:2100
+#: src/cli/main.cpp:2113
 #, kde-format
 msgid "Name to put on the comment."
 msgstr ""
 
-#: src/cli/main.cpp:2103
+#: src/cli/main.cpp:2116
 #, kde-format
 msgid "Draw the comments into the pages and remove them."
 msgstr ""
 
-#: src/cli/main.cpp:2105
+#: src/cli/main.cpp:2118
 #, kde-format
 msgid "How many pages go on one sheet, e.g. 2, 4 or 9."
 msgstr ""
 
-#: src/cli/main.cpp:2107
+#: src/cli/main.cpp:2120
 #, kde-format
 msgid "Exact arrangement as COLUMNSxROWS, e.g. 2x3."
 msgstr ""
 
-#: src/cli/main.cpp:2109
+#: src/cli/main.cpp:2122
 #, kde-format
 msgid "Gap between the slots, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2112
+#: src/cli/main.cpp:2125
 #, kde-format
 msgid "Empty border around the sheet, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2114
+#: src/cli/main.cpp:2127
 #, kde-format
 msgid "Draw a hairline around each slot."
 msgstr ""
 
-#: src/cli/main.cpp:2115
+#: src/cli/main.cpp:2128
 #, kde-format
 msgid "Fill downwards before moving right."
 msgstr ""
 
-#: src/cli/main.cpp:2117
+#: src/cli/main.cpp:2130
 #, kde-format
 msgid ""
 "Area to redact, as PAGE:X,Y,WIDTH,HEIGHT in points from the bottom-left "
 "corner. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2121
+#: src/cli/main.cpp:2134
 #, kde-format
 msgid "Leave the gap open instead of painting it black."
 msgstr ""
 
-#: src/cli/main.cpp:2122
+#: src/cli/main.cpp:2135
 #, kde-format
 msgid "Find the empty border and trim it."
 msgstr ""
 
-#: src/cli/main.cpp:2123
+#: src/cli/main.cpp:2136
 #, kde-format
 msgid "Remove the crop instead of setting one."
 msgstr ""
 
-#: src/cli/main.cpp:2124
+#: src/cli/main.cpp:2137
 #, kde-format
 msgid "Points to trim from the left."
 msgstr ""
 
-#: src/cli/main.cpp:2126
+#: src/cli/main.cpp:2139
 #, kde-format
 msgid "Points to trim from the right."
 msgstr ""
 
-#: src/cli/main.cpp:2128
+#: src/cli/main.cpp:2141
 #, kde-format
 msgid "Points to trim from the top."
 msgstr ""
 
-#: src/cli/main.cpp:2130
+#: src/cli/main.cpp:2143
 #, kde-format
 msgid "Points to trim from the bottom."
 msgstr ""
 
-#: src/cli/main.cpp:2132
+#: src/cli/main.cpp:2145
 #, kde-format
 msgid "Prefix for Bates numbering, e.g. ACME-."
 msgstr ""
 
-#: src/cli/main.cpp:2134
+#: src/cli/main.cpp:2147
 #, kde-format
 msgid "Zero padding for the Bates number."
 msgstr ""
 
-#: src/cli/main.cpp:2136
+#: src/cli/main.cpp:2149
 #, kde-format
 msgid "Number the first stamped page as this."
 msgstr ""
 
-#: src/cli/main.cpp:2138
+#: src/cli/main.cpp:2151
 #, kde-format
 msgid "Text size in points."
 msgstr ""
 
-#: src/cli/main.cpp:2142
+#: src/cli/main.cpp:2155
 #, kde-format
 msgid "Recognise text even on pages that already have some."
 msgstr ""
 
-#: src/cli/main.cpp:2284
+#: src/cli/main.cpp:2297
 #, kde-format
 msgid "This build has no OCR support."
 msgstr ""
 
-#: src/cli/main.cpp:2297
+#: src/cli/main.cpp:2310
 #, kde-format
 msgid "Unknown command “%1”."
 msgstr ""
@@ -5523,7 +5565,7 @@ msgstr ""
 #: src/core/Compressor.cpp:222 src/core/Convert.cpp:2388
 #: src/core/Encryption.cpp:42 src/core/ImageIO.cpp:70 src/core/Metadata.cpp:42
 #: src/core/Overlay.cpp:90 src/core/PageCrop.cpp:77 src/core/PageLayout.cpp:571
-#: src/core/Preflight.cpp:2646 src/core/Preflight.cpp:2932
+#: src/core/Preflight.cpp:2646 src/core/Preflight.cpp:2935
 #: src/core/ScanProcessor.cpp:319
 #, kde-format
 msgid "Cannot write to “%1”."
@@ -5560,7 +5602,7 @@ msgstr ""
 
 #: src/core/Archival.cpp:735 src/core/Compressor.cpp:309
 #: src/core/Convert.cpp:1756 src/core/Convert.cpp:2468
-#: src/core/Preflight.cpp:2727 src/core/Preflight.cpp:3017
+#: src/core/Preflight.cpp:2727 src/core/Preflight.cpp:3020
 #, kde-format
 msgid "Could not replace “%1”."
 msgstr ""
@@ -5785,7 +5827,7 @@ msgstr ""
 
 #: src/core/ColourTools.cpp:3532 src/core/NUp.cpp:60
 #: src/core/PageLayout.cpp:904 src/core/PageLayout.cpp:1047
-#: src/core/PageLayout.cpp:1153 src/core/PageRange.cpp:52
+#: src/core/PageLayout.cpp:1153 src/core/PageRange.cpp:119
 #, kde-format
 msgid "The document has no pages."
 msgstr ""
@@ -7715,17 +7757,47 @@ msgid ""
 "characters those hold."
 msgstr ""
 
-#: src/core/PageRange.cpp:99
+#: src/core/PageRange.cpp:42
+#, kde-format
+msgctxt ""
+"@item the word this language uses for the odd-numbered pages in a page-range "
+"box, for example “ungerade”. Several spellings may be given separated by a "
+"vertical bar, and the first one is the one the captions show. The English "
+"“odd” keeps working in every language."
+msgid "odd"
+msgstr ""
+
+#: src/core/PageRange.cpp:50
+#, kde-format
+msgctxt ""
+"@item the word this language uses for the even-numbered pages in a page-"
+"range box, for example “gerade”. Several spellings may be given separated by "
+"a vertical bar, and the first one is the one the captions show. The English "
+"“even” keeps working in every language."
+msgid "even"
+msgstr ""
+
+#: src/core/PageRange.cpp:58
+#, kde-format
+msgctxt ""
+"@item the word this language uses for the final page in a page-range box, as "
+"in “12-last”. Several spellings may be given separated by a vertical bar, "
+"and the first one is the one the captions show. The English “last” keeps "
+"working in every language."
+msgid "last"
+msgstr ""
+
+#: src/core/PageRange.cpp:164
 #, kde-format
 msgid "Page %1 is outside the document, which has %2 pages."
 msgstr ""
 
-#: src/core/PageRange.cpp:128
+#: src/core/PageRange.cpp:193
 #, kde-format
 msgid "The range %1 lies outside the document, which has %2 pages."
 msgstr ""
 
-#: src/core/PageRange.cpp:147
+#: src/core/PageRange.cpp:212
 #, kde-format
 msgid "That selects no pages."
 msgstr ""
@@ -8521,81 +8593,86 @@ msgstr ""
 msgid "Checked on %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:2879
+#: src/core/Preflight.cpp:2882
+#, kde-format
+msgid "No warnings."
+msgstr ""
+
+#: src/core/Preflight.cpp:2882
 #, kde-format
 msgid "One warning."
 msgid_plural "%1 warnings."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/Preflight.cpp:2882 src/core/Preflight.cpp:2885
+#: src/core/Preflight.cpp:2885 src/core/Preflight.cpp:2888
 #, kde-format
 msgid "Findings"
 msgstr ""
 
-#: src/core/Preflight.cpp:2883
+#: src/core/Preflight.cpp:2886
 #, kde-format
 msgid "Nothing to report."
 msgstr ""
 
-#: src/core/Preflight.cpp:2888
+#: src/core/Preflight.cpp:2891
 #, kde-format
 msgctxt "@info a finding's location"
 msgid "page %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:2889
+#: src/core/Preflight.cpp:2892
 #, kde-format
 msgctxt "@info a finding's location"
 msgid "whole document"
 msgstr ""
 
-#: src/core/Preflight.cpp:2890
+#: src/core/Preflight.cpp:2893
 #, kde-format
 msgctxt "@info severity, rule and place of a preflight finding"
 msgid "%1 · %2 · %3"
 msgstr ""
 
-#: src/core/Preflight.cpp:2893
+#: src/core/Preflight.cpp:2896
 #, kde-format
 msgctxt "@info the resource a finding is about"
 msgid " · %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:2898
+#: src/core/Preflight.cpp:2901
 #, kde-format
 msgid "Fix available (%1): %2"
 msgstr ""
 
-#: src/core/Preflight.cpp:2904
+#: src/core/Preflight.cpp:2907
 #, kde-format
 msgid "Asked for but not checked"
 msgstr ""
 
-#: src/core/Preflight.cpp:2905
+#: src/core/Preflight.cpp:2908
 #, kde-format
 msgid ""
 "The profile names these rules, and this program cannot judge them. Nothing "
 "above says anything about them either way."
 msgstr ""
 
-#: src/core/Preflight.cpp:2908
+#: src/core/Preflight.cpp:2911
 #, kde-format
 msgctxt "@info a rule id followed by what it looks for"
 msgid "%1: %2"
 msgstr ""
 
-#: src/core/Preflight.cpp:2913
+#: src/core/Preflight.cpp:2916
 #, kde-format
 msgid "What this check cannot promise"
 msgstr ""
 
-#: src/core/Preflight.cpp:2996
+#: src/core/Preflight.cpp:2999
 #, kde-format
 msgid "Preflight report for %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:3027
+#: src/core/Preflight.cpp:3030
 #, kde-format
 msgid ""
 "This is a preflight check, not a certification. A file that passes here can "
@@ -8603,7 +8680,7 @@ msgid ""
 "reach for when somebody has to sign the file off."
 msgstr ""
 
-#: src/core/Preflight.cpp:3030
+#: src/core/Preflight.cpp:3033
 #, kde-format
 msgid ""
 "Ink outside the trim box is not measured. Working out whether a mark is "
@@ -8612,7 +8689,7 @@ msgid ""
 "reported as unchecked rather than quietly passed."
 msgstr ""
 
-#: src/core/Preflight.cpp:3033
+#: src/core/Preflight.cpp:3036
 #, kde-format
 msgid ""
 "Only what is drawn on the pages themselves is examined. A font or a picture "
@@ -8620,7 +8697,7 @@ msgid ""
 "not seen."
 msgstr ""
 
-#: src/core/Preflight.cpp:3035
+#: src/core/Preflight.cpp:3038
 #, kde-format
 msgid ""
 "A font's licence is read from the embedding permission field that OpenType "
@@ -8628,7 +8705,7 @@ msgid ""
 "nothing can be said about them either way."
 msgstr ""
 
-#: src/core/Preflight.cpp:3037
+#: src/core/Preflight.cpp:3040
 #, kde-format
 msgid ""
 "Resolution is judged from where a picture is actually placed, so a picture "
@@ -8637,7 +8714,7 @@ msgid ""
 "measured."
 msgstr ""
 
-#: src/core/Preflight.cpp:3040
+#: src/core/Preflight.cpp:3043
 #, kde-format
 msgid ""
 "Whether a page is empty is decided by looking for drawing instructions, so a "
@@ -8645,7 +8722,7 @@ msgid ""
 "counts as having something on it."
 msgstr ""
 
-#: src/core/Preflight.cpp:3042
+#: src/core/Preflight.cpp:3045
 #, kde-format
 msgid ""
 "Tagging is checked for its presence and for pictures without a text "
@@ -8702,11 +8779,14 @@ msgid ""
 "to an image instead, which loses its selectable text."
 msgstr ""
 
-#: src/core/Redaction.cpp:1146
+#: src/core/Redaction.cpp:1148
 #, kde-format
+msgctxt ""
+"@info a limit of redaction; the quoted name is the “Clean Up Document…” menu "
+"entry and must read the same as that entry does"
 msgid ""
 "Attachments, and text hidden in the document's own properties, are not "
-"touched. Use Sanitise for those."
+"touched. Use “Clean Up Document” for those."
 msgstr ""
 
 #: src/core/ScanProcessor.cpp:261
@@ -9335,7 +9415,7 @@ msgstr ""
 #: src/ui/AnnotationOverlay.cpp:364 src/ui/CropEditor.cpp:118
 #: src/ui/FormDesignOverlay.cpp:569 src/ui/NumberEditor.cpp:148
 #: src/ui/NumberEditor.cpp:153 src/ui/ObjectOverlay.cpp:443
-#: src/ui/PageToolDialogs.cpp:327 src/ui/ToolColourDialog.cpp:600
+#: src/ui/PageToolDialogs.cpp:328 src/ui/ToolColourDialog.cpp:603
 #: src/ui/ToolFormBuilderDialog.cpp:587 src/ui/ToolFormBuilderDialog.cpp:694
 #: src/ui/ToolFormBuilderDialog.cpp:721 src/ui/ToolLayoutDialog.cpp:836
 #: src/ui/ToolObjectsDialog.cpp:890 src/ui/ToolObjectsDialog.cpp:892
@@ -9359,37 +9439,37 @@ msgctxt "@label:spinbox how thick a comment's line is"
 msgid "Line:"
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:382
+#: src/ui/AnnotationOverlay.cpp:390
 #, kde-format
 msgctxt "@label:listbox highlight, note, rectangle and so on"
 msgid "Kind:"
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:390
+#: src/ui/AnnotationOverlay.cpp:398
 #, kde-format
 msgid "Whoever is making the comments."
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:391
+#: src/ui/AnnotationOverlay.cpp:399
 #, kde-format
 msgctxt "@label:textbox who made the comment"
 msgid "Author:"
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:399
+#: src/ui/AnnotationOverlay.cpp:407
 #, kde-format
 msgctxt "@label:spinbox which page the comment is on"
 msgid "Page:"
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:403
+#: src/ui/AnnotationOverlay.cpp:411
 #, kde-format
 msgid ""
 "Comments sit beside the page rather than in it, so nothing underneath is "
 "changed. Nothing is written until the document is saved."
 msgstr ""
 
-#: src/ui/AnnotationOverlay.cpp:698
+#: src/ui/AnnotationOverlay.cpp:706
 #, kde-format
 msgctxt "@info %1 is a number of comments the user had made"
 msgid ""
@@ -9401,7 +9481,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/AnnotationOverlay.cpp:1377
+#: src/ui/AnnotationOverlay.cpp:1385
 #, kde-format
 msgid "This note has nothing written in it yet."
 msgstr ""
@@ -9561,12 +9641,15 @@ msgctxt "@title:window"
 msgid "Trim Pages"
 msgstr ""
 
-#: src/ui/CropEditor.cpp:268
+#: src/ui/CropEditor.cpp:269
 #, kde-format
-msgid "This editor has nothing to trim with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"Nothing was trimmed: this editor has no document behind it. That is a fault "
+"in the program, not in your file."
 msgstr ""
 
-#: src/ui/CropEditor.cpp:278
+#: src/ui/CropEditor.cpp:280
 #, kde-format
 msgctxt "@info:status"
 msgid "Restored %1 page."
@@ -9574,7 +9657,7 @@ msgid_plural "Restored %1 pages."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/CropEditor.cpp:279
+#: src/ui/CropEditor.cpp:281
 #, kde-format
 msgctxt "@info:status"
 msgid "Trimmed %1 page."
@@ -9877,8 +9960,8 @@ msgctxt "@item resolution"
 msgid "600 dpi (archival)"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:332 src/ui/PrintOptionsWidget.cpp:54
-#: src/ui/ToolColourDialog.cpp:363 src/ui/ToolImagesDialog.cpp:727
+#: src/ui/DocumentDialogs.cpp:332 src/ui/PrintOptionsWidget.cpp:61
+#: src/ui/ToolColourDialog.cpp:366 src/ui/ToolImagesDialog.cpp:727
 #: src/ui/ToolLayoutDialog.cpp:955 src/ui/ToolObjectsDialog.cpp:904
 #: src/ui/ToolObjectsDialog.cpp:1168
 #, kde-format
@@ -10979,12 +11062,15 @@ msgctxt "@title:window"
 msgid "Fill In Form"
 msgstr ""
 
-#: src/ui/FormEditor.cpp:326
+#: src/ui/FormEditor.cpp:327
 #, kde-format
-msgid "This editor has nothing to fill the form in with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"The form was not filled in: this editor has no document behind it. That is a "
+"fault in the program, not in your file."
 msgstr ""
 
-#: src/ui/FormEditor.cpp:337
+#: src/ui/FormEditor.cpp:339
 #, kde-format
 msgctxt "@info:status"
 msgid "Filled in %1 field and made the answers permanent."
@@ -10992,7 +11078,7 @@ msgid_plural "Filled in %1 fields and made the answers permanent."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/FormEditor.cpp:339
+#: src/ui/FormEditor.cpp:341
 #, kde-format
 msgctxt "@info:status"
 msgid "Filled in %1 field."
@@ -11127,7 +11213,7 @@ msgstr ""
 #, kde-format
 msgctxt ""
 "@info:status the kind of thing selected, then which one of them: \"Form "
-"field: Adresse.Strasse\""
+"field: Address.Street\""
 msgid "%1: %2"
 msgstr ""
 
@@ -11137,7 +11223,7 @@ msgstr ""
 msgid "PDF documents (*.pdf);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:134 src/ui/WatermarkEditor.cpp:321
+#: src/ui/MainWindow.cpp:134 src/ui/WatermarkEditor.cpp:323
 #, kde-format
 msgid "Images (%1);;All files (*)"
 msgstr ""
@@ -12429,7 +12515,7 @@ msgctxt "@label:textbox"
 msgid "Text:"
 msgstr ""
 
-#: src/ui/NumberEditor.cpp:174 src/ui/WatermarkEditor.cpp:211
+#: src/ui/NumberEditor.cpp:174 src/ui/WatermarkEditor.cpp:213
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Position:"
@@ -12510,12 +12596,15 @@ msgctxt "@title:window"
 msgid "Page Numbers"
 msgstr ""
 
-#: src/ui/NumberEditor.cpp:319
+#: src/ui/NumberEditor.cpp:320
 #, kde-format
-msgid "This editor has nothing to number with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"No page numbers were added: this editor has no document behind it. That is a "
+"fault in the program, not in your file."
 msgstr ""
 
-#: src/ui/NumberEditor.cpp:328
+#: src/ui/NumberEditor.cpp:330
 #, kde-format
 msgctxt "@info:status"
 msgid "Numbered %1 page."
@@ -12847,7 +12936,7 @@ msgstr[1] ""
 #: src/ui/OperationDialogs.cpp:241
 #, kde-format
 msgctxt "@option:check"
-msgid "Convert to grayscale"
+msgid "Convert to greyscale"
 msgstr ""
 
 #: src/ui/OperationDialogs.cpp:244
@@ -13658,7 +13747,7 @@ msgstr ""
 #: src/ui/PageToolDialogs.cpp:77
 #, kde-format
 msgctxt "@option:radio"
-msgid "At each bookmark (%1 found)"
+msgid "At each bookmark (one found)"
 msgid_plural "At each bookmark (%1 found)"
 msgstr[0] ""
 msgstr[1] ""
@@ -13677,55 +13766,55 @@ msgctxt "@item megabyte suffix in a spin box"
 msgid " MB"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:89
+#: src/ui/PageToolDialogs.cpp:90
 #, kde-format
-msgctxt "@info:placeholder"
-msgid "1-3, 4-9, 10-last"
+msgctxt "@info:placeholder %1 is the word for the final page, as in “10-last”"
+msgid "1-3, 4-9, 10-%1"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:90
+#: src/ui/PageToolDialogs.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Each group separated by a comma becomes its own file."
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:97
+#: src/ui/PageToolDialogs.cpp:98
 #, kde-format
 msgctxt "@title:group"
 msgid "Cut the document"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:120
+#: src/ui/PageToolDialogs.cpp:121
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Write to:"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:128
+#: src/ui/PageToolDialogs.cpp:129
 #, kde-format
 msgctxt "@label"
 msgid "This will write:"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:133
+#: src/ui/PageToolDialogs.cpp:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Split"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:189
+#: src/ui/PageToolDialogs.cpp:190
 #, kde-format
 msgid ""
 "The pieces are measured as they are written, so the exact split is only "
 "known afterwards. Nothing existing is overwritten without asking."
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:191
+#: src/ui/PageToolDialogs.cpp:192
 #, kde-format
 msgid "Pieces of at most %1 MB"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:198
+#: src/ui/PageToolDialogs.cpp:199
 #, kde-format
 msgctxt "@item"
 msgid "%1 page"
@@ -13733,13 +13822,13 @@ msgid_plural "%1 pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/PageToolDialogs.cpp:196
+#: src/ui/PageToolDialogs.cpp:197
 #, kde-format
 msgctxt "@item file name and how many pages it gets"
 msgid "%1 (%2)"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:201
+#: src/ui/PageToolDialogs.cpp:202
 #, kde-format
 msgctxt "@info"
 msgid "%1 file will be written."
@@ -13747,25 +13836,25 @@ msgid_plural "%1 files will be written."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/PageToolDialogs.cpp:307
+#: src/ui/PageToolDialogs.cpp:308
 #, kde-format
 msgctxt "@option:check"
 msgid "Draw a thin line around each page"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:308
+#: src/ui/PageToolDialogs.cpp:309
 #, kde-format
 msgctxt "@option:check"
 msgid "Fill downwards before moving right"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:312
+#: src/ui/PageToolDialogs.cpp:313
 #, kde-format
 msgctxt "@title:window"
 msgid "Arrange on Sheets"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:316
+#: src/ui/PageToolDialogs.cpp:317
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "%1 page per sheet"
@@ -13773,38 +13862,38 @@ msgid_plural "%1 pages per sheet"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/PageToolDialogs.cpp:331
+#: src/ui/PageToolDialogs.cpp:332
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Arrangement:"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:332
+#: src/ui/PageToolDialogs.cpp:333
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Border around the sheet:"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:333
+#: src/ui/PageToolDialogs.cpp:334
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Gap between pages:"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:350
+#: src/ui/PageToolDialogs.cpp:351
 #, kde-format
 msgid ""
 "Nothing is re-rendered. The pages keep their text, so the sheets stay "
 "selectable and searchable."
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:356
+#: src/ui/PageToolDialogs.cpp:357
 #, kde-format
 msgctxt "@action:button"
 msgid "Arrange"
 msgstr ""
 
-#: src/ui/PageToolDialogs.cpp:378
+#: src/ui/PageToolDialogs.cpp:379
 #, kde-format
 msgctxt "@info"
 msgid "%1 across and %2 down, on a sheet the size of one page."
@@ -13876,88 +13965,90 @@ msgid ""
 "and pictures can."
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:26
+#: src/ui/PrintOptionsWidget.cpp:28
 #, kde-format
 msgctxt "@option:check"
 msgid "Print back to front"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:27
+#: src/ui/PrintOptionsWidget.cpp:29
 #, kde-format
 msgctxt "@option:check"
-msgid "Print in grayscale"
+msgid "Print in greyscale"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:28
+#: src/ui/PrintOptionsWidget.cpp:30
 #, kde-format
 msgctxt "@option:check"
 msgid "Draw a line around each page"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:32
+#: src/ui/PrintOptionsWidget.cpp:34
 #, kde-format
 msgctxt "@title:tab"
 msgid "Pages && Layout"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:34
+#: src/ui/PrintOptionsWidget.cpp:39
 #, kde-format
-msgctxt "@info:placeholder"
-msgid "All pages, or 1-4, 8, 12-last"
+msgctxt "@info:placeholder %1 is the word for the final page, as in “12-last”"
+msgid "All pages, or 1-4, 8, 12-%1"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:36
+#: src/ui/PrintOptionsWidget.cpp:42
 #, kde-format
-msgctxt "@info:tooltip"
+msgctxt ""
+"@info:tooltip %1 is the word for the odd-numbered pages and %2 the word for "
+"the even-numbered ones"
 msgid ""
 "Which pages to print. Leave empty for all.\n"
-"Ranges, single pages and “odd”/“even” all work, and a descending range "
-"prints backwards."
+"Ranges, single pages and “%1”/“%2” all work, and a descending range prints "
+"backwards."
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:47
+#: src/ui/PrintOptionsWidget.cpp:54
 #, kde-format
 msgctxt "@item scaling"
 msgid "Shrink oversized pages"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:48
+#: src/ui/PrintOptionsWidget.cpp:55
 #, kde-format
 msgctxt "@item scaling"
 msgid "Fit to the paper"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:49
+#: src/ui/PrintOptionsWidget.cpp:56
 #, kde-format
 msgctxt "@item scaling"
 msgid "Actual size"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:50
+#: src/ui/PrintOptionsWidget.cpp:57
 #, kde-format
 msgctxt "@item scaling"
 msgid "Custom scale"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:58
+#: src/ui/PrintOptionsWidget.cpp:65
 #, kde-format
 msgctxt "@item page subset"
 msgid "Every page"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:59
+#: src/ui/PrintOptionsWidget.cpp:66
 #, kde-format
 msgctxt "@item page subset"
 msgid "Front sides only"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:60
+#: src/ui/PrintOptionsWidget.cpp:67
 #, kde-format
 msgctxt "@item page subset"
 msgid "Back sides only"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:62
+#: src/ui/PrintOptionsWidget.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -13965,14 +14056,14 @@ msgid ""
 "turn the stack over, print the back sides."
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:66 src/ui/ToolLayoutDialog.cpp:101
+#: src/ui/PrintOptionsWidget.cpp:73 src/ui/ToolLayoutDialog.cpp:101
 #: src/ui/ToolTypesetDialog.cpp:378
 #, kde-format
 msgctxt "@item millimetre suffix in a spin box"
 msgid " mm"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:69 src/ui/ToolColourDialog.cpp:367
+#: src/ui/PrintOptionsWidget.cpp:76 src/ui/ToolColourDialog.cpp:370
 #: src/ui/ToolFontsDialog.cpp:910 src/ui/ToolImagesDialog.cpp:744
 #: src/ui/ToolLayoutDialog.cpp:697 src/ui/ToolLayoutDialog.cpp:805
 #: src/ui/ToolLayoutDialog.cpp:965 src/ui/ToolLayoutDialog.cpp:1380
@@ -13981,31 +14072,31 @@ msgctxt "@label:textbox"
 msgid "Pages:"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:70
+#: src/ui/PrintOptionsWidget.cpp:77
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Layout:"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:71
+#: src/ui/PrintOptionsWidget.cpp:78
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Size:"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:72
+#: src/ui/PrintOptionsWidget.cpp:79
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Scale:"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:73
+#: src/ui/PrintOptionsWidget.cpp:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Sides:"
 msgstr ""
 
-#: src/ui/PrintOptionsWidget.cpp:74
+#: src/ui/PrintOptionsWidget.cpp:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Extra margin:"
@@ -14067,12 +14158,15 @@ msgctxt "@title:window"
 msgid "Redact"
 msgstr ""
 
-#: src/ui/RedactEditor.cpp:190
+#: src/ui/RedactEditor.cpp:191
 #, kde-format
-msgid "This editor has nothing to redact with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"Nothing was redacted: this editor has no document behind it. That is a fault "
+"in the program, not in your file."
 msgstr ""
 
-#: src/ui/RedactEditor.cpp:205
+#: src/ui/RedactEditor.cpp:207
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14084,7 +14178,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/RedactEditor.cpp:211
+#: src/ui/RedactEditor.cpp:213
 #, kde-format
 msgctxt "@info:status"
 msgid "Redacted %1 area: the content is gone, not covered."
@@ -14092,18 +14186,18 @@ msgid_plural "Redacted %1 areas: the content is gone, not covered."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/RedactEditor.cpp:276
+#: src/ui/RedactEditor.cpp:278
 #, kde-format
 msgctxt "@item marked redaction area: page number and size in points"
 msgid "Page %1: %2 × %3 pt"
 msgstr ""
 
-#: src/ui/RedactEditor.cpp:302
+#: src/ui/RedactEditor.cpp:304
 #, kde-format
 msgid "Nothing marked on this page."
 msgstr ""
 
-#: src/ui/RedactEditor.cpp:319
+#: src/ui/RedactEditor.cpp:321
 #, kde-format
 msgid ""
 "No selectable text here. On a scan that is expected: the picture itself is "
@@ -14126,7 +14220,7 @@ msgctxt "@label:slider"
 msgid "Size:"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:93 src/ui/SignEditor.cpp:253
+#: src/ui/SignEditor.cpp:93 src/ui/SignEditor.cpp:255
 #, kde-format
 msgid ""
 "Drag the signature to where it belongs, or click anywhere on the page. Pull "
@@ -14183,12 +14277,15 @@ msgctxt "@title:window"
 msgid "Sign Document"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:184
+#: src/ui/SignEditor.cpp:185
 #, kde-format
-msgid "This editor has nothing to sign with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"Nothing was signed: this editor has no document behind it. That is a fault "
+"in the program, not in your file."
 msgstr ""
 
-#: src/ui/SignEditor.cpp:192
+#: src/ui/SignEditor.cpp:194
 #, kde-format
 msgctxt "@info:status"
 msgid "Signed %1 page."
@@ -14196,76 +14293,76 @@ msgid_plural "Signed %1 pages."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/SignEditor.cpp:229
+#: src/ui/SignEditor.cpp:231
 #, kde-format
 msgid ""
 "No signature yet. Add a photo or scan of one, or draw it here. It is kept on "
 "this machine and reused next time."
 msgstr ""
 
-#: src/ui/SignEditor.cpp:260
+#: src/ui/SignEditor.cpp:262
 #, kde-format
 msgctxt "@title:window"
 msgid "Signature Image"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:261
+#: src/ui/SignEditor.cpp:263
 #, kde-format
 msgid "Images (*.png *.jpg *.jpeg *.webp *.tif *.tiff);;All files (*)"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:279 src/ui/SignEditor.cpp:326
+#: src/ui/SignEditor.cpp:281 src/ui/SignEditor.cpp:328
 #, kde-format
 msgctxt "@title:window"
 msgid "Name This Signature"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:279 src/ui/SignEditor.cpp:326
+#: src/ui/SignEditor.cpp:281 src/ui/SignEditor.cpp:328
 #, kde-format
 msgctxt "@label"
 msgid "Name:"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:288
+#: src/ui/SignEditor.cpp:290
 #, kde-format
 msgid "The signature could not be stored."
 msgstr ""
 
-#: src/ui/SignEditor.cpp:297
+#: src/ui/SignEditor.cpp:299
 #, kde-format
 msgctxt "@title:window"
 msgid "Draw Your Signature"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:301
+#: src/ui/SignEditor.cpp:303
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Again"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:305
+#: src/ui/SignEditor.cpp:307
 #, kde-format
 msgctxt "@action:button"
 msgid "Use This"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:315
+#: src/ui/SignEditor.cpp:317
 #, kde-format
 msgid "Sign in the box below."
 msgstr ""
 
-#: src/ui/SignEditor.cpp:327
+#: src/ui/SignEditor.cpp:329
 #, kde-format
 msgctxt "@item default signature name"
 msgid "My signature"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:346
+#: src/ui/SignEditor.cpp:348
 #, kde-format
 msgid "Remove the signature “%1” from this machine?"
 msgstr ""
 
-#: src/ui/SignEditor.cpp:347
+#: src/ui/SignEditor.cpp:349
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Signature"
@@ -14613,89 +14710,92 @@ msgid ""
 "highest C+M+Y+K found. Slow on a long document."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:226
+#: src/ui/ToolColourDialog.cpp:229
 #, kde-format
-msgid "Read %1 pages."
-msgstr ""
+msgctxt "@info"
+msgid "Read one page."
+msgid_plural "Read %1 pages."
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:230
+#: src/ui/ToolColourDialog.cpp:233
 #, kde-format
 msgctxt "@item nothing found"
 msgid "none"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:229
+#: src/ui/ToolColourDialog.cpp:232
 #, kde-format
 msgid "Colour spaces used: %1"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:231
+#: src/ui/ToolColourDialog.cpp:234
 #, kde-format
 msgid "Pages with RGB: %1 · pages with CMYK: %2"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:234
+#: src/ui/ToolColourDialog.cpp:237
 #, kde-format
 msgid "No spot colours."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:236
+#: src/ui/ToolColourDialog.cpp:239
 #, kde-format
 msgid "One spot colour, which is its own plate on press: %2"
 msgid_plural "%1 spot colours, each its own plate on press: %2"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:242 src/ui/ToolColourDialog.cpp:243
-#: src/ui/ToolColourDialog.cpp:244 src/ui/ToolColourDialog.cpp:245
+#: src/ui/ToolColourDialog.cpp:245 src/ui/ToolColourDialog.cpp:246
+#: src/ui/ToolColourDialog.cpp:247 src/ui/ToolColourDialog.cpp:248
 #, kde-format
 msgid "yes"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:242 src/ui/ToolColourDialog.cpp:243
-#: src/ui/ToolColourDialog.cpp:244 src/ui/ToolColourDialog.cpp:245
+#: src/ui/ToolColourDialog.cpp:245 src/ui/ToolColourDialog.cpp:246
+#: src/ui/ToolColourDialog.cpp:247 src/ui/ToolColourDialog.cpp:248
 #, kde-format
 msgid "no"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:242
+#: src/ui/ToolColourDialog.cpp:245
 #, kde-format
 msgid "ICC profile in the file: %1"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:243
+#: src/ui/ToolColourDialog.cpp:246
 #, kde-format
 msgid "Output intent: %1"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:244
+#: src/ui/ToolColourDialog.cpp:247
 #, kde-format
 msgid "Transparency: %1"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:245
+#: src/ui/ToolColourDialog.cpp:248
 #, kde-format
 msgid "Overprint set anywhere: %1"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:249
+#: src/ui/ToolColourDialog.cpp:252
 #, kde-format
 msgid "The document strokes nothing, so there are no hairlines to worry about."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:251
+#: src/ui/ToolColourDialog.cpp:254
 #, kde-format
 msgid "One stroke seen."
 msgid_plural "%1 strokes seen."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:253
+#: src/ui/ToolColourDialog.cpp:256
 #, kde-format
 msgid "None of them is a hairline. The thinnest is %1 pt."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:255
+#: src/ui/ToolColourDialog.cpp:258
 #, kde-format
 msgid ""
 "One of them is thinner than a quarter point and may vanish in print. The "
@@ -14706,93 +14806,93 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:262
+#: src/ui/ToolColourDialog.cpp:265
 #, kde-format
 msgid "What this could not deal with in place:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:269
+#: src/ui/ToolColourDialog.cpp:272
 #, kde-format
 msgid "What this cannot promise:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:291
+#: src/ui/ToolColourDialog.cpp:294
 #, kde-format
 msgctxt "@item process ink"
 msgid "Cyan"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:291
+#: src/ui/ToolColourDialog.cpp:294
 #, kde-format
 msgctxt "@item process ink"
 msgid "Magenta"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:292
+#: src/ui/ToolColourDialog.cpp:295
 #, kde-format
 msgctxt "@item process ink"
 msgid "Yellow"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:292
+#: src/ui/ToolColourDialog.cpp:295
 #, kde-format
 msgctxt "@item process ink"
 msgid "Black"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:311
+#: src/ui/ToolColourDialog.cpp:314
 #, kde-format
 msgid "The ink coverage could not be measured."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:316
+#: src/ui/ToolColourDialog.cpp:319
 #, kde-format
 msgid "Highest total ink per page, as a percentage. Over 300 is trouble:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:318
+#: src/ui/ToolColourDialog.cpp:321
 #, kde-format
 msgid "too much"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:319
+#: src/ui/ToolColourDialog.cpp:322
 #, kde-format
 msgctxt "@item ink coverage of one page"
 msgid "  Page %1: %2 %%3"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:338 src/ui/ToolFontsDialog.cpp:904
+#: src/ui/ToolColourDialog.cpp:341 src/ui/ToolFontsDialog.cpp:904
 #: src/ui/ToolLayoutDialog.cpp:524 src/ui/ToolLayoutDialog.cpp:692
 #: src/ui/ToolLayoutDialog.cpp:801 src/ui/ToolLayoutDialog.cpp:961
 #, kde-format
 msgid "All pages. Or: 1-4, 8, 12-"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:341
+#: src/ui/ToolColourDialog.cpp:344
 #, kde-format
 msgid "Left empty, a profile on this system is looked for"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:342 src/ui/ToolLayoutDialog.cpp:1103
+#: src/ui/ToolColourDialog.cpp:345 src/ui/ToolLayoutDialog.cpp:1103
 #: src/ui/ToolObjectsDialog.cpp:1143
 #, kde-format
 msgctxt "@action:button"
 msgid "Choose…"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:352
+#: src/ui/ToolColourDialog.cpp:355
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Above this brightness a colour becomes white, below it black."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:354
+#: src/ui/ToolColourDialog.cpp:357
 #, kde-format
 msgctxt "@option:check"
 msgid "Re-encode converted photographs as JPEG"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:357
+#: src/ui/ToolColourDialog.cpp:360
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -14800,37 +14900,37 @@ msgid ""
 "JPEG it came from."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:366
+#: src/ui/ToolColourDialog.cpp:369
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Into:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:368
+#: src/ui/ToolColourDialog.cpp:371
 #, kde-format
 msgctxt "@label:textbox"
 msgid "ICC profile:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:369 src/ui/ToolImagesDialog.cpp:929
+#: src/ui/ToolColourDialog.cpp:372 src/ui/ToolImagesDialog.cpp:929
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Black-and-white threshold:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:371 src/ui/ToolImagesDialog.cpp:746
+#: src/ui/ToolColourDialog.cpp:374 src/ui/ToolImagesDialog.cpp:746
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "JPEG quality:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:376
+#: src/ui/ToolColourDialog.cpp:379
 #, kde-format
 msgctxt "@action:button"
 msgid "Convert"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:391
+#: src/ui/ToolColourDialog.cpp:394
 #, kde-format
 msgid ""
 "Text and vector colour is rewritten operator by operator, which is exact: "
@@ -14838,14 +14938,14 @@ msgid ""
 "their pixels converted."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:395
+#: src/ui/ToolColourDialog.cpp:398
 #, kde-format
 msgid ""
 "This build converts into CMYK itself, through the profile, in place. The "
 "page selection is honoured and the text is not rasterised."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:398
+#: src/ui/ToolColourDialog.cpp:401
 #, kde-format
 msgid ""
 "This build has no colour management, so Ghostscript converts the whole "
@@ -14853,23 +14953,23 @@ msgid ""
 "result is a rewritten file rather than an edited one."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:407
+#: src/ui/ToolColourDialog.cpp:410
 #, kde-format
 msgctxt "@title:window"
 msgid "ICC Profile"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:408
+#: src/ui/ToolColourDialog.cpp:411
 #, kde-format
 msgid "ICC profiles (*.icc *.icm);;All files (*)"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:456
+#: src/ui/ToolColourDialog.cpp:459
 #, kde-format
 msgid "Nothing needed converting."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:476
+#: src/ui/ToolColourDialog.cpp:479
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -14877,25 +14977,25 @@ msgid ""
 "hundredths forgives the rounding a design tool leaves behind."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:480
+#: src/ui/ToolColourDialog.cpp:483
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Replace:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:481
+#: src/ui/ToolColourDialog.cpp:484
 #, kde-format
 msgctxt "@label:chooser"
 msgid "With:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:482
+#: src/ui/ToolColourDialog.cpp:485
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Tolerance:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:484
+#: src/ui/ToolColourDialog.cpp:487
 #, kde-format
 msgid ""
 "Written back as RGB, or as grey when both colours are greys. Putting an "
@@ -14903,43 +15003,43 @@ msgid ""
 "has not been given, so it does not pretend to."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:490 src/ui/ToolFontsDialog.cpp:841
+#: src/ui/ToolColourDialog.cpp:493 src/ui/ToolFontsDialog.cpp:841
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:517
+#: src/ui/ToolColourDialog.cpp:520
 #, kde-format
 msgid "That colour is not used anywhere in the document."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:518
+#: src/ui/ToolColourDialog.cpp:521
 #, kde-format
 msgid "Replaced one colour."
 msgid_plural "Replaced %1 colours."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:530
+#: src/ui/ToolColourDialog.cpp:533
 #, kde-format
 msgctxt "@title:column"
 msgid "Ink"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:530
+#: src/ui/ToolColourDialog.cpp:533
 #, kde-format
 msgctxt "@title:column"
 msgid "Rename to"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:531
+#: src/ui/ToolColourDialog.cpp:534
 #, kde-format
 msgctxt "@title:column"
 msgid "Dissolve into process"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:536
+#: src/ui/ToolColourDialog.cpp:539
 #, kde-format
 msgid ""
 "A printer plates by name, so pointing two inks at the same new name is how "
@@ -14947,31 +15047,31 @@ msgid ""
 "document already carries, so it needs no profile and is exact arithmetic."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:543
+#: src/ui/ToolColourDialog.cpp:546
 #, kde-format
 msgctxt "@action:button"
 msgid "Apply to the Inks"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:570
+#: src/ui/ToolColourDialog.cpp:573
 #, kde-format
 msgid "Nothing is being renamed or dissolved, so there is nothing to do."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:584
+#: src/ui/ToolColourDialog.cpp:587
 #, kde-format
 msgid "Changed one separation."
 msgid_plural "Changed %1 separations."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:602
+#: src/ui/ToolColourDialog.cpp:605
 #, kde-format
 msgctxt "@title:group"
 msgid "Hairlines"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:604
+#: src/ui/ToolColourDialog.cpp:607
 #, kde-format
 msgid ""
 "Strokes thinner than this are set to exactly this width, measured on the "
@@ -14979,118 +15079,118 @@ msgid ""
 "point, whatever the operator says."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:610
+#: src/ui/ToolColourDialog.cpp:613
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Thinnest allowed:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:611
+#: src/ui/ToolColourDialog.cpp:614
 #, kde-format
 msgctxt "@action:button"
 msgid "Thicken the Hairlines"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:616
+#: src/ui/ToolColourDialog.cpp:619
 #, kde-format
 msgctxt "@title:group"
 msgid "Black overprint"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:618
+#: src/ui/ToolColourDialog.cpp:621
 #, kde-format
 msgctxt "@option:radio"
 msgid "Black overprints"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:619
+#: src/ui/ToolColourDialog.cpp:622
 #, kde-format
 msgctxt "@option:radio"
 msgid "Black knocks out"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:621
+#: src/ui/ToolColourDialog.cpp:624
 #, kde-format
 msgid ""
 "Set wherever the page selects black, and nowhere else, so nothing but black "
 "gains or loses overprint by accident."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:625
+#: src/ui/ToolColourDialog.cpp:628
 #, kde-format
 msgctxt "@action:button"
 msgid "Set the Overprint"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:653
+#: src/ui/ToolColourDialog.cpp:656
 #, kde-format
 msgid "No stroke was thinner than that."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:654
+#: src/ui/ToolColourDialog.cpp:657
 #, kde-format
 msgid "Thickened one stroke."
 msgid_plural "Thickened %1 strokes."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:673
+#: src/ui/ToolColourDialog.cpp:676
 #, kde-format
 msgid "The document selects black nowhere, so nothing changed."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:674
+#: src/ui/ToolColourDialog.cpp:677
 #, kde-format
 msgid "Black now overprints in one place."
 msgid_plural "Black now overprints in %1 places."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:675
+#: src/ui/ToolColourDialog.cpp:678
 #, kde-format
 msgid "Black now knocks out in one place."
 msgid_plural "Black now knocks out in %1 places."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ToolColourDialog.cpp:694 src/ui/ToolImagesDialog.cpp:718
+#: src/ui/ToolColourDialog.cpp:697 src/ui/ToolImagesDialog.cpp:718
 #, kde-format
 msgctxt "@item dots-per-inch suffix in a spin box"
 msgid " dpi"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:696
+#: src/ui/ToolColourDialog.cpp:699
 #, kde-format
 msgctxt "@action:button"
 msgid "Show the Plate"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:699 src/ui/ToolLayoutDialog.cpp:991
+#: src/ui/ToolColourDialog.cpp:702 src/ui/ToolLayoutDialog.cpp:991
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Page:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:701
+#: src/ui/ToolColourDialog.cpp:704
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Ink:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:703
+#: src/ui/ToolColourDialog.cpp:706
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Resolution:"
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:709
+#: src/ui/ToolColourDialog.cpp:712
 #, kde-format
 msgid ""
 "An ink density map: black is full ink, white is bare paper. It looks like "
 "the plate rather than like the page, which is the point."
 msgstr ""
 
-#: src/ui/ToolColourDialog.cpp:738
+#: src/ui/ToolColourDialog.cpp:741
 #, kde-format
 msgid "That plate could not be rendered."
 msgstr ""
@@ -15766,7 +15866,7 @@ msgstr ""
 #: src/ui/ToolFormBuilderDialog.cpp:533
 #, kde-format
 msgctxt "@info:placeholder an example of a field name"
-msgid "Adresse.Strasse"
+msgid "Address.Street"
 msgstr ""
 
 #: src/ui/ToolFormBuilderDialog.cpp:535
@@ -15774,7 +15874,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "The name filling in addresses. A full stop in it makes a group, so that "
-"Adresse.Strasse and Adresse.Ort belong together."
+"“Address.Street” and “Address.Town” belong together."
 msgstr ""
 
 #: src/ui/ToolFormBuilderDialog.cpp:540
@@ -16104,7 +16204,8 @@ msgstr ""
 #, kde-format
 msgid ""
 "Give the field a name. That is the name filling in addresses, and a full "
-"stop in it makes a group: Adresse.Strasse and Adresse.Ort belong together."
+"stop in it makes a group: “Address.Street” and “Address.Town” belong "
+"together."
 msgstr ""
 
 #: src/ui/ToolFormBuilderDialog.cpp:827
@@ -17680,9 +17781,9 @@ msgstr ""
 #: src/ui/ToolLayoutDialog.cpp:807
 #, kde-format
 msgid ""
-"The /TrimBox becomes what the page shows now and the /BleedBox that grown on "
-"all four sides. The /MediaBox grows with it where it has to: bleed is ink "
-"that runs past the cut, and it needs paper to run onto."
+"The /TrimBox becomes what the page shows now, and the /BleedBox that same "
+"box grown on all four sides. The /MediaBox grows with it where it has to: "
+"bleed is ink that runs past the cut, and it needs paper to run onto."
 msgstr ""
 
 #: src/ui/ToolLayoutDialog.cpp:813
@@ -19517,71 +19618,74 @@ msgctxt "@option:check"
 msgid "Outline only, so the page stays readable"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:184
+#: src/ui/WatermarkEditor.cpp:186
 #, kde-format
-msgctxt "@label:slider"
-msgid "How faint:"
+msgctxt "@label:slider how solid the watermark is"
+msgid "How strong:"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:186
+#: src/ui/WatermarkEditor.cpp:188
 #, kde-format
 msgctxt "@label:slider"
 msgid "Angle:"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:193
+#: src/ui/WatermarkEditor.cpp:195
 #, kde-format
 msgctxt "@action:button"
 msgid "Choose a picture…"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:195
+#: src/ui/WatermarkEditor.cpp:197
 #, kde-format
 msgid "No picture chosen yet"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:214
+#: src/ui/WatermarkEditor.cpp:216
 #, kde-format
 msgctxt "@label:slider"
 msgid "Width, as a share of the page:"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:222
+#: src/ui/WatermarkEditor.cpp:224
 #, kde-format
 msgctxt "@action:button"
 msgid "Add the Watermark"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:260
+#: src/ui/WatermarkEditor.cpp:262
 #, kde-format
 msgctxt "@title:window"
 msgid "Watermark Colour"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:320
+#: src/ui/WatermarkEditor.cpp:322
 #, kde-format
 msgctxt "@title:window"
 msgid "Watermark Picture"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:334
+#: src/ui/WatermarkEditor.cpp:336
 #, kde-format
 msgctxt "@info the chosen picture and its size"
 msgid "%1 (%2 × %3 pixels)"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:352
+#: src/ui/WatermarkEditor.cpp:354
 #, kde-format
 msgctxt "@title:window"
 msgid "Watermark"
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:378
+#: src/ui/WatermarkEditor.cpp:381
 #, kde-format
-msgid "This editor has nothing to stamp with."
+msgctxt "@info a fault inside the program, not anything the reader did"
+msgid ""
+"Nothing was stamped: this editor has no document behind it. That is a fault "
+"in the program, not in your file."
 msgstr ""
 
-#: src/ui/WatermarkEditor.cpp:392
+#: src/ui/WatermarkEditor.cpp:396
 #, kde-format
 msgctxt "@info:status"
 msgid "Watermarked %1 page."

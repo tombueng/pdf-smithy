@@ -2876,7 +2876,10 @@ QVector<ReportLine> reportLines(const QString &pdf, const Preflight::Report &rep
     lines.append(ReportLine { report.passed ? i18n("No errors were found among the rules that were checked.")
                                             : i18np("One error was found.", "%1 errors were found.", report.errors),
                               true, 11.0, 0.0, 14.0 });
-    body(i18np("One warning.", "%1 warnings.", report.warnings));
+    // Zero is spelled out rather than left to the plural forms: English sends 0
+    // to the plural and French sends it to the singular, so a clean report would
+    // otherwise read "One warning." in half of Europe.
+    body(report.warnings == 0 ? i18n("No warnings.") : i18np("One warning.", "%1 warnings.", report.warnings));
 
     if (report.findings.isEmpty()) {
         heading(i18n("Findings"), 13.0, 18.0);

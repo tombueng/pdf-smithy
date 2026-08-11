@@ -223,7 +223,10 @@ void ColourDialog::inspect()
     }
 
     QStringList lines;
-    lines += i18n("Read %1 pages.", QLocale().toString(m_inventory.pages));
+    // The count carries the plural rather than a pre-formatted string, because
+    // one page is one page in every language. KLocalizedString still groups the
+    // digits the way the language does.
+    lines += i18ncp("@info", "Read one page.", "Read %1 pages.", m_inventory.pages);
     lines += QString();
     lines
         += i18n("Colour spaces used: %1",

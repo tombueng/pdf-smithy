@@ -338,7 +338,7 @@ bool buildFields(const QCommandLineParser &parser, QVector<Field> *fields, QStri
     prototype.name = parser.value(u"name"_s).trimmed();
     if (prototype.name.isEmpty()) {
         *error = i18n("Give the field a name with --name. That is the name filling in addresses, and a full stop "
-                      "in it makes a group: Adresse.Strasse and Adresse.Ort belong together.");
+                      "in it makes a group: “Address.Street” and “Address.Town” belong together.");
         return false;
     }
 

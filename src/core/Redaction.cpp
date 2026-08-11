@@ -1143,8 +1143,10 @@ QStringList Redaction::limitations()
              "removed instead when it overlaps."),
         i18n("Fax and JPEG 2000 pictures cannot be edited in place. The page is flattened to "
              "an image instead, which loses its selectable text."),
-        i18n("Attachments, and text hidden in the document's own properties, are not "
-             "touched. Use Sanitise for those."),
+        i18nc("@info a limit of redaction; the quoted name is the “Clean Up Document…” menu entry "
+              "and must read the same as that entry does",
+              "Attachments, and text hidden in the document's own properties, are not "
+              "touched. Use “Clean Up Document” for those."),
     };
 }
 

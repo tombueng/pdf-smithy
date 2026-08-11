@@ -804,9 +804,9 @@ QWidget *LayoutDialog::buildBleedAndMarks()
     bleedForm->addRow(i18nc("@label:spinbox", "Bleed:"), m_bleed);
     bleedForm->addRow(i18nc("@label:textbox", "Pages:"), m_bleedPages);
 
-    auto *bleedNote = new QLabel(i18n("The /TrimBox becomes what the page shows now and the /BleedBox that grown on "
-                                      "all four sides. The /MediaBox grows with it where it has to: bleed is ink "
-                                      "that runs past the cut, and it needs paper to run onto."),
+    auto *bleedNote = new QLabel(i18n("The /TrimBox becomes what the page shows now, and the /BleedBox that same box "
+                                      "grown on all four sides. The /MediaBox grows with it where it has to: bleed "
+                                      "is ink that runs past the cut, and it needs paper to run onto."),
                                  bleedBox);
     bleedNote->setWordWrap(true);
 

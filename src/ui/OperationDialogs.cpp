@@ -238,7 +238,7 @@ void InsertPositionDialog::setPosition(Position position)
 CompressDialog::CompressDialog(int selectedCount, int totalCount, QWidget *parent)
     : QDialog(parent)
     , m_level(new QComboBox(this))
-    , m_grayscale(new QCheckBox(i18nc("@option:check", "Convert to grayscale"), this))
+    , m_grayscale(new QCheckBox(i18nc("@option:check", "Convert to greyscale"), this))
     , m_note(new QLabel(this))
 {
     setWindowTitle(i18nc("@title:window", "Make Smaller"));

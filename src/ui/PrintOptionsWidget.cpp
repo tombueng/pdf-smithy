@@ -4,6 +4,8 @@
 */
 #include "PrintOptionsWidget.h"
 
+#include "core/PageRange.h"
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFormLayout>
@@ -24,18 +26,23 @@ PrintOptionsWidget::PrintOptionsWidget(QWidget *parent)
     , m_customScale(new QSpinBox(this))
     , m_subset(new QComboBox(this))
     , m_reverse(new QCheckBox(i18nc("@option:check", "Print back to front"), this))
-    , m_grayscale(new QCheckBox(i18nc("@option:check", "Print in grayscale"), this))
+    , m_grayscale(new QCheckBox(i18nc("@option:check", "Print in greyscale"), this))
     , m_borders(new QCheckBox(i18nc("@option:check", "Draw a line around each page"), this))
     , m_margin(new QSpinBox(this))
     , m_summary(new QLabel(this))
 {
     setWindowTitle(i18nc("@title:tab", "Pages && Layout"));
 
-    m_range->setPlaceholderText(i18nc("@info:placeholder", "All pages, or 1-4, 8, 12-last"));
-    m_range->setToolTip(i18nc("@info:tooltip",
+    // The keywords come from the parser rather than from the sentence, so that
+    // the box can only ever offer words the parser also takes.
+    m_range->setPlaceholderText(i18nc("@info:placeholder %1 is the word for the final page, as in “12-last”",
+                                      "All pages, or 1-4, 8, 12-%1", PageRange::lastWord()));
+    m_range->setToolTip(i18nc("@info:tooltip %1 is the word for the odd-numbered pages and %2 the word for the "
+                              "even-numbered ones",
                               "Which pages to print. Leave empty for all.\n"
-                              "Ranges, single pages and “odd”/“even” all work, "
-                              "and a descending range prints backwards."));
+                              "Ranges, single pages and “%1”/“%2” all work, "
+                              "and a descending range prints backwards.",
+                              PageRange::oddWord(), PageRange::evenWord()));
 
     using Layout = PrintController::Layout;
     for (const Layout layout : { Layout::Normal, Layout::TwoUp, Layout::FourUp, Layout::SixUp, Layout::NineUp,

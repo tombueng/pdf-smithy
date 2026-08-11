@@ -1770,8 +1770,18 @@ int commandRedact(const QStringList &arguments, const QString &output, const QSt
     }
 
     out() << i18ncp("@info", "Redacted %1 area.", "Redacted %1 areas.", report.areasApplied) << Qt::endl;
-    out() << i18n("Removed  %1 characters, %2 pictures, %3 drawings, %4 annotations", report.glyphsRemoved,
-                  report.imagesRemoved, report.formsRemoved, report.annotationsRemoved)
+    // Each noun counts itself: a single line with four hard-coded plurals reads
+    // wrong for a count of one in every language there is.
+    const QString characters = i18ncp("@item one entry in the list of what a redaction removed", "%1 character",
+                                      "%1 characters", report.glyphsRemoved);
+    const QString pictures = i18ncp("@item one entry in the list of what a redaction removed", "%1 picture",
+                                    "%1 pictures", report.imagesRemoved);
+    const QString drawings = i18ncp("@item one entry in the list of what a redaction removed", "%1 drawing",
+                                    "%1 drawings", report.formsRemoved);
+    const QString annotations = i18ncp("@item one entry in the list of what a redaction removed", "%1 annotation",
+                                       "%1 annotations", report.annotationsRemoved);
+    out() << i18nc("@info each argument is already a count with its own noun, such as “3 pictures”",
+                   "Removed %1, %2, %3, %4", characters, pictures, drawings, annotations)
           << Qt::endl;
     if (report.imagesEdited > 0) {
         out() << i18ncp("@info", "Edited %1 picture pixel by pixel.", "Edited %1 pictures pixel by pixel.",
@@ -1783,7 +1793,10 @@ int commandRedact(const QStringList &arguments, const QString &output, const QSt
         for (int page : report.pagesRasterised) {
             numbers << QString::number(page + 1);
         }
-        out() << i18n("Flattened to an image, losing selectable text: page %1", numbers.join(QStringLiteral(", ")))
+        out() << i18ncp("@info %2 is a comma-separated list of page numbers",
+                        "Flattened one page to an image, losing its selectable text: page %2",
+                        "Flattened %1 pages to an image, losing their selectable text: pages %2",
+                        report.pagesRasterised.size(), numbers.join(QStringLiteral(", ")))
               << Qt::endl;
     }
     for (const QString &warning : report.warnings) {

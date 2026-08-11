@@ -74,7 +74,7 @@ SplitDialog::SplitDialog(const Document *document, const QString &sourcePath, QW
 
     m_chapters = Splitter::chaptersOf(sourcePath);
     m_byBookmarks->setText(m_chapters.isEmpty() ? i18nc("@option:radio", "At each bookmark (this document has none)")
-                                                : i18ncp("@option:radio", "At each bookmark (%1 found)",
+                                                : i18ncp("@option:radio", "At each bookmark (one found)",
                                                          "At each bookmark (%1 found)", m_chapters.size()));
     m_byBookmarks->setEnabled(!m_chapters.isEmpty());
 
@@ -86,7 +86,8 @@ SplitDialog::SplitDialog(const Document *document, const QString &sourcePath, QW
     m_maxMegabytes->setValue(5);
     m_maxMegabytes->setSuffix(i18nc("@item megabyte suffix in a spin box", " MB"));
 
-    m_rangeText->setPlaceholderText(i18nc("@info:placeholder", "1-3, 4-9, 10-last"));
+    m_rangeText->setPlaceholderText(i18nc("@info:placeholder %1 is the word for the final page, as in “10-last”",
+                                          "1-3, 4-9, 10-%1", PageRange::lastWord()));
     m_rangeText->setToolTip(i18nc("@info:tooltip", "Each group separated by a comma becomes its own file."));
 
     const QFileInfo info(sourcePath);

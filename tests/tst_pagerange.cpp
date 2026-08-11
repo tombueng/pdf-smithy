@@ -30,6 +30,7 @@ private Q_SLOTS:
     void emptyMeansEverything();
     void keepsOrderAndRepetition();
     void reversesDescendingRanges();
+    void takesTheWordsItOffers();
 
     void formats_data();
     void formats();
@@ -109,6 +110,24 @@ void TestPageRange::keepsOrderAndRepetition()
 void TestPageRange::reversesDescendingRanges()
 {
     QCOMPARE(PageRange::parse(QStringLiteral("5-1"), 5), (QVector<int> { 4, 3, 2, 1, 0 }));
+}
+
+void TestPageRange::takesTheWordsItOffers()
+{
+    // The boxes in the interface print these words as the ones to type, and a
+    // translation that renamed them without the parser hearing of it would put
+    // a word on screen that the parser then refused. Whatever language this
+    // runs in, the offered word has to come back through parse().
+    QCOMPARE(PageRange::parse(PageRange::oddWord(), 6), (QVector<int> { 0, 2, 4 }));
+    QCOMPARE(PageRange::parse(PageRange::evenWord(), 6), (QVector<int> { 1, 3, 5 }));
+    QCOMPARE(PageRange::parse(PageRange::lastWord(), 6), (QVector<int> { 5 }));
+    QCOMPARE(PageRange::parse(QStringLiteral("2-") + PageRange::lastWord(), 4), (QVector<int> { 1, 2, 3 }));
+
+    // And the English words stay, because the handbook and people's scripts
+    // are written in them.
+    QCOMPARE(PageRange::parse(QStringLiteral("odd"), 6), (QVector<int> { 0, 2, 4 }));
+    QCOMPARE(PageRange::parse(QStringLiteral("even"), 6), (QVector<int> { 1, 3, 5 }));
+    QCOMPARE(PageRange::parse(QStringLiteral("3-last"), 4), (QVector<int> { 2, 3 }));
 }
 
 void TestPageRange::formats_data()

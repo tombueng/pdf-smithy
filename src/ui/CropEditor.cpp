@@ -265,7 +265,9 @@ bool CropEditor::commit(QString *error)
 
     if (!m_processor) {
         if (error) {
-            *error = i18n("This editor has nothing to trim with.");
+            *error = i18nc("@info a fault inside the program, not anything the reader did",
+                           "Nothing was trimmed: this editor has no document behind it. That is a fault in the "
+                           "program, not in your file.");
         }
         return false;
     }

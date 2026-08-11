@@ -13,7 +13,74 @@ namespace ps::PageRange {
 
 namespace {
 
-/** Resolves one endpoint: a number, or the word "last"/"letzte". */
+/**
+ * The words this language offers for one keyword.
+ *
+ * A translation may list several spellings separated by a vertical bar, so that
+ * "impair|impaires" both work; the first one is what the captions show. The
+ * English word is not part of the message: it is accepted in every language,
+ * because the handbook and any script written against it say "odd".
+ */
+QStringList spellings(const QString &translated)
+{
+    QStringList words;
+    const QStringList parts = translated.split(QLatin1Char('|'), Qt::SkipEmptyParts);
+    for (const QString &part : parts) {
+        const QString trimmed = part.trimmed();
+        if (!trimmed.isEmpty()) {
+            words.append(trimmed);
+        }
+    }
+    return words;
+}
+
+QString oddKeyword()
+{
+    return i18nc("@item the word this language uses for the odd-numbered pages in a page-range box, for example "
+                 "“ungerade”. Several spellings may be given separated by a vertical bar, and the first one is the "
+                 "one the captions show. The English “odd” keeps working in every language.",
+                 "odd");
+}
+
+QString evenKeyword()
+{
+    return i18nc("@item the word this language uses for the even-numbered pages in a page-range box, for example "
+                 "“gerade”. Several spellings may be given separated by a vertical bar, and the first one is the "
+                 "one the captions show. The English “even” keeps working in every language.",
+                 "even");
+}
+
+QString lastKeyword()
+{
+    return i18nc("@item the word this language uses for the final page in a page-range box, as in “12-last”. "
+                 "Several spellings may be given separated by a vertical bar, and the first one is the one the "
+                 "captions show. The English “last” keeps working in every language.",
+                 "last");
+}
+
+/**
+ * True when @p token is one of the words that stand for a keyword.
+ *
+ * Three sources answer, in this order of standing: the English word, which the
+ * handbook and every script use and which no language may take away; German,
+ * which was hard-wired here before there were any catalogues and is still in
+ * people's scripts; and this language's own spellings.
+ */
+bool matchesKeyword(const QString &token, const QString &english, const QString &german, const QString &translated)
+{
+    if (token.compare(english, Qt::CaseInsensitive) == 0 || token.compare(german, Qt::CaseInsensitive) == 0) {
+        return true;
+    }
+    const QStringList words = spellings(translated);
+    for (const QString &word : words) {
+        if (token.compare(word, Qt::CaseInsensitive) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/** Resolves one endpoint: a number, or the word for the last page. */
 bool parseEndpoint(const QString &token, int pageCount, int *out)
 {
     const QString trimmed = token.trimmed();
@@ -21,8 +88,8 @@ bool parseEndpoint(const QString &token, int pageCount, int *out)
         return false;
     }
 
-    if (trimmed.compare(QStringLiteral("last"), Qt::CaseInsensitive) == 0
-        || trimmed.compare(QStringLiteral("letzte"), Qt::CaseInsensitive) == 0 || trimmed == QLatin1Char('$')) {
+    if (trimmed == QLatin1Char('$')
+        || matchesKeyword(trimmed, QStringLiteral("last"), QStringLiteral("letzte"), lastKeyword())) {
         *out = pageCount;
         return true;
     }
@@ -68,15 +135,13 @@ QVector<int> parse(const QString &text, int pageCount, QString *error)
             continue;
         }
 
-        if (part.compare(QStringLiteral("odd"), Qt::CaseInsensitive) == 0
-            || part.compare(QStringLiteral("ungerade"), Qt::CaseInsensitive) == 0) {
+        if (matchesKeyword(part, QStringLiteral("odd"), QStringLiteral("ungerade"), oddKeyword())) {
             for (int i = 0; i < pageCount; i += 2) {
                 result.append(i);
             }
             continue;
         }
-        if (part.compare(QStringLiteral("even"), Qt::CaseInsensitive) == 0
-            || part.compare(QStringLiteral("gerade"), Qt::CaseInsensitive) == 0) {
+        if (matchesKeyword(part, QStringLiteral("even"), QStringLiteral("gerade"), evenKeyword())) {
             for (int i = 1; i < pageCount; i += 2) {
                 result.append(i);
             }
@@ -184,6 +249,24 @@ QString format(const QVector<int> &indexes)
     flush(runStart, previous);
 
     return parts.join(QStringLiteral(", "));
+}
+
+QString oddWord()
+{
+    const QStringList words = spellings(oddKeyword());
+    return words.isEmpty() ? QStringLiteral("odd") : words.constFirst();
+}
+
+QString evenWord()
+{
+    const QStringList words = spellings(evenKeyword());
+    return words.isEmpty() ? QStringLiteral("even") : words.constFirst();
+}
+
+QString lastWord()
+{
+    const QStringList words = spellings(lastKeyword());
+    return words.isEmpty() ? QStringLiteral("last") : words.constFirst();
 }
 
 bool isValid(const QString &text, int pageCount)

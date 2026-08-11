@@ -323,7 +323,9 @@ bool FormEditor::commit(QString *error)
     }
     if (!m_processor) {
         if (error) {
-            *error = i18n("This editor has nothing to fill the form in with.");
+            *error = i18nc("@info a fault inside the program, not anything the reader did",
+                           "The form was not filled in: this editor has no document behind it. That is a fault in "
+                           "the program, not in your file.");
         }
         return false;
     }

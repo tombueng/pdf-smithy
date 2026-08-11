@@ -207,7 +207,7 @@ void InspectorDock::build(Inspectable *thing)
     const QString which = thing->description();
     m_heading->setText(which.isEmpty() ? kind
                                        : i18nc("@info:status the kind of thing selected, then which one of them: "
-                                               "\"Form field: Adresse.Strasse\"",
+                                               "\"Form field: Address.Street\"",
                                                "%1: %2", kind, which));
     m_heading->show();
     m_hint->hide();

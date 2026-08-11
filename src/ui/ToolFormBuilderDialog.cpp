@@ -530,10 +530,10 @@ QGroupBox *FormBuilderDialog::buildWhat(QWidget *parent)
     }
 
     m_name = new QLineEdit(box);
-    m_name->setPlaceholderText(i18nc("@info:placeholder an example of a field name", "Adresse.Strasse"));
+    m_name->setPlaceholderText(i18nc("@info:placeholder an example of a field name", "Address.Street"));
     m_name->setToolTip(i18nc("@info:tooltip",
                              "The name filling in addresses. A full stop in it makes a group, so that "
-                             "Adresse.Strasse and Adresse.Ort belong together."));
+                             "“Address.Street” and “Address.Town” belong together."));
 
     m_label = new QLineEdit(box);
     m_label->setToolTip(i18nc("@info:tooltip",
@@ -810,7 +810,7 @@ bool FormBuilderDialog::describedFields(QVector<Field> *fields, QString *error) 
     spec.name = m_name->text().trimmed();
     if (spec.name.isEmpty()) {
         *error = i18n("Give the field a name. That is the name filling in addresses, and a full stop in it makes "
-                      "a group: Adresse.Strasse and Adresse.Ort belong together.");
+                      "a group: “Address.Street” and “Address.Town” belong together.");
         return false;
     }
     for (const FormField &already : m_existing) {

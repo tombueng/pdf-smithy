@@ -32,6 +32,20 @@ QVector<int> parse(const QString &text, int pageCount, QString *error = nullptr)
 /** Renders indexes back to the compact notation, e.g. {0,1,2,5} to "1-3, 6". */
 QString format(const QVector<int> &indexes);
 
+/**
+ * The words for the odd pages, the even pages and the final page in the
+ * language the program is running in.
+ *
+ * Captions that invite people to type a keyword must take it from here rather
+ * than spell it out, because then the caption and the parser cannot drift
+ * apart: a translated word is only ever promised where it is also accepted.
+ * The English words are accepted in every language whatever these return, so
+ * the handbook and existing scripts keep working.
+ */
+QString oddWord();
+QString evenWord();
+QString lastWord();
+
 /** True when @p text is syntactically valid for a document of that length. */
 bool isValid(const QString &text, int pageCount);
 
