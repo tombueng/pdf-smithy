@@ -336,6 +336,11 @@ jobs:
       # A string added without re-running Messages.sh silently ships
       # untranslated, so the extraction is verified to be current.
       - name: Check the template is up to date
+        # bash, not the container's sh: the comparison below uses process
+        # substitution, which dash does not have. A container without bash
+        # makes the runner fall back to sh, and the step dies on a syntax
+        # error before it can say anything about the template.
+        shell: bash
         run: |
           cp po/pdf-smithy.pot /tmp/committed.pot
           ./Messages.sh
