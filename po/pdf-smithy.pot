@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-08-11 08:03+0200\n"
+"POT-Creation-Date: 2026-08-11 08:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3294,7 +3294,7 @@ msgctxt "@info a place and the resource found there"
 msgid "%1 · %2"
 msgstr ""
 
-#: src/cli/CommandsPreflight.cpp:83 src/ui/DocumentProperties.cpp:776
+#: src/cli/CommandsPreflight.cpp:83 src/ui/DocumentProperties.cpp:778
 #, kde-format
 msgctxt "@item separator in a list"
 msgid ", "
@@ -9600,19 +9600,19 @@ msgctxt "@title:window"
 msgid "Document Properties"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:65 src/ui/DocumentProperties.cpp:799
+#: src/ui/DocumentDialogs.cpp:65 src/ui/DocumentProperties.cpp:801
 #, kde-format
 msgctxt "@item no date set"
 msgid "not recorded"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:71 src/ui/DocumentProperties.cpp:712
+#: src/ui/DocumentDialogs.cpp:71 src/ui/DocumentProperties.cpp:714
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Separated by commas"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:73 src/ui/DocumentProperties.cpp:788
+#: src/ui/DocumentDialogs.cpp:73 src/ui/DocumentProperties.cpp:790
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -9620,27 +9620,27 @@ msgid ""
 "that saving does not announce which tool you used."
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:77 src/ui/DocumentProperties.cpp:708
+#: src/ui/DocumentDialogs.cpp:77 src/ui/DocumentProperties.cpp:710
 #: src/ui/ToolTypesetDialog.cpp:468
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:78 src/ui/DocumentProperties.cpp:709
+#: src/ui/DocumentDialogs.cpp:78 src/ui/DocumentProperties.cpp:711
 #: src/ui/ToolTypesetDialog.cpp:469
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Author:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:79 src/ui/DocumentProperties.cpp:710
+#: src/ui/DocumentDialogs.cpp:79 src/ui/DocumentProperties.cpp:712
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Subject:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:80 src/ui/DocumentProperties.cpp:711
+#: src/ui/DocumentDialogs.cpp:80 src/ui/DocumentProperties.cpp:713
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Keywords:"
@@ -9658,19 +9658,19 @@ msgctxt "@label:textbox"
 msgid "Written by:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:83 src/ui/DocumentProperties.cpp:813
+#: src/ui/DocumentDialogs.cpp:83 src/ui/DocumentProperties.cpp:815
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Created:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:84 src/ui/DocumentProperties.cpp:814
+#: src/ui/DocumentDialogs.cpp:84 src/ui/DocumentProperties.cpp:816
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Last changed:"
 msgstr ""
 
-#: src/ui/DocumentDialogs.cpp:86 src/ui/DocumentProperties.cpp:713
+#: src/ui/DocumentDialogs.cpp:86 src/ui/DocumentProperties.cpp:715
 #, kde-format
 msgid "Emptying a field removes it from the document entirely."
 msgstr ""
@@ -9976,55 +9976,55 @@ msgctxt "@item something a protected document asks readers not to do"
 msgid "reading aloud"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:580
+#: src/ui/DocumentProperties.cpp:582
 #, kde-format
 msgctxt "@info a property whose value is not the same on every chosen page"
 msgid "differs between pages"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:585
+#: src/ui/DocumentProperties.cpp:587
 #, kde-format
 msgctxt "@info a value that is still being worked out"
 msgid "counting…"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:592
+#: src/ui/DocumentProperties.cpp:594
 #, kde-format
 msgctxt "@info how far a page has been turned"
 msgid "90° clockwise"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:594
+#: src/ui/DocumentProperties.cpp:596
 #, kde-format
 msgctxt "@info how far a page has been turned"
 msgid "upside down"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:596
+#: src/ui/DocumentProperties.cpp:598
 #, kde-format
 msgctxt "@info how far a page has been turned"
 msgid "90° anticlockwise"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:598
+#: src/ui/DocumentProperties.cpp:600
 #, kde-format
 msgctxt "@info a page that has not been turned"
 msgid "upright"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:625
+#: src/ui/DocumentProperties.cpp:627
 #, kde-format
 msgctxt "@title the kind of thing the properties panel is showing"
 msgid "Document"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:656
+#: src/ui/DocumentProperties.cpp:658
 #, kde-format
 msgctxt "@info the document draws no text at all"
 msgid "None"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:660
+#: src/ui/DocumentProperties.cpp:662
 #, kde-format
 msgctxt ""
 "@info how many typefaces a document uses, all of them carried inside it"
@@ -10033,7 +10033,7 @@ msgid_plural "%1 typefaces, all embedded"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:666 src/ui/DocumentProperties.cpp:902
+#: src/ui/DocumentProperties.cpp:668 src/ui/DocumentProperties.cpp:904
 #, kde-format
 msgctxt "@item a count of typefaces"
 msgid "%1 typeface"
@@ -10041,37 +10041,37 @@ msgid_plural "%1 typefaces"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:667 src/ui/DocumentProperties.cpp:903
+#: src/ui/DocumentProperties.cpp:669 src/ui/DocumentProperties.cpp:905
 #, kde-format
 msgctxt "@item separator in a list of names"
 msgid ", "
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:665
+#: src/ui/DocumentProperties.cpp:667
 #, kde-format
 msgctxt "@info typefaces the document names but does not carry the glyphs of"
 msgid "%1. Not embedded: %2"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:717
+#: src/ui/DocumentProperties.cpp:719
 #, kde-format
 msgctxt "@title:group the file the document is or will become"
 msgid "File"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:718
+#: src/ui/DocumentProperties.cpp:720
 #, kde-format
 msgctxt "@label how many pages a document has"
 msgid "Pages:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:720
+#: src/ui/DocumentProperties.cpp:722
 #, kde-format
 msgctxt "@label a document put together out of several files"
 msgid "Assembled from:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:721
+#: src/ui/DocumentProperties.cpp:723
 #, kde-format
 msgctxt "@info"
 msgid "%1 file"
@@ -10079,66 +10079,66 @@ msgid_plural "%1 files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:724
+#: src/ui/DocumentProperties.cpp:726
 #, kde-format
 msgctxt "@label how big the file is on disk"
 msgid "Size:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:727
+#: src/ui/DocumentProperties.cpp:729
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The file this document was opened from. What a save writes will differ."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:731
+#: src/ui/DocumentProperties.cpp:733
 #, kde-format
 msgctxt "@label which revision of the PDF specification the file is written to"
 msgid "PDF version:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:736
+#: src/ui/DocumentProperties.cpp:738
 #, kde-format
 msgctxt "@label where the document is kept"
 msgid "Location:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:737
+#: src/ui/DocumentProperties.cpp:739
 #, kde-format
 msgctxt "@label where an unsaved document was opened from"
 msgid "Opened from:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:742
+#: src/ui/DocumentProperties.cpp:744
 #, kde-format
 msgid "This document has not been saved yet."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:747
+#: src/ui/DocumentProperties.cpp:749
 #, kde-format
 msgctxt "@title:group what a document carries besides its pages"
 msgid "Contents"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:748
+#: src/ui/DocumentProperties.cpp:750
 #, kde-format
 msgctxt "@info a document carries none of this"
 msgid "None"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:749
+#: src/ui/DocumentProperties.cpp:751
 #, kde-format
 msgctxt "@label the table of contents"
 msgid "Bookmarks:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:751
+#: src/ui/DocumentProperties.cpp:753
 #, kde-format
 msgctxt "@label fields to be filled in"
 msgid "Form fields:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:752
+#: src/ui/DocumentProperties.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid "%1 field"
@@ -10146,37 +10146,37 @@ msgid_plural "%1 fields"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:753
+#: src/ui/DocumentProperties.cpp:755
 #, kde-format
 msgctxt "@label files carried inside the document"
 msgid "Attachments:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:759
+#: src/ui/DocumentProperties.cpp:761
 #, kde-format
 msgctxt "@label programs the document runs when it is opened"
 msgid "JavaScript:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:760
+#: src/ui/DocumentProperties.cpp:762
 #, kde-format
 msgctxt "@info the document carries JavaScript"
 msgid "Yes"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:761
+#: src/ui/DocumentProperties.cpp:763
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Clean Up under the Document menu removes it."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:763
+#: src/ui/DocumentProperties.cpp:765
 #, kde-format
 msgctxt "@label the typefaces a document uses"
 msgid "Fonts:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:765
+#: src/ui/DocumentProperties.cpp:767
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -10184,80 +10184,80 @@ msgid ""
 "has instead, which may not be the same shape or the same width."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:771
+#: src/ui/DocumentProperties.cpp:773
 #, kde-format
 msgctxt "@title:group the password and permissions on a document"
 msgid "Protection"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:772
+#: src/ui/DocumentProperties.cpp:774
 #, kde-format
 msgctxt "@label whether the file is encrypted"
 msgid "Encrypted:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:773
+#: src/ui/DocumentProperties.cpp:775
 #, kde-format
 msgctxt "@info the file needs a password to be read"
 msgid "Yes"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:774
+#: src/ui/DocumentProperties.cpp:776
 #, kde-format
 msgctxt "@label what a protected document asks readers not to do"
 msgid "Not allowed:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:775
+#: src/ui/DocumentProperties.cpp:777
 #, kde-format
 msgctxt "@info the protection restricts nothing"
 msgid "Nothing in particular"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:777
+#: src/ui/DocumentProperties.cpp:779
 #, kde-format
 msgid ""
 "Permissions are a request to the reading program, not a lock. Any reader may "
 "ignore them."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:782
+#: src/ui/DocumentProperties.cpp:784
 #, kde-format
 msgctxt "@title:group what wrote the document and when"
 msgid "Origin"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:783
+#: src/ui/DocumentProperties.cpp:785
 #, kde-format
 msgctxt "@label:textbox the application the document was written in"
 msgid "Created with:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:785
+#: src/ui/DocumentProperties.cpp:787
 #, kde-format
 msgctxt "@label:textbox the library that wrote the file"
 msgid "Written by:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:844
+#: src/ui/DocumentProperties.cpp:846
 #, kde-format
 msgctxt "@title the kind of thing the properties panel is showing"
 msgid "Page"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:845
+#: src/ui/DocumentProperties.cpp:847
 #, kde-format
 msgctxt "@title the kind of thing the properties panel is showing"
 msgid "Pages"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:874
+#: src/ui/DocumentProperties.cpp:876
 #, kde-format
 msgctxt "@item separator in a list of counts"
 msgid ", "
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:877
+#: src/ui/DocumentProperties.cpp:879
 #, kde-format
 msgctxt "@item how many words are on the chosen pages"
 msgid "%1 word"
@@ -10265,7 +10265,7 @@ msgid_plural "%1 words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:878
+#: src/ui/DocumentProperties.cpp:880
 #, kde-format
 msgctxt "@item letters, not counting spaces or line breaks"
 msgid "%1 character"
@@ -10273,7 +10273,7 @@ msgid_plural "%1 characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:885
+#: src/ui/DocumentProperties.cpp:887
 #, kde-format
 msgctxt "@item text-showing operations on a page"
 msgid "%1 text run"
@@ -10281,7 +10281,7 @@ msgid_plural "%1 text runs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:886
+#: src/ui/DocumentProperties.cpp:888
 #, kde-format
 msgctxt "@item pictures drawn on a page"
 msgid "%1 picture"
@@ -10289,7 +10289,7 @@ msgid_plural "%1 pictures"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:887
+#: src/ui/DocumentProperties.cpp:889
 #, kde-format
 msgctxt "@item filled or stroked artwork on a page"
 msgid "%1 shape"
@@ -10297,13 +10297,13 @@ msgid_plural "%1 shapes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:895
+#: src/ui/DocumentProperties.cpp:897
 #, kde-format
 msgctxt "@info the pages draw no text at all"
 msgid "None"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:897
+#: src/ui/DocumentProperties.cpp:899
 #, kde-format
 msgctxt "@info typefaces used, all carried inside the document"
 msgid "%1 typeface, embedded"
@@ -10311,37 +10311,37 @@ msgid_plural "%1 typefaces, all embedded"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:901
+#: src/ui/DocumentProperties.cpp:903
 #, kde-format
 msgctxt "@info typefaces used, some of them not carried inside the document"
 msgid "%1. Not embedded: %2"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:945
+#: src/ui/DocumentProperties.cpp:947
 #, kde-format
 msgctxt "@label how big the paper is"
 msgid "Size:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:950
+#: src/ui/DocumentProperties.cpp:952
 #, kde-format
 msgctxt "@label the name of a standard paper size, such as A4"
 msgid "Paper:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:954
+#: src/ui/DocumentProperties.cpp:956
 #, kde-format
 msgctxt "@label how far the page has been turned"
 msgid "Turned:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:960
+#: src/ui/DocumentProperties.cpp:962
 #, kde-format
 msgctxt "@label how much of the file one page accounts for"
 msgid "Weight:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:962
+#: src/ui/DocumentProperties.cpp:964
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -10350,73 +10350,73 @@ msgid ""
 "so the pages add up to a little more than the file."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:966
+#: src/ui/DocumentProperties.cpp:968
 #, kde-format
 msgctxt "@label which of the chosen pages costs the most"
 msgid "Heaviest page:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:967
+#: src/ui/DocumentProperties.cpp:969
 #, kde-format
 msgctxt "@info a page number and what it weighs"
 msgid "%1, %2"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:973
+#: src/ui/DocumentProperties.cpp:975
 #, kde-format
 msgctxt "@title:group what has been put on the pages"
 msgid "On the page"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:974
+#: src/ui/DocumentProperties.cpp:976
 #, kde-format
 msgctxt "@info the pages carry none of this"
 msgid "None"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:975
+#: src/ui/DocumentProperties.cpp:977
 #, kde-format
 msgctxt "@label notes and marks made on the page"
 msgid "Comments:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:977
+#: src/ui/DocumentProperties.cpp:979
 #, kde-format
 msgctxt "@label boxes to be filled in"
 msgid "Form fields:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:978
+#: src/ui/DocumentProperties.cpp:980
 #, kde-format
 msgctxt "@label places on the page that can be clicked"
 msgid "Links:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:981
+#: src/ui/DocumentProperties.cpp:983
 #, kde-format
 msgctxt "@label how much text is on the pages"
 msgid "Text:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:982
+#: src/ui/DocumentProperties.cpp:984
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Characters do not count spaces or line breaks."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:983
+#: src/ui/DocumentProperties.cpp:985
 #, kde-format
 msgctxt "@label what the page draws"
 msgid "Drawn:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:984
+#: src/ui/DocumentProperties.cpp:986
 #, kde-format
 msgctxt "@label the typefaces the pages use"
 msgid "Fonts:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:987
+#: src/ui/DocumentProperties.cpp:989
 #, kde-format
 msgctxt "@action:button read the pages through and count what is on them"
 msgid "Count what is on %1 page"
@@ -10424,7 +10424,7 @@ msgid_plural "Count what is on %1 pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/DocumentProperties.cpp:990
+#: src/ui/DocumentProperties.cpp:992
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -10433,67 +10433,67 @@ msgid ""
 "usable."
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1002
+#: src/ui/DocumentProperties.cpp:1004
 #, kde-format
 msgctxt "@title:group the five rectangles a PDF page carries"
 msgid "Boxes"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1017
+#: src/ui/DocumentProperties.cpp:1019
 #, kde-format
 msgctxt "@info the page does not carry this box at all"
 msgid "Not set"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1020
+#: src/ui/DocumentProperties.cpp:1022
 #, kde-format
 msgctxt "@label the sheet of paper itself"
 msgid "MediaBox:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1021
+#: src/ui/DocumentProperties.cpp:1023
 #, kde-format
 msgctxt "@label the part of the sheet a reader is shown"
 msgid "CropBox:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1022
+#: src/ui/DocumentProperties.cpp:1024
 #, kde-format
 msgctxt "@label how far the ink runs past the cut"
 msgid "BleedBox:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1023
+#: src/ui/DocumentProperties.cpp:1025
 #, kde-format
 msgctxt "@label where the finished page is cut"
 msgid "TrimBox:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1024
+#: src/ui/DocumentProperties.cpp:1026
 #, kde-format
 msgctxt "@label the meaningful content of the page"
 msgid "ArtBox:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1033
+#: src/ui/DocumentProperties.cpp:1035
 #, kde-format
 msgctxt "@title:group which file a page came out of"
 msgid "Source"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1039
+#: src/ui/DocumentProperties.cpp:1041
 #, kde-format
 msgctxt "@label the file a page was read from"
 msgid "File:"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1041
+#: src/ui/DocumentProperties.cpp:1043
 #, kde-format
 msgctxt "@info pages taken from more than one file"
 msgid "%1 different files"
 msgstr ""
 
-#: src/ui/DocumentProperties.cpp:1045
+#: src/ui/DocumentProperties.cpp:1047
 #, kde-format
 msgctxt ""
 "@label a page's number inside the file it came from, which is not its number "
