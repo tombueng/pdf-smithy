@@ -471,6 +471,34 @@ QString applyStep(MainWindow *window, const QString &spec, int settleMillisecond
         return {};
     }
 
+    if (verb == QLatin1String("dock")) {
+        // Written NAME,PIXELS. A dock keeps whatever width the window last had
+        // it at, and the properties panel is the one place that shows a whole
+        // row of numbers side by side: at its default width the right-hand ones
+        // are cut off, and a handbook picture of a truncated panel teaches the
+        // reader that the panel truncates. Widening it belongs in the recipe
+        // rather than in a hand-dragged window nobody can reproduce.
+        const QStringList parts = argument.split(QLatin1Char(','));
+        bool good = false;
+        const int width = parts.size() == 2 ? parts.at(1).toInt(&good) : 0;
+        if (parts.size() != 2 || !good || width <= 0) {
+            return QStringLiteral("step \"%1\": a dock width is written NAME,PIXELS").arg(spec);
+        }
+
+        const QList<QDockWidget *> docks = window->findChildren<QDockWidget *>();
+        QStringList known;
+        for (QDockWidget *dock : docks) {
+            known += dock->objectName();
+            if (dock->objectName() == parts.at(0)) {
+                window->resizeDocks({ dock }, { width }, Qt::Horizontal);
+                settle(settleMilliseconds);
+                return {};
+            }
+        }
+        return QStringLiteral("step \"%1\": the window has no dock called %2; it has %3")
+            .arg(spec, parts.at(0), known.isEmpty() ? QStringLiteral("none") : known.join(QStringLiteral(", ")));
+    }
+
     if (verb == QLatin1String("click")) {
         // Written PAGE,X,Y, with X and Y in points from the bottom left corner
         // of that page, which is how the rest of the project measures a page
@@ -673,7 +701,7 @@ int main(int argc, char **argv)
         QStringLiteral("step"),
         QStringLiteral("A step to carry out, repeatable, in the order given. One of "
                        "action:NAME, on:NAME, off:NAME, page:N, menu:NAME, click:PAGE,X,Y, "
-                       "select-field:NAME, resize:WxH, wait:MS."),
+                       "select-field:NAME, dock:NAME,PIXELS, resize:WxH, wait:MS."),
         QStringLiteral("spec"));
     const QCommandLineOption grabOption(QStringLiteral("grab"),
                                         QStringLiteral("What to photograph: window, active or both."),
@@ -774,6 +802,43 @@ int main(int argc, char **argv)
         return fail(what);
     };
 
+    // The shutter, in one place, because there are two moments it can go: the
+    // ordinary one at the end of the recipe, and, when the subject is a modal
+    // dialog, one from inside the event loop that dialog is running.
+    QSize taken;
+    const auto writeShot = [&]() -> QString {
+        const QPixmap shot = takeShot(window.get(), grabWhat);
+        if (shot.isNull()) {
+            return QStringLiteral("the grab came back empty");
+        }
+        const QFileInfo target(outPath);
+        if (!target.absoluteDir().mkpath(QStringLiteral("."))) {
+            return QStringLiteral("%1 could not be created").arg(target.absolutePath());
+        }
+        if (!shot.save(outPath, "PNG")) {
+            return QStringLiteral("%1 could not be written").arg(outPath);
+        }
+        taken = shot.size();
+        return {};
+    };
+
+    // A dialog opened with exec() runs an event loop of its own that does not
+    // return until somebody answers it, so a picture of one can only be taken
+    // from inside that loop. Armed before the document is opened, because a
+    // locked file asks for its password before any step has run.
+    bool photographed = false;
+    QString complaint;
+    std::unique_ptr<ModalWatcher> watcher;
+    if (dialogs == QLatin1String("leave")) {
+        watcher = std::make_unique<ModalWatcher>(true, [&] {
+            // The dialog has just gone up and may still be laying itself out,
+            // and a tool window draws a preview of the page after that.
+            settle(finalSettleMs);
+            complaint = writeShot();
+            photographed = true;
+        });
+    }
+
     window->resize(size);
     window->show();
     if (!waitForExposed(window.get())) {
@@ -794,30 +859,29 @@ int main(int argc, char **argv)
 
     const QStringList steps = parser.values(stepOption);
     for (const QString &step : steps) {
-        const QString complaint = applyStep(window.get(), step, settleMs);
-        if (!complaint.isEmpty()) {
-            return giveUp(complaint);
+        const QString wrongStep = applyStep(window.get(), step, settleMs);
+        if (!wrongStep.isEmpty()) {
+            return giveUp(wrongStep);
+        }
+        if (photographed) {
+            break;
         }
     }
 
-    settle(finalSettleMs);
-
-    const QPixmap shot = takeShot(window.get(), grabWhat);
-    if (shot.isNull()) {
-        return giveUp(QStringLiteral("the grab came back empty"));
+    // Already taken, from inside a dialog's own event loop. Taking it again
+    // here would photograph the window with the dialog dismissed, which is the
+    // picture the recipe asked not to have.
+    if (!photographed) {
+        settle(finalSettleMs);
+        complaint = writeShot();
     }
-
-    const QFileInfo target(outPath);
-    if (!target.absoluteDir().mkpath(QStringLiteral("."))) {
-        return giveUp(QStringLiteral("%1 could not be created").arg(target.absolutePath()));
-    }
-    if (!shot.save(outPath, "PNG")) {
-        return giveUp(QStringLiteral("%1 could not be written").arg(outPath));
+    if (!complaint.isEmpty()) {
+        return giveUp(complaint);
     }
 
     dismantle(window);
 
-    out() << outPath << QStringLiteral(" %1x%2").arg(shot.width()).arg(shot.height()) << Qt::endl;
+    out() << outPath << QStringLiteral(" %1x%2").arg(taken.width()).arg(taken.height()) << Qt::endl;
     out().flush();
     return 0;
 }

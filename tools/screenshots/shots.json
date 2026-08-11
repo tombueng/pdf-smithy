@@ -1,0 +1,362 @@
+{
+    "_comment": [
+        "Every picture in doc/screenshots, and exactly how it was taken.",
+        "",
+        "The point of writing them down is that the interface changes. A toolbar",
+        "gains a button, a panel is renamed, a mode learns a new gesture, and",
+        "every picture in the handbook is quietly a picture of last month's",
+        "program. Replaying this file is one command:",
+        "",
+        "    tools/screenshots/make-screenshots.py",
+        "",
+        "and one picture is",
+        "",
+        "    tools/screenshots/make-screenshots.py --only properties-a-form-field",
+        "",
+        "Fields:",
+        "  name      the file written, without .png",
+        "  shows     what the picture is of, for somebody deciding whether it",
+        "            still says that after a change",
+        "  used-in   where the handbook or the README puts it",
+        "  steps     --step arguments, in order",
+        "  size      window size, when it is not the default",
+        "  grab      window (the default), active or both",
+        "  dialogs   leave when a modal dialog is the subject, otherwise reject",
+        "",
+        "The first four are the ones the README shows. Their names are part of",
+        "the README and must not change."
+    ],
+
+    "document": "tools/showcase/showcase.pdf",
+    "out-dir": "doc/screenshots",
+    "size": "1400x900",
+    "settle": 400,
+    "final-settle": 1600,
+    "grab": "window",
+    "dialogs": "reject",
+
+    "shots": [
+        {
+            "name": "read-and-fill-in",
+            "shows": "Reading, with the form on page 12 part filled in: the pale wash over what can be answered, the red rule round the two required fields, the grey dashes round what is locked",
+            "used-in": "README, introduction-modes, reading",
+            "steps": ["action:mode_view", "page:12"]
+        },
+        {
+            "name": "edit-the-page",
+            "shows": "Editing the page, with every run of text that can be written into outlined faintly before anything is clicked",
+            "used-in": "README, page-editing, page-correcting",
+            "steps": ["action:mode_edit", "page:3"]
+        },
+        {
+            "name": "edit-the-form",
+            "shows": "Laying a form out: the field toolbar with every kind at once, and the fields drawn by the program rather than by the page",
+            "used-in": "README, form-editing, form-drawing",
+            "steps": ["action:mode_form", "page:12"]
+        },
+        {
+            "name": "arrange-the-pages",
+            "shows": "Every page of the document as one grid, in the order it will be saved in",
+            "used-in": "README, arranging",
+            "steps": ["action:mode_organise"]
+        },
+
+        {
+            "name": "the-three-sidebars",
+            "shows": "All three side panels open at once beside the photograph on page 6: pages, contents and properties",
+            "used-in": "introduction-window",
+            "size": "1600x950",
+            "steps": [
+                "action:mode_view",
+                "on:show_thumbnails",
+                "on:show_outline",
+                "on:show_inspector",
+                "dock:inspector_dock,380",
+                "page:6"
+            ]
+        },
+        {
+            "name": "contents-sidebar",
+            "shows": "The table of contents as a tree, each entry with the page it points at, following the reader down the document",
+            "used-in": "contents, contents-navigating",
+            "steps": [
+                "action:mode_view",
+                "off:show_thumbnails",
+                "on:show_outline",
+                "page:8"
+            ]
+        },
+        {
+            "name": "properties-a-line-of-text",
+            "shows": "The properties sidebar with the caret in a line: the face the page sets it in, the typeface, size, bold, italic and colour it is to be set in, and whether its box grows",
+            "used-in": "properties, page-correcting-format",
+            "size": "1600x950",
+            "steps": [
+                "action:mode_edit",
+                "off:show_thumbnails",
+                "on:show_inspector",
+                "dock:inspector_dock,400",
+                "click:3,300,738"
+            ]
+        },
+        {
+            "name": "an-object-with-handles",
+            "shows": "Something the page draws, chosen: eight handles round it, a ninth on a stalk to turn it by, and the properties sidebar saying where it comes in the painting order and that this cannot be changed",
+            "used-in": "page-objects, page-objects-limits",
+            "size": "1600x950",
+            "steps": [
+                "action:tool_objects",
+                "off:show_thumbnails",
+                "on:show_inspector",
+                "dock:inspector_dock,400",
+                "click:6,300,450"
+            ]
+        },
+        {
+            "name": "comments-and-the-pens",
+            "shows": "The four kinds of comment on page 14, with the pens on the page toolbar and a comment picked so that the properties sidebar names it",
+            "used-in": "page-comments, page-comments-making",
+            "size": "1600x950",
+            "steps": [
+                "action:page_annotate",
+                "off:show_thumbnails",
+                "on:show_inspector",
+                "dock:inspector_dock,400",
+                "action:draw_select",
+                "click:14,300,470"
+            ]
+        },
+        {
+            "name": "properties-a-form-field",
+            "shows": "The properties sidebar with a field of the form chosen while it is being designed: its place and size, its name and label, its rules and how it looks",
+            "used-in": "properties, form-properties",
+            "size": "1600x950",
+            "steps": [
+                "action:mode_form",
+                "off:show_thumbnails",
+                "on:show_inspector",
+                "dock:inspector_dock,400",
+                "page:12",
+                "select-field:Stay.Nights"
+            ]
+        },
+        {
+            "name": "fill-in-the-form-as-a-list",
+            "shows": "The page on one side and every field of the form as a list on the other, with the locked fields shown and refused rather than left out",
+            "used-in": "reading-form-list",
+            "size": "1500x900",
+            "steps": ["page:12", "action:document_form"]
+        },
+
+        {
+            "name": "the-file-menu",
+            "shows": "The File menu, including the Export as submenu's parent entry",
+            "used-in": "document-exports",
+            "grab": "both",
+            "steps": ["menu:file"]
+        },
+        {
+            "name": "the-view-menu",
+            "shows": "The View menu: the four modes at the top, then getting about, what a drag does, the five sizes and the three side panels",
+            "used-in": "introduction-modes, reading-zoom",
+            "grab": "both",
+            "steps": ["menu:view"]
+        },
+        {
+            "name": "the-pages-menu",
+            "shows": "The Pages menu: turning and throwing away, trimming, numbering and sheets, signing, watermarking and redacting, scans and compression, correcting the words, and the Mark Up submenu",
+            "used-in": "arranging, signing",
+            "grab": "both",
+            "steps": ["menu:pages"]
+        },
+        {
+            "name": "the-tools-menu",
+            "shows": "The Tools menu: the windows that look into a document, and the one entry in it that is not a window",
+            "used-in": "tools",
+            "grab": "both",
+            "steps": ["menu:tools"]
+        },
+
+        {
+            "name": "trim-the-edges",
+            "shows": "Trimming: the page where the grid was and the four measurements in a panel at the edge of the window",
+            "used-in": "arranging-trimming",
+            "size": "1500x900",
+            "steps": ["page:4", "action:page_crop"]
+        },
+        {
+            "name": "redact",
+            "shows": "Redaction: the marking tools, the list of marked areas, the words that will be destroyed, and the box saying what this does and does not do",
+            "used-in": "redaction, redaction-marking",
+            "size": "1500x900",
+            "steps": ["page:3", "action:page_redact"]
+        },
+        {
+            "name": "sign",
+            "shows": "Signing: the stored signatures on one side and the page to put one on beside them",
+            "used-in": "signing, signing-placing",
+            "size": "1500x900",
+            "steps": ["page:13", "action:page_sign"]
+        },
+        {
+            "name": "watermark",
+            "shows": "A watermark previewed on the page itself, drawn the way it will be written",
+            "used-in": "signing-watermark",
+            "size": "1500x900",
+            "steps": ["page:5", "action:page_watermark"]
+        },
+        {
+            "name": "page-numbers",
+            "shows": "Page numbers and Bates stamping, with the stamp shown where it will land and a line saying what this page will say",
+            "used-in": "signing-numbering",
+            "size": "1500x900",
+            "steps": ["page:5", "action:page_number"]
+        },
+
+        {
+            "name": "make-smaller",
+            "shows": "The four compression levels, what each one does to the pictures, and the button that answers how much it would save before anything is committed to",
+            "used-in": "smaller",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:page_compress"]
+        },
+        {
+            "name": "recognise-text",
+            "shows": "Text recognition: the languages installed on this machine, the detail to read at, skipping pages that already have text, straightening, and the two settings for a bad original",
+            "used-in": "scans, scans-recognition",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:page_ocr"]
+        },
+        {
+            "name": "add-blank-pages",
+            "shows": "Adding blank pages: how many, and a size matched to the page the new ones will sit beside rather than to page one",
+            "used-in": "arranging-inserting",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:insert_blank"]
+        },
+        {
+            "name": "split",
+            "shows": "The four ways of splitting a document, with the file names it is about to write and how many pages each will get listed before anything is written",
+            "used-in": "arranging-extracting",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:file_split"]
+        },
+        {
+            "name": "arrange-on-sheets",
+            "shows": "Several pages on one sheet, with a preview of the arrangement beside the settings",
+            "used-in": "arranging-sheets",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:page_nup"]
+        },
+        {
+            "name": "export-as-images",
+            "shows": "Writing one picture per page: the format, the detail and the quality, which goes quiet for a lossless format",
+            "used-in": "export-images",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:export_images"]
+        },
+        {
+            "name": "document-properties",
+            "shows": "The title, author, subject and keywords, what the document was created with, what wrote it, and the two dates",
+            "used-in": "document-properties",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:document_metadata"]
+        },
+        {
+            "name": "clean-up-document",
+            "shows": "What the document actually carries, named rather than called metadata, and the two things that can be removed",
+            "used-in": "document-cleanup",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:document_sanitize"]
+        },
+        {
+            "name": "password",
+            "shows": "Setting the password that opens the document, the two permissions beside it, and what the dialog says they are worth",
+            "used-in": "document-password",
+            "grab": "both",
+            "dialogs": "leave",
+            "steps": ["action:document_password"]
+        },
+
+        {
+            "name": "check-the-document",
+            "shows": "The preflight check: a profile, what it found grouped so that anything which would get the file rejected is at the top, and the box headed what was not checked",
+            "used-in": "tools-preflight",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_preflight"]
+        },
+        {
+            "name": "fonts",
+            "shows": "Every font the document uses, whether it travels with the file, whether only part of it is there, and whether its text can be copied out",
+            "used-in": "tools-fonts",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_fonts"]
+        },
+        {
+            "name": "colour",
+            "shows": "What the document does with colour: its spaces, its spot inks, whether it carries a profile, and how thin its thinnest stroke is",
+            "used-in": "tools-colour",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_colour"]
+        },
+        {
+            "name": "pictures",
+            "shows": "Every picture in the document with its effective resolution on the page rather than its pixel count",
+            "used-in": "tools-pictures",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_images"]
+        },
+        {
+            "name": "page-setup",
+            "shows": "The five boxes a page can carry, per page and in millimetres, saying absent where a page defines none",
+            "used-in": "tools-layout",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_layout"]
+        },
+        {
+            "name": "the-page-as-a-list",
+            "shows": "What a page draws, as a list, topmost first, with the boxes on the page and the rows beside it being the same list twice",
+            "used-in": "tools-object-list",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_object_list"]
+        },
+        {
+            "name": "set-text-as-pages",
+            "shows": "Making a document out of typed or pasted text, with the preview written by the same engine that writes the finished document",
+            "used-in": "tools-typeset",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_typeset"]
+        },
+        {
+            "name": "form-behaviour-and-answers",
+            "shows": "The parts of a form that are not a gesture on a page: its fields, the tab order, behaviour, the answers, and placing a field by its four numbers",
+            "used-in": "form-behaviour",
+            "grab": "both",
+            "dialogs": "leave",
+            "final-settle": 3000,
+            "steps": ["action:tool_form_behaviour"]
+        }
+    ]
+}

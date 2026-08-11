@@ -312,7 +312,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install gettext
-        run: apt-get update && apt-get install -y --no-install-recommends gettext
+        # python3 as well: Messages.sh reads the menu titles out of the .rc
+        # files with it, rather than depending on KDE's extractrc, which many
+        # systems do not have.
+        run: apt-get update && apt-get install -y --no-install-recommends gettext python3
 
       - name: Validate catalogues
         run: |
@@ -339,7 +342,7 @@ jobs:
           if ! diff -q \
               <(grep -v '^"POT-Creation-Date' /tmp/committed.pot) \
               <(grep -v '^"POT-Creation-Date' po/pdf-smithy.pot) > /dev/null; then
-            echo "::error::po/pdf-smithy.pot is stale — run ./Messages.sh and commit the result"
+            echo "::error::po/pdf-smithy.pot is stale: run ./Messages.sh and commit the result"
             diff <(grep '^msgid' /tmp/committed.pot) <(grep '^msgid' po/pdf-smithy.pot) || true
             exit 1
           fi
