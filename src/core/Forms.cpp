@@ -637,9 +637,9 @@ bool Forms::fill(const QString &inputPdf, const QString &outputPdf, const QHash<
                 // group holds the right value and every button looks empty.
                 for (QPDFObjectHandle widget : std::as_const(widgets)) {
                     const QStringList mine = onStatesOf(widget);
-                    widget.replaceKey("/AS",
-                                      QPDFObjectHandle::newName(mine.contains(state) ? state.toStdString()
-                                                                                     : std::string("/Off")));
+                    widget.replaceKey(
+                        "/AS",
+                        QPDFObjectHandle::newName(mine.contains(state) ? state.toStdString() : std::string("/Off")));
                 }
                 settled.insert(name);
             } else {

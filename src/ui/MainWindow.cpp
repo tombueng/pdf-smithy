@@ -219,9 +219,7 @@ MainWindow::MainWindow(QWidget *parent)
         updateActionState();
     });
     connect(m_pageView, &PageView::selectionChanged, this, &MainWindow::updateActionState);
-    connect(m_pageView, &PageView::refused, this, [this](const QString &reason) {
-        reportNotice(reason);
-    });
+    connect(m_pageView, &PageView::refused, this, [this](const QString &reason) { reportNotice(reason); });
     // The document view is where people spend their time, and right-clicking in
     // it did nothing at all: the signal was emitted and nobody was listening.
     connect(m_pageView, &PageView::contextMenuWanted, this,
@@ -276,12 +274,8 @@ MainWindow::MainWindow(QWidget *parent)
     addDockWidget(Qt::RightDockWidgetArea, m_inspector);
     m_inspector->hide();
 
-    connect(m_formOverlay, &FormOverlay::selectionChanged, this, [this] {
-        m_inspector->refreshFrom(m_formOverlay);
-    });
-    connect(m_textOverlay, &TextOverlay::inspectionChanged, this, [this] {
-        m_inspector->refreshFrom(m_textOverlay);
-    });
+    connect(m_formOverlay, &FormOverlay::selectionChanged, this, [this] { m_inspector->refreshFrom(m_formOverlay); });
+    connect(m_textOverlay, &TextOverlay::inspectionChanged, this, [this] { m_inspector->refreshFrom(m_textOverlay); });
     connect(m_formOverlay, &FormOverlay::valueChanged, this, &MainWindow::pendingWorkChanged);
     connect(m_textOverlay, &TextOverlay::editsChanged, this, &MainWindow::pendingWorkChanged);
     connect(m_objectOverlay, &ObjectOverlay::choiceChanged, this, [this] {
@@ -292,17 +286,12 @@ MainWindow::MainWindow(QWidget *parent)
         updateActionState();
     });
     connect(m_objectOverlay, &ObjectOverlay::editsChanged, this, &MainWindow::pendingWorkChanged);
-    connect(m_annotationOverlay, &AnnotationOverlay::selectionChanged, this, [this] {
-        m_inspector->refreshFrom(m_annotationOverlay);
-    });
+    connect(m_annotationOverlay, &AnnotationOverlay::selectionChanged, this,
+            [this] { m_inspector->refreshFrom(m_annotationOverlay); });
     connect(m_annotationOverlay, &AnnotationOverlay::annotationsChanged, this, &MainWindow::pendingWorkChanged);
-    connect(m_formDesign, &FormDesignOverlay::choiceChanged, this, [this] {
-        m_inspector->refreshFrom(m_formDesign);
-    });
+    connect(m_formDesign, &FormDesignOverlay::choiceChanged, this, [this] { m_inspector->refreshFrom(m_formDesign); });
     connect(m_formDesign, &FormDesignOverlay::editsChanged, this, &MainWindow::pendingWorkChanged);
-    connect(m_formDesign, &FormDesignOverlay::refused, this, [this](const QString &reason) {
-        reportNotice(reason);
-    });
+    connect(m_formDesign, &FormDesignOverlay::refused, this, [this](const QString &reason) { reportNotice(reason); });
     connect(m_formDesign, &FormDesignOverlay::kindToPlaceChanged, this, [this](FormDesignOverlay::Kind kind) {
         if (QAction *action = m_fieldActions.value(int(kind))) {
             action->setChecked(true);
@@ -316,12 +305,9 @@ MainWindow::MainWindow(QWidget *parent)
     // These two say what a page change cost: work anchored to a page that has
     // just been deleted cannot be carried anywhere, and losing it without a
     // word is the one outcome that is not allowed.
-    connect(m_annotationOverlay, &AnnotationOverlay::refused, this, [this](const QString &reason) {
-        reportNotice(reason);
-    });
-    connect(m_textOverlay, &TextOverlay::refused, this, [this](const QString &reason) {
-        reportNotice(reason);
-    });
+    connect(m_annotationOverlay, &AnnotationOverlay::refused, this,
+            [this](const QString &reason) { reportNotice(reason); });
+    connect(m_textOverlay, &TextOverlay::refused, this, [this](const QString &reason) { reportNotice(reason); });
 
     // Filling in a form needs the form; reading it costs a pass over the file,
     // so it happens when the document arrives rather than on every mode switch.
@@ -330,7 +316,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_document, &Document::wasReset, this, &MainWindow::documentReset);
     connect(m_pageView, &PageView::modeChanged, this, [this](PageView::Mode mode) {
         if (QAction *action = actionCollection()->action(mode == PageView::Mode::Edit ? QStringLiteral("mode_edit")
-                                                                                     : QStringLiteral("mode_view"))) {
+                                                                                      : QStringLiteral("mode_view"))) {
             action->setChecked(true);
         }
         updateActionState();
@@ -427,9 +413,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     m_inspector->addSource(m_outlineDock, m_outlineDock);
-    connect(m_outlineDock, &OutlineDock::inspectionChanged, this, [this] {
-        m_inspector->refreshFrom(m_outlineDock);
-    });
+    connect(m_outlineDock, &OutlineDock::inspectionChanged, this, [this] { m_inspector->refreshFrom(m_outlineDock); });
 
     connect(m_outlineDock, &OutlineDock::pageRequested, this, [this](int row) {
         // A chapter is something you click to go and read, and reading happens
@@ -631,17 +615,15 @@ void MainWindow::setupActions()
     addAction(QStringLiteral("insert_file"), i18nc("@action", "Insert File…"), QStringLiteral("document-import"),
               { QKeySequence(Qt::CTRL | Qt::Key_I) }, &MainWindow::insertDocument);
 
-    addAction(QStringLiteral("insert_blank"), i18nc("@action", "Add Blank Pages…"),
-              QStringLiteral("document-new"), {}, &MainWindow::insertBlankPages);
+    addAction(QStringLiteral("insert_blank"), i18nc("@action", "Add Blank Pages…"), QStringLiteral("document-new"), {},
+              &MainWindow::insertBlankPages);
 
     // Undo cannot reach this. What is waiting on a picture has not been written
     // to the document yet, so it is not on the undo stack, and until now there
     // was no way at all to change one's mind about a single object short of
     // discarding every change on the page.
     addAction(QStringLiteral("object_take_back"), i18nc("@action", "Undo the Change to This"),
-              QStringLiteral("edit-undo"), {}, [this] {
-                  m_objectOverlay->takeBack();
-              });
+              QStringLiteral("edit-undo"), {}, [this] { m_objectOverlay->takeBack(); });
 
     addAction(QStringLiteral("page_delete"), i18nc("@action", "Delete Pages"), QStringLiteral("edit-delete"),
               { QKeySequence::Delete }, &MainWindow::deleteSelectedPages);
@@ -667,8 +649,8 @@ void MainWindow::setupActions()
     addAction(QStringLiteral("file_split"), i18nc("@action", "Split…"), QStringLiteral("split"), {},
               &MainWindow::splitDocument);
 
-    addAction(QStringLiteral("page_number"), i18nc("@action", "Page Numbers…"), QStringLiteral("draw-number"),
-              {}, &MainWindow::numberPages);
+    addAction(QStringLiteral("page_number"), i18nc("@action", "Page Numbers…"), QStringLiteral("draw-number"), {},
+              &MainWindow::numberPages);
 
     addAction(QStringLiteral("page_crop"), i18nc("@action", "Trim Pages…"), QStringLiteral("transform-crop"), {},
               &MainWindow::cropPages);
@@ -740,8 +722,8 @@ void MainWindow::setupActions()
     addAction(QStringLiteral("tool_object_list"), i18nc("@action", "The Page as a List…"),
               QStringLiteral("view-list-details"), {}, &MainWindow::showObjectListTool);
 
-    addAction(QStringLiteral("tool_form_builder"), i18nc("@action", "Build a Form…"),
-              QStringLiteral("view-form"), {}, &MainWindow::showFormBuilderTool);
+    addAction(QStringLiteral("tool_form_builder"), i18nc("@action", "Build a Form…"), QStringLiteral("view-form"), {},
+              &MainWindow::showFormBuilderTool);
 
     // Not "Edit the Page…", which is what the mode button is called: one menu
     // bar carrying that name twice, for two different commands, is a menu bar
@@ -750,8 +732,8 @@ void MainWindow::setupActions()
               QStringLiteral("transform-move"), { QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_O) },
               &MainWindow::showObjectsTool);
 
-    addAction(QStringLiteral("tool_typeset"), i18nc("@action", "Set Text as Pages…"),
-              QStringLiteral("insert-text"), {}, &MainWindow::showTypesetTool);
+    addAction(QStringLiteral("tool_typeset"), i18nc("@action", "Set Text as Pages…"), QStringLiteral("insert-text"), {},
+              &MainWindow::showTypesetTool);
 
     addAction(QStringLiteral("import_images"), i18nc("@action", "Import Images…"), QStringLiteral("insert-image"), {},
               &MainWindow::importImages);
@@ -878,8 +860,7 @@ void MainWindow::setupActions()
            { QKeySequence(Qt::CTRL | Qt::Key_3) }, PageGridView::Fit::Page);
 
     addFit(QStringLiteral("zoom_two_pages"), i18nc("@action", "Two Pages Side by Side"),
-           QStringLiteral("view-pages-facing"), { QKeySequence(Qt::CTRL | Qt::Key_4) },
-           PageGridView::Fit::TwoPages);
+           QStringLiteral("view-pages-facing"), { QKeySequence(Qt::CTRL | Qt::Key_4) }, PageGridView::Fit::TwoPages);
 
     QAction *free = addFit(QStringLiteral("zoom_free"), i18nc("@action", "Free Zoom"), QStringLiteral("zoom-original"),
                            { QKeySequence(Qt::CTRL | Qt::Key_0) }, PageGridView::Fit::Free);
@@ -934,10 +915,8 @@ void MainWindow::setupActions()
     // corrections is one undo step. This is how the user cashes that in without
     // having to save the whole document to see it land.
     QAction *apply = addAction(QStringLiteral("edit_apply"), i18nc("@action", "Keep the Changes on the Page"),
-                               QStringLiteral("dialog-ok"),
-                               { QKeySequence(Qt::CTRL | Qt::Key_Return) }, [this] {
-                                   commitViewEdits();
-                               });
+                               QStringLiteral("dialog-ok"), { QKeySequence(Qt::CTRL | Qt::Key_Return) },
+                               [this] { commitViewEdits(); });
     apply->setToolTip(i18nc("@info:tooltip",
                             "Writes what you have typed and dragged into the document, as one undo step. "
                             "Saving does this for you."));
@@ -948,8 +927,7 @@ void MainWindow::setupActions()
     auto *pens = new QActionGroup(this);
     pens->setExclusive(true);
 
-    auto addPen = [&](const QString &name, const QString &text, const QString &iconName,
-                      AnnotationOverlay::Tool tool) {
+    auto addPen = [&](const QString &name, const QString &text, const QString &iconName, AnnotationOverlay::Tool tool) {
         QAction *action = addAction(name, text, iconName, {}, [this, tool] {
             showDocumentView(m_pageView->currentPage(), PageView::Mode::Edit);
             m_annotationOverlay->setTool(tool);
@@ -964,8 +942,8 @@ void MainWindow::setupActions()
            AnnotationOverlay::Tool::Select);
     addPen(QStringLiteral("draw_highlight"), i18nc("@action", "Highlight"), QStringLiteral("draw-highlight"),
            AnnotationOverlay::Tool::Highlight);
-    addPen(QStringLiteral("draw_underline"), i18nc("@action", "Underline"),
-           QStringLiteral("format-text-underline"), AnnotationOverlay::Tool::Underline);
+    addPen(QStringLiteral("draw_underline"), i18nc("@action", "Underline"), QStringLiteral("format-text-underline"),
+           AnnotationOverlay::Tool::Underline);
     addPen(QStringLiteral("draw_strikeout"), i18nc("@action", "Strikethrough"),
            QStringLiteral("format-text-strikethrough"), AnnotationOverlay::Tool::StrikeOut);
     addPen(QStringLiteral("draw_rectangle"), i18nc("@action", "Rectangle"), QStringLiteral("draw-rectangle"),
@@ -1002,19 +980,14 @@ void MainWindow::setupActions()
     // glided, so the paragraph crossing the top can still be read) was
     // unreachable code. Both keys belong to whichever view has the focus, and
     // these two commands keep their buttons and their menu entries.
-    addAction(QStringLiteral("go_previous_page"), i18nc("@action", "Previous Page"),
-              QStringLiteral("go-previous"), {}, [this] {
-                  m_pageView->goToPage(m_pageView->currentPage() - 1);
-              });
-    addAction(QStringLiteral("go_next_page"), i18nc("@action", "Next Page"), QStringLiteral("go-next"), {}, [this] {
-        m_pageView->goToPage(m_pageView->currentPage() + 1);
-    });
+    addAction(QStringLiteral("go_previous_page"), i18nc("@action", "Previous Page"), QStringLiteral("go-previous"), {},
+              [this] { m_pageView->goToPage(m_pageView->currentPage() - 1); });
+    addAction(QStringLiteral("go_next_page"), i18nc("@action", "Next Page"), QStringLiteral("go-next"), {},
+              [this] { m_pageView->goToPage(m_pageView->currentPage() + 1); });
     addAction(QStringLiteral("go_first_page"), i18nc("@action", "First Page"), QStringLiteral("go-first"),
               { QKeySequence(Qt::CTRL | Qt::Key_Home) }, [this] { m_pageView->goToPage(0); });
     addAction(QStringLiteral("go_last_page"), i18nc("@action", "Last Page"), QStringLiteral("go-last"),
-              { QKeySequence(Qt::CTRL | Qt::Key_End) }, [this] {
-                  m_pageView->goToPage(m_document->pageCount() - 1);
-              });
+              { QKeySequence(Qt::CTRL | Qt::Key_End) }, [this] { m_pageView->goToPage(m_document->pageCount() - 1); });
 
     // ── what dragging does while reading ──────────────────────────────────
     // Three answers to one question, and the question is the one the owner
@@ -1054,17 +1027,17 @@ void MainWindow::setupActions()
     auto *kinds = new QActionGroup(this);
     kinds->setExclusive(true);
 
-    auto addField = [&](const QString &name, const QString &text, const QString &iconName,
-                        FormDesignOverlay::Kind kind) {
-        QAction *action = addAction(name, text, iconName, {}, [this, kind] {
-            setWorkMode(WorkMode::Form);
-            m_formDesign->setKindToPlace(kind);
-        });
-        action->setCheckable(true);
-        action->setActionGroup(kinds);
-        m_fieldActions.insert(int(kind), action);
-        return action;
-    };
+    auto addField
+        = [&](const QString &name, const QString &text, const QString &iconName, FormDesignOverlay::Kind kind) {
+              QAction *action = addAction(name, text, iconName, {}, [this, kind] {
+                  setWorkMode(WorkMode::Form);
+                  m_formDesign->setKindToPlace(kind);
+              });
+              action->setCheckable(true);
+              action->setActionGroup(kinds);
+              m_fieldActions.insert(int(kind), action);
+              return action;
+          };
 
     addField(QStringLiteral("field_none"), i18nc("@action", "Pick a Field"), QStringLiteral("edit-select"),
              FormDesignOverlay::Kind::None)
@@ -1350,10 +1323,9 @@ bool MainWindow::askForPassword(const QString &fileName, bool wasWrong, QString 
     // there is nothing to be done with the document until it is answered.
     KPasswordDialog dialog(this);
     dialog.setWindowTitle(i18nc("@title:window", "Password Needed"));
-    dialog.setPrompt(wasWrong
-                         ? i18n("That password does not open “%1”. Try again, or press Cancel to leave it closed.",
-                                fileName)
-                         : i18n("“%1” is protected. Type the password that opens it.", fileName));
+    dialog.setPrompt(
+        wasWrong ? i18n("That password does not open “%1”. Try again, or press Cancel to leave it closed.", fileName)
+                 : i18n("“%1” is protected. Type the password that opens it.", fileName));
     if (dialog.exec() != QDialog::Accepted) {
         return false;
     }
@@ -1440,8 +1412,8 @@ void MainWindow::openDocument()
 {
     // Not chooseFileToRead: openUrl has to see the URL itself, so that saving
     // later goes back to the share the document came from.
-    const QUrl url = QFileDialog::getOpenFileUrl(this, i18nc("@title:window", "Open PDF"), chooserLocation(),
-                                                 pdfFilter());
+    const QUrl url
+        = QFileDialog::getOpenFileUrl(this, i18nc("@title:window", "Open PDF"), chooserLocation(), pdfFilter());
     if (!url.isEmpty()) {
         openUrl(url);
     }
@@ -1639,9 +1611,8 @@ bool MainWindow::saveDocumentAs()
         return false;
     }
 
-    const QString suggestion = m_document->filePath().isEmpty()
-        ? QString()
-        : QFileInfo(m_document->filePath()).fileName();
+    const QString suggestion
+        = m_document->filePath().isEmpty() ? QString() : QFileInfo(m_document->filePath()).fileName();
     const Destination destination = chooseDestination(i18nc("@title:window", "Save PDF As"), suggestion, pdfFilter());
     if (!destination.chosen) {
         return false;
@@ -1870,8 +1841,8 @@ void MainWindow::redactPages()
     }
 
     const QVector<int> selection = m_view->selectedRows();
-    enterEditor(new RedactEditor(m_document, m_backend.get(), selection.isEmpty() ? 0 : selection.first(),
-                                 m_processor));
+    enterEditor(
+        new RedactEditor(m_document, m_backend.get(), selection.isEmpty() ? 0 : selection.first(), m_processor));
 }
 
 void MainWindow::arrangeOnSheets()
@@ -1965,8 +1936,8 @@ void MainWindow::importComments()
         return;
     }
 
-    const QString path = chooseFileToRead(i18nc("@title:window", "Load Comments"),
-                                          i18n("Comment files (*.xfdf);;All files (*)"));
+    const QString path
+        = chooseFileToRead(i18nc("@title:window", "Load Comments"), i18n("Comment files (*.xfdf);;All files (*)"));
     if (path.isEmpty()) {
         return;
     }
@@ -2363,8 +2334,7 @@ void MainWindow::exportAsText(TextFormat format)
         break;
     }
 
-    const Destination destination
-        = chooseDestination(title, QFileInfo(source).completeBaseName() + suffix, filter);
+    const Destination destination = chooseDestination(title, QFileInfo(source).completeBaseName() + suffix, filter);
     if (!destination.chosen) {
         return;
     }
@@ -2442,8 +2412,8 @@ void MainWindow::saveForPrinting()
         return;
     }
 
-    const Destination destination = chooseDestination(
-        title, QFileInfo(source).completeBaseName() + QStringLiteral("-pdfx.pdf"), pdfFilter());
+    const Destination destination
+        = chooseDestination(title, QFileInfo(source).completeBaseName() + QStringLiteral("-pdfx.pdf"), pdfFilter());
     if (!destination.chosen) {
         return;
     }
@@ -2724,8 +2694,7 @@ void MainWindow::updateTitle()
 
 bool MainWindow::hasPendingViewEdits() const
 {
-    return (m_annotationOverlay && m_annotationOverlay->isModified())
-        || (m_textOverlay && m_textOverlay->hasEdits())
+    return (m_annotationOverlay && m_annotationOverlay->isModified()) || (m_textOverlay && m_textOverlay->hasEdits())
         || (m_objectOverlay && (m_objectOverlay->hasPendingEdits() || m_objectOverlay->hasPendingInsertions()))
         || (m_formDesign && m_formDesign->hasPendingWork()) || (m_formOverlay && m_formOverlay->isModified());
 }
@@ -2922,9 +2891,8 @@ void MainWindow::enterEditor(EditorMode *mode)
     m_toolDock->raise();
 
     connect(mode, &EditorMode::finished, this, &MainWindow::leaveEditor);
-    connect(mode, &EditorMode::statusMessage, this, [this](const QString &text) {
-        statusBar()->showMessage(text, 8000);
-    });
+    connect(mode, &EditorMode::statusMessage, this,
+            [this](const QString &text) { statusBar()->showMessage(text, 8000); });
 
     updateActionState();
 }
@@ -3504,8 +3472,8 @@ bool MainWindow::commitViewEdits()
 
     if (m_objectOverlay && (m_objectOverlay->hasPendingEdits() || m_objectOverlay->hasPendingInsertions())) {
         PageComposer::Report report;
-        if (m_processor->composeObjects(m_objectOverlay->pendingEdits(), m_objectOverlay->pendingInsertions(),
-                                        &report, &error)) {
+        if (m_processor->composeObjects(m_objectOverlay->pendingEdits(), m_objectOverlay->pendingInsertions(), &report,
+                                        &error)) {
             m_objectOverlay->takeBackAll();
             said += report.refusals;
         } else {

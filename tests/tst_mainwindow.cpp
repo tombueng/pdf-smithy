@@ -760,20 +760,20 @@ void TestMainWindow::offersEveryDocumentToolInTheMenus()
     // Features that exist but cannot be reached are features the user does not
     // have. Anything added to the engine belongs on this list.
     const QStringList expected {
-        QStringLiteral("page_delete"),       QStringLiteral("page_rotate_left"), QStringLiteral("page_duplicate"),
-        QStringLiteral("page_extract"),      QStringLiteral("page_ocr"),         QStringLiteral("page_compress"),
-        QStringLiteral("page_sign"),         QStringLiteral("page_watermark"),   QStringLiteral("page_number"),
-        QStringLiteral("page_crop"),         QStringLiteral("page_redact"),      QStringLiteral("page_nup"),
-        QStringLiteral("page_annotate"),     QStringLiteral("comments_export"),  QStringLiteral("comments_import"),
-        QStringLiteral("document_form"),     QStringLiteral("page_text"),        QStringLiteral("document_archive"),
-        QStringLiteral("document_compare"),  QStringLiteral("insert_file"),      QStringLiteral("import_images"),
-        QStringLiteral("export_images"),     QStringLiteral("file_split"),       QStringLiteral("document_metadata"),
+        QStringLiteral("page_delete"), QStringLiteral("page_rotate_left"), QStringLiteral("page_duplicate"),
+        QStringLiteral("page_extract"), QStringLiteral("page_ocr"), QStringLiteral("page_compress"),
+        QStringLiteral("page_sign"), QStringLiteral("page_watermark"), QStringLiteral("page_number"),
+        QStringLiteral("page_crop"), QStringLiteral("page_redact"), QStringLiteral("page_nup"),
+        QStringLiteral("page_annotate"), QStringLiteral("comments_export"), QStringLiteral("comments_import"),
+        QStringLiteral("document_form"), QStringLiteral("page_text"), QStringLiteral("document_archive"),
+        QStringLiteral("document_compare"), QStringLiteral("insert_file"), QStringLiteral("import_images"),
+        QStringLiteral("export_images"), QStringLiteral("file_split"), QStringLiteral("document_metadata"),
         QStringLiteral("document_sanitize"), QStringLiteral("document_password"),
         // The family the command line has had all along and the window offered
         // no way into: writing the document out as something other than a PDF,
         // and the two ways of writing a PDF for somebody else's machine.
-        QStringLiteral("export_text"),       QStringLiteral("export_html"),      QStringLiteral("export_markdown"),
-        QStringLiteral("export_tables"),     QStringLiteral("export_web"),       QStringLiteral("export_pdfx")
+        QStringLiteral("export_text"), QStringLiteral("export_html"), QStringLiteral("export_markdown"),
+        QStringLiteral("export_tables"), QStringLiteral("export_web"), QStringLiteral("export_pdfx")
     };
 
     for (const QString &name : expected) {

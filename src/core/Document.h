@@ -57,8 +57,7 @@ public:
      * rather than as Source::Trouble so that this header stays free of QPDF,
      * which everything that touches a document would otherwise have to read.
      */
-    bool open(const QString &path, QString *error, const QString &password = QString(),
-              bool *needsPassword = nullptr);
+    bool open(const QString &path, QString *error, const QString &password = QString(), bool *needsPassword = nullptr);
 
     /** Loads @p path as an extra source. Returns its id, or -1 on failure. */
     int addSource(const QString &path, QString *error, const QString &password = QString(),

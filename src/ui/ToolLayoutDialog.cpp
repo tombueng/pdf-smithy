@@ -1080,11 +1080,12 @@ QWidget *LayoutDialog::buildImposition()
     m_toPrinterSpreads->setChecked(true);
     auto *toReader = new QRadioButton(i18nc("@option:radio", "Printer's spreads back into reading order"), bookletBox);
 
-    auto *bookletNote = new QLabel(i18n("Eight pages become 8, 1, 2, 7, 6, 3, 4, 5, which is the order a "
-                                        "saddle-stitched booklet is laid down in. The pages are reordered, not paired onto sheets: "
-                                        "run “Arrange on Sheets” with two pages per sheet over the result to get "
-                                        "the sheets themselves."),
-                                   bookletBox);
+    auto *bookletNote
+        = new QLabel(i18n("Eight pages become 8, 1, 2, 7, 6, 3, 4, 5, which is the order a "
+                          "saddle-stitched booklet is laid down in. The pages are reordered, not paired onto sheets: "
+                          "run “Arrange on Sheets” with two pages per sheet over the result to get "
+                          "the sheets themselves."),
+                     bookletBox);
     bookletNote->setWordWrap(true);
 
     auto *booklet

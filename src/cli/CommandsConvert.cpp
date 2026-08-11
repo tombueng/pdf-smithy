@@ -201,9 +201,8 @@ int commandTables(const QStringList &arguments, const QCommandLineParser &parser
             for (const QStringList &row : table.rows) {
                 rows.append(QJsonArray::fromStringList(row));
             }
-            array.append(QJsonObject { { u"page"_s, table.page + 1 },
-                                       { u"confidence"_s, table.confidence },
-                                       { u"rows"_s, rows } });
+            array.append(QJsonObject {
+                { u"page"_s, table.page + 1 }, { u"confidence"_s, table.confidence }, { u"rows"_s, rows } });
         }
         out() << QString::fromUtf8(QJsonDocument(array).toJson(QJsonDocument::Indented));
         return Success;
@@ -403,8 +402,8 @@ void convertOptions(QCommandLineParser &parser)
                                          i18n("Which PDF/X to write: x1a, x3 or x4. Most printers still ask for "
                                               "x1a."),
                                          u"level"_s, u"x1a"_s);
-    const QCommandLineOption versionOption(
-        u"pdf-version"_s, i18n("The version the PDF header should claim, e.g. 1.7."), u"version"_s);
+    const QCommandLineOption versionOption(u"pdf-version"_s, i18n("The version the PDF header should claim, e.g. 1.7."),
+                                           u"version"_s);
 
     parser.addOptions({ levelOption, versionOption });
 }

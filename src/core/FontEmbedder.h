@@ -216,8 +216,8 @@ public:
      * so nothing moves, and what the new face cannot draw is reported rather
      * than left as a blank somebody finds later.
      */
-    static bool replaceFont(const QString &in, const QString &out, const QString &oldBaseFont,
-                            const QString &newFamily, QVector<Substitution> *substitutions, QString *error);
+    static bool replaceFont(const QString &in, const QString &out, const QString &oldBaseFont, const QString &newFamily,
+                            QVector<Substitution> *substitutions, QString *error);
 
     /**
      * Cuts a TrueType programme down to the glyphs @p characters need.

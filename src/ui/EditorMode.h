@@ -57,10 +57,7 @@ public:
     virtual QString title() const = 0;
 
     /** An icon name for the dock, or empty. */
-    virtual QString iconName() const
-    {
-        return {};
-    }
+    virtual QString iconName() const { return {}; }
 
     /**
      * True when leaving now would lose nothing.
@@ -68,10 +65,7 @@ public:
      * Asked before the "keep your changes?" question, so that a mode entered
      * and left again does not nag.
      */
-    virtual bool isUnchanged() const
-    {
-        return false;
-    }
+    virtual bool isUnchanged() const { return false; }
 
     /**
      * Writes what was done into the document.

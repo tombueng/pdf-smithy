@@ -589,9 +589,7 @@ bool PageProcessor::buildForm(const QStringList &removed, const QVector<QPair<QS
     // (which name their fields as they are *after* the renames) and additions
     // last, for the same freed-name reason.
     int step = 0;
-    const auto next = [&] {
-        return m_scratch.filePath(QStringLiteral("form-%1-%2.pdf").arg(m_counter).arg(++step));
-    };
+    const auto next = [&] { return m_scratch.filePath(QStringLiteral("form-%1-%2.pdf").arg(m_counter).arg(++step)); };
 
     int count = 0;
     if (!removed.isEmpty()) {
@@ -716,10 +714,10 @@ bool PageProcessor::composeObjects(const QVector<PageEdit> &edits, const QVector
         return false;
     }
 
-    return adoptResult(rows, output,
-                       i18ncp("@action:inmenu undo step", "Change what is on the page",
-                              "Change what is on %1 pages", rows.size()),
-                       error);
+    return adoptResult(
+        rows, output,
+        i18ncp("@action:inmenu undo step", "Change what is on the page", "Change what is on %1 pages", rows.size()),
+        error);
 }
 
 bool PageProcessor::writeArchival(const QString &path, const Archival::Options &options, Archival::Report *report,

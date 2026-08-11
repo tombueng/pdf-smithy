@@ -86,8 +86,8 @@ void drawTick(QPainter &painter, const QRectF &box)
     if (inner.isEmpty()) {
         return;
     }
-    painter.setPen(QPen(QColor(20, 20, 20), std::max(1.2, inner.height() * 0.2), Qt::SolidLine, Qt::RoundCap,
-                        Qt::RoundJoin));
+    painter.setPen(
+        QPen(QColor(20, 20, 20), std::max(1.2, inner.height() * 0.2), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush(Qt::NoBrush);
     painter.drawPolyline(QPolygonF({ QPointF(inner.left(), inner.center().y()),
                                      QPointF(inner.left() + inner.width() * 0.35, inner.bottom()),
@@ -204,9 +204,8 @@ QString wordsBeside(const QVector<RenderBackend::Word> &words, const QRectF &box
 
     // A rule, a bullet or a row of dots is next to a great many fields and names
     // none of them, and a label of punctuation would look like a bug.
-    const bool sayable = std::any_of(guess.cbegin(), guess.cend(), [](QChar character) {
-        return character.isLetterOrNumber();
-    });
+    const bool sayable
+        = std::any_of(guess.cbegin(), guess.cend(), [](QChar character) { return character.isLetterOrNumber(); });
     return sayable ? guess : QString();
 }
 
@@ -224,21 +223,11 @@ FormOverlay::FormOverlay(PageView *view, QObject *parent)
     // where the page is drawn has to be answered by moving it. Scrolling is the
     // one that happens constantly and the one the view has no signal for, so it
     // is taken from the scroll bars themselves.
-    connect(m_view, &PageView::zoomChanged, this, [this] {
-        placeEditor();
-    });
-    connect(m_view, &PageView::currentPageChanged, this, [this] {
-        placeEditor();
-    });
-    connect(m_view, &PageView::layoutChanged, this, [this] {
-        placeEditor();
-    });
-    connect(m_view->verticalScrollBar(), &QScrollBar::valueChanged, this, [this] {
-        placeEditor();
-    });
-    connect(m_view->horizontalScrollBar(), &QScrollBar::valueChanged, this, [this] {
-        placeEditor();
-    });
+    connect(m_view, &PageView::zoomChanged, this, [this] { placeEditor(); });
+    connect(m_view, &PageView::currentPageChanged, this, [this] { placeEditor(); });
+    connect(m_view, &PageView::layoutChanged, this, [this] { placeEditor(); });
+    connect(m_view->verticalScrollBar(), &QScrollBar::valueChanged, this, [this] { placeEditor(); });
+    connect(m_view->horizontalScrollBar(), &QScrollBar::valueChanged, this, [this] { placeEditor(); });
 
     // Filling in is a reading-mode gesture; in Edit mode the boxes belong to
     // whoever is moving them about, and an editor left open over one would be
@@ -688,8 +677,8 @@ void FormOverlay::paint(QPainter &painter, int row, const QRect &pageRect)
                 const Qt::Alignment across = field.alignment == 1 ? Qt::AlignHCenter
                     : field.alignment == 2                        ? Qt::AlignRight
                                                                   : Qt::AlignLeft;
-                const int flags = field.multiline ? int(across | Qt::AlignTop | Qt::TextWordWrap)
-                                                  : int(across | Qt::AlignVCenter);
+                const int flags
+                    = field.multiline ? int(across | Qt::AlignTop | Qt::TextWordWrap) : int(across | Qt::AlignVCenter);
                 painter.drawText(box.adjusted(pad, pad, -pad, -pad), flags, valueOf(index));
             }
         }
@@ -720,9 +709,9 @@ void FormOverlay::paint(QPainter &painter, int row, const QRect &pageRect)
                 // look like, so draw the one it asked for rather than ours.
                 edge = field.border;
                 width = std::max(0.5, field.borderWidth) * zoom;
-                dash = field.borderStyle == FormField::BorderStyle::Dashed ? Qt::DashLine
+                dash = field.borderStyle == FormField::BorderStyle::Dashed   ? Qt::DashLine
                     : field.borderStyle == FormField::BorderStyle::Underline ? Qt::SolidLine
-                                                                            : Qt::SolidLine;
+                                                                             : Qt::SolidLine;
             } else {
                 edge = m_view->palette().color(QPalette::Highlight);
                 edge.setAlpha(110);
@@ -961,27 +950,23 @@ void FormOverlay::openEditor()
         combo->setEditable(true); // Some lists take a value of their own as well.
         combo->addItems(field.options);
         combo->setCurrentText(valueOf(m_selected));
-        connect(combo, &QComboBox::currentTextChanged, this, [this](const QString &text) {
-            setValueOf(m_selected, text);
-        });
+        connect(combo, &QComboBox::currentTextChanged, this,
+                [this](const QString &text) { setValueOf(m_selected, text); });
         m_editor = combo;
     } else if (field.multiline) {
         auto *edit = new QPlainTextEdit(host);
         edit->setFrameShape(QFrame::NoFrame);
         edit->document()->setDocumentMargin(pad);
         edit->setPlainText(valueOf(m_selected));
-        connect(edit, &QPlainTextEdit::textChanged, this, [this, edit] {
-            setValueOf(m_selected, edit->toPlainText());
-        });
+        connect(edit, &QPlainTextEdit::textChanged, this,
+                [this, edit] { setValueOf(m_selected, edit->toPlainText()); });
         m_editor = edit;
     } else {
         auto *edit = new QLineEdit(host);
         edit->setFrame(false); // The page already draws whatever border the field has.
         edit->setTextMargins(int(pad), 0, int(pad), 0);
         edit->setText(valueOf(m_selected));
-        connect(edit, &QLineEdit::textChanged, this, [this](const QString &text) {
-            setValueOf(m_selected, text);
-        });
+        connect(edit, &QLineEdit::textChanged, this, [this](const QString &text) { setValueOf(m_selected, text); });
         m_editor = edit;
     }
 
@@ -1122,8 +1107,8 @@ void FormOverlay::step(int direction)
         return;
     }
     const int at = m_order.indexOf(m_selected);
-    const int next = at < 0 ? (direction > 0 ? 0 : m_order.size() - 1)
-                            : (at + direction + m_order.size()) % m_order.size();
+    const int next
+        = at < 0 ? (direction > 0 ? 0 : m_order.size() - 1) : (at + direction + m_order.size()) % m_order.size();
 
     const int index = m_order.at(next);
     selectField(index);
@@ -1197,8 +1182,7 @@ bool FormOverlay::eventFilter(QObject *watched, QEvent *event)
         return QObject::eventFilter(watched, event);
     }
 
-    if (event->type() == QEvent::ToolTip && watched == m_view->viewport()
-        && m_view->mode() == PageView::Mode::View) {
+    if (event->type() == QEvent::ToolTip && watched == m_view->viewport() && m_view->mode() == PageView::Mode::View) {
         auto *help = static_cast<QHelpEvent *>(event);
         const int row = m_view->pageAt(help->pos());
         const Spot spot = row < 0 ? Spot {} : spotAt(row, m_view->toPoints(row, QPointF(help->pos())));
@@ -1369,10 +1353,9 @@ QWidget *FormFieldInspectable::buildEditor(QWidget *parent)
     // reading of it, which can be wrong and is never written back.
     const FormOverlay::FieldLabel label = m_overlay->labelOf(m_index, m_overlay->selectedWidget());
     if (!label.text.isEmpty() && label.text != field.name) {
-        addRow(label.guessed
-                   ? i18nc("@label:textbox words found on the page beside the field, not stated by the form",
-                           "Label (read from the page):")
-                   : i18nc("@label:textbox what the form's author wrote next to the field", "Label:"),
+        addRow(label.guessed ? i18nc("@label:textbox words found on the page beside the field, not stated by the form",
+                                     "Label (read from the page):")
+                             : i18nc("@label:textbox what the form's author wrote next to the field", "Label:"),
                label.text);
     }
 
@@ -1406,8 +1389,8 @@ QWidget *FormFieldInspectable::buildEditor(QWidget *parent)
                field.options.join(i18nc("@item separator between the choices a form field offers", ", ")));
     }
 
-    QLabel *answer = addRow(i18nc("@label:textbox the answer the field holds now", "Value:"),
-                            m_overlay->valueOf(m_index));
+    QLabel *answer
+        = addRow(i18nc("@label:textbox the answer the field holds now", "Value:"), m_overlay->valueOf(m_index));
 
     // The answer is typed on the page, not here, and this panel outlives none
     // of that, so the one attribute that moves keeps itself up to date. The

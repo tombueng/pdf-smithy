@@ -121,9 +121,9 @@ void TestAlignment::alignsOntoEachOfTheSixEdges()
     COMPARE_BOX(bottom.at(2), QRectF(400, 500, 60, 30));
 
     // Nothing is resized by any of them, and nothing is reordered.
-    for (const Alignment::Edge edge : { Alignment::Edge::Left, Alignment::Edge::HorizontalCentre,
-                                        Alignment::Edge::Right, Alignment::Edge::Top, Alignment::Edge::VerticalMiddle,
-                                        Alignment::Edge::Bottom }) {
+    for (const Alignment::Edge edge :
+         { Alignment::Edge::Left, Alignment::Edge::HorizontalCentre, Alignment::Edge::Right, Alignment::Edge::Top,
+           Alignment::Edge::VerticalMiddle, Alignment::Edge::Bottom }) {
         const QVector<QRectF> moved = Alignment::align(Scattered, edge);
         QCOMPARE(moved.size(), Scattered.size());
         for (qsizetype at = 0; at < moved.size(); ++at) {
@@ -152,9 +152,9 @@ void TestAlignment::knowsWhichWayIsUp()
 void TestAlignment::leavesFewerThanTwoAlone()
 {
     const QVector<QRectF> one = { QRectF(11, 22, 33, 44) };
-    for (const Alignment::Edge edge : { Alignment::Edge::Left, Alignment::Edge::HorizontalCentre,
-                                        Alignment::Edge::Right, Alignment::Edge::Top, Alignment::Edge::VerticalMiddle,
-                                        Alignment::Edge::Bottom }) {
+    for (const Alignment::Edge edge :
+         { Alignment::Edge::Left, Alignment::Edge::HorizontalCentre, Alignment::Edge::Right, Alignment::Edge::Top,
+           Alignment::Edge::VerticalMiddle, Alignment::Edge::Bottom }) {
         QCOMPARE(Alignment::align(one, edge), one);
         QCOMPARE(Alignment::align(QVector<QRectF>(), edge), QVector<QRectF>());
     }

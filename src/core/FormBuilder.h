@@ -145,7 +145,8 @@ public:
                                QString *error);
 
     /** Field data in and out, for filling many copies from a spreadsheet. */
-    static bool exportData(const QString &pdf, const QString &toFile, QString *error); //!< by extension: .fdf, .xfdf, .csv
+    static bool exportData(const QString &pdf, const QString &toFile,
+                           QString *error); //!< by extension: .fdf, .xfdf, .csv
     static bool importData(const QString &in, const QString &out, const QString &fromFile, int *filled, QString *error);
     /** One row per document: collects many filled copies into a table. */
     static bool collect(const QStringList &pdfs, const QString &toCsv, QString *error);

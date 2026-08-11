@@ -174,8 +174,7 @@ public:
         const QByteArray glyf = table("glyf");
         const bool longFormat = s16Of(table("head"), 50) != 0;
         const quint32 from = longFormat ? u32Of(loca, qsizetype(glyph) * 4) : quint32(u16Of(loca, glyph * 2)) * 2;
-        const quint32 to
-            = longFormat ? u32Of(loca, qsizetype(glyph) * 4 + 4) : quint32(u16Of(loca, glyph * 2 + 2)) * 2;
+        const quint32 to = longFormat ? u32Of(loca, qsizetype(glyph) * 4 + 4) : quint32(u16Of(loca, glyph * 2 + 2)) * 2;
         if (to <= from || qsizetype(to) > glyf.size()) {
             return {};
         }
@@ -339,8 +338,8 @@ private:
      * from the file rather than from anything the embedder returned, which is
      * how a caller with no special knowledge would have to do it.
      */
-    bool embedInto(const QString &output, const QString &text, bool draw, FontEmbedder::Result *result,
-                   QString *error, int pageCount = 1)
+    bool embedInto(const QString &output, const QString &text, bool draw, FontEmbedder::Result *result, QString *error,
+                   int pageCount = 1)
     {
         const QString source = path(u"source.pdf"_s);
         if (!ps::test::writeSamplePdf(source, pageCount)) {
@@ -538,8 +537,7 @@ private Q_SLOTS:
         // Six capitals and a plus, which is how every producer marks a subset and
         // how the inventory recognises one.
         const QString baseFont = QString::fromStdString(font.getKey("/BaseFont").getName());
-        QVERIFY2(QRegularExpression(u"^/[A-Z]{6}\\+DejaVuSans$"_s).match(baseFont).hasMatch(),
-                 qPrintable(baseFont));
+        QVERIFY2(QRegularExpression(u"^/[A-Z]{6}\\+DejaVuSans$"_s).match(baseFont).hasMatch(), qPrintable(baseFont));
 
         QPDFObjectHandle descriptor = font.getKey("/FontDescriptor");
         QVERIFY(descriptor.isDictionary());
@@ -576,8 +574,7 @@ private Q_SLOTS:
         }
 
         // The umlaut kept its own name rather than becoming a number.
-        QVERIFY(QString::fromStdString(font.getKey("/Encoding").unparseResolved())
-                    .contains(u"/udieresis"_s));
+        QVERIFY(QString::fromStdString(font.getKey("/Encoding").unparseResolved()).contains(u"/udieresis"_s));
     }
 
     void theSubsetOfAnUmlautKeepsTheGlyphsItIsBuiltFrom()
@@ -661,8 +658,7 @@ private Q_SLOTS:
             QCOMPARE(use.fileSize, result.embeddedBytes);
             QVERIFY(!use.licence.isEmpty());
             for (const QChar &character : wanted) {
-                QVERIFY2(use.coverage.contains(character),
-                         qPrintable(u"coverage is missing %1"_s.arg(character)));
+                QVERIFY2(use.coverage.contains(character), qPrintable(u"coverage is missing %1"_s.arg(character)));
             }
         }
         QCOMPARE(found, 1);
@@ -897,10 +893,9 @@ private Q_SLOTS:
             QVERIFY2(glyph > 0, qPrintable(u"the subset cannot draw %1"_s.arg(it.value())));
             const int own = int(std::lround(face.advanceOf(glyph) * 1000.0 / face.unitsPerEm()));
             const int stated = widths.getArrayItem(it.key() - first).getIntValueAsInt();
-            QVERIFY2(qAbs(stated - own) <= 10,
-                     qPrintable(u"%1: the document now says %2, the face draws %3"_s.arg(it.value())
-                                    .arg(stated)
-                                    .arg(own)));
+            QVERIFY2(
+                qAbs(stated - own) <= 10,
+                qPrintable(u"%1: the document now says %2, the face draws %3"_s.arg(it.value()).arg(stated).arg(own)));
         }
 
         // The one that used to be wrong by name: an ellipsis is a full em wide
@@ -967,9 +962,9 @@ private Q_SLOTS:
         QString error;
         // Named with the spaces a person types and without the subset tag the
         // document carries, both of which have to reach the same font.
-        QVERIFY2(FontEmbedder::replaceFont(source, output, u"Liberation Serif"_s, u"DejaVu Sans"_s, &substitutions,
-                                           &error),
-                 qPrintable(error));
+        QVERIFY2(
+            FontEmbedder::replaceFont(source, output, u"Liberation Serif"_s, u"DejaVu Sans"_s, &substitutions, &error),
+            qPrintable(error));
         QCOMPARE(substitutions.size(), 1);
         QCOMPARE(substitutions.constFirst().baseFont, u"ABCDEF+LiberationSerif"_s);
         QCOMPARE(substitutions.constFirst().family, u"DejaVu Sans"_s);
@@ -1019,8 +1014,8 @@ private Q_SLOTS:
         QVERIFY(!substitutions.constFirst().warnings.isEmpty());
         QVERIFY(!QFileInfo::exists(path(u"uninstalled.pdf"_s)));
 
-        QVERIFY(!FontEmbedder::replaceFont(source, path(u"nameless.pdf"_s), QString(), u"DejaVu Sans"_s, nullptr,
-                                           &error));
+        QVERIFY(
+            !FontEmbedder::replaceFont(source, path(u"nameless.pdf"_s), QString(), u"DejaVu Sans"_s, nullptr, &error));
         QVERIFY(!error.isEmpty());
     }
 
@@ -1034,19 +1029,18 @@ private Q_SLOTS:
         // glyph nobody can resolve, and dropping those without saying so is how
         // a substitution loses two letters in a paragraph nobody rereads.
         const QString source = path(u"named-by-number.pdf"_s);
-        QVERIFY(writeDocumentWithFont(
-            source,
-            "<< /Type /Font /Subtype /TrueType /BaseFont /Fixture /FirstChar 65 /LastChar 69"
-            " /Widths [ 600 600 600 600 600 ]"
-            " /Encoding << /Type /Encoding /BaseEncoding /WinAnsiEncoding"
-            " /Differences [ 65 /A /g3 /cid17 /D /E ] >> >>",
-            "BT /F1 24 Tf 72 700 Td <4142434445> Tj ET\n"));
+        QVERIFY(writeDocumentWithFont(source,
+                                      "<< /Type /Font /Subtype /TrueType /BaseFont /Fixture /FirstChar 65 /LastChar 69"
+                                      " /Widths [ 600 600 600 600 600 ]"
+                                      " /Encoding << /Type /Encoding /BaseEncoding /WinAnsiEncoding"
+                                      " /Differences [ 65 /A /g3 /cid17 /D /E ] >> >>",
+                                      "BT /F1 24 Tf 72 700 Td <4142434445> Tj ET\n"));
 
         QVector<FontEmbedder::Substitution> substitutions;
         QString error;
-        QVERIFY2(FontEmbedder::embedMissing(source, path(u"named-embedded.pdf"_s), u"DejaVu Sans"_s, &substitutions,
-                                            &error),
-                 qPrintable(error));
+        QVERIFY2(
+            FontEmbedder::embedMissing(source, path(u"named-embedded.pdf"_s), u"DejaVu Sans"_s, &substitutions, &error),
+            qPrintable(error));
         QCOMPARE(substitutions.size(), 1);
         QCOMPARE(substitutions.constFirst().codes, 3);
 
@@ -1170,8 +1164,8 @@ private Q_SLOTS:
         QVERIFY(!error.isEmpty());
         QVERIFY(!QFileInfo::exists(path(u"no-such-page.pdf"_s)));
 
-        QVERIFY(!FontEmbedder::embed(source, path(u"no-characters.pdf"_s), FontEmbedder::Request {}, {}, nullptr,
-                                     &error));
+        QVERIFY(
+            !FontEmbedder::embed(source, path(u"no-characters.pdf"_s), FontEmbedder::Request {}, {}, nullptr, &error));
         QVERIFY(!error.isEmpty());
     }
 

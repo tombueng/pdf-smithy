@@ -334,9 +334,9 @@ void CompressDialog::runEstimate()
 
     // Labelled as the extrapolation it is. A number presented as exact when it
     // came from four pages would be a small lie repeated on every document.
-    m_estimateResult->setText(estimate.reliable ? i18np("%2, measured on %1 page.", "%2, measured on %1 pages.",
-                                                        estimate.pagesSampled, sizes)
-                                                : i18n("%1, a rough guess from very few pages.", sizes));
+    m_estimateResult->setText(
+        estimate.reliable ? i18np("%2, measured on %1 page.", "%2, measured on %1 pages.", estimate.pagesSampled, sizes)
+                          : i18n("%1, a rough guess from very few pages.", sizes));
 }
 
 bool CompressDialog::appliesToSelectionOnly() const

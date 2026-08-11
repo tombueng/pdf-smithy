@@ -62,8 +62,8 @@ QString outputOr(const QString &given, const QString &input, const QString &suff
  */
 struct Group {
     void (*options)(QCommandLineParser &parser) = nullptr;
-    std::optional<int> (*run)(const QString &verb, const QStringList &arguments,
-                              const QCommandLineParser &parser) = nullptr;
+    std::optional<int> (*run)(const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
+        = nullptr;
     /** One line per command, its usage and what it does, for the help text. */
     QStringList (*help)() = nullptr;
 };

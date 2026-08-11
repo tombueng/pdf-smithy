@@ -154,36 +154,21 @@ public:
      */
     FieldLabel labelOf(int index, int widget = 0) const;
 
-    const QVector<FormField> &fields() const
-    {
-        return m_fields;
-    }
+    const QVector<FormField> &fields() const { return m_fields; }
 
     /** Only the fields whose value the user changed, keyed by field name. */
-    QHash<QString, QString> values() const
-    {
-        return m_edited;
-    }
+    QHash<QString, QString> values() const { return m_edited; }
 
-    bool isModified() const
-    {
-        return !m_edited.isEmpty();
-    }
+    bool isModified() const { return !m_edited.isEmpty(); }
 
     /** Takes the typed values to be the document's own, after they were saved. */
     void clearChanges();
 
     /** The field being filled in, as an index into fields(), or -1. */
-    int selectedField() const
-    {
-        return m_selected;
-    }
+    int selectedField() const { return m_selected; }
 
     /** Which widget of the selected field was clicked, for a group of them. */
-    int selectedWidget() const
-    {
-        return m_selectedWidget;
-    }
+    int selectedWidget() const { return m_selectedWidget; }
 
     /** What the field holds now, which is what was typed if anything was. */
     QString valueOf(int index) const;

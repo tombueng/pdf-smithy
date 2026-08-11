@@ -83,8 +83,8 @@ void appearanceTally(const QString &path, int *widgets, int *drawn)
                 continue;
             }
             ++(*widgets);
-            QPDFObjectHandle normal = annot.getKey("/AP").isDictionary() ? annot.getKey("/AP").getKey("/N")
-                                                                        : QPDFObjectHandle::newNull();
+            QPDFObjectHandle normal
+                = annot.getKey("/AP").isDictionary() ? annot.getKey("/AP").getKey("/N") : QPDFObjectHandle::newNull();
             if (normal.isStream()) {
                 ++(*drawn);
                 continue;
@@ -511,8 +511,8 @@ void TestFormbuilder::aTickBoxKnowsExactlyTwoStates()
     const QString ticked = m_dir.filePath(QStringLiteral("ticked.pdf"));
     int count = 0;
     QString error;
-    QVERIFY2(Forms::fill(m_form, ticked, { { QStringLiteral("Einverstanden"), QStringLiteral("yes") } }, &count, nullptr,
-                         &error),
+    QVERIFY2(Forms::fill(m_form, ticked, { { QStringLiteral("Einverstanden"), QStringLiteral("yes") } }, &count,
+                         nullptr, &error),
              qPrintable(error));
     QCOMPARE(count, 1);
     QCOMPARE(valueNameOf(ticked, QStringLiteral("Einverstanden")), QStringLiteral("/Ja"));
@@ -672,9 +672,9 @@ void TestFormbuilder::changesAFieldWithoutMovingIt()
     // comparing against the number asked for.
     FormBuilder::Field missing = textField(QStringLiteral("Naem"), QRectF(1, 1, 10, 10));
     updated = 0;
-    QVERIFY2(FormBuilder::updateFields(m_form, m_dir.filePath(QStringLiteral("nothing.pdf")), { missing }, &updated,
-                                       &error),
-             qPrintable(error));
+    QVERIFY2(
+        FormBuilder::updateFields(m_form, m_dir.filePath(QStringLiteral("nothing.pdf")), { missing }, &updated, &error),
+        qPrintable(error));
     QCOMPARE(updated, 0);
 }
 
@@ -747,10 +747,10 @@ void TestFormbuilder::setsTheOrderTheTabKeyWalks()
 
     const QString out = m_dir.filePath(QStringLiteral("tabbed.pdf"));
     QString error;
-    QVERIFY2(FormBuilder::setTabOrder(
-                 m_form, out, 0,
-                 { QStringLiteral("Land"), QStringLiteral("Aktenzeichen"), QStringLiteral("Name") }, &error),
-             qPrintable(error));
+    QVERIFY2(
+        FormBuilder::setTabOrder(
+            m_form, out, 0, { QStringLiteral("Land"), QStringLiteral("Aktenzeichen"), QStringLiteral("Name") }, &error),
+        qPrintable(error));
 
     const QStringList after = widgetOrderOf(out, 0);
     QCOMPARE(after.mid(0, 3),
@@ -759,8 +759,8 @@ void TestFormbuilder::setsTheOrderTheTabKeyWalks()
     QCOMPARE(after.size(), before.size());
 
     error.clear();
-    QVERIFY(!FormBuilder::setTabOrder(m_form, m_dir.filePath(QStringLiteral("nope.pdf")), 0,
-                                      { QStringLiteral("Naem") }, &error));
+    QVERIFY(!FormBuilder::setTabOrder(m_form, m_dir.filePath(QStringLiteral("nope.pdf")), 0, { QStringLiteral("Naem") },
+                                      &error));
     QVERIFY(!error.isEmpty());
 }
 

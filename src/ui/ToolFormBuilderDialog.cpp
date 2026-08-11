@@ -129,10 +129,7 @@ public:
         });
     }
 
-    QColor colour() const
-    {
-        return m_colour;
-    }
+    QColor colour() const { return m_colour; }
 
 private:
     void refresh()
@@ -165,10 +162,7 @@ public:
         setCursor(Qt::CrossCursor);
     }
 
-    void onRectangleDrawn(std::function<void(const QRectF &)> handler)
-    {
-        m_drawn = std::move(handler);
-    }
+    void onRectangleDrawn(std::function<void(const QRectF &)> handler) { m_drawn = std::move(handler); }
 
     /** The rectangle the boxes beside the page describe, in points. */
     void setDraft(const QRectF &rectInPoints)
@@ -669,13 +663,20 @@ QGroupBox *FormBuilderDialog::buildLook(QWidget *parent)
         const char16_t *shown;
         const char16_t *resource;
     } const fonts[] = {
-        { u"Helvetica", u"Helv" },              { u"Helvetica Bold", u"HeBo" },
-        { u"Helvetica Oblique", u"HeOb" },      { u"Helvetica Bold Oblique", u"HeBO" },
-        { u"Times Roman", u"TiRo" },            { u"Times Bold", u"TiBo" },
-        { u"Times Italic", u"TiIt" },           { u"Times Bold Italic", u"TiBI" },
-        { u"Courier", u"Cour" },                { u"Courier Bold", u"CoBo" },
-        { u"Courier Oblique", u"CoOb" },        { u"Courier Bold Oblique", u"CoBO" },
-        { u"Symbol", u"Symb" },                 { u"ZapfDingbats", u"ZaDb" },
+        { u"Helvetica", u"Helv" },
+        { u"Helvetica Bold", u"HeBo" },
+        { u"Helvetica Oblique", u"HeOb" },
+        { u"Helvetica Bold Oblique", u"HeBO" },
+        { u"Times Roman", u"TiRo" },
+        { u"Times Bold", u"TiBo" },
+        { u"Times Italic", u"TiIt" },
+        { u"Times Bold Italic", u"TiBI" },
+        { u"Courier", u"Cour" },
+        { u"Courier Bold", u"CoBo" },
+        { u"Courier Oblique", u"CoOb" },
+        { u"Courier Bold Oblique", u"CoBO" },
+        { u"Symbol", u"Symb" },
+        { u"ZapfDingbats", u"ZaDb" },
     };
 
     m_font = new QComboBox(box);
@@ -938,9 +939,8 @@ void FormBuilderDialog::fillQueue()
 void FormBuilderDialog::writeQueued()
 {
     if (m_pending.isEmpty()) {
-        KMessageBox::information(this,
-                                 i18n("Nothing is waiting to be put on. Describe a field and add it to the list."),
-                                 windowTitle());
+        KMessageBox::information(
+            this, i18n("Nothing is waiting to be put on. Describe a field and add it to the list."), windowTitle());
         return;
     }
 
@@ -950,27 +950,26 @@ void FormBuilderDialog::writeQueued()
         hasRadio = hasRadio || field.kind == Field::Kind::Radio;
     }
 
-    const bool written = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                                      [this, fields, hasRadio](const QString &out, QStringList *summary,
-                                                               QString *error) {
-                                          int added = 0;
-                                          QApplication::setOverrideCursor(Qt::WaitCursor);
-                                          const bool ok = FormBuilder::addFields(m_pdf, out, fields, &added, error);
-                                          QApplication::restoreOverrideCursor();
-                                          if (!ok) {
-                                              return false;
-                                          }
-                                          *summary += i18np("Put one box on the document.",
-                                                            "Put %1 boxes on the document.", added);
-                                          if (hasRadio) {
-                                              *summary += i18n("A radio group counts as one box per button, since "
-                                                               "that is what it is: one field with several of them.");
-                                          }
-                                          *summary += i18n("Each box was given a drawing of its own, because a "
-                                                           "field that relies on the reader to draw it is invisible "
-                                                           "in about half the readers in use.");
-                                          return true;
-                                      });
+    const bool written
+        = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
+                       [this, fields, hasRadio](const QString &out, QStringList *summary, QString *error) {
+                           int added = 0;
+                           QApplication::setOverrideCursor(Qt::WaitCursor);
+                           const bool ok = FormBuilder::addFields(m_pdf, out, fields, &added, error);
+                           QApplication::restoreOverrideCursor();
+                           if (!ok) {
+                               return false;
+                           }
+                           *summary += i18np("Put one box on the document.", "Put %1 boxes on the document.", added);
+                           if (hasRadio) {
+                               *summary += i18n("A radio group counts as one box per button, since "
+                                                "that is what it is: one field with several of them.");
+                           }
+                           *summary += i18n("Each box was given a drawing of its own, because a "
+                                            "field that relies on the reader to draw it is invisible "
+                                            "in about half the readers in use.");
+                           return true;
+                       });
     closeAfterWriting(written);
 }
 
@@ -1054,9 +1053,9 @@ void FormBuilderDialog::fillInventory()
         page->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
         m_inventory->setItem(row, 2, page);
 
-        m_inventory->setItem(row, 3,
-                             new QTableWidgetItem(field.page >= 0 && !field.rect.isEmpty() ? describeRect(field.rect)
-                                                                                          : QString()));
+        m_inventory->setItem(
+            row, 3,
+            new QTableWidgetItem(field.page >= 0 && !field.rect.isEmpty() ? describeRect(field.rect) : QString()));
 
         QStringList notes;
         if (field.required) {
@@ -1097,24 +1096,23 @@ void FormBuilderDialog::removeTicked()
         return;
     }
 
-    const bool written
-        = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                       [this, names](const QString &out, QStringList *summary, QString *error) {
-                           int removed = 0;
-                           QApplication::setOverrideCursor(Qt::WaitCursor);
-                           const bool ok = FormBuilder::removeFields(m_pdf, out, names, &removed, error);
-                           QApplication::restoreOverrideCursor();
-                           if (!ok) {
-                               return false;
-                           }
-                           *summary += i18np("Took one field out.", "Took %1 fields out.", removed);
-                           if (removed < names.size()) {
-                               *summary += i18np("One of the names ticked was not in the document.",
-                                                 "%1 of the names ticked were not in the document.",
-                                                 int(names.size()) - removed);
-                           }
-                           return true;
-                       });
+    const bool written = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
+                                      [this, names](const QString &out, QStringList *summary, QString *error) {
+                                          int removed = 0;
+                                          QApplication::setOverrideCursor(Qt::WaitCursor);
+                                          const bool ok = FormBuilder::removeFields(m_pdf, out, names, &removed, error);
+                                          QApplication::restoreOverrideCursor();
+                                          if (!ok) {
+                                              return false;
+                                          }
+                                          *summary += i18np("Took one field out.", "Took %1 fields out.", removed);
+                                          if (removed < names.size()) {
+                                              *summary += i18np("One of the names ticked was not in the document.",
+                                                                "%1 of the names ticked were not in the document.",
+                                                                int(names.size()) - removed);
+                                          }
+                                          return true;
+                                      });
     closeAfterWriting(written);
 }
 
@@ -1128,10 +1126,10 @@ void FormBuilderDialog::renameChosen()
     const QString from = m_existing.at(row).name;
 
     bool accepted = false;
-    const QString to = QInputDialog::getText(this, i18nc("@title:window", "Rename a Field"),
-                                             i18n("What “%1” should be called instead:", from), QLineEdit::Normal,
-                                             from, &accepted)
-                           .trimmed();
+    const QString to
+        = QInputDialog::getText(this, i18nc("@title:window", "Rename a Field"),
+                                i18n("What “%1” should be called instead:", from), QLineEdit::Normal, from, &accepted)
+              .trimmed();
     if (!accepted || to.isEmpty() || to == from) {
         return;
     }
@@ -1181,8 +1179,7 @@ QWidget *FormBuilderDialog::buildOrder()
                             page);
     note->setWordWrap(true);
 
-    auto *apply = new QPushButton(QIcon::fromTheme(u"document-save"_s), i18nc("@action:button", "Set the Order"),
-                                  page);
+    auto *apply = new QPushButton(QIcon::fromTheme(u"document-save"_s), i18nc("@action:button", "Set the Order"), page);
 
     auto *layout = new QVBoxLayout(page);
     layout->addLayout(top);
@@ -1229,20 +1226,19 @@ void FormBuilderDialog::applyOrder()
     }
 
     const int page = m_orderPage->value() - 1;
-    const bool written
-        = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                       [this, page, names](const QString &out, QStringList *summary, QString *error) {
-                           QApplication::setOverrideCursor(Qt::WaitCursor);
-                           const bool ok = FormBuilder::setTabOrder(m_pdf, out, page, names, error);
-                           QApplication::restoreOverrideCursor();
-                           if (!ok) {
-                               return false;
-                           }
-                           *summary += i18np("The tab key now walks one field of page %2 in that order.",
-                                             "The tab key now walks %1 fields of page %2 in that order.",
-                                             int(names.size()), page + 1);
-                           return true;
-                       });
+    const bool written = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
+                                      [this, page, names](const QString &out, QStringList *summary, QString *error) {
+                                          QApplication::setOverrideCursor(Qt::WaitCursor);
+                                          const bool ok = FormBuilder::setTabOrder(m_pdf, out, page, names, error);
+                                          QApplication::restoreOverrideCursor();
+                                          if (!ok) {
+                                              return false;
+                                          }
+                                          *summary += i18np("The tab key now walks one field of page %2 in that order.",
+                                                            "The tab key now walks %1 fields of page %2 in that order.",
+                                                            int(names.size()), page + 1);
+                                          return true;
+                                      });
     closeAfterWriting(written);
 }
 
@@ -1448,24 +1444,22 @@ void FormBuilderDialog::applyFormat()
     const int decimals = m_decimals->value();
     const QString symbol = m_symbol->text();
 
-    const bool written
-        = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                       [this, name, format, shown, decimals, symbol](const QString &out, QStringList *summary,
-                                                                     QString *error) {
-                           QStringList warnings;
-                           QApplication::setOverrideCursor(Qt::WaitCursor);
-                           const bool ok = FormBuilder::setFormat(m_pdf, out, name, format, decimals, symbol,
-                                                                  &warnings, error);
-                           QApplication::restoreOverrideCursor();
-                           if (!ok) {
-                               return false;
-                           }
-                           *summary += format == FormBuilder::Format::None
-                               ? i18n("“%1” no longer formats what is typed into it.", name)
-                               : i18n("“%1” now shows what is typed into it as: %2.", name, shown);
-                           *summary += warnings;
-                           return true;
-                       });
+    const bool written = runProducing(
+        m_document, this, windowTitle(), u"-form.pdf"_s,
+        [this, name, format, shown, decimals, symbol](const QString &out, QStringList *summary, QString *error) {
+            QStringList warnings;
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+            const bool ok = FormBuilder::setFormat(m_pdf, out, name, format, decimals, symbol, &warnings, error);
+            QApplication::restoreOverrideCursor();
+            if (!ok) {
+                return false;
+            }
+            *summary += format == FormBuilder::Format::None
+                ? i18n("“%1” no longer formats what is typed into it.", name)
+                : i18n("“%1” now shows what is typed into it as: %2.", name, shown);
+            *summary += warnings;
+            return true;
+        });
     closeAfterWriting(written);
 }
 
@@ -1484,22 +1478,20 @@ void FormBuilderDialog::applyValidation()
         return;
     }
 
-    const bool written = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                                      [this, name, minimum, maximum](const QString &out, QStringList *summary,
-                                                                     QString *error) {
-                                          QStringList warnings;
-                                          QApplication::setOverrideCursor(Qt::WaitCursor);
-                                          const bool ok = FormBuilder::setValidation(m_pdf, out, name, minimum,
-                                                                                     maximum, &warnings, error);
-                                          QApplication::restoreOverrideCursor();
-                                          if (!ok) {
-                                              return false;
-                                          }
-                                          *summary += i18n("“%1” now takes numbers from %2 to %3 only.", name,
-                                                           points(minimum), points(maximum));
-                                          *summary += warnings;
-                                          return true;
-                                      });
+    const bool written = runProducing(
+        m_document, this, windowTitle(), u"-form.pdf"_s,
+        [this, name, minimum, maximum](const QString &out, QStringList *summary, QString *error) {
+            QStringList warnings;
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+            const bool ok = FormBuilder::setValidation(m_pdf, out, name, minimum, maximum, &warnings, error);
+            QApplication::restoreOverrideCursor();
+            if (!ok) {
+                return false;
+            }
+            *summary += i18n("“%1” now takes numbers from %2 to %3 only.", name, points(minimum), points(maximum));
+            *summary += warnings;
+            return true;
+        });
     closeAfterWriting(written);
 }
 
@@ -1513,8 +1505,9 @@ void FormBuilderDialog::applyCalculation()
         }
     }
     if (name.isEmpty() || sources.isEmpty()) {
-        KMessageBox::information(this, i18n("Say which field is worked out, and tick the fields it is worked out "
-                                            "from."),
+        KMessageBox::information(this,
+                                 i18n("Say which field is worked out, and tick the fields it is worked out "
+                                      "from."),
                                  windowTitle());
         return;
     }
@@ -1537,9 +1530,8 @@ void FormBuilderDialog::applyCalculation()
                            if (!ok) {
                                return false;
                            }
-                           *summary += i18np("“%2” is now the %3 of one field.",
-                                             "“%2” is now the %3 of %1 fields.", int(sources.size()), name,
-                                             what.toLower());
+                           *summary += i18np("“%2” is now the %3 of one field.", "“%2” is now the %3 of %1 fields.",
+                                             int(sources.size()), name, what.toLower());
                            *summary += warnings;
                            return true;
                        });
@@ -1550,8 +1542,9 @@ void FormBuilderDialog::applyButtonAction()
 {
     const QString name = m_buttonField->currentText().trimmed();
     if (name.isEmpty()) {
-        KMessageBox::information(this, i18n("Say which button this is about. A document with no push button on it "
-                                            "has nothing to press."),
+        KMessageBox::information(this,
+                                 i18n("Say which button this is about. A document with no push button on it "
+                                      "has nothing to press."),
                                  windowTitle());
         return;
     }
@@ -1565,20 +1558,19 @@ void FormBuilderDialog::applyButtonAction()
     }
     const QString does = m_buttonAction->currentText();
 
-    const bool written = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
-                                      [this, name, action, target, does](const QString &out, QStringList *summary,
-                                                                         QString *error) {
-                                          QApplication::setOverrideCursor(Qt::WaitCursor);
-                                          const bool ok
-                                              = FormBuilder::setButtonAction(m_pdf, out, name, action, target, error);
-                                          QApplication::restoreOverrideCursor();
-                                          if (!ok) {
-                                              return false;
-                                          }
-                                          *summary += i18nc("@info a button and what pressing it now does",
-                                                            "Pressing “%1” now does this: %2.", name, does.toLower());
-                                          return true;
-                                      });
+    const bool written
+        = runProducing(m_document, this, windowTitle(), u"-form.pdf"_s,
+                       [this, name, action, target, does](const QString &out, QStringList *summary, QString *error) {
+                           QApplication::setOverrideCursor(Qt::WaitCursor);
+                           const bool ok = FormBuilder::setButtonAction(m_pdf, out, name, action, target, error);
+                           QApplication::restoreOverrideCursor();
+                           if (!ok) {
+                               return false;
+                           }
+                           *summary += i18nc("@info a button and what pressing it now does",
+                                             "Pressing “%1” now does this: %2.", name, does.toLower());
+                           return true;
+                       });
     closeAfterWriting(written);
 }
 
@@ -1605,8 +1597,8 @@ QWidget *FormBuilderDialog::buildData()
                                    "which is how a hundred contracts get made from one letter and a spreadsheet."),
                               inBox);
     inNote->setWordWrap(true);
-    auto *importButton = new QPushButton(QIcon::fromTheme(u"document-import"_s),
-                                         i18nc("@action:button", "Read the Answers…"), inBox);
+    auto *importButton
+        = new QPushButton(QIcon::fromTheme(u"document-import"_s), i18nc("@action:button", "Read the Answers…"), inBox);
     auto *inLayout = new QVBoxLayout(inBox);
     inLayout->addWidget(inNote);
     inLayout->addWidget(importButton);
@@ -1616,8 +1608,8 @@ QWidget *FormBuilderDialog::buildData()
                                        "people as twenty files becomes a table."),
                                   gatherBox);
     gatherNote->setWordWrap(true);
-    auto *collectButton = new QPushButton(QIcon::fromTheme(u"table"_s),
-                                          i18nc("@action:button", "Gather into a Table…"), gatherBox);
+    auto *collectButton
+        = new QPushButton(QIcon::fromTheme(u"table"_s), i18nc("@action:button", "Gather into a Table…"), gatherBox);
     auto *gatherLayout = new QVBoxLayout(gatherBox);
     gatherLayout->addWidget(gatherNote);
     gatherLayout->addWidget(collectButton);
@@ -1628,8 +1620,8 @@ QWidget *FormBuilderDialog::buildData()
                                      "coordinates they had, not next to whatever text they were beside."),
                                 copyBox);
     copyNote->setWordWrap(true);
-    auto *copyButton = new QPushButton(QIcon::fromTheme(u"edit-copy"_s),
-                                       i18nc("@action:button", "Copy the Fields Over…"), copyBox);
+    auto *copyButton
+        = new QPushButton(QIcon::fromTheme(u"edit-copy"_s), i18nc("@action:button", "Copy the Fields Over…"), copyBox);
     auto *copyLayout = new QVBoxLayout(copyBox);
     copyLayout->addWidget(copyNote);
     copyLayout->addWidget(copyButton);
@@ -1667,9 +1659,9 @@ void FormBuilderDialog::exportAnswers()
         KMessageBox::error(this, error.isEmpty() ? i18n("The answers could not be written.") : error, windowTitle());
         return;
     }
-    KMessageBox::information(this, i18n("Wrote the answers to %1. The document itself is not in it.",
-                                        QFileInfo(path).fileName()),
-                             windowTitle());
+    KMessageBox::information(
+        this, i18n("Wrote the answers to %1. The document itself is not in it.", QFileInfo(path).fileName()),
+        windowTitle());
 }
 
 void FormBuilderDialog::importAnswers()
@@ -1684,8 +1676,7 @@ void FormBuilderDialog::importAnswers()
                                       [this, path](const QString &out, QStringList *summary, QString *error) {
                                           int filled = 0;
                                           QApplication::setOverrideCursor(Qt::WaitCursor);
-                                          const bool ok
-                                              = FormBuilder::importData(m_pdf, out, path, &filled, error);
+                                          const bool ok = FormBuilder::importData(m_pdf, out, path, &filled, error);
                                           QApplication::restoreOverrideCursor();
                                           if (!ok) {
                                               return false;
@@ -1709,8 +1700,8 @@ void FormBuilderDialog::collectAnswers()
 
     const QFileInfo file(m_pdf);
     const QString suggested = file.absolutePath() + u'/' + file.completeBaseName() + u"-answers.csv"_s;
-    const QString table = QFileDialog::getSaveFileName(this, i18nc("@title:window", "Where the Table Goes"),
-                                                       suggested, i18n("Tables (*.csv);;All files (*)"));
+    const QString table = QFileDialog::getSaveFileName(this, i18nc("@title:window", "Where the Table Goes"), suggested,
+                                                       i18n("Tables (*.csv);;All files (*)"));
     if (table.isEmpty()) {
         return;
     }

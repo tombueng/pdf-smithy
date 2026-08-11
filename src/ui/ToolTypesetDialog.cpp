@@ -287,8 +287,8 @@ QWidget *TypesetDialog::buildSource()
 {
     auto *page = new QWidget(this);
 
-    auto *load = new QPushButton(QIcon::fromTheme(u"document-open"_s), i18nc("@action:button", "Load from a File…"),
-                                 page);
+    auto *load
+        = new QPushButton(QIcon::fromTheme(u"document-open"_s), i18nc("@action:button", "Load from a File…"), page);
 
     m_reading = new QComboBox(page);
     m_reading->addItem(i18nc("@item:inlistbox how the text is read", "Plain text"), false);
@@ -324,10 +324,10 @@ QWidget *TypesetDialog::buildSource()
 
 void TypesetDialog::loadFile()
 {
-    const QString path =
-        QFileDialog::getOpenFileName(this, i18nc("@title:window", "Open a Text File"), startingFolder(),
-                                     i18n("Text and Markdown (*.txt *.text *.md *.markdown *.mdown *.mkd);;"
-                                          "All files (*)"));
+    const QString path
+        = QFileDialog::getOpenFileName(this, i18nc("@title:window", "Open a Text File"), startingFolder(),
+                                       i18n("Text and Markdown (*.txt *.text *.md *.markdown *.mdown *.mkd);;"
+                                            "All files (*)"));
     if (path.isEmpty()) {
         return;
     }
@@ -394,8 +394,8 @@ QWidget *TypesetDialog::buildPaper()
         }
     }
 
-    auto *turn = new QPushButton(QIcon::fromTheme(u"object-rotate-right"_s),
-                                 i18nc("@action:button", "Turn the Paper"), page);
+    auto *turn
+        = new QPushButton(QIcon::fromTheme(u"object-rotate-right"_s), i18nc("@action:button", "Turn the Paper"), page);
     turn->setToolTip(i18nc("@info:tooltip", "Swaps the width and the height, which is what landscape is."));
 
     m_width = millimetres(defaults.pageSize.width(), 2000.0);
@@ -430,8 +430,9 @@ QWidget *TypesetDialog::buildPaper()
     m_headerSize->setValue(defaults.headerSize);
 
     m_title = new QLineEdit(page);
-    m_title->setToolTip(i18nc("@info:tooltip", "Written into the document's properties, and put in wherever a "
-                                               "running head says {title}."));
+    m_title->setToolTip(i18nc("@info:tooltip",
+                              "Written into the document's properties, and put in wherever a "
+                              "running head says {title}."));
     m_author = new QLineEdit(page);
 
     auto *paperRow = new QHBoxLayout;

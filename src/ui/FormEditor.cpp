@@ -52,8 +52,8 @@ FormEditor::FormEditor(Document *document, RenderBackend *backend, const QVector
     , m_view(new FormFieldView)
     , m_pageBox(new QSpinBox)
     , m_pageLabel(new QLabel)
-    , m_flatten(new QCheckBox(
-          i18nc("@option:check", "Make the answers permanent (the form can no longer be filled in)")))
+    , m_flatten(
+          new QCheckBox(i18nc("@option:check", "Make the answers permanent (the form can no longer be filled in)")))
     , m_summary(new QLabel)
 {
     setWidgets(buildStage(), buildPanel());
@@ -78,8 +78,8 @@ QWidget *FormEditor::buildStage()
 
     auto *navigation = pageNavigation(stage, m_pageBox, m_document->pageCount());
 
-    auto *hint = new QLabel(i18n("Click a box on the page to type into it. Dashed grey boxes are locked by the form."),
-                            stage);
+    auto *hint
+        = new QLabel(i18n("Click a box on the page to type into it. Dashed grey boxes are locked by the form."), stage);
     hint->setWordWrap(true);
 
     auto *layout = new QVBoxLayout(stage);
@@ -184,12 +184,8 @@ QWidget *FormEditor::buildPanel()
 
     auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, panel);
     buttons->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "Fill In"));
-    connect(buttons, &QDialogButtonBox::accepted, this, [this] {
-        Q_EMIT finished(true);
-    });
-    connect(buttons, &QDialogButtonBox::rejected, this, [this] {
-        Q_EMIT finished(false);
-    });
+    connect(buttons, &QDialogButtonBox::accepted, this, [this] { Q_EMIT finished(true); });
+    connect(buttons, &QDialogButtonBox::rejected, this, [this] { Q_EMIT finished(false); });
 
     auto *layout = new QVBoxLayout(panel);
     layout->addWidget(m_summary);

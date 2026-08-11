@@ -302,11 +302,11 @@ bool DocumentWriter::writeSelection(const Document &document, const QVector<int>
             const QByteArray owner
                 = (options.ownerPassword.isEmpty() ? options.userPassword : options.ownerPassword).toUtf8();
             const Encryption::Permissions &permitted = options.permissions;
-            writer.setR6EncryptionParameters(user.constData(), owner.constData(), permitted.allowAccessibility,
-                                             permitted.allowExtractText, permitted.allowAssemble,
-                                             permitted.allowAnnotate, permitted.allowFillForms, permitted.allowModify,
-                                             static_cast<qpdf_r3_print_e>(Encryption::printingFlagFor(permitted.printing)),
-                                             /*encrypt_metadata_aes=*/true);
+            writer.setR6EncryptionParameters(
+                user.constData(), owner.constData(), permitted.allowAccessibility, permitted.allowExtractText,
+                permitted.allowAssemble, permitted.allowAnnotate, permitted.allowFillForms, permitted.allowModify,
+                static_cast<qpdf_r3_print_e>(Encryption::printingFlagFor(permitted.printing)),
+                /*encrypt_metadata_aes=*/true);
         }
         writer.write();
     } catch (const std::exception &e) {

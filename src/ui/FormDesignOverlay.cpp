@@ -870,7 +870,8 @@ void FormDesignOverlay::Details::addRules(QWidget *box, QFormLayout *form, Build
         limit->setSpecialValueText(i18nc("@item no limit on how much may be typed", "no limit"));
         limit->setValue(m_spec.maxLength);
         limit->setKeyboardTracking(false);
-        form->addRow(i18nc("@label:spinbox the greatest number of characters the field will take", "Character limit:"), limit);
+        form->addRow(i18nc("@label:spinbox the greatest number of characters the field will take", "Character limit:"),
+                     limit);
         QObject::connect(limit, &QSpinBox::valueChanged, box, [this](int value) {
             m_overlay->changeChosen([value](FormBuilder::Field &spec) { spec.maxLength = value; });
         });

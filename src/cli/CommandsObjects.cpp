@@ -113,9 +113,8 @@ void printHeading()
     // numbers out from under their own heading.
     out() << row(i18nc("@title:column the number that names an object", "No"),
                  i18nc("@title:column what kind of thing it is", "Kind"),
-                 i18nc("@title:column left edge, in points", "x"),
-                 i18nc("@title:column bottom edge, in points", "y"), i18nc("@title:column width, in points", "w"),
-                 i18nc("@title:column height, in points", "h"),
+                 i18nc("@title:column left edge, in points", "x"), i18nc("@title:column bottom edge, in points", "y"),
+                 i18nc("@title:column width, in points", "w"), i18nc("@title:column height, in points", "h"),
                  i18nc("@title:column place in the stacking order", "Layer"),
                  i18nc("@title:column what only this kind of object has", "Detail"))
           << Qt::endl;
@@ -279,9 +278,9 @@ bool knownObjects(const QVector<PageObject> &objects, const QVector<int> &wanted
         if (objects.isEmpty()) {
             *code = fail(i18n("Page %1 draws nothing, so there is no object %2 on it.", page + 1, index), UsageError);
         } else {
-            *code = fail(i18n("Page %1 has no object %2. Its numbers run from 0 to %3.", page + 1, index,
-                              objects.size() - 1),
-                         UsageError);
+            *code = fail(
+                i18n("Page %1 has no object %2. Its numbers run from 0 to %3.", page + 1, index, objects.size() - 1),
+                UsageError);
         }
         return false;
     }
@@ -377,8 +376,7 @@ int commandList(const QStringList &arguments, const QCommandLineParser &parser)
     }
 
     if (objects.isEmpty()) {
-        out() << (everyPage ? i18n("This document draws nothing at all.")
-                            : i18n("Page %1 draws nothing.", page + 1))
+        out() << (everyPage ? i18n("This document draws nothing at all.") : i18n("Page %1 draws nothing.", page + 1))
               << Qt::endl;
         return Success;
     }
@@ -392,8 +390,8 @@ int commandList(const QStringList &arguments, const QCommandLineParser &parser)
         // has to keep, so whole-document listings announce each page instead.
         if (everyPage && object.page != shownPage) {
             shownPage = object.page;
-            out() << Qt::endl << i18nc("@title heading above the objects of one page", "Page %1", shownPage + 1)
-                  << Qt::endl;
+            out() << Qt::endl
+                  << i18nc("@title heading above the objects of one page", "Page %1", shownPage + 1) << Qt::endl;
             printHeading();
         }
         printObject(object);
@@ -511,9 +509,9 @@ int commandAt(const QStringList &arguments, const QCommandLineParser &parser)
     }
 
     if (found.isEmpty()) {
-        out() << (byPoint ? i18n("Nothing is drawn at %1, %2 on page %3.", points(where.x()), points(where.y()),
-                                 page + 1)
-                          : i18n("Nothing on page %1 meets that area.", page + 1))
+        out() << (byPoint
+                      ? i18n("Nothing is drawn at %1, %2 on page %3.", points(where.x()), points(where.y()), page + 1)
+                      : i18n("Nothing on page %1 meets that area.", page + 1))
               << Qt::endl;
         return outcome;
     }
@@ -743,16 +741,11 @@ int commandRestyle(const QStringList &arguments, const QCommandLineParser &parse
 bool parseShape(const QString &name, NewContent::Kind *kind)
 {
     static const QHash<QString, NewContent::Kind> shapes {
-        { u"text"_s, NewContent::Kind::Text },
-        { u"image"_s, NewContent::Kind::Image },
-        { u"picture"_s, NewContent::Kind::Image },
-        { u"bild"_s, NewContent::Kind::Image },
-        { u"rectangle"_s, NewContent::Kind::Rectangle },
-        { u"rect"_s, NewContent::Kind::Rectangle },
-        { u"rechteck"_s, NewContent::Kind::Rectangle },
-        { u"ellipse"_s, NewContent::Kind::Ellipse },
-        { u"line"_s, NewContent::Kind::Line },
-        { u"linie"_s, NewContent::Kind::Line },
+        { u"text"_s, NewContent::Kind::Text },           { u"image"_s, NewContent::Kind::Image },
+        { u"picture"_s, NewContent::Kind::Image },       { u"bild"_s, NewContent::Kind::Image },
+        { u"rectangle"_s, NewContent::Kind::Rectangle }, { u"rect"_s, NewContent::Kind::Rectangle },
+        { u"rechteck"_s, NewContent::Kind::Rectangle },  { u"ellipse"_s, NewContent::Kind::Ellipse },
+        { u"line"_s, NewContent::Kind::Line },           { u"linie"_s, NewContent::Kind::Line },
     };
     const auto it = shapes.constFind(name.trimmed().toLower());
     if (it == shapes.constEnd()) {
@@ -889,16 +882,16 @@ void objectOptions(QCommandLineParser &parser)
     const QCommandLineOption byOption(
         u"by"_s, i18n("How far to move, as DX,DY in points, or how much to scale, as a factor."), u"amount"_s);
     const QCommandLineOption aroundOption(
-        u"around"_s, i18n("Point to scale or turn around, as X,Y in points from the bottom-left corner. Without it, "
-                          "each object uses its own middle."),
+        u"around"_s,
+        i18n("Point to scale or turn around, as X,Y in points from the bottom-left corner. Without it, "
+             "each object uses its own middle."),
         u"point"_s);
-    const QCommandLineOption fillOption(u"fill"_s,
-                                        i18n("Fill colour, a name or #rrggbb. For text, the colour of the letters."),
-                                        u"colour"_s);
+    const QCommandLineOption fillOption(
+        u"fill"_s, i18n("Fill colour, a name or #rrggbb. For text, the colour of the letters."), u"colour"_s);
     const QCommandLineOption strokeOption(u"stroke"_s, i18n("Outline colour, a name or #rrggbb."), u"colour"_s);
     const QCommandLineOption lineWidthOption(u"line-width"_s, i18n("Outline width in points."), u"points"_s);
-    const QCommandLineOption shapeOption(u"shape"_s,
-                                         i18n("What to insert: text, image, rectangle, ellipse or line."), u"kind"_s);
+    const QCommandLineOption shapeOption(u"shape"_s, i18n("What to insert: text, image, rectangle, ellipse or line."),
+                                         u"kind"_s);
     const QCommandLineOption rectOption(
         u"rect"_s,
         i18n("Where it goes, as X,Y,WIDTH,HEIGHT in points from the bottom-left corner of the page. Repeat to "
@@ -915,9 +908,8 @@ void objectOptions(QCommandLineParser &parser)
 
 QStringList objectHelp()
 {
-    const auto line = [](const QString &syntax, const QString &what) {
-        return u"  "_s + syntax.leftJustified(46) + what;
-    };
+    const auto line
+        = [](const QString &syntax, const QString &what) { return u"  "_s + syntax.leftJustified(46) + what; };
     return {
         line(u"objects list     FILE --page N|all"_s,
              i18n("Everything drawn on the page, with the number to grab it by")),

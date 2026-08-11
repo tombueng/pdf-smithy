@@ -281,9 +281,9 @@ void TestColour::readsTheColourOfARealMagazine()
     // stream walk that quietly stops early reports zero hairlines too, and
     // that is the failure this guards against.
     QVERIFY2(inventory.strokes > 1000, "the walk barely reached any stroked art");
-    QVERIFY2(inventory.thinnestStroke > 0.0 && inventory.thinnestStroke < 1.0,
-             qPrintable(u"the thinnest stroke measured %1 pt, which is not a printed rule"_s
-                            .arg(inventory.thinnestStroke)));
+    QVERIFY2(
+        inventory.thinnestStroke > 0.0 && inventory.thinnestStroke < 1.0,
+        qPrintable(u"the thinnest stroke measured %1 pt, which is not a printed rule"_s.arg(inventory.thinnestStroke)));
     QCOMPARE(inventory.hairlines, 0);
 }
 
@@ -323,15 +323,14 @@ void TestColour::greyscaleKeepsTheBrightnessOfAScan()
             sumBefore += qGray(source);
             sumAfter += qGray(result);
             ++counted;
-            worstSpread = std::max(worstSpread,
-                                   std::max(std::abs(qRed(result) - qGreen(result)),
-                                            std::abs(qGreen(result) - qBlue(result))));
+            worstSpread
+                = std::max(worstSpread,
+                           std::max(std::abs(qRed(result) - qGreen(result)), std::abs(qGreen(result) - qBlue(result))));
         }
     }
     QVERIFY(counted > 0);
 
-    QVERIFY2(worstSpread <= 2,
-             qPrintable(u"a pixel is still coloured: channels differ by %1"_s.arg(worstSpread)));
+    QVERIFY2(worstSpread <= 2, qPrintable(u"a pixel is still coloured: channels differ by %1"_s.arg(worstSpread)));
 
     const double meanBefore = sumBefore / double(counted);
     const double meanAfter = sumAfter / double(counted);
@@ -511,8 +510,8 @@ void TestColour::rewritesAnIndexedPaletteAndNotItsPixels()
 
 void TestColour::replacesOneColourAndLeavesItsNeighboursAlone()
 {
-    const QString in = writePdf(u"replace-in.pdf"_s,
-                                { u"1 0 0 rg 10 10 80 80 re f\n0 0.6 0 rg 110 110 80 80 re f\n"_s });
+    const QString in
+        = writePdf(u"replace-in.pdf"_s, { u"1 0 0 rg 10 10 80 80 re f\n0 0.6 0 rg 110 110 80 80 re f\n"_s });
     const QString out = m_directory.filePath(u"replace-out.pdf"_s);
 
     int replaced = 0;
@@ -731,9 +730,8 @@ void TestColour::measuresInkCoverageAgainstAKnownFill()
         QSKIP("Ghostscript is not installed");
     }
 
-    const QString document = writePdf(u"ink.pdf"_s,
-                                      { u"0 0 0 1 k 0 0 200 200 re f\n"_s, QString(),
-                                        u"0 0 0 1 k 0 0 200 100 re f\n"_s });
+    const QString document
+        = writePdf(u"ink.pdf"_s, { u"0 0 0 1 k 0 0 200 200 re f\n"_s, QString(), u"0 0 0 1 k 0 0 200 100 re f\n"_s });
 
     QString error;
     const QVector<double> coverage = ColourTools::inkCoverage(document, &error);

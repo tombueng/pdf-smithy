@@ -145,12 +145,8 @@ PreflightDialog::PreflightDialog(Document *document, const QString &pdf, QWidget
     m_fix = buttons->addButton(i18nc("@action:button", "Fix the Ticked Problems"), QDialogButtonBox::ApplyRole);
     m_report_ = buttons->addButton(i18nc("@action:button", "Report as PDF…"), QDialogButtonBox::ActionRole);
     connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    connect(m_fix, &QPushButton::clicked, this, [this] {
-        applySelected();
-    });
-    connect(m_report_, &QPushButton::clicked, this, [this] {
-        saveReport();
-    });
+    connect(m_fix, &QPushButton::clicked, this, [this] { applySelected(); });
+    connect(m_report_, &QPushButton::clicked, this, [this] { saveReport(); });
 
     auto *layout = new QVBoxLayout(this);
     layout->addLayout(top);
@@ -159,18 +155,10 @@ PreflightDialog::PreflightDialog(Document *document, const QString &pdf, QWidget
     layout->addWidget(honesty);
     layout->addWidget(buttons);
 
-    connect(m_profile, &QComboBox::currentIndexChanged, this, [this] {
-        check();
-    });
-    connect(open, &QPushButton::clicked, this, [this] {
-        loadProfileFile();
-    });
-    connect(again, &QPushButton::clicked, this, [this] {
-        check();
-    });
-    connect(m_tree, &QTreeWidget::itemChanged, this, [this] {
-        updateButtons();
-    });
+    connect(m_profile, &QComboBox::currentIndexChanged, this, [this] { check(); });
+    connect(open, &QPushButton::clicked, this, [this] { loadProfileFile(); });
+    connect(again, &QPushButton::clicked, this, [this] { check(); });
+    connect(m_tree, &QTreeWidget::itemChanged, this, [this] { updateButtons(); });
 
     check();
 }
@@ -201,8 +189,8 @@ void PreflightDialog::fill()
 
     // Grouped by severity and in this order, so that the thing which will get
     // the document rejected is the thing at the top.
-    const Preflight::Severity order[] = { Preflight::Severity::Error, Preflight::Severity::Warning,
-                                          Preflight::Severity::Note };
+    const Preflight::Severity order[]
+        = { Preflight::Severity::Error, Preflight::Severity::Warning, Preflight::Severity::Note };
     for (Preflight::Severity severity : order) {
         QVector<const Preflight::Finding *> mine;
         for (const Preflight::Finding &finding : std::as_const(m_report.findings)) {
@@ -223,8 +211,8 @@ void PreflightDialog::fill()
 
         for (const Preflight::Finding *finding : std::as_const(mine)) {
             const QString where = finding->page >= 0 ? QLocale().toString(finding->page + 1) : QString();
-            auto *row = new QTreeWidgetItem(group,
-                                            { finding->message, where, finding->object, finding->fixDescription });
+            auto *row
+                = new QTreeWidgetItem(group, { finding->message, where, finding->object, finding->fixDescription });
             row->setToolTip(0, Preflight::describeRule(finding->ruleId));
             row->setTextAlignment(1, Qt::AlignRight | Qt::AlignVCenter);
             if (!finding->fixId.isEmpty()) {
@@ -240,8 +228,7 @@ void PreflightDialog::fill()
     if (m_report.findings.isEmpty()) {
         m_verdict->setText(i18n("Nothing to report against this profile."));
     } else {
-        m_verdict->setText(i18nc("@info a preflight verdict: counts, then whether it passed",
-                                 "%1, %2. %3",
+        m_verdict->setText(i18nc("@info a preflight verdict: counts, then whether it passed", "%1, %2. %3",
                                  i18ncp("@info", "%1 error", "%1 errors", m_report.errors),
                                  i18ncp("@info", "%1 warning", "%1 warnings", m_report.warnings),
                                  m_report.passed ? i18n("No errors among the rules that were checked.")
@@ -319,8 +306,7 @@ void PreflightDialog::applySelected()
                                    [this, &ids](const QString &output, QStringList *summary, QString *error) {
                                        QStringList applied;
                                        QApplication::setOverrideCursor(Qt::WaitCursor);
-                                       const bool ok =
-                                           Preflight::applyFixes(m_pdf, output, ids, &applied, error);
+                                       const bool ok = Preflight::applyFixes(m_pdf, output, ids, &applied, error);
                                        QApplication::restoreOverrideCursor();
                                        if (!ok) {
                                            return false;

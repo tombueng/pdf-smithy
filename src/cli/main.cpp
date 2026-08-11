@@ -1845,9 +1845,9 @@ int commandOcr(const QStringList &arguments, const QString &output, const QStrin
 /** Every area of the command line, in the order their help is printed. */
 QVector<ps::cli::Group> commandGroups()
 {
-    return { ps::cli::preflightGroup(), ps::cli::colourGroup(),  ps::cli::fontGroup(),
-             ps::cli::imageGroup(),     ps::cli::layoutGroup(),  ps::cli::formGroup(),
-             ps::cli::typesetGroup(),   ps::cli::objectGroup(),  ps::cli::convertGroup() };
+    return { ps::cli::preflightGroup(), ps::cli::colourGroup(), ps::cli::fontGroup(),
+             ps::cli::imageGroup(),     ps::cli::layoutGroup(), ps::cli::formGroup(),
+             ps::cli::typesetGroup(),   ps::cli::objectGroup(), ps::cli::convertGroup() };
 }
 
 /**
@@ -1941,43 +1941,43 @@ int main(int argc, char **argv)
              "  archive-check FILE                  Look for what stops a file being archival\n")
         + groupHelp()
         + i18n("\n"
-             "Examples:\n"
-             "  pdf-smithy-cli merge a.pdf b.pdf -o both.pdf\n"
-             "  pdf-smithy-cli split invoices.pdf --every 1\n"
-             "  pdf-smithy-cli pages report.pdf --keep 1-3,7 --rotate 4:90 -o short.pdf\n"
-             "  pdf-smithy-cli compress scan.pdf --level strong -o small.pdf\n"
-             "  pdf-smithy-cli ocr scan.pdf --languages deu+eng --straighten -o searchable.pdf\n"
-             "  pdf-smithy-cli sign contract.pdf --image signature.png --pages last -o signed.pdf\n"
-             "  pdf-smithy-cli watermark offer.pdf --text DRAFT --opacity 20 -o marked.pdf\n"
-             "  pdf-smithy-cli meta payslip.pdf --sanitize -o clean.pdf\n"
-             "  pdf-smithy-cli protect contract.pdf --password geheim -o locked.pdf\n"
-             "  pdf-smithy-cli from-images scan*.png --page-size a4 -o scans.pdf\n"
-             "  pdf-smithy-cli export-images report.pdf --pages 1-3 --dpi 300\n"
-             "  pdf-smithy-cli number report.pdf --text \"{page} / {pages}\" -o numbered.pdf\n"
-             "  pdf-smithy-cli number bundle.pdf --text {bates} --bates ACME- -o stamped.pdf\n"
-             "  pdf-smithy-cli crop scan.pdf --auto -o trimmed.pdf\n"
-             "  pdf-smithy-cli redact case.pdf --area 1:72,700,180,16 -o public.pdf\n"
-             "  pdf-smithy-cli nup slides.pdf --per-sheet 4 --borders -o handout.pdf\n"
-             "  pdf-smithy-cli annotate report.pdf --list\n"
-             "  pdf-smithy-cli outline manual.pdf --json > toc.json\n"
-             "  pdf-smithy-cli form application.pdf --list\n"
-             "  pdf-smithy-cli text letter.pdf --page 1\n"
-             "  pdf-smithy-cli batch scans/*.pdf --op ocr --out-dir searchable/\n"
-             "  pdf-smithy-cli compare contract-v1.pdf contract-v2.pdf\n"
-             "  pdf-smithy-cli archive invoice.pdf --level 2b -o invoice-archival.pdf\n"
-             "  pdf-smithy-cli to-pdfx cover.pdf --pdfx-level x4 -o cover-print.pdf\n"
-             "  pdf-smithy-cli tables report.pdf --pages 3-5\n"
-             "  pdf-smithy-cli to-svg poster.pdf --pages 1-4 -o poster.svg\n"
-             "  pdf-smithy-cli linearise handbook.pdf -o handbook-web.pdf\n"
-             "  pdf-smithy-cli set-version old.pdf --pdf-version 1.7 -o modern.pdf\n"
-             "  pdf-smithy-cli text letter.pdf --replace \"1:4=Sehr geehrte Frau Meier\" -o fixed.pdf\n"
-             "  pdf-smithy-cli form application.pdf --set Name=Bueng --set Ort=Bern -o filled.pdf\n"
-             "  pdf-smithy-cli annotate report.pdf --export-xfdf comments.xfdf\n"
-             "  pdf-smithy-cli annotate report.pdf --note 2:120,600 --text \"Check this\" -o marked.pdf\n"
-             "  pdf-smithy-cli split handbook.pdf --bookmarks\n"
-             "\n"
-             "Duplicating pages needs no separate command: a range may repeat a page,\n"
-             "so \"pages FILE --keep 1,1,2-4\" writes page 1 twice."));
+               "Examples:\n"
+               "  pdf-smithy-cli merge a.pdf b.pdf -o both.pdf\n"
+               "  pdf-smithy-cli split invoices.pdf --every 1\n"
+               "  pdf-smithy-cli pages report.pdf --keep 1-3,7 --rotate 4:90 -o short.pdf\n"
+               "  pdf-smithy-cli compress scan.pdf --level strong -o small.pdf\n"
+               "  pdf-smithy-cli ocr scan.pdf --languages deu+eng --straighten -o searchable.pdf\n"
+               "  pdf-smithy-cli sign contract.pdf --image signature.png --pages last -o signed.pdf\n"
+               "  pdf-smithy-cli watermark offer.pdf --text DRAFT --opacity 20 -o marked.pdf\n"
+               "  pdf-smithy-cli meta payslip.pdf --sanitize -o clean.pdf\n"
+               "  pdf-smithy-cli protect contract.pdf --password geheim -o locked.pdf\n"
+               "  pdf-smithy-cli from-images scan*.png --page-size a4 -o scans.pdf\n"
+               "  pdf-smithy-cli export-images report.pdf --pages 1-3 --dpi 300\n"
+               "  pdf-smithy-cli number report.pdf --text \"{page} / {pages}\" -o numbered.pdf\n"
+               "  pdf-smithy-cli number bundle.pdf --text {bates} --bates ACME- -o stamped.pdf\n"
+               "  pdf-smithy-cli crop scan.pdf --auto -o trimmed.pdf\n"
+               "  pdf-smithy-cli redact case.pdf --area 1:72,700,180,16 -o public.pdf\n"
+               "  pdf-smithy-cli nup slides.pdf --per-sheet 4 --borders -o handout.pdf\n"
+               "  pdf-smithy-cli annotate report.pdf --list\n"
+               "  pdf-smithy-cli outline manual.pdf --json > toc.json\n"
+               "  pdf-smithy-cli form application.pdf --list\n"
+               "  pdf-smithy-cli text letter.pdf --page 1\n"
+               "  pdf-smithy-cli batch scans/*.pdf --op ocr --out-dir searchable/\n"
+               "  pdf-smithy-cli compare contract-v1.pdf contract-v2.pdf\n"
+               "  pdf-smithy-cli archive invoice.pdf --level 2b -o invoice-archival.pdf\n"
+               "  pdf-smithy-cli to-pdfx cover.pdf --pdfx-level x4 -o cover-print.pdf\n"
+               "  pdf-smithy-cli tables report.pdf --pages 3-5\n"
+               "  pdf-smithy-cli to-svg poster.pdf --pages 1-4 -o poster.svg\n"
+               "  pdf-smithy-cli linearise handbook.pdf -o handbook-web.pdf\n"
+               "  pdf-smithy-cli set-version old.pdf --pdf-version 1.7 -o modern.pdf\n"
+               "  pdf-smithy-cli text letter.pdf --replace \"1:4=Sehr geehrte Frau Meier\" -o fixed.pdf\n"
+               "  pdf-smithy-cli form application.pdf --set Name=Bueng --set Ort=Bern -o filled.pdf\n"
+               "  pdf-smithy-cli annotate report.pdf --export-xfdf comments.xfdf\n"
+               "  pdf-smithy-cli annotate report.pdf --note 2:120,600 --text \"Check this\" -o marked.pdf\n"
+               "  pdf-smithy-cli split handbook.pdf --bookmarks\n"
+               "\n"
+               "Duplicating pages needs no separate command: a range may repeat a page,\n"
+               "so \"pages FILE --keep 1,1,2-4\" writes page 1 twice."));
 
     parser.addPositionalArgument(QStringLiteral("command"), i18n("The command to run."));
     parser.addHelpOption();

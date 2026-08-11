@@ -259,17 +259,16 @@ QWidget *ImagesDialog::buildInventory()
     auto *page = new QWidget(this);
 
     m_table = new QTableWidget(0, 10, page);
-    m_table->setHorizontalHeaderLabels(
-        { i18nc("@title:column page number", "Page"),
-          i18nc("@title:column the /Im0 name a content stream uses", "Name"),
-          i18nc("@title:column effective resolution, pixels per inch as placed", "dpi"),
-          i18nc("@title:column the stored pixel size", "Pixels"),
-          i18nc("@title:column how large it is drawn", "On page"),
-          i18nc("@title:column the colour space the pixels are in", "Colour"),
-          i18nc("@title:column how the pixels are compressed", "Format"),
-          i18nc("@title:column bytes it occupies in the file", "Stored"),
-          i18nc("@title:column how often the document draws this same picture", "Drawn"),
-          i18nc("@title:column anything unusual about this picture", "Notes") });
+    m_table->setHorizontalHeaderLabels({ i18nc("@title:column page number", "Page"),
+                                         i18nc("@title:column the /Im0 name a content stream uses", "Name"),
+                                         i18nc("@title:column effective resolution, pixels per inch as placed", "dpi"),
+                                         i18nc("@title:column the stored pixel size", "Pixels"),
+                                         i18nc("@title:column how large it is drawn", "On page"),
+                                         i18nc("@title:column the colour space the pixels are in", "Colour"),
+                                         i18nc("@title:column how the pixels are compressed", "Format"),
+                                         i18nc("@title:column bytes it occupies in the file", "Stored"),
+                                         i18nc("@title:column how often the document draws this same picture", "Drawn"),
+                                         i18nc("@title:column anything unusual about this picture", "Notes") });
     m_table->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_table->setSelectionMode(QAbstractItemView::SingleSelection);
     m_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -289,15 +288,15 @@ QWidget *ImagesDialog::buildInventory()
     m_picked = new QLabel(chosen);
     m_picked->setWordWrap(true);
 
-    auto *extract = new QPushButton(QIcon::fromTheme(u"document-save-as"_s), i18nc("@action:button", "Write It Out…"),
-                                    chosen);
+    auto *extract
+        = new QPushButton(QIcon::fromTheme(u"document-save-as"_s), i18nc("@action:button", "Write It Out…"), chosen);
     extract->setToolTip(i18nc("@info:tooltip",
                               "A JPEG asked for as .jpg is copied out compressed, byte for byte: the one "
                               "extraction that loses nothing at all."));
     auto *replace = new QPushButton(QIcon::fromTheme(u"edit-image-face-show"_s),
                                     i18nc("@action:button", "Put Another in Its Place…"), chosen);
-    auto *remove = new QPushButton(QIcon::fromTheme(u"edit-delete"_s), i18nc("@action:button", "Take It Off the Page"),
-                                   chosen);
+    auto *remove
+        = new QPushButton(QIcon::fromTheme(u"edit-delete"_s), i18nc("@action:button", "Take It Off the Page"), chosen);
 
     m_angle = new QDoubleSpinBox(chosen);
     m_angle->setRange(-360.0, 360.0);
@@ -305,14 +304,14 @@ QWidget *ImagesDialog::buildInventory()
     m_angle->setSingleStep(90.0);
     m_angle->setValue(90.0);
     m_angle->setSuffix(i18nc("@item degree suffix in a spin box", " °"));
-    auto *turn =
-        new QPushButton(QIcon::fromTheme(u"object-rotate-right"_s), i18nc("@action:button", "Turn It"), chosen);
+    auto *turn
+        = new QPushButton(QIcon::fromTheme(u"object-rotate-right"_s), i18nc("@action:button", "Turn It"), chosen);
     turn->setToolTip(i18nc("@info:tooltip",
                            "A turn is a matrix in the content stream, so not one stored byte of the picture is "
                            "rewritten: a fax or a JPEG 2000 turns as well as a JPEG, and any angle works."));
 
-    m_keepAspect =
-        new QCheckBox(i18nc("@option:check", "Fit a replacement inside the old place rather than stretch it"), chosen);
+    m_keepAspect = new QCheckBox(
+        i18nc("@option:check", "Fit a replacement inside the old place rather than stretch it"), chosen);
     m_keepAspect->setChecked(true);
 
     auto *actions = new QHBoxLayout;
@@ -345,27 +344,13 @@ QWidget *ImagesDialog::buildInventory()
 
     m_needPicture = { extract, replace, remove, turn };
 
-    connect(m_table, &QTableWidget::itemSelectionChanged, this, [this] {
-        followSelection();
-    });
-    connect(again, &QPushButton::clicked, this, [this] {
-        read();
-    });
-    connect(all, &QPushButton::clicked, this, [this] {
-        extractEverything();
-    });
-    connect(extract, &QPushButton::clicked, this, [this] {
-        extractPicked();
-    });
-    connect(replace, &QPushButton::clicked, this, [this] {
-        replacePicked();
-    });
-    connect(remove, &QPushButton::clicked, this, [this] {
-        removePicked();
-    });
-    connect(turn, &QPushButton::clicked, this, [this] {
-        rotatePicked();
-    });
+    connect(m_table, &QTableWidget::itemSelectionChanged, this, [this] { followSelection(); });
+    connect(again, &QPushButton::clicked, this, [this] { read(); });
+    connect(all, &QPushButton::clicked, this, [this] { extractEverything(); });
+    connect(extract, &QPushButton::clicked, this, [this] { extractPicked(); });
+    connect(replace, &QPushButton::clicked, this, [this] { replacePicked(); });
+    connect(remove, &QPushButton::clicked, this, [this] { removePicked(); });
+    connect(turn, &QPushButton::clicked, this, [this] { rotatePicked(); });
     return page;
 }
 
@@ -414,8 +399,9 @@ void ImagesDialog::fill()
             QFont bold = resolution->font();
             bold.setBold(true);
             resolution->setFont(bold);
-            resolution->setToolTip(i18nc("@info:tooltip", "Finer than %1 dpi, which is more than any printer will "
-                                                          "show. Bringing it down is free size.",
+            resolution->setToolTip(i18nc("@info:tooltip",
+                                         "Finer than %1 dpi, which is more than any printer will "
+                                         "show. Bringing it down is free size.",
                                          QLocale().toString(int(lavishDpi))));
         }
         m_table->setItem(row, 2, resolution);
@@ -482,8 +468,9 @@ void ImagesDialog::followSelection()
     m_angle->setEnabled(use != nullptr);
 
     const QString what = use
-        ? i18nc("@info which picture the per-picture actions will work on", "%1 on page %2: %3×%4 pixels at %5 dpi, "
-                                                                            "%6 as %7",
+        ? i18nc("@info which picture the per-picture actions will work on",
+                "%1 on page %2: %3×%4 pixels at %5 dpi, "
+                "%6 as %7",
                 use->resourceName, QLocale().toString(use->page + 1), QLocale().toString(use->pixelSize.width()),
                 QLocale().toString(use->pixelSize.height()), dpiText(*use), humanSize(use->storedBytes), use->encoding)
         : i18n("Nothing is picked. Choose a row in the table above.");
@@ -521,9 +508,9 @@ void ImagesDialog::extractPicked()
     const QString suggested = file.absolutePath() + u'/'
         + u"%1-p%2-%3.%4"_s.arg(file.completeBaseName(), QString::number(page + 1), fileStem(name), ending);
 
-    const QString target =
-        QFileDialog::getSaveFileName(this, i18nc("@title:window", "Write the Picture Out"), suggested,
-                                     i18n("Pictures (*.png *.jpg *.jpeg *.tif *.webp);;All files (*)"));
+    const QString target
+        = QFileDialog::getSaveFileName(this, i18nc("@title:window", "Write the Picture Out"), suggested,
+                                       i18n("Pictures (*.png *.jpg *.jpeg *.tif *.webp);;All files (*)"));
     if (target.isEmpty()) {
         return;
     }
@@ -538,9 +525,8 @@ void ImagesDialog::extractPicked()
                            windowTitle());
         return;
     }
-    KMessageBox::information(this, i18n("Wrote %1, %2.", QFileInfo(target).fileName(),
-                                        humanSize(QFileInfo(target).size())),
-                             windowTitle());
+    KMessageBox::information(
+        this, i18n("Wrote %1, %2.", QFileInfo(target).fileName(), humanSize(QFileInfo(target).size())), windowTitle());
 }
 
 void ImagesDialog::extractEverything()
@@ -583,9 +569,9 @@ void ImagesDialog::extractEverything()
     QStringList report { i18ncp("@info", "Wrote one picture, %2 in all.", "Wrote %1 pictures, %2 in all.",
                                 int(written.size()), humanSize(bytes)) };
     if (skipped > 0) {
-        report += i18np("Left one picture in the document: its pixels are stored in a form this cannot open.",
-                        "Left %1 pictures in the document: their pixels are stored in a form this cannot open.",
-                        skipped);
+        report
+            += i18np("Left one picture in the document: its pixels are stored in a form this cannot open.",
+                     "Left %1 pictures in the document: their pixels are stored in a form this cannot open.", skipped);
     }
     report += QString();
     report += written;
@@ -783,9 +769,7 @@ QWidget *ImagesDialog::buildSmaller()
     };
     connect(m_scope, &QComboBox::currentIndexChanged, this, followScope);
     connect(m_lossless, &QCheckBox::toggled, this, followScope);
-    connect(run, &QPushButton::clicked, this, [this] {
-        runRecompress();
-    });
+    connect(run, &QPushButton::clicked, this, [this] { runRecompress(); });
     followScope();
     return page;
 }
@@ -800,8 +784,9 @@ bool ImagesDialog::chosenPictures(QVector<int> *pages, QStringList *names, int *
     if (scope == Scope::Picked) {
         const ImageEdit::ImageUse *use = picked();
         if (!use) {
-            KMessageBox::information(this, i18n("No picture is picked. Choose a row in the first tab, or work on the "
-                                                "whole document."),
+            KMessageBox::information(this,
+                                     i18n("No picture is picked. Choose a row in the first tab, or work on the "
+                                          "whole document."),
                                      windowTitle());
             return false;
         }
@@ -814,8 +799,8 @@ bool ImagesDialog::chosenPictures(QVector<int> *pages, QStringList *names, int *
     }
 
     QString error;
-    const QVector<int> wanted = PageRange::parse(m_pages->text().trimmed(),
-                                                 m_document ? m_document->pageCount() : 0, &error);
+    const QVector<int> wanted
+        = PageRange::parse(m_pages->text().trimmed(), m_document ? m_document->pageCount() : 0, &error);
     if (!error.isEmpty()) {
         KMessageBox::error(this, error, windowTitle());
         return false;
@@ -859,8 +844,9 @@ void ImagesDialog::runRecompress()
     options.forceReencode = m_force->isChecked();
 
     if (options.targetDpi <= 0.0 && !options.forceReencode && !options.toGrayscale) {
-        KMessageBox::information(this, i18n("With every pixel kept and no re-encoding forced, there is nothing for "
-                                            "this to do. Give it a resolution to come down to, or tick the last box."),
+        KMessageBox::information(this,
+                                 i18n("With every pixel kept and no re-encoding forced, there is nothing for "
+                                      "this to do. Give it a resolution to come down to, or tick the last box."),
                                  windowTitle());
         return;
     }
@@ -988,8 +974,8 @@ QWidget *ImagesDialog::buildPixels()
                                 cropBox);
     cropNote->setWordWrap(true);
 
-    auto *cropButton = new QPushButton(QIcon::fromTheme(u"transform-crop"_s),
-                                       i18nc("@action:button", "Crop the Picture"), cropBox);
+    auto *cropButton
+        = new QPushButton(QIcon::fromTheme(u"transform-crop"_s), i18nc("@action:button", "Crop the Picture"), cropBox);
 
     auto *cropLayout = new QVBoxLayout(cropBox);
     cropLayout->addLayout(cropRow);
@@ -1005,12 +991,8 @@ QWidget *ImagesDialog::buildPixels()
     m_needPixels = { adjustButton, cropButton };
 
     connect(m_toBlackWhite, &QCheckBox::toggled, m_threshold, &QSpinBox::setEnabled);
-    connect(adjustButton, &QPushButton::clicked, this, [this] {
-        runAdjust();
-    });
-    connect(cropButton, &QPushButton::clicked, this, [this] {
-        runCrop();
-    });
+    connect(adjustButton, &QPushButton::clicked, this, [this] { runAdjust(); });
+    connect(cropButton, &QPushButton::clicked, this, [this] { runCrop(); });
     return page;
 }
 
@@ -1076,8 +1058,9 @@ void ImagesDialog::runCrop()
     // long way over it means someone has read the boxes as pixels.
     if (keep.width() <= 0.0 || keep.height() <= 0.0 || keep.x() + keep.width() > 1.001
         || keep.y() + keep.height() > 1.001) {
-        KMessageBox::information(this, i18n("The part to keep has to lie inside the picture, as fractions between 0 "
-                                            "and 1."),
+        KMessageBox::information(this,
+                                 i18n("The part to keep has to lie inside the picture, as fractions between 0 "
+                                      "and 1."),
                                  windowTitle());
         return;
     }
@@ -1140,9 +1123,7 @@ QWidget *ImagesDialog::buildTidy()
     layout->addWidget(limitsBox);
     layout->addStretch(1);
 
-    connect(runDupes, &QPushButton::clicked, this, [this] {
-        runDeduplicate();
-    });
+    connect(runDupes, &QPushButton::clicked, this, [this] { runDeduplicate(); });
     return page;
 }
 

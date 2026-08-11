@@ -201,9 +201,8 @@ QWidget *NumberEditor::buildPanel()
         m_touched = true;
         refreshPreview();
     };
-    connect(m_preset, &QComboBox::currentIndexChanged, this, [this](int index) {
-        m_text->setText(m_preset->itemData(index).toString());
-    });
+    connect(m_preset, &QComboBox::currentIndexChanged, this,
+            [this](int index) { m_text->setText(m_preset->itemData(index).toString()); });
     connect(m_text, &QLineEdit::textChanged, this, redraw);
     connect(m_position, &QComboBox::currentIndexChanged, this, redraw);
     connect(m_fontSize, &QSpinBox::valueChanged, this, redraw);

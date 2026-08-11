@@ -63,13 +63,10 @@ CropEditor::CropEditor(Document *document, RenderBackend *backend, const QVector
 
     // Both ways round: dragging moves the numbers, typing moves the box. Only
     // one of the two can be the truth, and it is the margins in the view.
-    connect(m_view, &CropView::marginsChanged, this, [this](const PageCrop::Margins &margins) {
-        pushToBoxes(margins);
-    });
+    connect(m_view, &CropView::marginsChanged, this,
+            [this](const PageCrop::Margins &margins) { pushToBoxes(margins); });
     for (QDoubleSpinBox *box : { m_left, m_right, m_top, m_bottom }) {
-        connect(box, &QDoubleSpinBox::valueChanged, this, [this] {
-            m_view->setMargins(fromBoxes());
-        });
+        connect(box, &QDoubleSpinBox::valueChanged, this, [this] { m_view->setMargins(fromBoxes()); });
     }
 
     showRow(m_row);
@@ -150,12 +147,8 @@ QWidget *CropEditor::buildPanel()
 
     auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, panel);
     buttons->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "Trim"));
-    connect(buttons, &QDialogButtonBox::accepted, this, [this] {
-        Q_EMIT finished(true);
-    });
-    connect(buttons, &QDialogButtonBox::rejected, this, [this] {
-        Q_EMIT finished(false);
-    });
+    connect(buttons, &QDialogButtonBox::accepted, this, [this] { Q_EMIT finished(true); });
+    connect(buttons, &QDialogButtonBox::rejected, this, [this] { Q_EMIT finished(false); });
 
     auto *layout = new QVBoxLayout(panel);
     layout->addWidget(scope);

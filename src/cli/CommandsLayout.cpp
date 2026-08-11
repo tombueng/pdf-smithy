@@ -80,10 +80,10 @@ bool parsePaperSize(const QString &text, QSizeF *size)
     // Held in millimetres and converted, so A4 comes out 595.276 × 841.89 rather
     // than the rounded 595 × 842 that leaves a hairline of the old page showing.
     static constexpr Paper papers[] = {
-        { "a0", 841.0, 1189.0 }, { "a1", 594.0, 841.0 },      { "a2", 420.0, 594.0 },
-        { "a3", 297.0, 420.0 },  { "a4", 210.0, 297.0 },      { "a5", 148.0, 210.0 },
-        { "a6", 105.0, 148.0 },  { "b4", 250.0, 353.0 },      { "b5", 176.0, 250.0 },
-        { "letter", 215.9, 279.4 }, { "legal", 215.9, 355.6 }, { "tabloid", 279.4, 431.8 },
+        { "a0", 841.0, 1189.0 },        { "a1", 594.0, 841.0 },    { "a2", 420.0, 594.0 },
+        { "a3", 297.0, 420.0 },         { "a4", 210.0, 297.0 },    { "a5", 148.0, 210.0 },
+        { "a6", 105.0, 148.0 },         { "b4", 250.0, 353.0 },    { "b5", 176.0, 250.0 },
+        { "letter", 215.9, 279.4 },     { "legal", 215.9, 355.6 }, { "tabloid", 279.4, 431.8 },
         { "executive", 184.15, 266.7 },
     };
 
@@ -764,8 +764,8 @@ int commandLabels(const QStringList &arguments, const QCommandLineParser &parser
     if (parser.isSet(QStringLiteral("json"))) {
         QJsonArray array;
         for (int i = 0; i < labels.size(); ++i) {
-            array.append(QJsonObject { { QStringLiteral("number"), i + 1 },
-                                       { QStringLiteral("label"), labels.at(i) } });
+            array.append(
+                QJsonObject { { QStringLiteral("number"), i + 1 }, { QStringLiteral("label"), labels.at(i) } });
         }
         const QJsonObject root { { QStringLiteral("file"), QFileInfo(input).absoluteFilePath() },
                                  { QStringLiteral("pages"), array } };

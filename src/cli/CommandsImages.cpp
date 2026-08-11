@@ -516,9 +516,8 @@ int resamplePictures(const QString &input, const QCommandLineParser &parser)
         return code;
     }
 
-    return recompressPictures(
-        input, output, chosen, options,
-        i18n("Every picture is already at or below %1 dpi.", QString::number(maxDpi, 'f', 0)));
+    return recompressPictures(input, output, chosen, options,
+                              i18n("Every picture is already at or below %1 dpi.", QString::number(maxDpi, 'f', 0)));
 }
 
 // ── replace, rotate, remove ──────────────────────────────────────────────
@@ -590,8 +589,8 @@ int rotatePicture(const QString &input, const QCommandLineParser &parser)
         return fail(error, OutputError);
     }
 
-    out() << i18np("Turned %2 on page %3 by %4°, in one place.",
-                   "Turned %2 on page %3 by %4°, in %1 places.", report.placementsTurned, name, page + 1, given)
+    out() << i18np("Turned %2 on page %3 by %4°, in one place.", "Turned %2 on page %3 by %4°, in %1 places.",
+                   report.placementsTurned, name, page + 1, given)
           << Qt::endl;
     if (report.pixelsUntouched) {
         out() << i18n("Not one stored byte of the picture was rewritten.") << Qt::endl;
@@ -805,8 +804,8 @@ int extractPictures(const QString &input, const QCommandLineParser &parser)
                 return use.page == page && use.resourceName == name;
             });
             const QString ending = found != uses.cend() ? suffixFor(*found) : (suffix.isEmpty() ? u"png"_s : suffix);
-            target = QDir(outDir).filePath(
-                u"%1-p%2-%3.%4"_s.arg(base, QString::number(page + 1), fileStem(name), ending));
+            target
+                = QDir(outDir).filePath(u"%1-p%2-%3.%4"_s.arg(base, QString::number(page + 1), fileStem(name), ending));
         }
         if (!ps::ImageEdit::extract(input, page, name, target, &error)) {
             return fail(error, OutputError);
@@ -834,8 +833,8 @@ int extractPictures(const QString &input, const QCommandLineParser &parser)
             ++skipped;
             continue;
         }
-        const QString target = QDir(outDir).filePath(u"%1-p%2-%3.%4"_s.arg(
-            base, QString::number(use.page + 1), fileStem(use.resourceName), suffixFor(use)));
+        const QString target = QDir(outDir).filePath(
+            u"%1-p%2-%3.%4"_s.arg(base, QString::number(use.page + 1), fileStem(use.resourceName), suffixFor(use)));
         if (!ps::ImageEdit::extract(input, use.page, use.resourceName, target, &error)) {
             err() << i18n("Note: %1", error) << Qt::endl;
             ++skipped;
@@ -895,8 +894,8 @@ void imageOptions(QCommandLineParser &parser)
     const QCommandLineOption nameOption(u"resource"_s, i18n("Which picture, by the resource name “images list” shows."),
                                         u"name"_s);
     const QCommandLineOption withOption(u"with"_s, i18n("The picture file to put in instead."), u"file"_s);
-    const QCommandLineOption maxDpiOption(u"max-dpi"_s,
-                                          i18n("Bring anything finer than this down to it, e.g. 150."), u"number"_s);
+    const QCommandLineOption maxDpiOption(u"max-dpi"_s, i18n("Bring anything finer than this down to it, e.g. 150."),
+                                          u"number"_s);
     const QCommandLineOption stretchOption(
         u"stretch"_s, i18n("Fill the old place exactly instead of fitting the picture inside it."));
     const QCommandLineOption keepBoxOption(
@@ -910,12 +909,12 @@ void imageOptions(QCommandLineParser &parser)
     const QCommandLineOption despeckleOption(u"despeckle"_s, i18n("Take the specks out of a scan."));
     const QCommandLineOption autoLevelsOption(u"auto-levels"_s, i18n("Spread the tones over the full range."));
     const QCommandLineOption blackWhiteOption(u"black-white"_s, i18n("Reduce the picture to black and white."));
-    const QCommandLineOption thresholdOption(u"bw-threshold"_s,
-                                             i18n("Where black turns into white, 0 to 255."), u"level"_s, u"128"_s);
+    const QCommandLineOption thresholdOption(u"bw-threshold"_s, i18n("Where black turns into white, 0 to 255."),
+                                             u"level"_s, u"128"_s);
 
     parser.addOptions({ nameOption, withOption, maxDpiOption, stretchOption, keepBoxOption, brightnessOption,
-                        contrastOption, gammaOption, sharpenOption, despeckleOption, autoLevelsOption,
-                        blackWhiteOption, thresholdOption });
+                        contrastOption, gammaOption, sharpenOption, despeckleOption, autoLevelsOption, blackWhiteOption,
+                        thresholdOption });
 }
 
 std::optional<int> runImages(const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
@@ -982,9 +981,8 @@ std::optional<int> runImages(const QString &verb, const QStringList &arguments, 
 
 QStringList imageHelp()
 {
-    const auto line = [](const QString &usage, const QString &what) {
-        return u"  "_s + usage.leftJustified(36) + what;
-    };
+    const auto line
+        = [](const QString &usage, const QString &what) { return u"  "_s + usage.leftJustified(36) + what; };
     return {
         line(u"images list FILE"_s, i18n("Every picture, with the resolution it really has")),
         line(u"images compress FILE [-o OUT]"_s, i18n("Re-encode the pictures, smaller")),

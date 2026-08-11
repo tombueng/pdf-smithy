@@ -150,8 +150,7 @@ void TestCli::everyAdvertisedVerbIsUnderstood()
             unreachable.append(verb);
         }
     }
-    QVERIFY2(unreachable.isEmpty(),
-             qPrintable(u"advertised but not dispatched: %1"_s.arg(unreachable.join(u", "_s))));
+    QVERIFY2(unreachable.isEmpty(), qPrintable(u"advertised but not dispatched: %1"_s.arg(unreachable.join(u", "_s))));
 }
 
 void TestCli::refusesAnUnknownVerbAndSaysSo()

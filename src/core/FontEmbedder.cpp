@@ -678,7 +678,7 @@ QByteArray buildPost(const QVector<QByteArray> &names, const Face &face)
     appendU32(post, 0x00020000u);
     appendU32(post, quint32(qint32(std::lround(face.italicAngle * 65536.0))));
     appendU16(post, quint16(-100)); // Underline position, a plausible default.
-    appendU16(post, 50);            // Underline thickness, likewise.
+    appendU16(post, 50); // Underline thickness, likewise.
     appendU32(post, face.fixedPitch ? 1 : 0);
     for (int i = 0; i < 4; ++i) {
         appendU32(post, 0); // The memory hints, which nothing has needed since Type 42.
@@ -714,8 +714,8 @@ struct Subset {
  * that is supposed to be small. Renumbering costs one pass over the composite
  * references, which have to be visited anyway.
  */
-bool buildSubset(const Face &face, const QMap<uint, int> &glyphForCharacter,
-                 const QHash<int, QByteArray> &nameForGlyph, Subset *out, QString *error)
+bool buildSubset(const Face &face, const QMap<uint, int> &glyphForCharacter, const QHash<int, QByteArray> &nameForGlyph,
+                 Subset *out, QString *error)
 {
     QByteArray head = tableBytes(face, "head");
     QByteArray hhea = tableBytes(face, "hhea");
@@ -770,8 +770,8 @@ bool buildSubset(const Face &face, const QMap<uint, int> &glyphForCharacter,
     }
 
     head.truncate(54);
-    put32(head, 8, 0);   // The file checksum, which buildSfnt() fills in.
-    put16(head, 50, 1);  // Long offsets, so a large glyf never needs a second format.
+    put32(head, 8, 0); // The file checksum, which buildSfnt() fills in.
+    put16(head, 50, 1); // Long offsets, so a large glyf never needs a second format.
 
     hhea.truncate(36);
     put16(hhea, 34, quint16(glyphs.size()));
@@ -830,9 +830,8 @@ QString normalisedFamily(const QString &family)
  */
 bool familyMatches(const QString &wanted, const QString &offered)
 {
-    static const QStringList aliases = { u"sans"_s,      u"sansserif"_s, u"serif"_s,  u"monospace"_s,
-                                         u"mono"_s,      u"cursive"_s,   u"fantasy"_s, u"system"_s,
-                                         u"systemui"_s };
+    static const QStringList aliases = { u"sans"_s,    u"sansserif"_s, u"serif"_s,  u"monospace"_s, u"mono"_s,
+                                         u"cursive"_s, u"fantasy"_s,   u"system"_s, u"systemui"_s };
     const QString target = normalisedFamily(wanted);
     if (target.isEmpty() || aliases.contains(target)) {
         return true; // These name a role rather than a font; anything is right.
@@ -876,8 +875,7 @@ Located locateWithFontconfig(const FontEmbedder::Request &request)
 
     QProcess process;
     process.start(u"fc-match"_s, { u"--format=%{file}\t%{family}\t%{style}"_s, pattern });
-    if (!process.waitForFinished(5000) || process.exitStatus() != QProcess::NormalExit
-        || process.exitCode() != 0) {
+    if (!process.waitForFinished(5000) || process.exitStatus() != QProcess::NormalExit || process.exitCode() != 0) {
         return {};
     }
     const QStringList fields = QString::fromUtf8(process.readAllStandardOutput()).split(u'\t');
@@ -971,8 +969,7 @@ Located locateByScanning(const FontEmbedder::Request &request)
 
     Located best;
     for (const QString &directory : std::as_const(directories)) {
-        QDirIterator walk(directory, { u"*.ttf"_s, u"*.otf"_s, u"*.ttc"_s }, QDir::Files,
-                          QDirIterator::Subdirectories);
+        QDirIterator walk(directory, { u"*.ttf"_s, u"*.otf"_s, u"*.ttc"_s }, QDir::Files, QDirIterator::Subdirectories);
         while (walk.hasNext()) {
             const QString path = walk.next();
             QFile file(path);
@@ -983,13 +980,13 @@ Located locateByScanning(const FontEmbedder::Request &request)
             if (name.isEmpty()) {
                 continue;
             }
-            const QString family = nameTableEntry(name, 16).isEmpty() ? nameTableEntry(name, 1)
-                                                                      : nameTableEntry(name, 16);
+            const QString family
+                = nameTableEntry(name, 16).isEmpty() ? nameTableEntry(name, 1) : nameTableEntry(name, 16);
             if (!familyMatches(request.family, family)) {
                 continue;
             }
-            const QString style = nameTableEntry(name, 17).isEmpty() ? nameTableEntry(name, 2)
-                                                                     : nameTableEntry(name, 17);
+            const QString style
+                = nameTableEntry(name, 17).isEmpty() ? nameTableEntry(name, 2) : nameTableEntry(name, 17);
             const Located found { path, family, style };
             if (styleIsBold(style) == request.bold && styleIsItalic(style) == request.italic) {
                 return found;
@@ -1023,12 +1020,11 @@ int winAnsiCodeFor(QChar character)
         int code;
         char16_t character;
     } filled[] = {
-        { 0x80, 0x20AC }, { 0x82, 0x201A }, { 0x83, 0x0192 }, { 0x84, 0x201E }, { 0x85, 0x2026 },
-        { 0x86, 0x2020 }, { 0x87, 0x2021 }, { 0x88, 0x02C6 }, { 0x89, 0x2030 }, { 0x8A, 0x0160 },
-        { 0x8B, 0x2039 }, { 0x8C, 0x0152 }, { 0x8E, 0x017D }, { 0x91, 0x2018 }, { 0x92, 0x2019 },
-        { 0x93, 0x201C }, { 0x94, 0x201D }, { 0x95, 0x2022 }, { 0x96, 0x2013 }, { 0x97, 0x2014 },
-        { 0x98, 0x02DC }, { 0x99, 0x2122 }, { 0x9A, 0x0161 }, { 0x9B, 0x203A }, { 0x9C, 0x0153 },
-        { 0x9E, 0x017E }, { 0x9F, 0x0178 },
+        { 0x80, 0x20AC }, { 0x82, 0x201A }, { 0x83, 0x0192 }, { 0x84, 0x201E }, { 0x85, 0x2026 }, { 0x86, 0x2020 },
+        { 0x87, 0x2021 }, { 0x88, 0x02C6 }, { 0x89, 0x2030 }, { 0x8A, 0x0160 }, { 0x8B, 0x2039 }, { 0x8C, 0x0152 },
+        { 0x8E, 0x017D }, { 0x91, 0x2018 }, { 0x92, 0x2019 }, { 0x93, 0x201C }, { 0x94, 0x201D }, { 0x95, 0x2022 },
+        { 0x96, 0x2013 }, { 0x97, 0x2014 }, { 0x98, 0x02DC }, { 0x99, 0x2122 }, { 0x9A, 0x0161 }, { 0x9B, 0x203A },
+        { 0x9C, 0x0153 }, { 0x9E, 0x017E }, { 0x9F, 0x0178 },
     };
     const char16_t code = character.unicode();
     if (code >= 0x20 && code <= 0x7E) {
@@ -1065,8 +1061,7 @@ QByteArray glyphNameFor(QChar character)
     if (found != names.constEnd()) {
         return *found;
     }
-    return QByteArrayLiteral("uni")
-        + QByteArray::number(character.unicode(), 16).toUpper().rightJustified(4, '0');
+    return QByteArrayLiteral("uni") + QByteArray::number(character.unicode(), 16).toUpper().rightJustified(4, '0');
 }
 
 /** A glyph name as the text of a PDF name object. */
@@ -1086,9 +1081,7 @@ std::string nameObjectFor(const QByteArray &glyphName)
 QString subsetTag(const QString &family, const QMap<int, QChar> &characterForCode)
 {
     quint32 hash = 2166136261u;
-    const auto mix = [&hash](quint32 value) {
-        hash = (hash ^ value) * 16777619u;
-    };
+    const auto mix = [&hash](quint32 value) { hash = (hash ^ value) * 16777619u; };
     for (const QChar &character : family) {
         mix(character.unicode());
     }
@@ -1157,16 +1150,15 @@ int scaledToThousandths(double value, int unitsPerEm)
 /** A `/ToUnicode` CMap, which is what keeps the finished text copyable. */
 QByteArray toUnicodeCMap(const QMap<int, QChar> &characterForCode)
 {
-    QByteArray cmap = QByteArrayLiteral(
-        "/CIDInit /ProcSet findresource begin\n"
-        "12 dict begin\n"
-        "begincmap\n"
-        "/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n"
-        "/CMapName /Adobe-Identity-UCS def\n"
-        "/CMapType 2 def\n"
-        "1 begincodespacerange\n"
-        "<00> <FF>\n"
-        "endcodespacerange\n");
+    QByteArray cmap = QByteArrayLiteral("/CIDInit /ProcSet findresource begin\n"
+                                        "12 dict begin\n"
+                                        "begincmap\n"
+                                        "/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n"
+                                        "/CMapName /Adobe-Identity-UCS def\n"
+                                        "/CMapType 2 def\n"
+                                        "1 begincodespacerange\n"
+                                        "<00> <FF>\n"
+                                        "endcodespacerange\n");
 
     // A hundred mappings per block is the limit the specification sets.
     QVector<QPair<int, QChar>> entries;
@@ -1566,8 +1558,8 @@ QStringList substitutesFor(const QString &baseFont, QPDFObjectHandle descriptor)
     const int flags = flagsValue.isInteger() ? flagsValue.getIntValueAsInt() : 0;
 
     const bool mono = (flags & 1) || squashed.contains(u"courier"_s) || squashed.contains(u"mono"_s);
-    const bool sans = squashed.contains(u"sans"_s) || squashed.contains(u"helvetica"_s)
-        || squashed.contains(u"arial"_s) || squashed.contains(u"verdana"_s) || squashed.contains(u"tahoma"_s);
+    const bool sans = squashed.contains(u"sans"_s) || squashed.contains(u"helvetica"_s) || squashed.contains(u"arial"_s)
+        || squashed.contains(u"verdana"_s) || squashed.contains(u"tahoma"_s);
     const bool serif = !mono && !sans
         && ((flags & 2) || squashed.contains(u"times"_s) || squashed.contains(u"serif"_s)
             || squashed.contains(u"roman"_s) || squashed.contains(u"georgia"_s) || squashed.contains(u"garamond"_s)
@@ -1734,8 +1726,7 @@ bool substituteInPlace(QPDF &pdf, QPDFObjectHandle font, const QString &requeste
     if (widthsInFile) {
         const int first = firstChar.getIntValueAsInt();
         for (int i = 0; i < widths.getArrayNItems(); ++i) {
-            statedWidth.insert(first + i,
-                               int(std::lround(PdfGeometry::numericValue(widths.getArrayItem(i), 0.0))));
+            statedWidth.insert(first + i, int(std::lround(PdfGeometry::numericValue(widths.getArrayItem(i), 0.0))));
         }
     }
     const Core14::Entry *standard = widthsInFile ? nullptr : core14For(baseFont);
@@ -1815,8 +1806,8 @@ bool substituteInPlace(QPDF &pdf, QPDFObjectHandle font, const QString &requeste
     }
 
     // ── The dictionary, rewritten only where it must be ──
-    QPDFObjectHandle programmeStream = QPDFObjectHandle::newStream(
-        &pdf, std::string(programme.constData(), size_t(programme.size())));
+    QPDFObjectHandle programmeStream
+        = QPDFObjectHandle::newStream(&pdf, std::string(programme.constData(), size_t(programme.size())));
     if (loaded.face.compactOutlines) {
         programmeStream.getDict().replaceKey("/Subtype", QPDFObjectHandle::newName("/Type1C"));
     } else {
@@ -1861,9 +1852,10 @@ bool substituteInPlace(QPDF &pdf, QPDFObjectHandle font, const QString &requeste
                      QPDFObjectHandle::newInteger(scaledToThousandths(loaded.face.ascender, loaded.face.unitsPerEm)));
     fresh.replaceKey("/Descent",
                      QPDFObjectHandle::newInteger(scaledToThousandths(loaded.face.descender, loaded.face.unitsPerEm)));
-    fresh.replaceKey("/CapHeight", QPDFObjectHandle::newInteger(scaledToThousandths(capHeight, loaded.face.unitsPerEm)));
-    fresh.replaceKey("/StemV",
-                     QPDFObjectHandle::newInteger(50 + int(std::lround(std::pow(loaded.face.weightClass / 100.0, 2.0)))));
+    fresh.replaceKey("/CapHeight",
+                     QPDFObjectHandle::newInteger(scaledToThousandths(capHeight, loaded.face.unitsPerEm)));
+    fresh.replaceKey(
+        "/StemV", QPDFObjectHandle::newInteger(50 + int(std::lround(std::pow(loaded.face.weightClass / 100.0, 2.0)))));
     fresh.replaceKey(loaded.face.compactOutlines ? "/FontFile3" : "/FontFile2", programmeStream);
 
     font.replaceKey("/Subtype", QPDFObjectHandle::newName(loaded.face.compactOutlines ? "/Type1" : "/TrueType"));
@@ -2112,8 +2104,7 @@ QString FontEmbedder::locate(const Request &request)
     return locateFont(request).path;
 }
 
-bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &request, Result *result,
-                         QString *error)
+bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &request, Result *result, QString *error)
 {
     if (request.characters.isEmpty()) {
         if (error) {
@@ -2170,9 +2161,8 @@ bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &r
     // Sorted, because a QSet has no order and two runs of the same request have
     // to produce the same file.
     QVector<QChar> characters(request.characters.constBegin(), request.characters.constEnd());
-    std::sort(characters.begin(), characters.end(), [](QChar left, QChar right) {
-        return left.unicode() < right.unicode();
-    });
+    std::sort(characters.begin(), characters.end(),
+              [](QChar left, QChar right) { return left.unicode() < right.unicode(); });
 
     QMap<uint, int> glyphForCharacter;
     QStringList missing;
@@ -2275,11 +2265,10 @@ bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &r
     QPDFObjectHandle widths = QPDFObjectHandle::newArray();
     for (int code = first; code <= last; ++code) {
         const auto character = characterForCode.constFind(code);
-        const int glyph = character == characterForCode.constEnd()
-            ? 0
-            : glyphForCharacter.value(character->unicode(), 0);
-        widths.appendItem(QPDFObjectHandle::newInteger(
-            scaledToThousandths(face.advances.value(glyph, 0), face.unitsPerEm)));
+        const int glyph
+            = character == characterForCode.constEnd() ? 0 : glyphForCharacter.value(character->unicode(), 0);
+        widths.appendItem(
+            QPDFObjectHandle::newInteger(scaledToThousandths(face.advances.value(glyph, 0), face.unitsPerEm)));
     }
 
     QPDFObjectHandle differences = QPDFObjectHandle::newArray();
@@ -2321,16 +2310,16 @@ bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &r
         flags |= 64;
     }
 
-    QPDFObjectHandle programmeStream = QPDFObjectHandle::newStream(
-        &pdf, std::string(programme.constData(), size_t(programme.size())));
+    QPDFObjectHandle programmeStream
+        = QPDFObjectHandle::newStream(&pdf, std::string(programme.constData(), size_t(programme.size())));
     if (face.compactOutlines) {
         programmeStream.getDict().replaceKey("/Subtype", QPDFObjectHandle::newName("/Type1C"));
     } else {
         programmeStream.getDict().replaceKey("/Length1", QPDFObjectHandle::newInteger(programme.size()));
     }
 
-    const QString baseName = u"/"_s + subsetTag(found.family, characterForCode) + u"+"_s
-        + postScriptName(found.family, bold, italic);
+    const QString baseName
+        = u"/"_s + subsetTag(found.family, characterForCode) + u"+"_s + postScriptName(found.family, bold, italic);
 
     QPDFObjectHandle descriptor = QPDFObjectHandle::newDictionary();
     descriptor.replaceKey("/Type", QPDFObjectHandle::newName("/FontDescriptor"));
@@ -2338,12 +2327,10 @@ bool FontEmbedder::embed(QPDF &pdf, QPDFObjectHandle resources, const Request &r
     descriptor.replaceKey("/Flags", QPDFObjectHandle::newInteger(flags));
     descriptor.replaceKey("/FontBBox", bbox);
     descriptor.replaceKey("/ItalicAngle", realNumber(face.italicAngle));
-    descriptor.replaceKey("/Ascent",
-                          QPDFObjectHandle::newInteger(scaledToThousandths(face.ascender, face.unitsPerEm)));
+    descriptor.replaceKey("/Ascent", QPDFObjectHandle::newInteger(scaledToThousandths(face.ascender, face.unitsPerEm)));
     descriptor.replaceKey("/Descent",
                           QPDFObjectHandle::newInteger(scaledToThousandths(face.descender, face.unitsPerEm)));
-    descriptor.replaceKey("/CapHeight",
-                          QPDFObjectHandle::newInteger(scaledToThousandths(capHeight, face.unitsPerEm)));
+    descriptor.replaceKey("/CapHeight", QPDFObjectHandle::newInteger(scaledToThousandths(capHeight, face.unitsPerEm)));
     // Stem width is an estimate from the font's weight and always was: it only
     // guides a viewer that has to draw a substitute, and this font is here.
     descriptor.replaceKey("/StemV",
@@ -2527,8 +2514,7 @@ bool FontEmbedder::replaceFont(const QString &in, const QString &out, const QStr
         if (done == 0) {
             if (error) {
                 *error = matched == 0
-                    ? i18n("No font in this document is called “%1”. “fonts list” says what it does use.",
-                           oldBaseFont)
+                    ? i18n("No font in this document is called “%1”. “fonts list” says what it does use.", oldBaseFont)
                     : i18n("“%1” was found but could not be replaced with “%2”.", oldBaseFont, newFamily);
             }
             if (substitutions) {
@@ -2570,9 +2556,7 @@ QByteArray FontEmbedder::subsetProgramme(const QByteArray &programme, const QSet
 
     // Sorted, so that two runs over the same set produce the same bytes.
     QVector<QChar> sorted(characters.constBegin(), characters.constEnd());
-    std::sort(sorted.begin(), sorted.end(), [](QChar left, QChar right) {
-        return left.unicode() < right.unicode();
-    });
+    std::sort(sorted.begin(), sorted.end(), [](QChar left, QChar right) { return left.unicode() < right.unicode(); });
 
     QMap<uint, int> glyphForCharacter;
     QHash<int, QByteArray> nameForGlyph;

@@ -44,6 +44,7 @@
 #include <QMenuBar>
 #include <QPainter>
 #include <QPixmap>
+#include <QMouseEvent>
 #include <QStackedWidget>
 #include <QTemporaryDir>
 #include <QTextStream>
@@ -470,6 +471,59 @@ QString applyStep(MainWindow *window, const QString &spec, int settleMillisecond
         return {};
     }
 
+    if (verb == QLatin1String("click")) {
+        // Written PAGE,X,Y, with X and Y in points from the bottom left corner
+        // of that page, which is how the rest of the project measures a page
+        // and what "objects list" prints. The click is sent to the view's
+        // viewport rather than to a layer directly, so it is dispatched exactly
+        // as a user's click is: the pen first, then the words, then the block.
+        // A layer reached by calling into it would photograph a state the
+        // window cannot actually be put into by clicking.
+        const QStringList parts = argument.split(QLatin1Char(','));
+        if (parts.size() != 3) {
+            return QStringLiteral("step \"%1\": a click is written PAGE,X,Y, as in 6:click:6,300,500").arg(spec);
+        }
+        bool goodPage = false;
+        bool goodX = false;
+        bool goodY = false;
+        const int page = parts.at(0).toInt(&goodPage);
+        const double x = parts.at(1).toDouble(&goodX);
+        const double y = parts.at(2).toDouble(&goodY);
+        if (!goodPage || !goodX || !goodY || page < 1) {
+            return QStringLiteral("step \"%1\": a click is written PAGE,X,Y, with the page counted from 1")
+                .arg(spec);
+        }
+
+        auto *view = window->findChild<PageView *>();
+        if (!view) {
+            return QStringLiteral("step \"%1\": the window has no document view to click on").arg(spec);
+        }
+        const int row = page - 1;
+        view->goToPage(row);
+        settle(settleMilliseconds);
+
+        const QPointF where = view->fromPoints(row, QPointF(x, y));
+        QWidget *target = view->viewport();
+        if (!target->rect().contains(where.toPoint())) {
+            return QStringLiteral("step \"%1\": %2,%3 on page %4 is not on screen; the view shows %5")
+                .arg(spec)
+                .arg(x)
+                .arg(y)
+                .arg(page)
+                .arg(QStringLiteral("%1x%2").arg(target->width()).arg(target->height()));
+        }
+
+        const QPointF global = target->mapToGlobal(where);
+        QMouseEvent press(QEvent::MouseButtonPress, where, global, Qt::LeftButton, Qt::LeftButton,
+                          Qt::NoModifier);
+        QApplication::sendEvent(target, &press);
+        QMouseEvent release(QEvent::MouseButtonRelease, where, global, Qt::LeftButton, Qt::NoButton,
+                            Qt::NoModifier);
+        QApplication::sendEvent(target, &release);
+        settle(settleMilliseconds);
+        return {};
+    }
+
     if (verb == QLatin1String("select-field")) {
         auto *fields = window->findChild<FormOverlay *>();
         if (!fields) {
@@ -618,8 +672,8 @@ int main(int argc, char **argv)
     const QCommandLineOption stepOption(
         QStringLiteral("step"),
         QStringLiteral("A step to carry out, repeatable, in the order given. One of "
-                       "action:NAME, on:NAME, off:NAME, page:N, menu:NAME, select-field:NAME, "
-                       "resize:WxH, wait:MS."),
+                       "action:NAME, on:NAME, off:NAME, page:N, menu:NAME, click:PAGE,X,Y, "
+                       "select-field:NAME, resize:WxH, wait:MS."),
         QStringLiteral("spec"));
     const QCommandLineOption grabOption(QStringLiteral("grab"),
                                         QStringLiteral("What to photograph: window, active or both."),

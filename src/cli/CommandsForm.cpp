@@ -114,8 +114,7 @@ bool applyKind(const QString &token, Field *field)
         field->kind = Field::Kind::Checkbox;
     } else if (word == QLatin1String("radio")) {
         field->kind = Field::Kind::Radio;
-    } else if (word == QLatin1String("choice") || word == QLatin1String("dropdown")
-               || word == QLatin1String("combo")) {
+    } else if (word == QLatin1String("choice") || word == QLatin1String("dropdown") || word == QLatin1String("combo")) {
         field->kind = Field::Kind::Dropdown;
     } else if (word == QLatin1String("list") || word == QLatin1String("listbox")) {
         field->kind = Field::Kind::ListBox;
@@ -376,8 +375,8 @@ bool buildFields(const QCommandLineParser &parser, QVector<Field> *fields, QStri
         return false;
     }
     if (rects.size() != choices.size()) {
-        *error = i18n("A radio group needs one --at for every choice: %1 given for %2 choices.",
-                      int(rects.size()), int(choices.size()));
+        *error = i18n("A radio group needs one --at for every choice: %1 given for %2 choices.", int(rects.size()),
+                      int(choices.size()));
         return false;
     }
     for (qsizetype i = 0; i < choices.size(); ++i) {
@@ -539,8 +538,8 @@ bool fieldFromJson(const QJsonObject &object, QVector<Field> *fields, QString *e
     }
     field.page = page - 1;
 
-    const QString label = object.contains(u"tooltip"_s) ? object.value(u"tooltip"_s).toString()
-                                                        : object.value(u"label"_s).toString();
+    const QString label
+        = object.contains(u"tooltip"_s) ? object.value(u"tooltip"_s).toString() : object.value(u"label"_s).toString();
     if (label != field.name) {
         field.label = label;
     }
@@ -610,8 +609,7 @@ bool fieldFromJson(const QJsonObject &object, QVector<Field> *fields, QString *e
             }
             button.radioGroup = field.name;
             button.label = field.options.at(i);
-            button.onState
-                = i < field.exportValues.size() ? field.exportValues.at(i) : field.options.at(i);
+            button.onState = i < field.exportValues.size() ? field.exportValues.at(i) : field.options.at(i);
             button.options.clear();
             button.exportValues.clear();
             fields->append(button);
@@ -652,12 +650,9 @@ int listAction(const QString &input, bool asJson)
     if (asJson) {
         QJsonArray array;
         for (const FormField &field : fields) {
-            QJsonObject object { { u"name"_s, field.name },
-                                 { u"type"_s, typeToken(field.kind) },
-                                 { u"label"_s, field.label },
-                                 { u"value"_s, field.value },
-                                 { u"required"_s, field.required },
-                                 { u"readOnly"_s, field.readOnly },
+            QJsonObject object { { u"name"_s, field.name },          { u"type"_s, typeToken(field.kind) },
+                                 { u"label"_s, field.label },        { u"value"_s, field.value },
+                                 { u"required"_s, field.required },  { u"readOnly"_s, field.readOnly },
                                  { u"multiline"_s, field.multiline } };
             object.insert(u"page"_s, field.page >= 0 ? QJsonValue(field.page + 1) : QJsonValue());
             if (field.page >= 0 && !field.rect.isEmpty()) {
@@ -846,8 +841,7 @@ int changeAction(const QString &input, const QCommandLineParser &parser, bool ge
         // A widget belongs to the page it is listed on, and changing that means
         // taking it off one page and putting it on another, which is remove and
         // add rather than a change.
-        err() << i18n("Note: --page is not used here. To put “%1” on another page, take it out and add it again.",
-                      name)
+        err() << i18n("Note: --page is not used here. To put “%1” on another page, take it out and add it again.", name)
               << Qt::endl;
     }
 
@@ -934,8 +928,8 @@ int tabOrderAction(const QString &input, const QCommandLineParser &parser)
         return fail(error, OutputError);
     }
     out() << i18np("The tab key now walks %1 field of page %2 in that order. The result is in %3.",
-                   "The tab key now walks %1 fields of page %2 in that order. The result is in %3.",
-                   int(order.size()), page, output)
+                   "The tab key now walks %1 fields of page %2 in that order. The result is in %3.", int(order.size()),
+                   page, output)
           << Qt::endl;
     return Success;
 }
@@ -988,8 +982,7 @@ int formatAction(const QString &input, const QCommandLineParser &parser)
     const QString output = destination(parser, input);
     QStringList warnings;
     QString error;
-    if (!FormBuilder::setFormat(input, output, name, format, decimals, parser.value(u"symbol"_s), &warnings,
-                                &error)) {
+    if (!FormBuilder::setFormat(input, output, name, format, decimals, parser.value(u"symbol"_s), &warnings, &error)) {
         return fail(error, OutputError);
     }
     reportWarnings(warnings);
@@ -1010,8 +1003,7 @@ int validateAction(const QString &input, const QCommandLineParser &parser)
     }
     QPointF range;
     if (!parsePoint(parser.value(u"between"_s), &range)) {
-        return fail(i18n("“%1” is not a range. The form is SMALLEST,LARGEST.", parser.value(u"between"_s)),
-                    UsageError);
+        return fail(i18n("“%1” is not a range. The form is SMALLEST,LARGEST.", parser.value(u"between"_s)), UsageError);
     }
 
     const QString output = destination(parser, input);
@@ -1085,8 +1077,7 @@ int buttonAction(const QString &input, const QCommandLineParser &parser)
     } else if (word == QLatin1String("url") || word == QLatin1String("link")) {
         action = FormBuilder::ButtonAction::OpenUrl;
     } else {
-        return fail(i18n("“%1” is not something a button can do. Use reset, submit, goto or url.", word),
-                    UsageError);
+        return fail(i18n("“%1” is not something a button can do. Use reset, submit, goto or url.", word), UsageError);
     }
 
     const QString output = destination(parser, input);
@@ -1139,8 +1130,7 @@ int importAction(const QString &input, const QCommandLineParser &parser)
 {
     const QString from = parser.value(u"data"_s);
     if (from.isEmpty()) {
-        return fail(i18n("Say which answers to read with --data, in a file ending .fdf, .xfdf or .csv."),
-                    UsageError);
+        return fail(i18n("Say which answers to read with --data, in a file ending .fdf, .xfdf or .csv."), UsageError);
     }
     const QString output = destination(parser, input);
     QString error;
@@ -1194,14 +1184,12 @@ QString actionList()
 void formOptions(QCommandLineParser &parser)
 {
     parser.addOptions({
-        { u"type"_s,
-          i18n("What kind of field: text, password, checkbox, radio, choice, list, button or signature."),
+        { u"type"_s, i18n("What kind of field: text, password, checkbox, radio, choice, list, button or signature."),
           i18nc("@label:chooser command-line placeholder", "kind") },
         { u"name"_s, i18n("Which field. This is the name filling in addresses; a full stop in it makes a group."),
           i18nc("@label command-line placeholder", "name") },
         { u"to-name"_s, i18n("What to call the field instead."), i18nc("@label command-line placeholder", "name") },
-        { u"value"_s, i18n("What the field holds to start with."),
-          i18nc("@label command-line placeholder", "text") },
+        { u"value"_s, i18n("What the field holds to start with."), i18nc("@label command-line placeholder", "text") },
         { u"options"_s, i18n("What may be chosen, as A,B,C. For a radio group, one --at goes with each."),
           i18nc("@label command-line placeholder", "list") },
         { u"export-values"_s, i18n("What gets stored for each choice, when that differs from what is shown."),
@@ -1238,8 +1226,8 @@ void formOptions(QCommandLineParser &parser)
           i18nc("@label command-line placeholder", "file") },
         { u"as"_s, i18n("How a value is shown: none, number, currency, percent, date, time, zip or phone."),
           i18nc("@label command-line placeholder", "kind") },
-        { u"decimals"_s, i18n("Places after the decimal point."),
-          i18nc("@label command-line placeholder", "number"), QStringLiteral("2") },
+        { u"decimals"_s, i18n("Places after the decimal point."), i18nc("@label command-line placeholder", "number"),
+          QStringLiteral("2") },
         { u"symbol"_s, i18n("Currency symbol to show."), i18nc("@label command-line placeholder", "text") },
         { u"between"_s, i18n("The numbers a field may hold, as SMALLEST,LARGEST."),
           i18nc("@label command-line placeholder", "range") },

@@ -189,8 +189,8 @@ bool writeGroupedFormPdf(const QString &path)
         QPDFObjectHandle heads = QPDFObjectHandle::newArray();
         QPDFObjectHandle secondAnnots = QPDFObjectHandle::newArray();
         for (int i = 0; i < 2; ++i) {
-            QPDFObjectHandle widget = pdf.makeIndirectObject(QPDFObjectHandle::parse(
-                "<< /Type /Annot /Subtype /Widget /Rect [400 740 560 760] /F 4 >>"));
+            QPDFObjectHandle widget = pdf.makeIndirectObject(
+                QPDFObjectHandle::parse("<< /Type /Annot /Subtype /Widget /Rect [400 740 560 760] /F 4 >>"));
             widget.replaceKey("/P", pages.at(size_t(i)).getObjectHandle());
             widget.replaceKey("/Parent", repeated);
             heads.appendItem(widget);
@@ -727,9 +727,9 @@ void TestForms::choosingOneOfAGroupLeavesTheOthersOff()
 
     // Changing one's mind moves the answer rather than adding to it.
     const QString again = m_dir.filePath(QStringLiteral("chosen-again.pdf"));
-    QVERIFY2(Forms::fill(out, again, { { QStringLiteral("Anrede"), QStringLiteral("Divers") } }, &filled, nullptr,
-                         &error),
-             qPrintable(error));
+    QVERIFY2(
+        Forms::fill(out, again, { { QStringLiteral("Anrede"), QStringLiteral("Divers") } }, &filled, nullptr, &error),
+        qPrintable(error));
 
     after = Forms::read(again, &error);
     QCOMPARE(fieldNamed(after, QStringLiteral("Anrede"))->value, QStringLiteral("/Divers"));

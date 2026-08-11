@@ -102,9 +102,8 @@ QString pageList(const QVector<int> &pages)
 QString sortedCoverage(const QSet<QChar> &coverage)
 {
     QVector<QChar> characters(coverage.constBegin(), coverage.constEnd());
-    std::sort(characters.begin(), characters.end(), [](QChar left, QChar right) {
-        return left.unicode() < right.unicode();
-    });
+    std::sort(characters.begin(), characters.end(),
+              [](QChar left, QChar right) { return left.unicode() < right.unicode(); });
     QString text;
     text.reserve(characters.size());
     for (const QChar &character : std::as_const(characters)) {
@@ -200,12 +199,10 @@ int listFonts(const QStringList &arguments, const QCommandLineParser &parser)
         return Success;
     }
 
-    out() << row({ i18nc("@title:column the /Fx name a page calls a font by", "Name"),
-                   i18nc("@title:column", "Font"), i18nc("@title:column what kind of font", "Type"),
-                   i18nc("@title:column short for embedded", "Emb"),
+    out() << row({ i18nc("@title:column the /Fx name a page calls a font by", "Name"), i18nc("@title:column", "Font"),
+                   i18nc("@title:column what kind of font", "Type"), i18nc("@title:column short for embedded", "Emb"),
                    i18nc("@title:column short for subset", "Sub"),
-                   i18nc("@title:column short for “has a /ToUnicode map”", "Uni"),
-                   i18nc("@title:column", "Encoding"),
+                   i18nc("@title:column short for “has a /ToUnicode map”", "Uni"), i18nc("@title:column", "Encoding"),
                    i18nc("@title:column how many characters can be addressed", "Chars"),
                    i18nc("@title:column size of the embedded font programme", "Size"),
                    i18nc("@title:column", "Pages") })
@@ -218,14 +215,14 @@ int listFonts(const QStringList &arguments, const QCommandLineParser &parser)
         embedded += use.embedded ? 1 : 0;
         noUnicode += use.hasToUnicode ? 0 : 1;
         total += use.fileSize;
-        out() << row({ use.resourceName, use.baseFont, bare(use.subtype), tick(use.embedded), tick(use.subset),
-                       tick(use.hasToUnicode),
-                       use.encoding.isEmpty() ? i18nc("@item the font names no encoding of its own", "none")
-                                              : bare(use.encoding),
-                       QString::number(use.coverage.size()),
-                       use.fileSize > 0 ? humanSize(use.fileSize)
-                                        : i18nc("@item no font file, so no size to give", "none"),
-                       pageList(use.pages) })
+        out() << row(
+            { use.resourceName, use.baseFont, bare(use.subtype), tick(use.embedded), tick(use.subset),
+              tick(use.hasToUnicode),
+              use.encoding.isEmpty() ? i18nc("@item the font names no encoding of its own", "none")
+                                     : bare(use.encoding),
+              QString::number(use.coverage.size()),
+              use.fileSize > 0 ? humanSize(use.fileSize) : i18nc("@item no font file, so no size to give", "none"),
+              pageList(use.pages) })
               << Qt::endl;
     }
 
@@ -289,27 +286,25 @@ int checkFonts(const QStringList &arguments, const QCommandLineParser &parser)
     QJsonArray problems;
     for (const ps::FontUse &use : uses) {
         if (!use.embedded) {
-            sentences << i18nc("@info", "%1 is not embedded, so the reader will substitute another face and the "
-                                        "lines will shift.",
+            sentences << i18nc("@info",
+                               "%1 is not embedded, so the reader will substitute another face and the "
+                               "lines will shift.",
                                describe(use));
-            problems.append(QJsonObject { { u"font"_s, use.baseFont },
-                                          { u"resource"_s, use.resourceName },
-                                          { u"problem"_s, u"notEmbedded"_s } });
+            problems.append(QJsonObject {
+                { u"font"_s, use.baseFont }, { u"resource"_s, use.resourceName }, { u"problem"_s, u"notEmbedded"_s } });
         }
         if (!use.hasToUnicode) {
-            sentences << i18nc("@info", "%1 has no /ToUnicode map, so its text cannot be copied, searched or read "
-                                        "aloud.",
+            sentences << i18nc("@info",
+                               "%1 has no /ToUnicode map, so its text cannot be copied, searched or read "
+                               "aloud.",
                                describe(use));
-            problems.append(QJsonObject { { u"font"_s, use.baseFont },
-                                          { u"resource"_s, use.resourceName },
-                                          { u"problem"_s, u"noToUnicode"_s } });
+            problems.append(QJsonObject {
+                { u"font"_s, use.baseFont }, { u"resource"_s, use.resourceName }, { u"problem"_s, u"noToUnicode"_s } });
         }
         if (use.coverage.isEmpty()) {
-            sentences << i18nc("@info", "%1 says nothing anywhere about what its character codes mean.",
-                               describe(use));
-            problems.append(QJsonObject { { u"font"_s, use.baseFont },
-                                          { u"resource"_s, use.resourceName },
-                                          { u"problem"_s, u"noCoverage"_s } });
+            sentences << i18nc("@info", "%1 says nothing anywhere about what its character codes mean.", describe(use));
+            problems.append(QJsonObject {
+                { u"font"_s, use.baseFont }, { u"resource"_s, use.resourceName }, { u"problem"_s, u"noCoverage"_s } });
         }
     }
 
@@ -362,8 +357,7 @@ int embedFont(const QStringList &arguments, const QCommandLineParser &parser)
         return fail(i18n("fonts embed needs a font to embed, as --font “DejaVu Sans”."), UsageError);
     }
     if (!applyStyle(parser.value(u"font-style"_s), &request)) {
-        return fail(i18n("“%1” is not a cut. Use bold, italic, bold-italic or regular.",
-                         parser.value(u"font-style"_s)),
+        return fail(i18n("“%1” is not a cut. Use bold, italic, bold-italic or regular.", parser.value(u"font-style"_s)),
                     UsageError);
     }
 
@@ -514,8 +508,7 @@ int findFont(const QStringList &arguments, const QCommandLineParser &parser)
     ps::FontEmbedder::Request request;
     request.family = arguments.constFirst();
     if (!applyStyle(parser.value(u"font-style"_s), &request)) {
-        return fail(i18n("“%1” is not a cut. Use bold, italic, bold-italic or regular.",
-                         parser.value(u"font-style"_s)),
+        return fail(i18n("“%1” is not a cut. Use bold, italic, bold-italic or regular.", parser.value(u"font-style"_s)),
                     UsageError);
     }
 

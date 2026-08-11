@@ -67,8 +67,8 @@ void TestEncryption::initTestCase()
 
     m_locked = m_dir.filePath(QStringLiteral("locked.pdf"));
     QString error;
-    QVERIFY2(Encryption::encrypt(m_plain, m_locked, UserPassword, OwnerPassword, Encryption::Permissions {},
-                                 QString(), &error),
+    QVERIFY2(Encryption::encrypt(m_plain, m_locked, UserPassword, OwnerPassword, Encryption::Permissions {}, QString(),
+                                 &error),
              qPrintable(error));
     QVERIFY(Encryption::isEncrypted(m_locked));
 }
@@ -81,7 +81,8 @@ void TestEncryption::aLockedFileCanBeOpenedWithItsPassword()
     Source::Trouble trouble = Source::Trouble::Damaged;
     const std::unique_ptr<Source> source = Source::open(m_locked, &error, UserPassword, &trouble);
 
-    QVERIFY2(source != nullptr, qPrintable(QStringLiteral("a document would not open with its own password: ") + error));
+    QVERIFY2(source != nullptr,
+             qPrintable(QStringLiteral("a document would not open with its own password: ") + error));
     QCOMPARE(trouble, Source::Trouble::None);
     QCOMPARE(source->pageCount(), 3);
     // Kept, so that saving can lock the file again with what opened it rather

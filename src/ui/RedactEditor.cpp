@@ -151,12 +151,8 @@ QWidget *RedactEditor::buildPanel()
     m_apply = buttons->button(QDialogButtonBox::Ok);
     m_apply->setText(i18nc("@action:button", "Redact"));
     m_apply->setEnabled(false);
-    connect(buttons, &QDialogButtonBox::accepted, this, [this] {
-        Q_EMIT finished(true);
-    });
-    connect(buttons, &QDialogButtonBox::rejected, this, [this] {
-        Q_EMIT finished(false);
-    });
+    connect(buttons, &QDialogButtonBox::accepted, this, [this] { Q_EMIT finished(true); });
+    connect(buttons, &QDialogButtonBox::rejected, this, [this] { Q_EMIT finished(false); });
 
     auto *layout = new QVBoxLayout(panel);
     layout->addWidget(marked, 1);

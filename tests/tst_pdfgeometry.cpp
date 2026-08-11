@@ -173,7 +173,10 @@ void TestPdfGeometry::writesTheCharactersLatin1Loses()
     // compiler is concerned, and 0xDFE truncated to a byte is 0xFE, so writing
     // it in one piece tests the wrong thing and fails for the wrong reason.
     QCOMPARE(PdfGeometry::winAnsi(QStringLiteral("Grüße, Straße")),
-             std::string("Gr\xFC" "\xDF" "e, Stra\xDF" "e"));
+             std::string("Gr\xFC"
+                         "\xDF"
+                         "e, Stra\xDF"
+                         "e"));
 }
 
 void TestPdfGeometry::escapesWhatAPdfStringCannotHoldRaw()
@@ -192,7 +195,6 @@ void TestPdfGeometry::escapesWhatAPdfStringCannotHoldRaw()
     // an invisible control into a euro sign on the page.
     QCOMPARE(PdfGeometry::winAnsi(QString(QChar(0x0085))), std::string("?"));
 }
-
 
 QTEST_MAIN(TestPdfGeometry)
 

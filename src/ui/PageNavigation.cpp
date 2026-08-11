@@ -41,12 +41,8 @@ QHBoxLayout *pageNavigation(QWidget *parent, QSpinBox *pageBox, int pageCount)
     row->addWidget(total);
     row->addStretch(1);
 
-    QObject::connect(previous, &QToolButton::clicked, pageBox, [pageBox] {
-        pageBox->setValue(pageBox->value() - 1);
-    });
-    QObject::connect(next, &QToolButton::clicked, pageBox, [pageBox] {
-        pageBox->setValue(pageBox->value() + 1);
-    });
+    QObject::connect(previous, &QToolButton::clicked, pageBox, [pageBox] { pageBox->setValue(pageBox->value() - 1); });
+    QObject::connect(next, &QToolButton::clicked, pageBox, [pageBox] { pageBox->setValue(pageBox->value() + 1); });
 
     // Greyed out at the ends rather than silently doing nothing, so that a
     // document of one page does not offer two buttons that never work.

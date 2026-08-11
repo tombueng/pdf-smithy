@@ -308,8 +308,7 @@ Overlay::TextStamp WatermarkEditor::stamp() const
 void WatermarkEditor::refreshPreview()
 {
     if (m_useImage->isChecked() && !m_image.isNull()) {
-        m_view->setImageStamp(m_image, chosenAnchor(), m_imageSize->value() / 100.0, 0.0,
-                              m_opacity->value() / 100.0);
+        m_view->setImageStamp(m_image, chosenAnchor(), m_imageSize->value() / 100.0, 0.0, m_opacity->value() / 100.0);
     } else {
         m_view->setTextStamp(stamp());
     }
@@ -317,18 +316,16 @@ void WatermarkEditor::refreshPreview()
 
 void WatermarkEditor::chooseImage()
 {
-    const QString path
-        = QFileDialog::getOpenFileName(panel(), i18nc("@title:window", "Watermark Picture"), QString(),
-                                       i18n("Images (%1);;All files (*)",
-                                            ImageIO::readableImageFilters().join(QLatin1Char(' '))));
+    const QString path = QFileDialog::getOpenFileName(
+        panel(), i18nc("@title:window", "Watermark Picture"), QString(),
+        i18n("Images (%1);;All files (*)", ImageIO::readableImageFilters().join(QLatin1Char(' '))));
     if (path.isEmpty()) {
         return;
     }
 
     QImage image(path);
     if (image.isNull()) {
-        KMessageBox::error(panel(), i18n("“%1” could not be read as an image.", QFileInfo(path).fileName()),
-                           title());
+        KMessageBox::error(panel(), i18n("“%1” could not be read as an image.", QFileInfo(path).fileName()), title());
         return;
     }
 

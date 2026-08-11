@@ -61,11 +61,20 @@ struct FontAlias {
 };
 
 constexpr FontAlias fontAliases[] = {
-    { "Helv", "Helvetica" },   { "HeBo", "Helvetica-Bold" }, { "HeOb", "Helvetica-Oblique" },
-    { "HeBO", "Helvetica-BoldOblique" }, { "TiRo", "Times-Roman" }, { "TiBo", "Times-Bold" },
-    { "TiIt", "Times-Italic" }, { "TiBI", "Times-BoldItalic" }, { "Cour", "Courier" },
-    { "CoBo", "Courier-Bold" }, { "CoOb", "Courier-Oblique" }, { "CoBO", "Courier-BoldOblique" },
-    { "Symb", "Symbol" },      { "ZaDb", "ZapfDingbats" },
+    { "Helv", "Helvetica" },
+    { "HeBo", "Helvetica-Bold" },
+    { "HeOb", "Helvetica-Oblique" },
+    { "HeBO", "Helvetica-BoldOblique" },
+    { "TiRo", "Times-Roman" },
+    { "TiBo", "Times-Bold" },
+    { "TiIt", "Times-Italic" },
+    { "TiBI", "Times-BoldItalic" },
+    { "Cour", "Courier" },
+    { "CoBo", "Courier-Bold" },
+    { "CoOb", "Courier-Oblique" },
+    { "CoBO", "Courier-BoldOblique" },
+    { "Symb", "Symbol" },
+    { "ZaDb", "ZapfDingbats" },
 };
 
 QString baseFontFor(const QString &resource)
@@ -362,8 +371,8 @@ QPDFObjectHandle fontFor(Build &build, const QString &resource)
     if (base != QLatin1String("Symbol") && base != QLatin1String("ZapfDingbats")) {
         // The two symbol fonts have their own built-in encoding; forcing WinAnsi
         // on them replaces every glyph with something Latin.
-        definition = "<< /Type /Font /Subtype /Type1 /BaseFont /" + base.toStdString()
-            + " /Encoding /WinAnsiEncoding >>";
+        definition
+            = "<< /Type /Font /Subtype /Type1 /BaseFont /" + base.toStdString() + " /Encoding /WinAnsiEncoding >>";
     }
     QPDFObjectHandle font = build.pdf->makeIndirectObject(QPDFObjectHandle::parse(definition));
     if (build.drFonts.isDictionary()) {
@@ -750,8 +759,7 @@ void configureWidget(Build &build, QPDFObjectHandle widget, const FormBuilder::F
     } else if (spec.kind == FormBuilder::Field::Kind::Radio) {
         appearanceCharacteristics.replaceKey("/CA", QPDFObjectHandle::newString("l"));
     } else if (spec.kind == FormBuilder::Field::Kind::PushButton) {
-        appearanceCharacteristics.replaceKey("/CA",
-                                            unicodeString(spec.label.isEmpty() ? spec.name : spec.label));
+        appearanceCharacteristics.replaceKey("/CA", unicodeString(spec.label.isEmpty() ? spec.name : spec.label));
     }
     if (rotate != 0) {
         appearanceCharacteristics.replaceKey("/R", QPDFObjectHandle::newInteger(rotate));
@@ -813,8 +821,8 @@ void configureWidget(Build &build, QPDFObjectHandle widget, const FormBuilder::F
         break;
     }
     case FormBuilder::Field::Kind::PushButton: {
-        const std::string content
-            = drawFrame(spec, w, h, false) + drawCaption(spec, w, h, spec.label.isEmpty() ? spec.name : spec.label, baseFont);
+        const std::string content = drawFrame(spec, w, h, false)
+            + drawCaption(spec, w, h, spec.label.isEmpty() ? spec.name : spec.label, baseFont);
         QPDFObjectHandle appearance = QPDFObjectHandle::newDictionary();
         appearance.replaceKey("/N", makeForm(build, content, w, h, rotate, { spec.fontName }));
         widget.replaceKey("/AP", appearance);
@@ -829,8 +837,7 @@ void configureWidget(Build &build, QPDFObjectHandle widget, const FormBuilder::F
     case FormBuilder::Field::Kind::Text:
     case FormBuilder::Field::Kind::Dropdown:
     case FormBuilder::Field::Kind::ListBox: {
-        const std::string content
-            = drawFrame(spec, w, h, false) + drawValue(spec, w, h, spec.defaultValue, baseFont);
+        const std::string content = drawFrame(spec, w, h, false) + drawValue(spec, w, h, spec.defaultValue, baseFont);
         QPDFObjectHandle appearance = QPDFObjectHandle::newDictionary();
         appearance.replaceKey("/N", makeForm(build, content, w, h, rotate, { spec.fontName }));
         widget.replaceKey("/AP", appearance);
@@ -1220,11 +1227,11 @@ QString actionScript(FormBuilder::Format format, int decimals, const QString &cu
     const QString count = QString::number(qBound(0, decimals, 6));
     switch (format) {
     case FormBuilder::Format::Number:
-        return (keystroke ? QStringLiteral("AFNumber_Keystroke(") : QStringLiteral("AFNumber_Format("))
-            + count + QStringLiteral(", 0, 0, 0, \"\", true)");
+        return (keystroke ? QStringLiteral("AFNumber_Keystroke(") : QStringLiteral("AFNumber_Format(")) + count
+            + QStringLiteral(", 0, 0, 0, \"\", true)");
     case FormBuilder::Format::Currency:
-        return (keystroke ? QStringLiteral("AFNumber_Keystroke(") : QStringLiteral("AFNumber_Format("))
-            + count + QStringLiteral(", 0, 0, 0, \"") + currencySymbol + QStringLiteral(" \", true)");
+        return (keystroke ? QStringLiteral("AFNumber_Keystroke(") : QStringLiteral("AFNumber_Format(")) + count
+            + QStringLiteral(", 0, 0, 0, \"") + currencySymbol + QStringLiteral(" \", true)");
     case FormBuilder::Format::Percent:
         return (keystroke ? QStringLiteral("AFPercent_Keystroke(") : QStringLiteral("AFPercent_Format(")) + count
             + QStringLiteral(", 0)");
@@ -1337,8 +1344,8 @@ bool FormBuilder::addFields(const QString &in, const QString &out, const QVector
         bool wantsSignature = false;
 
         for (const Field &spec : fields) {
-            const QString name = spec.kind == Field::Kind::Radio && !spec.radioGroup.isEmpty() ? spec.radioGroup
-                                                                                              : spec.name;
+            const QString name
+                = spec.kind == Field::Kind::Radio && !spec.radioGroup.isEmpty() ? spec.radioGroup : spec.name;
             if (name.isEmpty()) {
                 if (error) {
                     *error = i18n("A field needs a name.");
@@ -1486,8 +1493,8 @@ bool FormBuilder::updateFields(const QString &in, const QString &out, const QVec
 
         const QVector<Located> existing = allFields(build.acroForm);
         for (const Field &spec : fields) {
-            const QString name = spec.kind == Field::Kind::Radio && !spec.radioGroup.isEmpty() ? spec.radioGroup
-                                                                                              : spec.name;
+            const QString name
+                = spec.kind == Field::Kind::Radio && !spec.radioGroup.isEmpty() ? spec.radioGroup : spec.name;
             const Located *found = findField(existing, name);
             if (!found) {
                 continue;
@@ -1660,7 +1667,8 @@ bool FormBuilder::renameField(const QString &in, const QString &out, const QStri
 
     const QStringList oldParts = from.split(QLatin1Char('.'), Qt::SkipEmptyParts);
     const QStringList newParts = to.split(QLatin1Char('.'), Qt::SkipEmptyParts);
-    if (oldParts.size() != newParts.size() || oldParts.mid(0, oldParts.size() - 1) != newParts.mid(0, newParts.size() - 1)) {
+    if (oldParts.size() != newParts.size()
+        || oldParts.mid(0, oldParts.size() - 1) != newParts.mid(0, newParts.size() - 1)) {
         if (error) {
             // Moving a field into another group means rewriting whatever
             // JavaScript in the document refers to it, and there is no honest way
@@ -1671,23 +1679,23 @@ bool FormBuilder::renameField(const QString &in, const QString &out, const QStri
         return false;
     }
 
-    return editField(in, out, from,
-                     [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
-                         Q_UNUSED(pdf)
-                         if (findField(allFields(acroForm), to)) {
-                             if (why) {
-                                 *why = i18n("This document already has a field called “%1”.", to);
-                             }
-                             return false;
-                         }
-                         field.replaceKey("/T", unicodeString(newParts.constLast()));
-                         return true;
-                     },
-                     error);
+    return editField(
+        in, out, from,
+        [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
+            Q_UNUSED(pdf)
+            if (findField(allFields(acroForm), to)) {
+                if (why) {
+                    *why = i18n("This document already has a field called “%1”.", to);
+                }
+                return false;
+            }
+            field.replaceKey("/T", unicodeString(newParts.constLast()));
+            return true;
+        },
+        error);
 }
 
-bool FormBuilder::setTabOrder(const QString &in, const QString &out, int page, const QStringList &names,
-                              QString *error)
+bool FormBuilder::setTabOrder(const QString &in, const QString &out, int page, const QStringList &names, QString *error)
 {
     try {
         QPDF pdf;
@@ -1727,7 +1735,8 @@ bool FormBuilder::setTabOrder(const QString &in, const QString &out, int page, c
             }
             for (QPDFObjectHandle widget : widgetsOf(found->field)) {
                 for (int a = 0; a < annots.getArrayNItems(); ++a) {
-                    if (annots.getArrayItem(a).getObjGen() == widget.getObjGen() && placed.count(widget.getObjGen()) == 0) {
+                    if (annots.getArrayItem(a).getObjGen() == widget.getObjGen()
+                        && placed.count(widget.getObjGen()) == 0) {
                         ordered.appendItem(widget);
                         placed.insert(widget.getObjGen());
                     }
@@ -1761,30 +1770,29 @@ bool FormBuilder::setTabOrder(const QString &in, const QString &out, int page, c
 bool FormBuilder::setFormat(const QString &in, const QString &out, const QString &fieldName, Format format,
                             int decimals, const QString &currencySymbol, QStringList *warnings, QString *error)
 {
-    const bool ok = editField(in, out, fieldName,
-                              [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
-                                  Q_UNUSED(pdf)
-                                  Q_UNUSED(acroForm)
-                                  Q_UNUSED(why)
-                                  if (format == Format::None) {
-                                      QPDFObjectHandle actions = field.getKey("/AA");
-                                      if (actions.isDictionary()) {
-                                          actions.removeKey("/F");
-                                          actions.removeKey("/K");
-                                      }
-                                      return true;
-                                  }
-                                  QPDFObjectHandle actions = additionalActions(field);
-                                  actions.replaceKey(
-                                      "/F", javaScriptAction(actionScript(format, decimals, currencySymbol, false)));
-                                  // The keystroke action is what stops "12,x4" being
-                                  // typed at all; without it the field only tidies up
-                                  // once focus leaves, which fools nobody.
-                                  actions.replaceKey(
-                                      "/K", javaScriptAction(actionScript(format, decimals, currencySymbol, true)));
-                                  return true;
-                              },
-                              error);
+    const bool ok = editField(
+        in, out, fieldName,
+        [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
+            Q_UNUSED(pdf)
+            Q_UNUSED(acroForm)
+            Q_UNUSED(why)
+            if (format == Format::None) {
+                QPDFObjectHandle actions = field.getKey("/AA");
+                if (actions.isDictionary()) {
+                    actions.removeKey("/F");
+                    actions.removeKey("/K");
+                }
+                return true;
+            }
+            QPDFObjectHandle actions = additionalActions(field);
+            actions.replaceKey("/F", javaScriptAction(actionScript(format, decimals, currencySymbol, false)));
+            // The keystroke action is what stops "12,x4" being
+            // typed at all; without it the field only tidies up
+            // once focus leaves, which fools nobody.
+            actions.replaceKey("/K", javaScriptAction(actionScript(format, decimals, currencySymbol, true)));
+            return true;
+        },
+        error);
     if (ok && format != Format::None) {
         addScriptWarnings(warnings);
     }
@@ -1802,15 +1810,16 @@ bool FormBuilder::setValidation(const QString &in, const QString &out, const QSt
     }
     const QString script = QStringLiteral("AFRange_Validate(true, ") + QString::fromStdString(number(minimum))
         + QStringLiteral(", true, ") + QString::fromStdString(number(maximum)) + QStringLiteral(")");
-    const bool ok = editField(in, out, fieldName,
-                              [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
-                                  Q_UNUSED(pdf)
-                                  Q_UNUSED(acroForm)
-                                  Q_UNUSED(why)
-                                  additionalActions(field).replaceKey("/V", javaScriptAction(script));
-                                  return true;
-                              },
-                              error);
+    const bool ok = editField(
+        in, out, fieldName,
+        [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
+            Q_UNUSED(pdf)
+            Q_UNUSED(acroForm)
+            Q_UNUSED(why)
+            additionalActions(field).replaceKey("/V", javaScriptAction(script));
+            return true;
+        },
+        error);
     if (ok) {
         addScriptWarnings(warnings);
     }
@@ -1855,37 +1864,38 @@ bool FormBuilder::setCalculation(const QString &in, const QString &out, const QS
     const QString script = QStringLiteral("AFSimple_CALC(\"") + operation + QStringLiteral("\", [")
         + quoted.join(QStringLiteral(", ")) + QStringLiteral("])");
 
-    const bool ok = editField(in, out, fieldName,
-                              [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
-                                  for (const QString &source : sourceFields) {
-                                      if (!findField(allFields(acroForm), source)) {
-                                          if (why) {
-                                              *why = i18n("This document has no field called “%1”.", source);
-                                          }
-                                          return false;
-                                      }
-                                  }
-                                  additionalActions(field).replaceKey("/C", javaScriptAction(script));
+    const bool ok = editField(
+        in, out, fieldName,
+        [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
+            for (const QString &source : sourceFields) {
+                if (!findField(allFields(acroForm), source)) {
+                    if (why) {
+                        *why = i18n("This document has no field called “%1”.", source);
+                    }
+                    return false;
+                }
+            }
+            additionalActions(field).replaceKey("/C", javaScriptAction(script));
 
-                                  // /CO is the order the calculations run in, and a
-                                  // field that adds up others has to come after them
-                                  // or it adds up last time's answers. Appending is
-                                  // what gets that right.
-                                  if (!acroForm.getKey("/CO").isArray()) {
-                                      acroForm.replaceKey("/CO", QPDFObjectHandle::newArray());
-                                  }
-                                  QPDFObjectHandle order = acroForm.getKey("/CO");
-                                  QPDFObjectHandle kept = QPDFObjectHandle::newArray();
-                                  for (int i = 0; i < order.getArrayNItems(); ++i) {
-                                      if (order.getArrayItem(i).getObjGen() != field.getObjGen()) {
-                                          kept.appendItem(order.getArrayItem(i));
-                                      }
-                                  }
-                                  kept.appendItem(field.isIndirect() ? field : pdf.makeIndirectObject(field));
-                                  acroForm.replaceKey("/CO", kept);
-                                  return true;
-                              },
-                              error);
+            // /CO is the order the calculations run in, and a
+            // field that adds up others has to come after them
+            // or it adds up last time's answers. Appending is
+            // what gets that right.
+            if (!acroForm.getKey("/CO").isArray()) {
+                acroForm.replaceKey("/CO", QPDFObjectHandle::newArray());
+            }
+            QPDFObjectHandle order = acroForm.getKey("/CO");
+            QPDFObjectHandle kept = QPDFObjectHandle::newArray();
+            for (int i = 0; i < order.getArrayNItems(); ++i) {
+                if (order.getArrayItem(i).getObjGen() != field.getObjGen()) {
+                    kept.appendItem(order.getArrayItem(i));
+                }
+            }
+            kept.appendItem(field.isIndirect() ? field : pdf.makeIndirectObject(field));
+            acroForm.replaceKey("/CO", kept);
+            return true;
+        },
+        error);
     if (ok) {
         addScriptWarnings(warnings);
     }
@@ -1895,75 +1905,76 @@ bool FormBuilder::setCalculation(const QString &in, const QString &out, const QS
 bool FormBuilder::setButtonAction(const QString &in, const QString &out, const QString &fieldName, ButtonAction action,
                                   const QString &target, QString *error)
 {
-    return editField(in, out, fieldName,
-                     [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
-                         Q_UNUSED(acroForm)
-                         QPDFObjectHandle entry = QPDFObjectHandle::newDictionary();
-                         entry.replaceKey("/Type", QPDFObjectHandle::newName("/Action"));
-                         switch (action) {
-                         case ButtonAction::ResetForm:
-                             entry.replaceKey("/S", QPDFObjectHandle::newName("/ResetForm"));
-                             break;
-                         case ButtonAction::SubmitForm: {
-                             if (target.isEmpty()) {
-                                 if (why) {
-                                     *why = i18n("A button that submits a form needs an address to submit it to.");
-                                 }
-                                 return false;
-                             }
-                             entry.replaceKey("/S", QPDFObjectHandle::newName("/SubmitForm"));
-                             QPDFObjectHandle destination = QPDFObjectHandle::newDictionary();
-                             destination.replaceKey("/FS", QPDFObjectHandle::newName("/URL"));
-                             destination.replaceKey("/F", QPDFObjectHandle::newString(target.toStdString()));
-                             entry.replaceKey("/F", destination);
-                             // No flags: the whole form, as FDF, which is the one
-                             // shape of submission every reader that submits at all
-                             // agrees on.
-                             entry.replaceKey("/Flags", QPDFObjectHandle::newInteger(0));
-                             break;
-                         }
-                         case ButtonAction::GoToPage: {
-                             bool numeric = false;
-                             const int wanted = target.toInt(&numeric) - 1;
-                             std::vector<QPDFPageObjectHelper> pages = QPDFPageDocumentHelper(pdf).getAllPages();
-                             if (!numeric || wanted < 0 || size_t(wanted) >= pages.size()) {
-                                 if (why) {
-                                     *why = i18n("“%1” is not a page of this document.", target);
-                                 }
-                                 return false;
-                             }
-                             entry.replaceKey("/S", QPDFObjectHandle::newName("/GoTo"));
-                             QPDFObjectHandle destination = QPDFObjectHandle::newArray();
-                             destination.appendItem(pages[size_t(wanted)].getObjectHandle());
-                             destination.appendItem(QPDFObjectHandle::newName("/Fit"));
-                             entry.replaceKey("/D", destination);
-                             break;
-                         }
-                         case ButtonAction::OpenUrl:
-                             if (target.isEmpty()) {
-                                 if (why) {
-                                     *why = i18n("A button that opens a link needs an address.");
-                                 }
-                                 return false;
-                             }
-                             entry.replaceKey("/S", QPDFObjectHandle::newName("/URI"));
-                             entry.replaceKey("/URI", QPDFObjectHandle::newString(target.toStdString()));
-                             break;
-                         }
+    return editField(
+        in, out, fieldName,
+        [&](QPDF &pdf, QPDFObjectHandle acroForm, QPDFObjectHandle field, QString *why) {
+            Q_UNUSED(acroForm)
+            QPDFObjectHandle entry = QPDFObjectHandle::newDictionary();
+            entry.replaceKey("/Type", QPDFObjectHandle::newName("/Action"));
+            switch (action) {
+            case ButtonAction::ResetForm:
+                entry.replaceKey("/S", QPDFObjectHandle::newName("/ResetForm"));
+                break;
+            case ButtonAction::SubmitForm: {
+                if (target.isEmpty()) {
+                    if (why) {
+                        *why = i18n("A button that submits a form needs an address to submit it to.");
+                    }
+                    return false;
+                }
+                entry.replaceKey("/S", QPDFObjectHandle::newName("/SubmitForm"));
+                QPDFObjectHandle destination = QPDFObjectHandle::newDictionary();
+                destination.replaceKey("/FS", QPDFObjectHandle::newName("/URL"));
+                destination.replaceKey("/F", QPDFObjectHandle::newString(target.toStdString()));
+                entry.replaceKey("/F", destination);
+                // No flags: the whole form, as FDF, which is the one
+                // shape of submission every reader that submits at all
+                // agrees on.
+                entry.replaceKey("/Flags", QPDFObjectHandle::newInteger(0));
+                break;
+            }
+            case ButtonAction::GoToPage: {
+                bool numeric = false;
+                const int wanted = target.toInt(&numeric) - 1;
+                std::vector<QPDFPageObjectHelper> pages = QPDFPageDocumentHelper(pdf).getAllPages();
+                if (!numeric || wanted < 0 || size_t(wanted) >= pages.size()) {
+                    if (why) {
+                        *why = i18n("“%1” is not a page of this document.", target);
+                    }
+                    return false;
+                }
+                entry.replaceKey("/S", QPDFObjectHandle::newName("/GoTo"));
+                QPDFObjectHandle destination = QPDFObjectHandle::newArray();
+                destination.appendItem(pages[size_t(wanted)].getObjectHandle());
+                destination.appendItem(QPDFObjectHandle::newName("/Fit"));
+                entry.replaceKey("/D", destination);
+                break;
+            }
+            case ButtonAction::OpenUrl:
+                if (target.isEmpty()) {
+                    if (why) {
+                        *why = i18n("A button that opens a link needs an address.");
+                    }
+                    return false;
+                }
+                entry.replaceKey("/S", QPDFObjectHandle::newName("/URI"));
+                entry.replaceKey("/URI", QPDFObjectHandle::newString(target.toStdString()));
+                break;
+            }
 
-                         const QVector<QPDFObjectHandle> widgets = widgetsOf(field);
-                         if (widgets.isEmpty()) {
-                             if (why) {
-                                 *why = i18n("“%1” has nothing on a page for anyone to press.", fieldName);
-                             }
-                             return false;
-                         }
-                         for (QPDFObjectHandle widget : widgets) {
-                             widget.replaceKey("/A", entry);
-                         }
-                         return true;
-                     },
-                     error);
+            const QVector<QPDFObjectHandle> widgets = widgetsOf(field);
+            if (widgets.isEmpty()) {
+                if (why) {
+                    *why = i18n("“%1” has nothing on a page for anyone to press.", fieldName);
+                }
+                return false;
+            }
+            for (QPDFObjectHandle widget : widgets) {
+                widget.replaceKey("/A", entry);
+            }
+            return true;
+        },
+        error);
 }
 
 bool FormBuilder::copyFieldsFrom(const QString &templatePdf, const QString &in, const QString &out, int *copied,
@@ -2078,8 +2089,9 @@ bool FormBuilder::copyFieldsFrom(const QString &templatePdf, const QString &in, 
 
         // The fonts the copied /DA strings name have to come too, or every one of
         // them draws with no font at all.
-        QPDFObjectHandle sourceFonts = sourceForm.getKey("/DR").isDictionary() ? sourceForm.getKey("/DR").getKey("/Font")
-                                                                              : QPDFObjectHandle::newNull();
+        QPDFObjectHandle sourceFonts = sourceForm.getKey("/DR").isDictionary()
+            ? sourceForm.getKey("/DR").getKey("/Font")
+            : QPDFObjectHandle::newNull();
         if (sourceFonts.isDictionary()) {
             for (const auto &[name, font] : sourceFonts.getDictAsMap()) {
                 if (!build.drFonts.getKey(name).isDictionary()) {
@@ -2091,8 +2103,8 @@ bool FormBuilder::copyFieldsFrom(const QString &templatePdf, const QString &in, 
             build.acroForm.replaceKey("/DA", QPDFObjectHandle::newString(sourceForm.getKey("/DA").getUTF8Value()));
         }
         if (sourceForm.getKey("/SigFlags").isInteger()) {
-            build.acroForm.replaceKey("/SigFlags", QPDFObjectHandle::newInteger(
-                                                       sourceForm.getKey("/SigFlags").getIntValueAsInt()));
+            build.acroForm.replaceKey("/SigFlags",
+                                      QPDFObjectHandle::newInteger(sourceForm.getKey("/SigFlags").getIntValueAsInt()));
         }
 
         settleAppearances(pdf);
@@ -2138,8 +2150,8 @@ bool FormBuilder::exportData(const QString &pdf, const QString &toFile, QString 
             names << csvCell(field.name);
             values << csvCell(field.value);
         }
-        const QString text = names.join(QLatin1Char(',')) + QLatin1Char('\n') + values.join(QLatin1Char(','))
-            + QLatin1Char('\n');
+        const QString text
+            = names.join(QLatin1Char(',')) + QLatin1Char('\n') + values.join(QLatin1Char(',')) + QLatin1Char('\n');
         return writeTextFile(toFile, text.toUtf8(), error);
     }
 
@@ -2194,7 +2206,8 @@ bool FormBuilder::exportData(const QString &pdf, const QString &toFile, QString 
         }
         body += " >>";
     }
-    body += "\n] /F " + pdfTextLiteral(QFileInfo(pdf).fileName()) + " >> >>\nendobj\ntrailer\n<< /Root 1 0 R >>\n%%EOF\n";
+    body += "\n] /F " + pdfTextLiteral(QFileInfo(pdf).fileName())
+        + " >> >>\nendobj\ntrailer\n<< /Root 1 0 R >>\n%%EOF\n";
     return writeTextFile(toFile, QByteArray::fromStdString(body), error);
 }
 

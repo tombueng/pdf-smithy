@@ -95,8 +95,8 @@ QString familyOfResource(const QString &name)
 double rightEdgeOf(const SetLine &line)
 {
     const int index = QStringView(line.font).mid(2).toInt();
-    const double width = Typeset::textWidth(line.text, familyOfResource(line.font), index % 2 == 1,
-                                            (index % 4) >= 2, line.size);
+    const double width
+        = Typeset::textWidth(line.text, familyOfResource(line.font), index % 2 == 1, (index % 4) >= 2, line.size);
     return line.x + width + line.wordSpacing * double(line.text.count(QLatin1Char(' ')));
 }
 
@@ -256,9 +256,9 @@ void TestTypeset::aShortNoteBecomesOnePageWithItsWordsInIt()
     QString error;
 
     const QString path = out(QStringLiteral("short.pdf"));
-    QVERIFY2(Typeset::fromPlainText(QStringLiteral("Guten Morgen.\n\nDie Sonne scheint."), path, document, &report,
-                                    &error),
-             qPrintable(error));
+    QVERIFY2(
+        Typeset::fromPlainText(QStringLiteral("Guten Morgen.\n\nDie Sonne scheint."), path, document, &report, &error),
+        qPrintable(error));
 
     QCOMPARE(test::pageCountOf(path), 1);
     QCOMPARE(report.pages, 1);
@@ -269,7 +269,7 @@ void TestTypeset::aShortNoteBecomesOnePageWithItsWordsInIt()
     QVERIFY(content.contains(QLatin1String("(Guten Morgen.) Tj")));
     QVERIFY(content.contains(QLatin1String("(Die Sonne scheint.) Tj")));
     QVERIFY(content.contains(QLatin1String("/Encoding")) == false); // that lives in the font, not the stream
-    QCOMPARE(baseFontsOf(path, 0), QStringList{ QStringLiteral("/Helvetica") });
+    QCOMPARE(baseFontsOf(path, 0), QStringList { QStringLiteral("/Helvetica") });
 }
 
 void TestTypeset::aLongTextSpillsOverAndKeepsEveryWord()
@@ -388,8 +388,8 @@ void TestTypeset::aHeadingGoesWithTheParagraphItIntroduces()
     for (int i = 0; i < 9; ++i) {
         filler.append(wide);
     }
-    const QString markdown =
-        filler.join(QLatin1Char('\n')) + QStringLiteral("\n\n# Kapitel\n\n") + wide + QLatin1Char('\n') + wide;
+    const QString markdown
+        = filler.join(QLatin1Char('\n')) + QStringLiteral("\n\n# Kapitel\n\n") + wide + QLatin1Char('\n') + wide;
 
     Typeset::Report report;
     QString error;
@@ -456,9 +456,9 @@ void TestTypeset::aNestedListStandsFurtherIn()
     QString error;
 
     const QString path = out(QStringLiteral("list.pdf"));
-    QVERIFY2(Typeset::fromMarkdown(QStringLiteral("- aussen\n  - innen\n    1. tiefer\n"), path, document, &report,
-                                   &error),
-             qPrintable(error));
+    QVERIFY2(
+        Typeset::fromMarkdown(QStringLiteral("- aussen\n  - innen\n    1. tiefer\n"), path, document, &report, &error),
+        qPrintable(error));
 
     const QVector<SetLine> lines = setLinesOf(path, 0);
     double outer = -1.0;
@@ -528,8 +528,7 @@ void TestTypeset::aCharacterOutsideWinAnsiIsReportedRatherThanGuessedAt()
     QString error;
 
     const QString path = out(QStringLiteral("winansi.pdf"));
-    QVERIFY2(Typeset::fromPlainText(QStringLiteral("Pfeil → Ziel und 中 auch."), path, document, &report,
-                                    &error),
+    QVERIFY2(Typeset::fromPlainText(QStringLiteral("Pfeil → Ziel und 中 auch."), path, document, &report, &error),
              qPrintable(error));
 
     QVERIFY(!report.overflows.isEmpty());
@@ -552,8 +551,7 @@ void TestTypeset::aCharacterOutsideWinAnsiIsReportedRatherThanGuessedAt()
     // quotation marks, dashes and the euro sign are the whole point of it.
     report = Typeset::Report();
     const QString rich = out(QStringLiteral("winansi-rich.pdf"));
-    QVERIFY2(Typeset::fromPlainText(QString::fromUtf8("„Grüße“ – 14 €, ca. 30°"), rich,
-                                    document, &report, &error),
+    QVERIFY2(Typeset::fromPlainText(QString::fromUtf8("„Grüße“ – 14 €, ca. 30°"), rich, document, &report, &error),
              qPrintable(error));
     QVERIFY2(report.overflows.isEmpty(), qPrintable(report.overflows.join(QLatin1Char('|'))));
 }
@@ -626,7 +624,8 @@ void TestTypeset::tablesQuotesAndRulesSurviveTheirMarkdown()
         QPDFObjectHandle annots = pages[0].getObjectHandle().getKey("/Annots");
         QVERIFY(annots.isArray());
         QCOMPARE(annots.getArrayNItems(), 1);
-        QCOMPARE(annots.getArrayItem(0).getKey("/A").getKey("/URI").getUTF8Value(), std::string("https://example.org/x"));
+        QCOMPARE(annots.getArrayItem(0).getKey("/A").getKey("/URI").getUTF8Value(),
+                 std::string("https://example.org/x"));
     } catch (const std::exception &e) {
         QFAIL(e.what());
     }
@@ -814,15 +813,15 @@ void TestTypeset::nothingUsableIsRefusedWithAReason()
 
     error.clear();
     document.marginLeft = document.marginRight = 290.0;
-    QVERIFY(!Typeset::fromPlainText(QStringLiteral("Text"), out(QStringLiteral("narrow.pdf")), document, &report,
-                                    &error));
+    QVERIFY(
+        !Typeset::fromPlainText(QStringLiteral("Text"), out(QStringLiteral("narrow.pdf")), document, &report, &error));
     QVERIFY(!error.isEmpty());
 
     error.clear();
     document = Typeset::Document();
     document.body.fontSize = 0.0;
-    QVERIFY(!Typeset::fromPlainText(QStringLiteral("Text"), out(QStringLiteral("nosize.pdf")), document, &report,
-                                    &error));
+    QVERIFY(
+        !Typeset::fromPlainText(QStringLiteral("Text"), out(QStringLiteral("nosize.pdf")), document, &report, &error));
     QVERIFY(!error.isEmpty());
 }
 

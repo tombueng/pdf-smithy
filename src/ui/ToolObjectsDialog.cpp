@@ -115,8 +115,8 @@ QString detailOf(const PageObject &object)
 
 QString whereOf(const QRectF &bounds)
 {
-    return i18nc("@item where an object sits and how big it is, in points", "%1, %2 · %3 × %4",
-                 points(bounds.x()), points(bounds.y()), points(bounds.width()), points(bounds.height()));
+    return i18nc("@item where an object sits and how big it is, in points", "%1, %2 · %3 × %4", points(bounds.x()),
+                 points(bounds.y()), points(bounds.width()), points(bounds.height()));
 }
 
 /**
@@ -188,10 +188,7 @@ public:
         });
     }
 
-    QColor colour() const
-    {
-        return m_colour;
-    }
+    QColor colour() const { return m_colour; }
 
 private:
     void refresh()
@@ -283,10 +280,7 @@ private:
         return box;
     }
 
-    QPointF pointsAt(const QPoint &where) const
-    {
-        return toPoints(fromWidget(where));
-    }
+    QPointF pointsAt(const QPoint &where) const { return toPoints(fromWidget(where)); }
 
     QVector<PageObject> m_objects;
     QVector<QRectF> m_insertions;
@@ -588,8 +582,7 @@ private:
     QLabel *m_waiting = nullptr;
 };
 
-ObjectsDialog::ObjectsDialog(Document *document, RenderBackend *backend, const QString &pdf, int page,
-                             QWidget *parent)
+ObjectsDialog::ObjectsDialog(Document *document, RenderBackend *backend, const QString &pdf, int page, QWidget *parent)
     : QDialog(parent)
     , m_document(document)
     , m_backend(backend)
@@ -805,16 +798,14 @@ void ObjectsDialog::refresh()
     const QString drawn = m_objects.isEmpty()
         ? i18n("This page draws nothing.")
         : i18np("One object on this page.", "%1 objects on this page.", m_objects.size());
-    const QString waiting = changes == 0
-        ? i18n("Nothing is waiting to be written.")
-        : i18np("One change is waiting.", "%1 changes are waiting.", changes);
+    const QString waiting = changes == 0 ? i18n("Nothing is waiting to be written.")
+                                         : i18np("One change is waiting.", "%1 changes are waiting.", changes);
     m_status->setText(drawn + u' ' + waiting);
     syncChoice();
 
-    m_waiting->setText(m_insertions.isEmpty()
-                           ? i18n("Nothing added yet.")
-                           : i18np("One thing waiting to be added.", "%1 things waiting to be added.",
-                                   m_insertions.size()));
+    m_waiting->setText(m_insertions.isEmpty() ? i18n("Nothing added yet.")
+                                              : i18np("One thing waiting to be added.",
+                                                      "%1 things waiting to be added.", m_insertions.size()));
 }
 
 void ObjectsDialog::syncChoice()
@@ -941,8 +932,8 @@ QWidget *ObjectsDialog::buildChangeTab()
     m_lineWidth = measure(0, 100, 1);
     m_lineWidth->setDecimals(2);
     m_lineWidth->setSuffix(i18nc("@item point suffix in a spin box", " pt"));
-    auto *restyle = new QPushButton(QIcon::fromTheme(u"format-fill-color"_s),
-                                    i18nc("@action:button", "Set the Colours"), tab);
+    auto *restyle
+        = new QPushButton(QIcon::fromTheme(u"format-fill-color"_s), i18nc("@action:button", "Set the Colours"), tab);
 
     auto *styleBox = new QGroupBox(i18nc("@title:group", "Colours and line"), tab);
     auto *styleForm = new QFormLayout(styleBox);
@@ -957,8 +948,8 @@ QWidget *ObjectsDialog::buildChangeTab()
     styleNote->setWordWrap(true);
     styleForm->addRow(styleNote);
 
-    auto *remove = new QPushButton(QIcon::fromTheme(u"edit-delete"_s), i18nc("@action:button", "Take Off the Page"),
-                                   tab);
+    auto *remove
+        = new QPushButton(QIcon::fromTheme(u"edit-delete"_s), i18nc("@action:button", "Take Off the Page"), tab);
     auto *undo = new QPushButton(QIcon::fromTheme(u"edit-undo"_s), i18nc("@action:button", "Let It Be"), tab);
     undo->setToolTip(i18nc("@info:tooltip", "Drops the change waiting on the chosen objects."));
     auto *undoAll = new QPushButton(i18nc("@action:button", "Let Everything Be"), tab);
@@ -1199,8 +1190,8 @@ QWidget *ObjectsDialog::buildAddTab()
     hint->setWordWrap(true);
 
     m_waiting = new QLabel(tab);
-    auto *drop = new QPushButton(QIcon::fromTheme(u"edit-undo"_s), i18nc("@action:button", "Take Back the Last One"),
-                                 tab);
+    auto *drop
+        = new QPushButton(QIcon::fromTheme(u"edit-undo"_s), i18nc("@action:button", "Take Back the Last One"), tab);
 
     auto *waitingRow = new QHBoxLayout;
     waitingRow->addWidget(m_waiting, 1);
@@ -1309,43 +1300,41 @@ void ObjectsDialog::write()
         return;
     }
 
-    const bool written
-        = runProducing(m_document, this, windowTitle(), u"-objects.pdf"_s,
-                       [this, edits](const QString &out, QStringList *summary, QString *error) {
-                           PageComposer::Report report;
-                           QApplication::setOverrideCursor(Qt::WaitCursor);
-                           const bool ok = PageComposer::apply(m_pdf, out, edits, m_insertions, &report, error);
-                           QApplication::restoreOverrideCursor();
-                           if (!ok) {
-                               return false;
-                           }
+    const bool written = runProducing(
+        m_document, this, windowTitle(), u"-objects.pdf"_s,
+        [this, edits](const QString &out, QStringList *summary, QString *error) {
+            PageComposer::Report report;
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+            const bool ok = PageComposer::apply(m_pdf, out, edits, m_insertions, &report, error);
+            QApplication::restoreOverrideCursor();
+            if (!ok) {
+                return false;
+            }
 
-                           QStringList did;
-                           if (report.transformed > 0) {
-                               did += i18np("Moved one object.", "Moved %1 objects.", report.transformed);
-                           }
-                           if (report.deleted > 0) {
-                               did += i18np("Took one object off the page.", "Took %1 objects off the page.",
-                                            report.deleted);
-                           }
-                           if (report.restyled > 0) {
-                               did += i18np("Recoloured one object.", "Recoloured %1 objects.", report.restyled);
-                           }
-                           if (report.inserted > 0) {
-                               did += i18np("Added one thing.", "Added %1 things.", report.inserted);
-                           }
-                           *summary += did.isEmpty()
-                               ? i18n("Nothing on the page changed. The file was still written, unchanged.")
-                               : did.join(u' ');
+            QStringList did;
+            if (report.transformed > 0) {
+                did += i18np("Moved one object.", "Moved %1 objects.", report.transformed);
+            }
+            if (report.deleted > 0) {
+                did += i18np("Took one object off the page.", "Took %1 objects off the page.", report.deleted);
+            }
+            if (report.restyled > 0) {
+                did += i18np("Recoloured one object.", "Recoloured %1 objects.", report.restyled);
+            }
+            if (report.inserted > 0) {
+                did += i18np("Added one thing.", "Added %1 things.", report.inserted);
+            }
+            *summary += did.isEmpty() ? i18n("Nothing on the page changed. The file was still written, unchanged.")
+                                      : did.join(u' ');
 
-                           // What was asked for and could not be done belongs in
-                           // the same breath as what was: a count on its own lets
-                           // a half-finished run look like a finished one.
-                           for (const QString &refusal : std::as_const(report.refusals)) {
-                               *summary += refusal;
-                           }
-                           return true;
-                       });
+            // What was asked for and could not be done belongs in
+            // the same breath as what was: a count on its own lets
+            // a half-finished run look like a finished one.
+            for (const QString &refusal : std::as_const(report.refusals)) {
+                *summary += refusal;
+            }
+            return true;
+        });
 
     // The waiting changes are in the new file now, and the numbers they were
     // written against belong to the old one, so this window has done its work.

@@ -64,9 +64,8 @@ SignEditor::SignEditor(Document *document, RenderBackend *backend, int row, Page
                     m_document->pageSizePoints(m_row));
 
     connect(m_list, &QListWidget::currentRowChanged, this, &SignEditor::applySelection);
-    connect(m_size, &QSlider::valueChanged, this, [this](int value) {
-        m_view->setOverlayRelativeWidth(value / 100.0);
-    });
+    connect(m_size, &QSlider::valueChanged, this,
+            [this](int value) { m_view->setOverlayRelativeWidth(value / 100.0); });
     connect(m_view, &PagePlacementView::overlayChanged, this, [this] {
         m_placed = true;
         const int percent = static_cast<int>(std::lround(m_view->overlayRelativeWidth() * 100));
@@ -127,12 +126,8 @@ QWidget *SignEditor::buildPanel()
     auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, panel);
     m_okButton = buttons->button(QDialogButtonBox::Ok);
     m_okButton->setText(i18nc("@action:button", "Sign"));
-    connect(buttons, &QDialogButtonBox::accepted, this, [this] {
-        Q_EMIT finished(true);
-    });
-    connect(buttons, &QDialogButtonBox::rejected, this, [this] {
-        Q_EMIT finished(false);
-    });
+    connect(buttons, &QDialogButtonBox::accepted, this, [this] { Q_EMIT finished(true); });
+    connect(buttons, &QDialogButtonBox::rejected, this, [this] { Q_EMIT finished(false); });
 
     auto *layout = new QVBoxLayout(panel);
     layout->addWidget(new QLabel(i18nc("@label", "Your signatures:"), panel));

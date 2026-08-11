@@ -35,10 +35,7 @@ public:
     virtual QString kindName() const = 0;
 
     /** Which one, when that can be said: a field's name, a picture's size. */
-    virtual QString description() const
-    {
-        return {};
-    }
+    virtual QString description() const { return {}; }
 
     /**
      * The controls for this thing's attributes.

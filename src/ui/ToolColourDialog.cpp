@@ -62,10 +62,7 @@ public:
         });
     }
 
-    QColor colour() const
-    {
-        return m_colour;
-    }
+    QColor colour() const { return m_colour; }
 
 private:
     void refresh()
@@ -228,8 +225,9 @@ void ColourDialog::inspect()
     QStringList lines;
     lines += i18n("Read %1 pages.", QLocale().toString(m_inventory.pages));
     lines += QString();
-    lines += i18n("Colour spaces used: %1",
-                  m_inventory.spaces.isEmpty() ? i18nc("@item nothing found", "none") : m_inventory.spaces.join(u", "_s));
+    lines
+        += i18n("Colour spaces used: %1",
+                m_inventory.spaces.isEmpty() ? i18nc("@item nothing found", "none") : m_inventory.spaces.join(u", "_s));
     lines += i18n("Pages with RGB: %1 · pages with CMYK: %2", m_inventory.pagesWithRgb, m_inventory.pagesWithCmyk);
 
     if (m_inventory.spotColours.isEmpty()) {
@@ -516,9 +514,8 @@ void ColourDialog::runReplace()
                      if (!ok) {
                          return false;
                      }
-                     *summary += replaced == 0
-                         ? i18n("That colour is not used anywhere in the document.")
-                         : i18np("Replaced one colour.", "Replaced %1 colours.", replaced);
+                     *summary += replaced == 0 ? i18n("That colour is not used anywhere in the document.")
+                                               : i18np("Replaced one colour.", "Replaced %1 colours.", replaced);
                      return true;
                  });
 }
@@ -542,8 +539,8 @@ QWidget *ColourDialog::buildSeparations()
                             page);
     note->setWordWrap(true);
 
-    auto *run = new QPushButton(QIcon::fromTheme(u"format-fill-color"_s), i18nc("@action:button", "Apply to the Inks"),
-                                page);
+    auto *run
+        = new QPushButton(QIcon::fromTheme(u"format-fill-color"_s), i18nc("@action:button", "Apply to the Inks"), page);
 
     auto *layout = new QVBoxLayout(page);
     layout->addWidget(m_inks, 1);
@@ -653,9 +650,8 @@ void ColourDialog::runHairlines()
                      if (!ok) {
                          return false;
                      }
-                     *summary += fixed == 0
-                         ? i18n("No stroke was thinner than that.")
-                         : i18np("Thickened one stroke.", "Thickened %1 strokes.", fixed);
+                     *summary += fixed == 0 ? i18n("No stroke was thinner than that.")
+                                            : i18np("Thickened one stroke.", "Thickened %1 strokes.", fixed);
                      return true;
                  });
 }
@@ -663,23 +659,22 @@ void ColourDialog::runHairlines()
 void ColourDialog::runOverprint()
 {
     const bool on = m_overprintOn->isChecked();
-    runProducing(m_document, this, windowTitle(), u"-overprint.pdf"_s,
-                 [this, on](const QString &out, QStringList *summary, QString *error) {
-                     int changed = 0;
-                     QApplication::setOverrideCursor(Qt::WaitCursor);
-                     const bool ok = ColourTools::setBlackOverprint(m_pdf, out, on, &changed, error);
-                     QApplication::restoreOverrideCursor();
-                     if (!ok) {
-                         return false;
-                     }
-                     *summary += changed == 0
-                         ? i18n("The document selects black nowhere, so nothing changed.")
-                         : (on ? i18np("Black now overprints in one place.", "Black now overprints in %1 places.",
-                                       changed)
-                               : i18np("Black now knocks out in one place.", "Black now knocks out in %1 places.",
-                                       changed));
-                     return true;
-                 });
+    runProducing(
+        m_document, this, windowTitle(), u"-overprint.pdf"_s,
+        [this, on](const QString &out, QStringList *summary, QString *error) {
+            int changed = 0;
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+            const bool ok = ColourTools::setBlackOverprint(m_pdf, out, on, &changed, error);
+            QApplication::restoreOverrideCursor();
+            if (!ok) {
+                return false;
+            }
+            *summary += changed == 0
+                ? i18n("The document selects black nowhere, so nothing changed.")
+                : (on ? i18np("Black now overprints in one place.", "Black now overprints in %1 places.", changed)
+                      : i18np("Black now knocks out in one place.", "Black now knocks out in %1 places.", changed));
+            return true;
+        });
 }
 
 // ── Plates ────────────────────────────────────────────────────────────────

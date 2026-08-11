@@ -29,65 +29,46 @@ AlignmentPanel::AlignmentPanel(QWidget *parent)
     // about the same axis as the three lines before it.
     addButton(0, 0, u"align-horizontal-left"_s, i18nc("@action:button", "Align Left"),
               i18nc("@info:tooltip", "Line the left edges up with the leftmost."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::Left);
-              });
-    addButton(0, 1, u"align-horizontal-center"_s, i18nc("@action:button line the boxes up on a shared upright line", "Align Centre"),
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::Left); });
+    addButton(0, 1, u"align-horizontal-center"_s,
+              i18nc("@action:button line the boxes up on a shared upright line", "Align Centre"),
               i18nc("@info:tooltip", "Line the centres up on one upright line, halfway across the selection."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::HorizontalCentre);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::HorizontalCentre); });
     addButton(0, 2, u"align-horizontal-right"_s, i18nc("@action:button", "Align Right"),
               i18nc("@info:tooltip", "Line the right edges up with the rightmost."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::Right);
-              });
-    addButton(0, 3, u"distribute-horizontal"_s, i18nc("@action:button", "Space Out Sideways"),
-              i18nc("@info:tooltip", "Put equal gaps between them from left to right. The outermost two stay put."), 3,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::distribute(boxes, Alignment::Spread::Horizontally);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::Right); });
+    addButton(
+        0, 3, u"distribute-horizontal"_s, i18nc("@action:button", "Space Out Sideways"),
+        i18nc("@info:tooltip", "Put equal gaps between them from left to right. The outermost two stay put."), 3,
+        [](const QVector<QRectF> &boxes) { return Alignment::distribute(boxes, Alignment::Spread::Horizontally); });
 
     addButton(1, 0, u"align-vertical-top"_s, i18nc("@action:button", "Align Top"),
               i18nc("@info:tooltip", "Line the top edges up with the highest."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::Top);
-              });
-    addButton(1, 1, u"align-vertical-center"_s, i18nc("@action:button line the boxes up on a shared level line", "Align Middle"),
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::Top); });
+    addButton(1, 1, u"align-vertical-center"_s,
+              i18nc("@action:button line the boxes up on a shared level line", "Align Middle"),
               i18nc("@info:tooltip", "Line the centres up on one level line, halfway up the selection."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::VerticalMiddle);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::VerticalMiddle); });
     addButton(1, 2, u"align-vertical-bottom"_s, i18nc("@action:button", "Align Bottom"),
               i18nc("@info:tooltip", "Line the bottom edges up with the lowest."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::align(boxes, Alignment::Edge::Bottom);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::align(boxes, Alignment::Edge::Bottom); });
     addButton(1, 3, u"distribute-vertical"_s, i18nc("@action:button", "Space Out Upright"),
               i18nc("@info:tooltip", "Put equal gaps between them from bottom to top. The outermost two stay put."), 3,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::distribute(boxes, Alignment::Spread::Vertically);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::distribute(boxes, Alignment::Spread::Vertically); });
 
     // No icon in any standard theme stands for these three, and an invented one
     // would have to be learned before it said anything, so they are written out.
     addButton(2, 0, QString(), i18nc("@action:button", "Same Width"),
               i18nc("@info:tooltip", "Give everything the width of the widest, keeping each top left corner."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::matchSize(boxes, Alignment::Match::Width);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::matchSize(boxes, Alignment::Match::Width); });
     addButton(2, 1, QString(), i18nc("@action:button", "Same Height"),
               i18nc("@info:tooltip", "Give everything the height of the tallest, keeping each top left corner."), 2,
-              [](const QVector<QRectF> &boxes) {
-                  return Alignment::matchSize(boxes, Alignment::Match::Height);
-              });
+              [](const QVector<QRectF> &boxes) { return Alignment::matchSize(boxes, Alignment::Match::Height); });
     addButton(2, 2, QString(), i18nc("@action:button", "Same Size"),
               i18nc("@info:tooltip",
                     "Give everything the width of the widest and the height of the tallest, keeping each top left "
                     "corner."),
-              2, [](const QVector<QRectF> &boxes) {
-                  return Alignment::matchSize(boxes, Alignment::Match::Both);
-              });
+              2, [](const QVector<QRectF> &boxes) { return Alignment::matchSize(boxes, Alignment::Match::Both); });
 
     // The buttons keep their own width; the room left over goes to the right of
     // them, so a wide properties panel does not stretch eleven buttons across it.
@@ -133,9 +114,7 @@ void AlignmentPanel::addButton(int row, int column, const QString &iconName, con
     // alignment row would strand anyone working from the keyboard.
     button->setFocusPolicy(Qt::StrongFocus);
 
-    connect(button, &QToolButton::clicked, this, [this, act] {
-        apply(act(m_boxes));
-    });
+    connect(button, &QToolButton::clicked, this, [this, act] { apply(act(m_boxes)); });
 
     m_grid->addWidget(button, row, column);
     m_buttons.append(Button { button, needs, tip });

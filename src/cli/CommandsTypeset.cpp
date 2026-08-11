@@ -109,8 +109,8 @@ bool lengthInPoints(const QString &text, double fallbackFactor, double *points)
 bool parsePageSize(const QString &text, QSizeF *size)
 {
     static const QHash<QString, QSizeF> named {
-        { QStringLiteral("a3"), QSizeF(841.89, 1190.55) },   { QStringLiteral("a4"), QSizeF(595.276, 841.89) },
-        { QStringLiteral("a5"), QSizeF(419.528, 595.276) },  { QStringLiteral("letter"), QSizeF(612, 792) },
+        { QStringLiteral("a3"), QSizeF(841.89, 1190.55) },  { QStringLiteral("a4"), QSizeF(595.276, 841.89) },
+        { QStringLiteral("a5"), QSizeF(419.528, 595.276) }, { QStringLiteral("letter"), QSizeF(612, 792) },
         { QStringLiteral("legal"), QSizeF(612, 1008) },
     };
 
@@ -151,11 +151,11 @@ bool parsePageSize(const QString &text, QSizeF *size)
 bool parseAlignment(const QString &text, Qt::Alignment *alignment)
 {
     static const QHash<QString, Qt::Alignment> names {
-        { QStringLiteral("left"), Qt::AlignLeft },        { QStringLiteral("links"), Qt::AlignLeft },
-        { QStringLiteral("right"), Qt::AlignRight },      { QStringLiteral("rechts"), Qt::AlignRight },
-        { QStringLiteral("centre"), Qt::AlignHCenter },   { QStringLiteral("center"), Qt::AlignHCenter },
-        { QStringLiteral("mitte"), Qt::AlignHCenter },    { QStringLiteral("zentriert"), Qt::AlignHCenter },
-        { QStringLiteral("justify"), Qt::AlignJustify },  { QStringLiteral("justified"), Qt::AlignJustify },
+        { QStringLiteral("left"), Qt::AlignLeft },         { QStringLiteral("links"), Qt::AlignLeft },
+        { QStringLiteral("right"), Qt::AlignRight },       { QStringLiteral("rechts"), Qt::AlignRight },
+        { QStringLiteral("centre"), Qt::AlignHCenter },    { QStringLiteral("center"), Qt::AlignHCenter },
+        { QStringLiteral("mitte"), Qt::AlignHCenter },     { QStringLiteral("zentriert"), Qt::AlignHCenter },
+        { QStringLiteral("justify"), Qt::AlignJustify },   { QStringLiteral("justified"), Qt::AlignJustify },
         { QStringLiteral("blocksatz"), Qt::AlignJustify },
     };
 
@@ -379,8 +379,7 @@ bool applyStyleSpec(const QString &spec, ps::Typeset::Document *document, QStrin
 }
 
 /** Reads a length option, leaving @p points untouched when the option was not typed. */
-bool readLength(const QCommandLineParser &parser, const QString &name, double fallbackFactor, double *points,
-                int *code)
+bool readLength(const QCommandLineParser &parser, const QString &name, double fallbackFactor, double *points, int *code)
 {
     const std::optional<QString> value = typed(parser, name);
     if (!value) {
@@ -558,7 +557,7 @@ bool buildDocument(const QCommandLineParser &parser, ps::Typeset::Document *docu
     for (int pass = 0; pass < 2; ++pass) {
         for (const QString &spec : specs) {
             const bool isBody = spec.startsWith(QLatin1String("body:"), Qt::CaseInsensitive)
-                    || spec.startsWith(QLatin1String("text:"), Qt::CaseInsensitive);
+                || spec.startsWith(QLatin1String("text:"), Qt::CaseInsensitive);
             if (isBody != (pass == 0)) {
                 continue;
             }
@@ -709,9 +708,8 @@ int commandTypeset(const QStringList &arguments, const QCommandLineParser &parse
 
         // Markdown by name is Typeset's own rule for a file; asked for a reading
         // explicitly, or handed a stream with no name at all, the caller decides.
-        ok = reading == Reading::Markdown
-                ? ps::Typeset::fromMarkdown(source, output, document, &report, &error)
-                : ps::Typeset::fromPlainText(source, output, document, &report, &error);
+        ok = reading == Reading::Markdown ? ps::Typeset::fromMarkdown(source, output, document, &report, &error)
+                                          : ps::Typeset::fromPlainText(source, output, document, &report, &error);
     } else {
         ok = ps::Typeset::fromTextFile(input, output, document, &report, &error);
     }
@@ -746,8 +744,7 @@ int commandTypeset(const QStringList &arguments, const QCommandLineParser &parse
 
 enum class Flavour { Text, Markdown, Html };
 
-int commandExtract(Flavour flavour, const QString &verb, const QStringList &arguments,
-                   const QCommandLineParser &parser)
+int commandExtract(Flavour flavour, const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
 {
     const bool asJson = parser.isSet(QStringLiteral("json"));
     if (parser.isSet(QStringLiteral("limits"))) {
@@ -784,8 +781,8 @@ int commandExtract(Flavour flavour, const QString &verb, const QStringList &argu
     }
 
     const QString suffix = flavour == Flavour::Text ? QStringLiteral(".txt")
-            : flavour == Flavour::Markdown           ? QStringLiteral(".md")
-                                                     : QStringLiteral(".html");
+        : flavour == Flavour::Markdown              ? QStringLiteral(".md")
+                                                    : QStringLiteral(".html");
     const QString given = parser.value(QStringLiteral("output"));
     const bool toStdout = given == QLatin1String("-");
 
@@ -844,8 +841,7 @@ void options(QCommandLineParser &parser)
     // millimetres and those names are points, so this group declares its own.
     parser.addOptions({
         { QStringLiteral("margin-mm"), i18n("Margin on all four sides, in millimetres."), QStringLiteral("mm") },
-        { QStringLiteral("top-mm"), i18n("Top margin, in millimetres. Overrides --margin-mm."),
-          QStringLiteral("mm") },
+        { QStringLiteral("top-mm"), i18n("Top margin, in millimetres. Overrides --margin-mm."), QStringLiteral("mm") },
         { QStringLiteral("bottom-mm"), i18n("Bottom margin, in millimetres. Overrides --margin-mm."),
           QStringLiteral("mm") },
         { QStringLiteral("left-mm"), i18n("Left margin, in millimetres. Overrides --margin-mm."),
@@ -886,8 +882,8 @@ void options(QCommandLineParser &parser)
         { QStringLiteral("no-layout"), i18n("Take the text as it was drawn, without paragraphs or columns.") },
         { QStringLiteral("line-tolerance"), i18n("Baselines closer together than this many points are one line."),
           QStringLiteral("points") },
-        { QStringLiteral("paragraph-factor"),
-          i18n("A gap this many times the text size starts a new paragraph."), QStringLiteral("number") },
+        { QStringLiteral("paragraph-factor"), i18n("A gap this many times the text size starts a new paragraph."),
+          QStringLiteral("number") },
     });
 }
 

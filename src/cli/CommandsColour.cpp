@@ -123,24 +123,23 @@ int commandInspect(const QStringList &arguments, const QCommandLineParser &parse
     const bool strokesSeen = std::isfinite(inventory.thinnestStroke);
 
     if (parser.isSet(u"json"_s)) {
-        const QJsonObject root {
-            { u"file"_s, input },
-            { u"pages"_s, inventory.pages },
-            { u"spaces"_s, QJsonArray::fromStringList(inventory.spaces) },
-            { u"spotColours"_s, QJsonArray::fromStringList(inventory.spotColours) },
-            { u"hasIccProfile"_s, inventory.hasIccProfile },
-            { u"hasOutputIntent"_s, inventory.hasOutputIntent },
-            { u"usesTransparency"_s, inventory.usesTransparency },
-            { u"usesOverprint"_s, inventory.usesOverprint },
-            { u"pagesWithRgb"_s, inventory.pagesWithRgb },
-            { u"pagesWithCmyk"_s, inventory.pagesWithCmyk },
-            { u"hairlines"_s, inventory.hairlines },
-            { u"strokes"_s, inventory.strokes },
-            // JSON has no infinity, so a document that strokes nothing says null
-            // rather than a number no reader could parse back.
-            { u"thinnestStrokePt"_s, strokesSeen ? QJsonValue(inventory.thinnestStroke) : QJsonValue() },
-            { u"notes"_s, QJsonArray::fromStringList(inventory.notes) }
-        };
+        const QJsonObject root { { u"file"_s, input },
+                                 { u"pages"_s, inventory.pages },
+                                 { u"spaces"_s, QJsonArray::fromStringList(inventory.spaces) },
+                                 { u"spotColours"_s, QJsonArray::fromStringList(inventory.spotColours) },
+                                 { u"hasIccProfile"_s, inventory.hasIccProfile },
+                                 { u"hasOutputIntent"_s, inventory.hasOutputIntent },
+                                 { u"usesTransparency"_s, inventory.usesTransparency },
+                                 { u"usesOverprint"_s, inventory.usesOverprint },
+                                 { u"pagesWithRgb"_s, inventory.pagesWithRgb },
+                                 { u"pagesWithCmyk"_s, inventory.pagesWithCmyk },
+                                 { u"hairlines"_s, inventory.hairlines },
+                                 { u"strokes"_s, inventory.strokes },
+                                 // JSON has no infinity, so a document that strokes nothing says null
+                                 // rather than a number no reader could parse back.
+                                 { u"thinnestStrokePt"_s,
+                                   strokesSeen ? QJsonValue(inventory.thinnestStroke) : QJsonValue() },
+                                 { u"notes"_s, QJsonArray::fromStringList(inventory.notes) } };
         out() << QString::fromUtf8(QJsonDocument(root).toJson(QJsonDocument::Indented));
         return Success;
     }
@@ -148,8 +147,7 @@ int commandInspect(const QStringList &arguments, const QCommandLineParser &parse
     reportLine(i18n("File:"), input);
     reportLine(i18n("Pages:"), QString::number(inventory.pages));
     reportLine(i18n("Colour spaces:"),
-               inventory.spaces.isEmpty() ? i18nc("@item nothing was found", "none")
-                                          : inventory.spaces.join(u", "_s));
+               inventory.spaces.isEmpty() ? i18nc("@item nothing was found", "none") : inventory.spaces.join(u", "_s));
     reportLine(i18n("Spot colours:"),
                inventory.spotColours.isEmpty() ? i18nc("@item nothing was found", "none")
                                                : inventory.spotColours.join(u", "_s));
@@ -157,10 +155,10 @@ int commandInspect(const QStringList &arguments, const QCommandLineParser &parse
     reportLine(i18n("Output intent:"), yesNo(inventory.hasOutputIntent));
     reportLine(i18n("Transparency:"), yesNo(inventory.usesTransparency));
     reportLine(i18n("Overprint:"), yesNo(inventory.usesOverprint));
-    reportLine(i18n("RGB pages:"), i18nc("@info a count out of the whole document", "%1 of %2",
-                                         inventory.pagesWithRgb, inventory.pages));
-    reportLine(i18n("CMYK pages:"), i18nc("@info a count out of the whole document", "%1 of %2",
-                                          inventory.pagesWithCmyk, inventory.pages));
+    reportLine(i18n("RGB pages:"),
+               i18nc("@info a count out of the whole document", "%1 of %2", inventory.pagesWithRgb, inventory.pages));
+    reportLine(i18n("CMYK pages:"),
+               i18nc("@info a count out of the whole document", "%1 of %2", inventory.pagesWithCmyk, inventory.pages));
     reportLine(i18n("Strokes:"),
                strokesSeen ? i18nc("@info how many strokes, and the finest of them", "%1, thinnest %2 pt",
                                    inventory.strokes, QString::number(inventory.thinnestStroke, 'f', 3))
@@ -313,8 +311,7 @@ int commandSpot(const QStringList &arguments, const QCommandLineParser &parser)
     for (const QString &pair : parser.values(u"rename"_s)) {
         const int equals = pair.indexOf(u'=');
         if (equals <= 0 || equals == pair.size() - 1) {
-            return fail(i18n("“%1” should look like OLD=NEW, for example “Pantone 300 C=Hausblau”.", pair),
-                        UsageError);
+            return fail(i18n("“%1” should look like OLD=NEW, for example “Pantone 300 C=Hausblau”.", pair), UsageError);
         }
         renames.insert(pair.left(equals), pair.mid(equals + 1));
     }
@@ -337,8 +334,7 @@ int commandSpot(const QStringList &arguments, const QCommandLineParser &parser)
     out() << i18n("Wrote %1.", output) << Qt::endl;
     out() << i18np("Changed %1 separation.", "Changed %1 separations.", changed) << Qt::endl;
     if (changed == 0) {
-        out() << i18n("No ink of that name is in this document. “colour inspect” lists the ones that are.")
-              << Qt::endl;
+        out() << i18n("No ink of that name is in this document. “colour inspect” lists the ones that are.") << Qt::endl;
     }
     return Success;
 }
@@ -370,8 +366,7 @@ int commandHairlines(const QStringList &arguments, const QCommandLineParser &par
         out() << i18n("No stroke was thinner than %1 pt.", QString::number(minimum)) << Qt::endl;
         return Success;
     }
-    out() << i18np("Thickened %1 stroke to %2 pt.", "Thickened %1 strokes to %2 pt.", fixed,
-                   QString::number(minimum))
+    out() << i18np("Thickened %1 stroke to %2 pt.", "Thickened %1 strokes to %2 pt.", fixed, QString::number(minimum))
           << Qt::endl;
     return Success;
 }
@@ -422,8 +417,7 @@ int commandCoverage(const QStringList &arguments, const QCommandLineParser &pars
         for (int i = 0; i < coverage.size(); ++i) {
             pages.append(QJsonObject { { u"page"_s, i + 1 }, { u"percent"_s, coverage.at(i) } });
         }
-        const QJsonObject root { { u"file"_s, input }, { u"maximumPercent"_s, highest },
-                                 { u"pages"_s, pages } };
+        const QJsonObject root { { u"file"_s, input }, { u"maximumPercent"_s, highest }, { u"pages"_s, pages } };
         out() << QString::fromUtf8(QJsonDocument(root).toJson(QJsonDocument::Indented));
         return Success;
     }
@@ -435,8 +429,7 @@ int commandCoverage(const QStringList &arguments, const QCommandLineParser &pars
     // The number people are actually looking for. Left as a note rather than a
     // failing exit code, because the limit is the print shop's to set.
     if (highest > 300.0) {
-        out() << i18n("Over 300 %, which most presses cannot dry. Ask the print shop for their ink limit.")
-              << Qt::endl;
+        out() << i18n("Over 300 %, which most presses cannot dry. Ask the print shop for their ink limit.") << Qt::endl;
     }
     return Success;
 }
@@ -520,8 +513,7 @@ void colourOptions(QCommandLineParser &parser)
     const QCommandLineOption toColourOption(u"to-colour"_s, i18n("The colour to put in its place."), u"colour"_s);
     const QCommandLineOption renameOption(
         u"rename"_s,
-        i18n("Rename a spot colour, as OLD=NEW. Repeat for more; two inks given the same name are merged."),
-        u"pair"_s);
+        i18n("Rename a spot colour, as OLD=NEW. Repeat for more; two inks given the same name are merged."), u"pair"_s);
     const QCommandLineOption toProcessOption(
         u"to-process"_s, i18n("Dissolve this spot colour into process colour. Repeat for more."), u"ink"_s);
     const QCommandLineOption minWidthOption(u"min-width"_s, i18n("Thinnest stroke that still prints, in points."),

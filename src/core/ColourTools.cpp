@@ -102,9 +102,7 @@ Rgb rgbFromLab(double lStar, double aStar, double bStar, const QVector<double> &
     const double zw = whitePoint.value(2, 0.8249);
 
     const double m = (lStar + 16.0) / 116.0;
-    const auto inverseF = [](double t) {
-        return t >= 6.0 / 29.0 ? t * t * t : (108.0 / 841.0) * (t - 4.0 / 29.0);
-    };
+    const auto inverseF = [](double t) { return t >= 6.0 / 29.0 ? t * t * t : (108.0 / 841.0) * (t - 4.0 / 29.0); };
     const double x = xw * inverseF(m + aStar / 500.0);
     const double y = yw * inverseF(m);
     const double z = zw * inverseF(m - bStar / 200.0);
@@ -211,8 +209,8 @@ std::unique_ptr<Managed> Managed::create(const QString &profilePath, QString *er
                                                  INTENT_RELATIVE_COLORIMETRIC, flags);
     managed->m_toRgbDouble = cmsCreateTransform(managed->m_cmyk, TYPE_CMYK_DBL, managed->m_srgb, TYPE_RGB_DBL,
                                                 INTENT_RELATIVE_COLORIMETRIC, flags);
-    managed->m_toCmykBytes = cmsCreateTransform(managed->m_srgb, TYPE_RGB_8, managed->m_cmyk, TYPE_CMYK_8,
-                                                INTENT_PERCEPTUAL, flags);
+    managed->m_toCmykBytes
+        = cmsCreateTransform(managed->m_srgb, TYPE_RGB_8, managed->m_cmyk, TYPE_CMYK_8, INTENT_PERCEPTUAL, flags);
     if (!managed->m_toCmykDouble || !managed->m_toRgbDouble || !managed->m_toCmykBytes) {
         if (error) {
             *error = i18n("A colour transform could not be built from “%1”.", QFileInfo(profilePath).fileName());
@@ -245,8 +243,8 @@ bool Managed::rgbToCmyk(const Rgb &in, double out[4]) const
 
 bool Managed::cmykToRgb(const double in[4], Rgb *out) const
 {
-    const double percent[4] = { clamp01(in[0]) * 100.0, clamp01(in[1]) * 100.0, clamp01(in[2]) * 100.0,
-                                clamp01(in[3]) * 100.0 };
+    const double percent[4]
+        = { clamp01(in[0]) * 100.0, clamp01(in[1]) * 100.0, clamp01(in[2]) * 100.0, clamp01(in[3]) * 100.0 };
     double rgb[3] = { 0, 0, 0 };
     cmsDoTransform(m_toRgbDouble, percent, rgb, 1);
     *out = { clamp01(rgb[0]), clamp01(rgb[1]), clamp01(rgb[2]) };
@@ -471,8 +469,8 @@ std::shared_ptr<Function> Function::load(QPDFObjectHandle object, int depth)
         }
         try {
             const std::shared_ptr<Buffer> buffer = object.getStreamData();
-            function->m_samples = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()),
-                                            qsizetype(buffer->getSize()));
+            function->m_samples
+                = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()), qsizetype(buffer->getSize()));
         } catch (const std::exception &) {
             return {};
         }
@@ -1089,8 +1087,7 @@ Space resolveSpaceName(const std::string &name, QPDFObjectHandle resources, int 
 
     // Anything else is a name in the resource dictionary, which is how every
     // separation and every ICC space actually reaches a content stream.
-    QPDFObjectHandle table
-        = resources.isDictionary() ? resources.getKey("/ColorSpace") : QPDFObjectHandle::newNull();
+    QPDFObjectHandle table = resources.isDictionary() ? resources.getKey("/ColorSpace") : QPDFObjectHandle::newNull();
     if (table.isDictionary() && table.hasKey(name)) {
         return resolveSpace(table.getKey(name), resources, depth + 1);
     }
@@ -1171,8 +1168,8 @@ Space resolveSpace(QPDFObjectHandle object, QPDFObjectHandle resources, int dept
         } else if (lookup.isStream()) {
             try {
                 const std::shared_ptr<Buffer> buffer = lookup.getStreamData();
-                space->lookup = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()),
-                                           qsizetype(buffer->getSize()));
+                space->lookup
+                    = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()), qsizetype(buffer->getSize()));
             } catch (const std::exception &) {
                 return {};
             }
@@ -1696,7 +1693,8 @@ private:
     /** How much the current matrix magnifies a stroke, for hairline judgements. */
     double scaleOfCtm() const
     {
-        const double determinant = std::abs(m_state.ctm.m11() * m_state.ctm.m22() - m_state.ctm.m12() * m_state.ctm.m21());
+        const double determinant
+            = std::abs(m_state.ctm.m11() * m_state.ctm.m22() - m_state.ctm.m12() * m_state.ctm.m21());
         const double scale = std::sqrt(determinant);
         return scale > 1e-9 ? scale : 1.0;
     }
@@ -1845,8 +1843,7 @@ void ColourFilter::handleSetSpace(bool stroking)
     // to be convertible after all, writeThrough() selects the space again
     // before passing the operator on.
     bool dissolving = false;
-    if (m_work.job == Job::Spot && space
-        && (space->family == Family::Separation || space->family == Family::DeviceN)) {
+    if (m_work.job == Job::Spot && space && (space->family == Family::Separation || space->family == Family::DeviceN)) {
         for (const QString &ink : space->inkNames) {
             dissolving = dissolving || m_work.toProcess.contains(ink);
         }
@@ -1890,12 +1887,12 @@ bool ColourFilter::emitTarget(const Rgb &colour, const Space &source, const QVec
     case ColourTools::Target::Rgb: {
         Rgb result = colour;
         if (source && source->family == Family::Cmyk && m_work.managed) {
-            const double cmyk[4] = { values.value(0, 0.0), values.value(1, 0.0), values.value(2, 0.0),
-                                     values.value(3, 0.0) };
+            const double cmyk[4]
+                = { values.value(0, 0.0), values.value(1, 0.0), values.value(2, 0.0), values.value(3, 0.0) };
             m_work.managed->cmykToRgb(cmyk, &result);
         }
-        text = PdfGeometry::number(result.r) + " " + PdfGeometry::number(result.g) + " "
-            + PdfGeometry::number(result.b) + (stroking ? " RG" : " rg");
+        text = PdfGeometry::number(result.r) + " " + PdfGeometry::number(result.g) + " " + PdfGeometry::number(result.b)
+            + (stroking ? " RG" : " rg");
         break;
     }
     case ColourTools::Target::Cmyk: {
@@ -2004,9 +2001,9 @@ void ColourFilter::handleColour(const QString &op)
             writeThrough(op);
             return;
         }
-        const double distance = std::sqrt(std::pow(colour.r - m_work.from.r, 2.0)
-                                          + std::pow(colour.g - m_work.from.g, 2.0)
-                                          + std::pow(colour.b - m_work.from.b, 2.0));
+        const double distance
+            = std::sqrt(std::pow(colour.r - m_work.from.r, 2.0) + std::pow(colour.g - m_work.from.g, 2.0)
+                        + std::pow(colour.b - m_work.from.b, 2.0));
         if (distance > m_work.tolerance + 1e-9) {
             writeThrough(op);
             return;
@@ -2252,8 +2249,8 @@ void ColourFilter::handleDo()
         if (m_work.job == Job::Inspect) {
             if (space) {
                 recordSpace(space);
-                const Family family = space->family == Family::Indexed && space->alternate ? space->alternate->family
-                                                                                           : space->family;
+                const Family family
+                    = space->family == Family::Indexed && space->alternate ? space->alternate->family : space->family;
                 if (family == Family::Rgb) {
                     m_work.pageHasRgb = true;
                 } else if (family == Family::Cmyk) {
@@ -2384,8 +2381,8 @@ void ColourFilter::handleDo()
     // Shared with a page that was not selected, so it gets a converted twin and
     // the untouched page keeps the original.
     QPDFObjectHandle ownResources = formResources.shallowCopy();
-    QPDFObjectHandle nestedXObjects = ownResources.isDictionary() ? ownResources.getKey("/XObject")
-                                                                 : QPDFObjectHandle::newNull();
+    QPDFObjectHandle nestedXObjects
+        = ownResources.isDictionary() ? ownResources.getKey("/XObject") : QPDFObjectHandle::newNull();
     if (nestedXObjects.isDictionary()) {
         ownResources.replaceKey("/XObject", nestedXObjects.shallowCopy());
     }
@@ -2448,8 +2445,8 @@ void ColourFilter::handleOperator(const QString &op)
         handleSetSpace(op == u"CS"_s);
         return;
     }
-    if (op == u"g"_s || op == u"G"_s || op == u"rg"_s || op == u"RG"_s || op == u"k"_s || op == u"K"_s
-        || op == u"sc"_s || op == u"SC"_s || op == u"scn"_s || op == u"SCN"_s) {
+    if (op == u"g"_s || op == u"G"_s || op == u"rg"_s || op == u"RG"_s || op == u"k"_s || op == u"K"_s || op == u"sc"_s
+        || op == u"SC"_s || op == u"scn"_s || op == u"SCN"_s) {
         handleColour(op);
         return;
     }
@@ -2545,7 +2542,8 @@ bool convertPalette(Work &work, const Space &space, ImagePlan *plan)
     QVector<double> values(inComponents, 0.0);
     for (int entry = 0; entry < entries; ++entry) {
         for (int i = 0; i < inComponents; ++i) {
-            values[i] = paletteComponent(base, i, static_cast<uchar>(space->lookup.at(qsizetype(entry) * inComponents + i)));
+            values[i]
+                = paletteComponent(base, i, static_cast<uchar>(space->lookup.at(qsizetype(entry) * inComponents + i)));
         }
         Rgb colour;
         if (!toRgb(base, values, &colour)) {
@@ -2601,8 +2599,8 @@ ImageOutcome convertImageInto(Work &work, QPDFObjectHandle image, const Space &s
         return ImageOutcome::Refused;
     }
 
-    const Family effective = space->family == Family::Indexed && space->alternate ? space->alternate->family
-                                                                                 : space->family;
+    const Family effective
+        = space->family == Family::Indexed && space->alternate ? space->alternate->family : space->family;
     const bool alreadyThere = (work.target == ColourTools::Target::Grayscale && effective == Family::Gray)
         || (work.target == ColourTools::Target::Rgb && effective == Family::Rgb)
         || (work.target == ColourTools::Target::Cmyk && effective == Family::Cmyk);
@@ -2779,8 +2777,8 @@ void filterAppearances(Work &work, QPDFPageObjectHelper &page)
     }
     for (int i = 0; i < annotations.getArrayNItems(); ++i) {
         QPDFObjectHandle annotation = annotations.getArrayItem(i);
-        QPDFObjectHandle appearances = annotation.isDictionary() ? annotation.getKey("/AP")
-                                                                : QPDFObjectHandle::newNull();
+        QPDFObjectHandle appearances
+            = annotation.isDictionary() ? annotation.getKey("/AP") : QPDFObjectHandle::newNull();
         if (!appearances.isDictionary()) {
             continue;
         }
@@ -2891,9 +2889,9 @@ bool runOverPages(const QString &in, const QString &out, Work &work, const QVect
             if (filter.changed()) {
                 const auto data = buffer.getBufferSharedPointer();
                 page.getObjectHandle().replaceKey(
-                    "/Contents", QPDFObjectHandle::newStream(
-                                     &pdf, std::string(reinterpret_cast<const char *>(data->getBuffer()),
-                                                       data->getSize())));
+                    "/Contents",
+                    QPDFObjectHandle::newStream(
+                        &pdf, std::string(reinterpret_cast<const char *>(data->getBuffer()), data->getSize())));
                 page.removeUnreferencedResources();
 
                 // Done by name rather than left to the sweep above, because that
@@ -3085,8 +3083,8 @@ ColourTools::Inventory ColourTools::inspect(const QString &pdf, QString *error)
             // The resource dictionary is worth reading on its own: a separation
             // that is defined but never painted still needs a plate, and a
             // print shop that finds out at the press has found out too late.
-            QPDFObjectHandle table = resources.isDictionary() ? resources.getKey("/ColorSpace")
-                                                             : QPDFObjectHandle::newNull();
+            QPDFObjectHandle table
+                = resources.isDictionary() ? resources.getKey("/ColorSpace") : QPDFObjectHandle::newNull();
             if (table.isDictionary()) {
                 for (const auto &[name, value] : table.getDictAsMap()) {
                     Q_UNUSED(name)
@@ -3176,8 +3174,7 @@ QString ColourTools::defaultIccProfile(Target target)
 
     // Nothing familiar, so ask every profile on the system what it is.
     const QStringList directories { u"/usr/share/color/icc"_s, u"/usr/share/color/icc/colord"_s,
-                                    u"/usr/share/color/icc/ghostscript"_s,
-                                    QDir::homePath() + u"/.local/share/icc"_s };
+                                    u"/usr/share/color/icc/ghostscript"_s, QDir::homePath() + u"/.local/share/icc"_s };
     for (const QString &directory : directories) {
         const QStringList files
             = QDir(directory).entryList({ u"*.icc"_s, u"*.ICC"_s, u"*.icm"_s, u"*.ICM"_s }, QDir::Files, QDir::Name);
@@ -3254,8 +3251,8 @@ bool ColourTools::convert(const QString &in, const QString &out, const ConvertOp
     std::unique_ptr<Managed> managed;
 
     if (options.target == Target::Cmyk) {
-        const QString profile = options.iccProfilePath.isEmpty() ? defaultIccProfile(Target::Cmyk)
-                                                                 : options.iccProfilePath;
+        const QString profile
+            = options.iccProfilePath.isEmpty() ? defaultIccProfile(Target::Cmyk) : options.iccProfilePath;
         if (hasColourManagement() && !profile.isEmpty()) {
             QString reason;
             managed = Managed::create(profile, &reason);
@@ -3366,8 +3363,8 @@ bool ColourTools::replaceColour(const QString &in, const QString &out, const QCo
     work.from = { from.redF(), from.greenF(), from.blueF() };
     work.to = { to.redF(), to.greenF(), to.blueF() };
     work.tolerance = std::max(0.0, tolerance);
-    work.replacementIsGrey = qFuzzyCompare(to.redF() + 1.0, to.greenF() + 1.0)
-        && qFuzzyCompare(to.greenF() + 1.0, to.blueF() + 1.0);
+    work.replacementIsGrey
+        = qFuzzyCompare(to.redF() + 1.0, to.greenF() + 1.0) && qFuzzyCompare(to.greenF() + 1.0, to.blueF() + 1.0);
 
     if (!runOverPages(in, out, work, {}, {}, error)) {
         return false;
@@ -3632,10 +3629,16 @@ QImage ColourTools::separation(const QString &pdf, int page, const QString &inkN
     if (channel >= 0) {
         const QString path = directory.filePath(u"plate.pam"_s);
         const QStringList arguments {
-            u"-q"_s,          u"-dNOPAUSE"_s,                    u"-dBATCH"_s,
-            u"-dSAFER"_s,     u"-sDEVICE=pamcmyk32"_s,           u"-r%1"_s.arg(resolution),
-            u"-dFirstPage=%1"_s.arg(page + 1),                   u"-dLastPage=%1"_s.arg(page + 1),
-            u"-sOutputFile=%1"_s.arg(path),                      pdf,
+            u"-q"_s,
+            u"-dNOPAUSE"_s,
+            u"-dBATCH"_s,
+            u"-dSAFER"_s,
+            u"-sDEVICE=pamcmyk32"_s,
+            u"-r%1"_s.arg(resolution),
+            u"-dFirstPage=%1"_s.arg(page + 1),
+            u"-dLastPage=%1"_s.arg(page + 1),
+            u"-sOutputFile=%1"_s.arg(path),
+            pdf,
         };
         if (!runGhostscript(arguments, nullptr, error)) {
             return {};

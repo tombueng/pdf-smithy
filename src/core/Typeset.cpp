@@ -744,8 +744,8 @@ Group layoutParagraph(const Block &block, double columnWidth, const Typeset::Doc
     const double firstWidth = qMax(style.fontSize, bodyWidth - style.indentFirst);
 
     const QVector<Word> words = wordsFromTokens(block.tokens, style);
-    const QVector<DraftLine> lines =
-        breakIntoLines(words, firstWidth, bodyWidth, document.hyphenate, document.language, notes);
+    const QVector<DraftLine> lines
+        = breakIntoLines(words, firstWidth, bodyWidth, document.hyphenate, document.language, notes);
 
     for (int i = 0; i < lines.size(); ++i) {
         const bool first = i == 0;
@@ -918,7 +918,7 @@ Group layoutTable(const Block &block, double columnWidth, const Typeset::Documen
             const QVector<Token> tokens = c < row.size() ? row.at(c) : QVector<Token>();
             const double inner = qMax(style.fontSize, widths.at(c) - 2.0 * padding);
             const QVector<DraftLine> lines = breakIntoLines(wordsFromTokens(tokens, style), inner, inner,
-                                                           document.hyphenate, document.language, notes);
+                                                            document.hyphenate, document.language, notes);
             tallest = qMax(tallest, int(lines.size()));
             cellLines.append(lines);
         }
@@ -1304,8 +1304,8 @@ bool writePdf(const QVector<OutPage> &pages, const Typeset::Document &document, 
                 if (text.link.isEmpty() || !isFollowableLink(text.link)) {
                     continue;
                 }
-                const double width =
-                    advanceOf(text.text, text.font, text.size) + text.wordSpacing * double(spacesIn(text.text));
+                const double width
+                    = advanceOf(text.text, text.font, text.size) + text.wordSpacing * double(spacesIn(text.text));
                 QPDFObjectHandle link = QPDFObjectHandle::parse("<< /Type /Annot /Subtype /Link /Border [0 0 0] >>");
                 link.replaceKey("/Rect",
                                 QPDFObjectHandle::parse("[" + number(text.x) + " " + number(text.y - text.size * 0.25)
@@ -2011,8 +2011,8 @@ bool Typeset::fromTextFile(const QString &path, const QString &outPdf, const Doc
         text = QString::fromLatin1(bytes);
     }
 
-    static const QStringList markdownSuffixes = { QStringLiteral("md"), QStringLiteral("markdown"),
-                                                  QStringLiteral("mdown"), QStringLiteral("mkd") };
+    static const QStringList markdownSuffixes
+        = { QStringLiteral("md"), QStringLiteral("markdown"), QStringLiteral("mdown"), QStringLiteral("mkd") };
     if (markdownSuffixes.contains(QFileInfo(path).suffix().toLower())) {
         return fromMarkdown(text, outPdf, document, report, error);
     }

@@ -312,13 +312,22 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install gettext
-        run: apt-get update && apt-get install -y gettext
+        run: apt-get update && apt-get install -y --no-install-recommends gettext
 
       - name: Validate catalogues
         run: |
-          for po in po/*/*.po; do
-            echo "── $po"
-            msgfmt --check --statistics -o /dev/null "$po"
+          set -e
+          # find rather than a glob: a pattern that matches nothing is passed
+          # through as a literal file name, and the failure that produces says
+          # nothing about the catalogues.
+          found=$(find po -name '*.po' | sort)
+          if [ -z "$found" ]; then
+            echo "no catalogues found under po/, which cannot be right"
+            exit 1
+          fi
+          for po in $found; do
+            echo "== $po"
+            msgfmt --check --check-format --statistics -o /dev/null "$po"
           done
 
       # A string added without re-running Messages.sh silently ships
