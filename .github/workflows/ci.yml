@@ -348,7 +348,12 @@ jobs:
               <(grep -v '^"POT-Creation-Date' /tmp/committed.pot) \
               <(grep -v '^"POT-Creation-Date' po/pdf-smithy.pot) > /dev/null; then
             echo "::error::po/pdf-smithy.pot is stale: run ./Messages.sh and commit the result"
-            diff <(grep '^msgid' /tmp/committed.pot) <(grep '^msgid' po/pdf-smithy.pot) || true
+            # The whole difference, not only the messages. A template can
+            # differ in its references or its header while every message
+            # matches, and a report that only lists messages then says nothing.
+            diff -u \
+              <(grep -v '^"POT-Creation-Date' /tmp/committed.pot) \
+              <(grep -v '^"POT-Creation-Date' po/pdf-smithy.pot) | head -60 || true
             exit 1
           fi
 

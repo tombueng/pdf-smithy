@@ -32,3 +32,4 @@ po/slices/
 # an English one. They join the repository when they are complete.
 po/es/
 po/fr/
+tools/__pycache__/
