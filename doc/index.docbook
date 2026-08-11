@@ -27,7 +27,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2026-08-10</date>
+<date>2026-08-11</date>
 <releaseinfo>0.1.0</releaseinfo>
 
 <abstract>
@@ -86,6 +86,15 @@ the only steering it has. Four buttons sit at the left of the toolbar, one of
 them always pressed, and the one that is pressed decides which view is in the
 middle of the window, what a click on the page means, which second toolbar is
 up, and what the status bar says at the bottom.</para>
+
+<screenshot>
+<screeninfo>The View menu, with the four modes at the top of it</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-view-menu.png" format="PNG"/></imageobject>
+<textobject><phrase>The View menu, with the four modes at the top of it</phrase></textobject>
+<caption><para>The <guimenu>View</guimenu> menu. The four modes are at the top, above getting about, what a drag does, the five sizes and the three side panels.</para></caption>
+</mediaobject>
+</screenshot>
 
 <variablelist>
 <varlistentry>
@@ -190,6 +199,15 @@ tear one off to float it on a second screen, or drop one on top of another so
 that they share their space as tabs. The window remembers where you left them,
 so every tool from then on opens where you put the last one.</para>
 
+<screenshot>
+<screeninfo>All three side panels open beside a page</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-three-sidebars.png" format="PNG"/></imageobject>
+<textobject><phrase>All three side panels open beside a page</phrase></textobject>
+<caption><para>All three side panels at once: the pages down the left, the contents under them, and the properties of whatever was last clicked on the right. With nothing chosen, the properties panel describes the document itself.</para></caption>
+</mediaobject>
+</screenshot>
+
 <para>The menu bar can be hidden with
 <menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo></shortcut>
 <guimenu>Settings</guimenu><guimenuitem>Show Menubar</guimenuitem></menuchoice>.
@@ -264,6 +282,15 @@ form fields can be filled in, and the comments the document carries are drawn
 and can be read. Nothing about the document can be altered by accident, which
 is what makes it safe to hand somebody a program that can alter
 everything.</para>
+
+<screenshot>
+<screeninfo>Reading a document and filling in its form</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/read-and-fill-in.png" format="PNG"/></imageobject>
+<textobject><phrase>Reading a document and filling in its form</phrase></textobject>
+<caption><para>Reading. The pale wash marks what can be answered, the red rule marks the two fields the form insists on, and the grey dashes mark what it locks.</para></caption>
+</mediaobject>
+</screenshot>
 
 <sect1 id="reading-opening">
 <title>Opening a document</title>
@@ -530,6 +557,15 @@ in the list. Required fields are marked, and the line under the list says how
 many of the fields can be filled in and how many are locked. A document with no
 form fields says so rather than opening an empty list.</para>
 
+<screenshot>
+<screeninfo>The same form as a list beside the page</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/fill-in-the-form-as-a-list.png" format="PNG"/></imageobject>
+<textobject><phrase>The same form as a list beside the page</phrase></textobject>
+<caption><para>The page on one side and every field on the other, each with the label its author wrote. Clicking a field in the list moves the page to it.</para></caption>
+</mediaobject>
+</screenshot>
+
 <para>A field the form locks is shown and refused rather than left out: on the
 page it is outlined in grey dashes, and in the list it is there but greyed and
 says that the form locks it. Hiding it would leave you wondering whether you
@@ -568,6 +604,15 @@ marks of your own is <xref linkend="page-comments"/>.</para>
 makes the page editable where it stands: click into a line and type, drag a
 picture, pull a handle, mark a paragraph up. It is the same page at the same
 size as the one you were reading.</para>
+
+<screenshot>
+<screeninfo>Editing the page, with the editable runs outlined</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/edit-the-page.png" format="PNG"/></imageobject>
+<textobject><phrase>Editing the page, with the editable runs outlined</phrase></textobject>
+<caption><para>Every run of text that can be written into is outlined before anything is clicked, so the shape of what can be changed is visible rather than discovered by surprise.</para></caption>
+</mediaobject>
+</screenshot>
 
 <para>Three layers are live at once and they are asked in a fixed order. A pen
 in hand wins the press, because that is what you have told the program you
@@ -680,6 +725,15 @@ italic of it has to come from a typeface chosen above. A cut is a separate font
 programme, and there is no bold of the page's own face to reach for. A disabled
 box that explains itself is better than a checkbox that does nothing.</para>
 
+<screenshot>
+<screeninfo>The properties sidebar with the caret in a line of text</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/properties-a-line-of-text.png" format="PNG"/></imageobject>
+<textobject><phrase>The properties sidebar with the caret in a line of text</phrase></textobject>
+<caption><para>The caret is in the first line of the foreword. The panel names the face the page sets it in and the resource name the page gives that font, and offers the typeface, size and colour it is to be set in. <guilabel>Bold</guilabel> and <guilabel>Italic</guilabel> are greyed out because no other typeface has been chosen.</para></caption>
+</mediaobject>
+</screenshot>
+
 <para>The typeface is a list rather than a font picker for a related reason.
 The page names a face such as <quote>Graphik-Semibold</quote>, which is a cut
 and not a family and is not what this machine calls anything it has. Putting
@@ -767,6 +821,15 @@ the page is chosen those keys mean that thing, not the page.</para></listitem></
 <para>Clicking a line of text offers to correct the words rather than to move
 the block; moving is what the handles round it are for.</para>
 
+<screenshot>
+<screeninfo>A picture on the page, chosen, with handles round it</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/an-object-with-handles.png" format="PNG"/></imageobject>
+<textobject><phrase>A picture on the page, chosen, with handles round it</phrase></textobject>
+<caption><para>Something the page draws, chosen: eight handles round it and a ninth on a stalk to turn it by. The panel says where it comes in the painting order and that this cannot be changed, rather than offering a control that does nothing.</para></caption>
+</mediaobject>
+</screenshot>
+
 <sect2 id="page-objects-clipboard">
 <title>Cut, copy and paste</title>
 
@@ -799,6 +862,10 @@ sideways; <guibutton>Align Top</guibutton>,
 the same up and down. The line is taken from the box enclosing everything
 chosen rather than from the first or the last of them, because a selection made
 by dragging a band has no first. Nothing is resized.</para>
+
+<para>The same buttons appear while a form is being laid out, where they do the
+work a form author would otherwise do by typing coordinates
+(<xref linkend="form-drawing"/>).</para>
 
 <para><guibutton>Space Out Sideways</guibutton> and <guibutton>Space Out
 Upright</guibutton> put equal gaps between them; the outermost two stay where
@@ -842,7 +909,13 @@ the press.</para></listitem></varlistentry>
 which is only safe when each block is properly enclosed, and on a real page
 they often are not. The properties sidebar says where an object comes in the
 painting order and says plainly that it cannot be changed, rather than offering
-a control that does nothing.</para></listitem></varlistentry>
+a control that does nothing.
+<keycombo action="simul">&Ctrl;&Shift;<keycap>Up</keycap></keycombo> and
+<keycombo action="simul">&Ctrl;&Shift;<keycap>Down</keycap></keycombo> are
+bound to raising and lowering, and both do nothing but give that refusal in
+words. Keeping the keys attached to an honest answer is better than leaving two
+familiar shortcuts silent, and it is where they will be when the restriction
+lifts.</para></listitem></varlistentry>
 
 <varlistentry><term>A moved object travels on top of the page</term>
 <listitem><para>What the layer draws over is a picture of the file as it
@@ -889,6 +962,15 @@ four shapes share the <guibutton>Shapes</guibutton> button on the toolbar,
 which wears whichever of them was chosen last. A toolbar rather than a menu, because
 choosing a pen is something done dozens of times in a session and never worth
 going looking for.</para>
+
+<screenshot>
+<screeninfo>Four kinds of comment on one page, with one of them chosen</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/comments-and-the-pens.png" format="PNG"/></imageobject>
+<textobject><phrase>Four kinds of comment on one page, with one of them chosen</phrase></textobject>
+<caption><para>Four kinds of mark on one page: a highlight over a line, a note beside it, a line drawn by hand and a box round an empty space. The freehand mark is chosen, and everything a comment says can be changed in the panel.</para></caption>
+</mediaobject>
+</screenshot>
 
 <sect2 id="page-comments-making">
 <title>Making a mark</title>
@@ -1090,6 +1172,15 @@ not an empty panel in the two modes where there is often nothing to
 click.</para></listitem></varlistentry>
 </variablelist>
 
+<screenshot>
+<screeninfo>The properties of a form field being filled in</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/properties-filling-a-field-in.png" format="PNG"/></imageobject>
+<textobject><phrase>The properties of a form field being filled in</phrase></textobject>
+<caption><para>A field chosen while the form is being filled in. All of it is shown rather than changed: the name and the rules are the form author's, and the one thing that is yours is given on the page where you can see what you are answering.</para></caption>
+</mediaobject>
+</screenshot>
+
 </chapter>
 
 
@@ -1111,6 +1202,15 @@ paragraph.</para>
 <para><menuchoice><guimenu>Forms</guimenu><guimenuitem>Build a
 Form…</guimenuitem></menuchoice> is the way in from the menu: it brings you
 here with a text field already in hand and the properties sidebar open.</para>
+
+<screenshot>
+<screeninfo>Laying a form out on the page</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/edit-the-form.png" format="PNG"/></imageobject>
+<textobject><phrase>Laying a form out on the page</phrase></textobject>
+<caption><para>Every kind of field at once on the second toolbar, because these are reached dozens of times while a form is drawn and never otherwise. Only the field layer answers the mouse here.</para></caption>
+</mediaobject>
+</screenshot>
 
 <sect1 id="form-drawing">
 <title>Drawing the fields</title>
@@ -1221,6 +1321,15 @@ that also accepts typing are not among what is read back from a form, so those
 three start unticked whatever the document says. Changing anything at all about
 a field rewrites all of its flags, so tick them again here if the field had
 them.</para></note>
+
+<screenshot>
+<screeninfo>The properties of a form field being designed</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/properties-a-form-field.png" format="PNG"/></imageobject>
+<textobject><phrase>The properties of a form field being designed</phrase></textobject>
+<caption><para>The same field while the form is being designed, and now all of it can be changed: where it is and what it is called, its rules, how it looks, and the script the document already carried, which is shown as it was written and kept exactly as it is.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="form-appearance">
@@ -1326,6 +1435,15 @@ new file rather than changing the one in the window. It closes itself after a
 successful write, because a second change made afterwards would be made to the
 older file and would quietly drop what the first one did. See
 <xref linkend="tools"/> for how all such windows behave.</para>
+
+<screenshot>
+<screeninfo>Form behaviour and answers</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/form-behaviour-and-answers.png" format="PNG"/></imageobject>
+<textobject><phrase>Form behaviour and answers</phrase></textobject>
+<caption><para>The parts of a form that are not a gesture on a page, in five tabs: the fields it has, the order &Tab; walks them in, how a value behaves, the answers, and the older way of placing a field by typing its four numbers.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 </chapter>
@@ -1342,12 +1460,32 @@ order the document will be saved in. It answers <quote>which pages, and in what
 order</quote>. What the pages say is the other three modes' question, and one
 view that tried to answer both would answer neither well.</para>
 
+<screenshot>
+<screeninfo>Every page of the document as one grid</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/arrange-the-pages.png" format="PNG"/></imageobject>
+<textobject><phrase>Every page of the document as one grid</phrase></textobject>
+<caption><para>Every page of every file opened or inserted, in the order the document will be saved in. Drag a page to move it; the drop position is shown as a line between thumbnails.</para></caption>
+</mediaobject>
+</screenshot>
+
 <para>It opens on a windowful of pages rather than on whatever size you last
 read at, because rearranging a document is done by eye and needs a page's
 neighbours on screen beside it. Set a size there yourself, with the status-bar
 slider or with &Ctrl; and the wheel, and that is the size it keeps from then
 on. Leaving puts the document back exactly as you left it: the same size, the
 same spread or single column, and the same line.</para>
+
+<para>The toolbar under the top one belongs to this mode. Turning left and
+right keep buttons of their own, because that is the one thing on this bar done
+over and over, and beside them are duplicating and deleting, trimming,
+numbering and sheets, and <guibutton>Select All</guibutton>. Two of its buttons
+hold a small menu each rather than one command:
+<guibutton>Insert</guibutton> holds bringing another file in, bringing pictures
+in and setting text as pages, and <guibutton>Export</guibutton> holds
+extracting pages to a new file, writing them out as pictures, splitting and
+saving for an archive. Both are pages coming in and pages going out, which is
+what this mode is about.</para>
 
 <para>Everything in this chapter is undoable, and each command counts as one
 step however many pages it touched. Undo also covers what you keep on the page
@@ -1386,6 +1524,15 @@ what can be done to whole pages. On the document it offers copying and marking
 while reading, cutting and keeping while editing the page, and the field kinds
 while editing the form. None of them offers to delete the page, which is the
 page grid's question.</para>
+
+<screenshot>
+<screeninfo>The Pages menu</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-pages-menu.png" format="PNG"/></imageobject>
+<textobject><phrase>The Pages menu</phrase></textobject>
+<caption><para>The <guimenu>Pages</guimenu> menu holds everything done to whole pages, and the <guisubmenu>Mark Up</guisubmenu> submenu at the foot of it holds the pens.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="arranging-turning">
@@ -1455,6 +1602,15 @@ upright one. The named papers are offered as well, with an orientation, which
 is disabled while the size is being matched, since offering to change it there
 would be offering to break the match.</para>
 
+<screenshot>
+<screeninfo>Adding blank pages</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/add-blank-pages.png" format="PNG"/></imageobject>
+<textobject><phrase>Adding blank pages</phrase></textobject>
+<caption><para><guilabel>Same as this document</guilabel> is matched to the page the new ones will sit beside rather than to page one, so a book with a landscape plate in the middle gets another landscape sheet there.</para></caption>
+</mediaobject>
+</screenshot>
+
 <para><menuchoice><guimenu>File</guimenu><guimenuitem>Import
 Images…</guimenuitem></menuchoice> makes one page per picture and appends them,
 at the picture's own size read at 300 &dpi;, which is what stops an A4 scan
@@ -1498,6 +1654,15 @@ bookmarks.</para></listitem>
 each will get, before anything is written. Writing twenty files is not
 something anyone should have to do speculatively to find out what they get. The
 document has to be on disk first, and you are asked to save if it is not.</para>
+
+<screenshot>
+<screeninfo>Splitting a document into several files</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/split.png" format="PNG"/></imageobject>
+<textobject><phrase>Splitting a document into several files</phrase></textobject>
+<caption><para>The four questions people actually ask, and, before anything is written, the names of the files it is about to write and how many pages each will get.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="arranging-trimming">
@@ -1522,6 +1687,15 @@ trimming each page to its own content would produce a document whose pages are
 all slightly different sizes, which looks worse than the margins did. Margins
 are measured on the page as it is displayed, so <quote>left</quote> is your
 left whatever the page's own rotation says.</para>
+
+<screenshot>
+<screeninfo>Trimming the edges off the pages</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/trim-the-edges.png" format="PNG"/></imageobject>
+<textobject><phrase>Trimming the edges off the pages</phrase></textobject>
+<caption><para>The page goes where the grid was and the four measurements into a panel at the edge of the window. Nothing is cut away: trimming sets the visible area, and <guilabel>Show the full pages again</guilabel> puts it back.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="arranging-sheets">
@@ -1543,6 +1717,15 @@ under it says how many pages go across and down.</para>
 
 <para>This is the one command here that changes how many pages the document
 has. Undo puts all of them back, not half of them.</para>
+
+<screenshot>
+<screeninfo>Several pages on one sheet</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/arrange-on-sheets.png" format="PNG"/></imageobject>
+<textobject><phrase>Several pages on one sheet</phrase></textobject>
+<caption><para>A preview beside the settings shows the arrangement, and a line under it says how many pages go across and down. Nothing is rasterised: each page is placed on the sheet whole.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 </chapter>
@@ -1569,6 +1752,15 @@ in a column of its own. Click one to go and read that page. It also follows you
 the other way round: as you move through the document, the entry covering the
 current page is highlighted, so you can always see where in the document you
 are.</para>
+
+<screenshot>
+<screeninfo>The contents sidebar</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/contents-sidebar.png" format="PNG"/></imageobject>
+<textobject><phrase>The contents sidebar</phrase></textobject>
+<caption><para>The entries as a tree, each with the page it points at in a column of its own. The entry covering the page being read is marked, so where you are in the document can be seen rather than worked out.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="contents-editing">
@@ -1700,6 +1892,15 @@ one, which is the classic way to ruin a searchable document.</para>
 <para>Recognition runs page by page behind a progress window that can be
 cancelled; cancelling stops at the next page boundary and leaves the document
 as it was.</para>
+
+<screenshot>
+<screeninfo>Making a scan searchable</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/recognise-text.png" format="PNG"/></imageobject>
+<textobject><phrase>Making a scan searchable</phrase></textobject>
+<caption><para>Only the languages Tesseract has data files for on this machine are offered, under their proper names. <guilabel>Skip pages that already have text</guilabel> is on by default and should stay on.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="scans-straightening">
@@ -1796,6 +1997,15 @@ does the same thing numerically, as a proportion of the page width.</para>
 <guilabel>Put it on every page</guilabel> stamps the same signature at the same
 coordinates on every page of the document, for initialling a contract, which is
 otherwise thirty separate acts.</para>
+
+<screenshot>
+<screeninfo>Placing a signature on a page</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/sign.png" format="PNG"/></imageobject>
+<textobject><phrase>Placing a signature on a page</phrase></textobject>
+<caption><para>A signature is captured once and then kept for every document afterwards, which is why the list is empty the first time. Drag it to where it belongs, or click anywhere on the page to put it there.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="signing-not-cryptographic">
@@ -1829,6 +2039,15 @@ width you give as a share of the page.</para>
 be written, so turn to a busy page to check that it stays readable through the
 watermark. Judging a watermark against a white rectangle means applying it,
 looking, undoing and starting again.</para>
+
+<screenshot>
+<screeninfo>Laying a watermark across the pages</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/watermark.png" format="PNG"/></imageobject>
+<textobject><phrase>Laying a watermark across the pages</phrase></textobject>
+<caption><para>The preview is the page itself with the stamp drawn on it the way it will be written, so a busy page can be checked for whether it stays readable through the watermark.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="signing-numbering">
@@ -1864,6 +2083,15 @@ that every page of a bundle carries a unique, sequential, quotable identifier
 such as <literal>ACME-000147</literal>. Legal and audit work needs that, and
 doing it by hand across a four-hundred-page disclosure is how mistakes
 happen.</para>
+
+<screenshot>
+<screeninfo>Page numbers, headers and Bates stamping</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/page-numbers.png" format="PNG"/></imageobject>
+<textobject><phrase>Page numbers, headers and Bates stamping</phrase></textobject>
+<caption><para>The page shows the stamp where it will land as the settings change, with a line under it reading what this page will say.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 </chapter>
@@ -1905,6 +2133,15 @@ been written, though, the content is not in it any more and cannot be recovered
 from it, which is the point, and which the panel states plainly, under
 <guilabel>What this does and does not do</guilabel>, before you press
 <guibutton>Redact</guibutton>.</para>
+
+<screenshot>
+<screeninfo>Marking what has to be removed</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/redact.png" format="PNG"/></imageobject>
+<textobject><phrase>Marking what has to be removed</phrase></textobject>
+<caption><para><guilabel>Text that will be destroyed</guilabel> shows the actual words your marks will remove, so a box drawn two millimetres too far left is caught before it takes a word you needed. Underneath it, what this does and does not do.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="redaction-text">
@@ -2019,6 +2256,15 @@ without it, the lossless level still works and the dialog says why the others
 are unavailable. Install the <literal>ghostscript</literal> package to get
 them.</para>
 
+<screenshot>
+<screeninfo>Making a document smaller</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/make-smaller.png" format="PNG"/></imageobject>
+<textobject><phrase>Making a document smaller</phrase></textobject>
+<caption><para>The first level cannot lose anything; the other three trade picture quality for size. <guibutton>How much would this save?</guibutton> answers the question before you commit to it.</para></caption>
+</mediaobject>
+</screenshot>
+
 <sect1 id="smaller-estimate">
 <title>Asking first</title>
 
@@ -2060,6 +2306,15 @@ tool you used.</para>
 
 <para>Changing the properties is an ordinary undo step and is written on the
 next save.</para>
+
+<screenshot>
+<screeninfo>The document's properties</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/document-properties.png" format="PNG"/></imageobject>
+<textobject><phrase>The document's properties</phrase></textobject>
+<caption><para>An empty date reads <guilabel>not recorded</guilabel> rather than showing a made-up one, and emptying a field removes it from the document entirely.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="document-cleanup">
@@ -2079,6 +2334,15 @@ are not touched, and nothing changes on disk until you save.</para>
 
 <para>What is listed is read from the file on disk, so save first if you want
 the inventory to include something you have added in this session.</para>
+
+<screenshot>
+<screeninfo>Cleaning up a document</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/clean-up-document.png" format="PNG"/></imageobject>
+<textobject><phrase>Cleaning up a document</phrase></textobject>
+<caption><para>What the document actually carries, named rather than called metadata. <quote>Author: A. Person</quote> is a fact somebody can act on.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="document-password">
@@ -2108,6 +2372,15 @@ cannot be opened again, by this program or by any other.</para>
 <para>The protection a document was opened with is carried into every save,
 including into pages extracted out of it, so a plain save never quietly unlocks
 a file its owner had locked. Opening a different document forgets it.</para>
+
+<screenshot>
+<screeninfo>Setting the password that opens a document</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/password.png" format="PNG"/></imageobject>
+<textobject><phrase>Setting the password that opens a document</phrase></textobject>
+<caption><para>Encryption is AES-256 and nothing weaker is offered. The two permissions beside it are a request rather than a lock, which the dialog says as plainly as this handbook does.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="document-compare">
@@ -2198,6 +2471,26 @@ they are eight answers to one question, and <quote>Export as</quote> is where
 somebody with that question looks. None of them changes the document in the
 window.</para>
 
+<para>One export is missing from the menu on purpose. Drawing each page as an
+SVG file is on the command line only
+(<userinput><command>pdf-smithy-cli</command> to-svg
+<replaceable>file.pdf</replaceable></userinput>), because it is done by another
+program on the machine rather than by this one, it writes a file per page from
+a name you give it as a pattern, and what comes out depends on which of the two
+possible programs is installed: with <command>pdftocairo</command> the text is
+still text, and where Ghostscript has to stand in for it the letters are
+outlines and no longer searchable. That is a thing to be told at a terminal, in
+a report you can read, rather than discovered in a Save dialog.</para>
+
+<screenshot>
+<screeninfo>The File menu</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-file-menu.png" format="PNG"/></imageobject>
+<textobject><phrase>The File menu</phrase></textobject>
+<caption><para>The <guimenu>File</guimenu> menu. <guisubmenu>Export as</guisubmenu> gathers everything the program can write that is not this document as it stands.</para></caption>
+</mediaobject>
+</screenshot>
+
 <sect2 id="export-images">
 <title>Pages as pictures</title>
 
@@ -2210,6 +2503,15 @@ for PNG rather than sitting there implying it does something to a lossless
 format. It acts on the selected pages or on the whole document. Any page that
 could not be drawn is counted and reported, since nothing else on screen
 distinguishes eight images from the two of them that worked.</para>
+
+<screenshot>
+<screeninfo>Writing the pages out as pictures</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/export-as-images.png" format="PNG"/></imageobject>
+<textobject><phrase>Writing the pages out as pictures</phrase></textobject>
+<caption><para><guilabel>Quality</guilabel> goes quiet for PNG rather than sitting there implying it does something to a lossless format.</para></caption>
+</mediaobject>
+</screenshot>
 
 <para><guimenuitem>Import Images…</guimenuitem> is the way back;
 see <xref linkend="arranging-inserting"/>.</para>
@@ -2355,10 +2657,19 @@ printed output look soft.</para>
 <para>The <guimenu>Tools</guimenu> menu holds the windows that look
 <emphasis>into</emphasis> a document: what colour it uses, which fonts it
 carries, how big its pictures really are, what its page boxes say, and whether
-a printer or an archive will accept it. Two entries in it, and two in the
+a printer or an archive will accept it. One entry in it, and one in the
 <guimenu>Forms</guimenu> menu, are not windows at all but ways into the editing
 modes, and they are listed here too so that the whole menu is accounted
 for.</para>
+
+<screenshot>
+<screeninfo>The Tools menu</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-tools-menu.png" format="PNG"/></imageobject>
+<textobject><phrase>The Tools menu</phrase></textobject>
+<caption><para>The <guimenu>Tools</guimenu> menu. Everything in it but <guimenuitem>Move What the Page Draws…</guimenuitem> opens a window that reads the document and writes a new file beside it.</para></caption>
+</mediaobject>
+</screenshot>
 
 <sect1 id="tools-how">
 <title>How the windows behave</title>
@@ -2416,6 +2727,15 @@ no program makes well.</para>
 
 <para>This is a preflight check and not a certification. A file that passes
 here can still be refused by a strict validator.</para>
+
+<screenshot>
+<screeninfo>Checking a document against a profile</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/check-the-document.png" format="PNG"/></imageobject>
+<textobject><phrase>Checking a document against a profile</phrase></textobject>
+<caption><para>Findings are grouped so that anything which would get the file rejected is at the top. The box headed <guilabel>What was not checked</guilabel> is the most important part of the window.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-colour">
@@ -2444,6 +2764,15 @@ through the tint transform the document already carries, thicken hairlines so
 they survive the press, set black to overprint or to knock out, and show one
 ink on its own as a plate, which looks like the plate rather than like the page
 and is the point of it.</para>
+
+<screenshot>
+<screeninfo>What the document does with colour</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/colour.png" format="PNG"/></imageobject>
+<textobject><phrase>What the document does with colour</phrase></textobject>
+<caption><para>What the document does with colour, before anything is changed: the spaces it uses, the inks it would need a plate for, whether it carries a profile, and how thin its thinnest stroke is.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-fonts">
@@ -2482,6 +2811,15 @@ meaning; and a Type 3 font draws its letters with the document's own drawing
 operators rather than carrying a font programme at all, so there is nothing to
 supply and no substitute that would mean the same thing. Those are named rather
 than guessed at. Font licences are reported and never enforced.</para>
+
+<screenshot>
+<screeninfo>Every font the document uses</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/fonts.png" format="PNG"/></imageobject>
+<textobject><phrase>Every font the document uses</phrase></textobject>
+<caption><para>Every font, whether its glyphs travel with the file, whether only part of it is there, and whether its text can be copied out and searched. The three columns are the three questions people actually have.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-pictures">
@@ -2508,6 +2846,15 @@ answer, and an operation naming one picture applies to every place that page
 draws it. Fax and JPEG 2000 pictures can be listed, removed and deduplicated
 but not opened, so they cannot be recompressed, adjusted or cropped. Pictures
 inside an embedded drawing are not listed at all.</para>
+
+<screenshot>
+<screeninfo>Every picture in the document</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/pictures.png" format="PNG"/></imageobject>
+<textobject><phrase>Every picture in the document</phrase></textobject>
+<caption><para>Every picture with the number that actually matters, its effective resolution on the page rather than its pixel count, alongside its colour space, its compression and how often it is drawn.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-layout">
@@ -2535,6 +2882,15 @@ out, and write the page labels a reader shows instead of 1, 2, 3.</para>
 hairlines with the page, and laying one document over another does not merge
 their forms, so two forms with a field of the same name keep only the base
 document's.</para>
+
+<screenshot>
+<screeninfo>The five page boxes, per page</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/page-setup.png" format="PNG"/></imageobject>
+<textobject><phrase>The five page boxes, per page</phrase></textobject>
+<caption><para>The five boxes a page can carry, in millimetres, saying <guilabel>absent</guilabel> where a page defines none, which is different from one that matches the media box.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-object-list">
@@ -2553,6 +2909,15 @@ also add text, a picture or a simple shape to a page.</para>
 
 <para>Changes are collected and written in one pass, for the same reason they
 are on the page: an object carries one change at a time.</para>
+
+<screenshot>
+<screeninfo>What a page draws, as a list</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/the-page-as-a-list.png" format="PNG"/></imageobject>
+<textobject><phrase>What a page draws, as a list</phrase></textobject>
+<caption><para>The boxes on the page and the rows beside them are the same list twice, so that <quote>the caption near the bottom</quote> and <quote>object 47</quote> are the same thing.</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 <sect1 id="tools-typeset">
@@ -2574,6 +2939,15 @@ engine which would be wrong in exactly the places that matter.</para>
 <para>Distances across the paper are in millimetres and distances inside the
 type are in points, and every box says which, because a margin of 20 and a
 leading of 20 are not the same length.</para>
+
+<screenshot>
+<screeninfo>Setting text as pages</screeninfo>
+<mediaobject>
+<imageobject><imagedata fileref="screenshots/set-text-as-pages.png" format="PNG"/></imageobject>
+<textobject><phrase>Setting text as pages</phrase></textobject>
+<caption><para>The one tool here that makes a document instead of examining one. The preview is written by the same engine that writes the finished document, so where the lines and the pages break on screen is where they will break in the file.</para></caption>
+</mediaobject>
+</screenshot>
 
 <para>It can only set text in the fourteen fonts every reader knows, which
 means western European alphabets: Greek, Cyrillic, Hebrew, Arabic and the CJK
@@ -2624,20 +2998,24 @@ prints the same list at the terminal.</para>
 
 <screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> <replaceable>command</replaceable> [<replaceable>options</replaceable>] <replaceable>file</replaceable>…</userinput></screen>
 
-<para>The command comes first and is not case-sensitive. Nine of the commands
+<para>The command comes first and is not case-sensitive. Eight of the commands
 take a second word saying which of their jobs is meant, so they read as a
 sentence:</para>
 
 <screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> colour inspect heft.pdf</userinput>
 <prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> images list scan.pdf</userinput></screen>
 
-<para>Those nine are <command>colour</command>, <command>fonts</command>,
-<command>images</command>, <command>layout</command>,
-<command>objects</command>, <command>field</command>,
-<command>preflight</command>, <command>typeset</command> and the conversions.
-Each of them ends with a <userinput>limits</userinput> action that says what it
-cannot promise, which is worth reading before trusting a result and is
-short.</para>
+<para>Those eight are <command>colour</command>, <command>field</command>,
+<command>fonts</command>, <command>images</command>, <command>layout</command>,
+<command>objects</command>, <command>preflight</command> and
+<command>typeset</command>. <command>preflight</command> and
+<command>typeset</command> also work with no second word at all, on the job
+they are usually wanted for. Most of these groups end with an action that says
+what the group cannot promise, spelled <userinput>limits</userinput> for some
+and <userinput>limitations</userinput> for others; <option>--limits</option>
+does the same for any command at all and is the one to reach for when the
+spelling is in doubt. It is short, and worth reading before trusting a
+result.</para>
 
 <para><option>-o</option> says where the output goes. Left out, a command that
 has to write something writes it beside the input under a new name rather than
@@ -2690,7 +3068,8 @@ the table of contents).</para></listitem></varlistentry>
 <listitem><para><command>text</command> (show a page's text, or replace a
 line), <command>to-text</command>, <command>to-markdown</command>,
 <command>to-html</command>, <command>tables</command>,
-<command>to-csv</command>, <command>to-svg</command> and
+<command>to-csv</command>, <command>to-svg</command> (which the window
+deliberately does not offer, see <xref linkend="document-exports"/>) and
 <command>typeset</command>.</para></listitem></varlistentry>
 
 <varlistentry><term>Pictures</term>
@@ -2960,6 +3339,7 @@ mean the right thing in four different places.</para>
 <row><entry>&Space;</entry><entry>Tick the form field that is picked</entry></row>
 <row><entry>Arrow keys</entry><entry>Move what is chosen a point at a time, or step through a group of radio buttons</entry></row>
 <row><entry><keycombo action="simul">&Shift;</keycombo> and the arrow keys</entry><entry>Move what is chosen ten points at a time</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>Up</keycap></keycombo>, <keycombo action="simul">&Ctrl;&Shift;<keycap>Down</keycap></keycombo></entry><entry>Raise or lower what is chosen, which is refused in words and explains why (<xref linkend="page-objects-limits"/>)</entry></row>
 <row><entry>&Del;, &Backspace;</entry><entry>Remove what is chosen on the page: an object, a comment, a form field</entry></row>
 <row><entry>&Shift; and a corner handle</entry><entry>Free the proportions of an object, or keep the proportions of a form field</entry></row>
 <row><entry>&Shift; and the turn handle</entry><entry>Snap the turn to fifteen degrees</entry></row>

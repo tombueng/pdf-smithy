@@ -178,7 +178,7 @@
         {
             "name": "the-pages-menu",
             "shows": "The Pages menu: turning and throwing away, trimming, numbering and sheets, signing, watermarking and redacting, scans and compression, correcting the words, and the Mark Up submenu",
-            "used-in": "arranging, signing",
+            "used-in": "arranging-selecting",
             "grab": "both",
             "steps": ["menu:pages"]
         },

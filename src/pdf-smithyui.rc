@@ -39,7 +39,6 @@
       <Action name="file_open_recent"/>
       <Separator/>
       <Action name="insert_file"/>
-    <Action name="insert_blank"/>
       <Action name="insert_blank"/>
       <Action name="import_images"/>
       <Separator/>
@@ -233,6 +232,7 @@
     <Separator/>
     <Action name="page_extract"/>
     <Action name="insert_file"/>
+    <Action name="insert_blank"/>
     <Separator/>
     <Action name="edit_select_all"/>
   </Menu>

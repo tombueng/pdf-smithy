@@ -374,11 +374,19 @@ QWidget *AnnotationOverlay::Details::buildEditor(QWidget *parent)
     // ── what kind of mark it is ───────────────────────────────────────────
     auto *kind = new QComboBox(sheet);
     for (const Annotation::Type type : allTypes) {
-        if (canBecome(comment, type)) {
+        // The comment's own kind is always offered, whatever canBecome() makes
+        // of it. A freehand mark whose strokes are empty draws nothing and so
+        // cannot be *made*, but it can certainly *be*: leaving it out of the
+        // list made the panel fall back to the first entry and announce the
+        // comment as a highlight, and changing anything else about it would
+        // then have turned it into one.
+        if (type == comment.type || canBecome(comment, type)) {
             kind->addItem(describe(type), int(type));
         }
     }
-    kind->setCurrentIndex(std::max(0, kind->findData(int(comment.type))));
+    const int mine = kind->findData(int(comment.type));
+    Q_ASSERT(mine >= 0);
+    kind->setCurrentIndex(mine);
     form->addRow(i18nc("@label:listbox highlight, note, rectangle and so on", "Kind:"), kind);
     QObject::connect(kind, &QComboBox::activated, sheet, [this, kind](int index) {
         m_overlay->setSelectedType(Annotation::Type(kind->itemData(index).toInt()));
