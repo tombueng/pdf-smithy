@@ -1,0 +1,59 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: PDF Smithy
+Upstream-Contact: Tom Bueng <tombueng@gmail.com>
+Source: https://github.com/tombueng/pdf-smithy
+
+Comment:
+ The engine under src/core/ is MIT so it can be reused elsewhere. The
+ application is GPL-3.0-or-later because it links Poppler, which is GPL and is
+ the only packaged Qt-native PDF renderer. See LICENSING.md for the reasoning
+ and for the route back to a permissive licence.
+
+Files: *
+Copyright: 2026 Tom Bueng <tombueng@gmail.com>
+License: GPL-3.0-or-later
+
+Files: src/core/*
+Copyright: 2026 Tom Bueng <tombueng@gmail.com>
+License: MIT
+
+Files: data/icons/*
+Copyright: 2026 Tom Bueng <tombueng@gmail.com>
+License: CC-BY-SA-4.0
+
+License: GPL-3.0-or-later
+ This program is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ .
+ On Debian systems, the full text of the GNU General Public License version 3
+ can be found in /usr/share/common-licenses/GPL-3.
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy of
+ this software and associated documentation files (the "Software"), to deal in
+ the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+ OR OTHER DEALINGS IN THE SOFTWARE.
+
+License: CC-BY-SA-4.0
+ Creative Commons Attribution-ShareAlike 4.0 International.
+ On Debian systems, the full text can be found in
+ /usr/share/common-licenses/CC-BY-SA-4.0 where available, or at
+ https://creativecommons.org/licenses/by-sa/4.0/legalcode

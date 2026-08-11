@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
+<gui name="pdf-smithy" version="19">
+
+<!--
+    NOTHING may be written above this line but the two lines that are there.
+
+    XMLGUI does not parse this file to find out which release it belongs to. It
+    scans the raw text: first angle bracket, first "gui" after it, first
+    "version" after that, then digits. A comment above the element that happens
+    to contain either word feeds the scanner the wrong thing, it gives up and
+    calls the file release zero, and an installed copy of an older one then
+    wins against it. The window comes up with last release's toolbars and
+    nothing anywhere says why. This is written from experience.
+
+    ── What is below ────────────────────────────────────────────────────────
+
+    Two rows of toolbars, never more.
+
+    The top row is the same in every mode: opening, saving, printing, undoing,
+    the four buttons that say what the user is here to do, and the two split
+    buttons that hold the zoom levels and the side panels. The row under it
+    belongs to the mode and changes with it, so that the tools on screen are
+    the tools that do something to the document on screen.
+
+    The number on the element above has to rise whenever anything below
+    changes, and it is not enough on its own. A user who has been through
+    Configure Toolbars has a copy of this file in their profile, and XMLGUI
+    prefers every container in that copy to ours whatever number either
+    carries, so a bar added here would never reach them. MainWindow strips
+    the containers out of an older copy before the description is read; see
+    discardStaleLayoutDescription. Keep LayoutGeneration there in step.
+-->
+
+  <MenuBar>
+    <Menu name="file">
+      <text context="@title:menu">&amp;File</text>
+      <Action name="file_open"/>
+      <Action name="file_open_recent"/>
+      <Separator/>
+      <Action name="insert_file"/>
+    <Action name="insert_blank"/>
+      <Action name="insert_blank"/>
+      <Action name="import_images"/>
+      <Separator/>
+      <Action name="file_save"/>
+      <Action name="file_save_as"/>
+      <Separator/>
+      <Action name="page_extract"/>
+      <Action name="file_split"/>
+
+      <!-- Everything the engine can write that is not this document as it
+           stands. Gathered rather than listed one after another in the menu
+           above: these are eight answers to one question, and "Export as" is
+           where somebody with that question looks. -->
+      <Menu name="export_as">
+        <text context="@title:menu">Export &amp;as</text>
+        <Action name="export_images"/>
+        <Separator/>
+        <Action name="export_text"/>
+        <Action name="export_html"/>
+        <Action name="export_markdown"/>
+        <Action name="export_tables"/>
+        <Separator/>
+        <Action name="export_web"/>
+        <Action name="export_pdfx"/>
+        <Action name="document_archive"/>
+      </Menu>
+      <Separator/>
+      <Action name="file_print_preview"/>
+      <Action name="file_print"/>
+      <Separator/>
+      <Action name="file_close"/>
+      <Action name="file_quit"/>
+    </Menu>
+
+    <Menu name="edit">
+      <text context="@title:menu">&amp;Edit</text>
+      <Action name="edit_undo"/>
+      <Action name="edit_redo"/>
+      <Separator/>
+      <Action name="edit_cut"/>
+      <Action name="edit_copy"/>
+      <Action name="edit_paste"/>
+      <Separator/>
+      <Action name="edit_apply"/>
+      <Separator/>
+      <Action name="edit_select_all"/>
+    </Menu>
+
+    <Menu name="pages">
+      <text context="@title:menu">&amp;Pages</text>
+      <Action name="page_rotate_left"/>
+      <Action name="page_rotate_right"/>
+      <Separator/>
+      <Action name="page_duplicate"/>
+      <Action name="page_delete"/>
+      <Action name="page_extract"/>
+      <Separator/>
+      <Action name="page_crop"/>
+      <Action name="page_number"/>
+      <Action name="page_nup"/>
+      <Separator/>
+      <Action name="page_sign"/>
+      <Action name="page_watermark"/>
+      <Action name="page_redact"/>
+      <Separator/>
+      <Action name="page_ocr"/>
+      <Action name="page_compress"/>
+      <Separator/>
+      <Action name="page_text"/>
+
+      <!-- The pens. A submenu rather than a dozen more lines in this one, and
+           the place they can be reached from the keyboard. -->
+      <Menu name="markup">
+        <text context="@title:menu">&amp;Mark Up</text>
+        <Action name="page_annotate"/>
+        <Separator/>
+        <Action name="draw_select"/>
+        <Separator/>
+        <Action name="draw_highlight"/>
+        <Action name="draw_underline"/>
+        <Action name="draw_strikeout"/>
+        <Separator/>
+        <Action name="draw_rectangle"/>
+        <Action name="draw_ellipse"/>
+        <Action name="draw_line"/>
+        <Action name="draw_freehand"/>
+        <Separator/>
+        <Action name="draw_textbox"/>
+        <Action name="draw_note"/>
+        <Separator/>
+        <Action name="comments_export"/>
+        <Action name="comments_import"/>
+      </Menu>
+    </Menu>
+
+    <Menu name="forms">
+      <text context="@title:menu">F&amp;orms</text>
+      <Action name="document_form"/>
+      <Separator/>
+      <Action name="tool_form_builder"/>
+      <Action name="tool_form_behaviour"/>
+      <Separator/>
+      <Action name="field_none"/>
+      <Action name="field_text"/>
+      <Action name="field_checkbox"/>
+      <Action name="field_radio"/>
+      <Action name="field_dropdown"/>
+      <Action name="field_list"/>
+      <Action name="field_button"/>
+      <Action name="field_signature"/>
+    </Menu>
+
+    <Menu name="tools">
+      <text context="@title:menu">&amp;Tools</text>
+      <Action name="tool_preflight"/>
+      <Separator/>
+      <Action name="tool_objects"/>
+      <Action name="tool_layout"/>
+      <Separator/>
+      <Action name="tool_colour"/>
+      <Action name="tool_fonts"/>
+      <Action name="tool_images"/>
+      <Separator/>
+      <Action name="tool_object_list"/>
+      <Action name="tool_typeset"/>
+    </Menu>
+
+    <Menu name="document">
+      <text context="@title:menu">&amp;Document</text>
+      <Action name="document_metadata"/>
+      <Action name="document_sanitize"/>
+      <Action name="document_compare"/>
+      <Separator/>
+      <Action name="document_password"/>
+    </Menu>
+
+    <Menu name="view">
+      <text context="@title:menu">&amp;View</text>
+      <Action name="mode_view"/>
+      <Action name="mode_edit"/>
+      <Action name="mode_form"/>
+      <Action name="mode_organise"/>
+      <Separator/>
+      <Action name="go_first_page"/>
+      <Action name="go_previous_page"/>
+      <Action name="go_next_page"/>
+      <Action name="go_last_page"/>
+      <Separator/>
+      <Action name="tool_select_text"/>
+      <Action name="tool_select_area"/>
+      <Action name="tool_pan"/>
+      <Separator/>
+      <Action name="zoom_in"/>
+      <Action name="zoom_out"/>
+      <Action name="zoom_fit_width"/>
+      <Action name="zoom_fit_height"/>
+      <Action name="zoom_one_page"/>
+      <Action name="zoom_two_pages"/>
+      <Action name="zoom_free"/>
+      <Separator/>
+      <Action name="view_facing"/>
+      <Separator/>
+      <Action name="show_thumbnails"/>
+      <Action name="show_outline"/>
+      <Action name="show_inspector"/>
+    </Menu>
+  </MenuBar>
+
+  <!-- Right-click on the page grid. Defined here so it stays translated and
+       configurable alongside the menu bar instead of drifting apart from it. -->
+  <Menu name="page_context">
+    <text context="@title:menu">Page</text>
+    <Action name="page_rotate_left"/>
+    <Action name="page_rotate_right"/>
+    <Separator/>
+    <Action name="page_duplicate"/>
+    <Action name="page_delete"/>
+    <Separator/>
+    <Action name="page_sign"/>
+    <Action name="page_watermark"/>
+    <Separator/>
+    <Action name="page_ocr"/>
+    <Action name="page_compress"/>
+    <Action name="page_crop"/>
+    <Action name="page_redact"/>
+    <Action name="page_annotate"/>
+    <Action name="page_text"/>
+    <Action name="comments_export"/>
+    <Action name="comments_import"/>
+    <Action name="page_nup"/>
+    <Separator/>
+    <Action name="page_extract"/>
+    <Action name="insert_file"/>
+    <Separator/>
+    <Action name="edit_select_all"/>
+  </Menu>
+
+  <!-- Right-click on the document itself. Three menus rather than one,
+       because the mode is the whole of what a click there means: reading asks
+       "copy this, mark this", editing the page asks "cut this, keep what I
+       have done", and laying a form out asks about fields. None of them asks
+       about the order of the pages, which is what the menu above is for. -->
+  <Menu name="read_context">
+    <text context="@title:menu">Page</text>
+    <Action name="edit_copy"/>
+    <Action name="edit_select_all"/>
+    <Separator/>
+    <Action name="draw_highlight"/>
+    <Action name="draw_underline"/>
+    <Action name="draw_strikeout"/>
+    <Separator/>
+    <Action name="tool_select_text"/>
+    <Action name="tool_select_area"/>
+    <Action name="tool_pan"/>
+    <Separator/>
+    <Action name="mode_edit"/>
+  </Menu>
+
+  <Menu name="page_edit_context">
+    <text context="@title:menu">Page</text>
+    <Action name="edit_cut"/>
+    <Action name="edit_copy"/>
+    <Action name="edit_paste"/>
+    <Action name="object_take_back"/>
+    <Separator/>
+    <Action name="draw_select"/>
+    <Action name="draw_highlight"/>
+    <Action name="draw_rectangle"/>
+    <Action name="draw_textbox"/>
+    <Action name="draw_note"/>
+    <Separator/>
+    <Action name="edit_apply"/>
+  </Menu>
+
+  <Menu name="form_context">
+    <text context="@title:menu">Form</text>
+    <Action name="edit_cut"/>
+    <Action name="edit_copy"/>
+    <Action name="edit_paste"/>
+    <Separator/>
+    <Action name="field_none"/>
+    <Action name="field_text"/>
+    <Action name="field_checkbox"/>
+    <Action name="field_dropdown"/>
+    <Separator/>
+    <Action name="tool_form_behaviour"/>
+    <Action name="edit_apply"/>
+  </Menu>
+
+  <!-- ══ Row one: the same in every mode ═══════════════════════════════════
+       Text under the icons, because these are the dozen things reached most
+       often and a picture alone is a guessing game. Deliberately *not* said
+       here with an iconText attribute: a bar built with one ignores both the
+       user's Plasma-wide choice and the one in its own context menu, for ever.
+       MainWindow sets it as a default instead, so it can still be overruled. -->
+  <ToolBar name="mainToolBar" noMerge="1">
+    <text context="@title:menu">Main Toolbar</text>
+    <Action name="file_open"/>
+    <Action name="file_save"/>
+    <Action name="file_print"/>
+    <Separator/>
+    <Action name="edit_undo"/>
+    <Action name="edit_redo"/>
+    <Separator/>
+    <Action name="mode_view"/>
+    <Action name="mode_edit"/>
+    <Action name="mode_form"/>
+    <Action name="mode_organise"/>
+    <Separator/>
+    <Action name="view_zoom"/>
+    <Action name="view_sidebars"/>
+    <Action name="hamburger_menu"/>
+  </ToolBar>
+
+  <!-- ══ Row two: whichever one the mode is about ══════════════════════════
+       Icons only, and dense: these are the tools of a job already chosen, and
+       the person doing it learns the row in a morning. -->
+
+  <!-- Reading. Turning pages, taking a copy of something, and choosing what a
+       drag on the page does, which is the question a reader asks first. -->
+  <ToolBar name="readToolBar" newline="true">
+    <text context="@title:menu">Reading</text>
+    <Action name="go_first_page"/>
+    <Action name="go_previous_page"/>
+    <Action name="go_next_page"/>
+    <Action name="go_last_page"/>
+    <Separator/>
+    <Action name="tool_select"/>
+    <Action name="edit_copy"/>
+    <Separator/>
+    <Action name="zoom_fit_width"/>
+    <Action name="zoom_one_page"/>
+    <Action name="view_facing"/>
+    <Separator/>
+    <Action name="document_form"/>
+  </ToolBar>
+
+  <!-- Correcting the page: the words, what the page draws, and the marks made
+       on top of both. Ends with the button that writes them down. -->
+  <ToolBar name="pageToolBar" newline="true">
+    <text context="@title:menu">Page</text>
+    <Action name="go_previous_page"/>
+    <Action name="go_next_page"/>
+    <Separator/>
+    <Action name="page_text"/>
+    <Action name="tool_objects"/>
+    <Separator/>
+    <Action name="draw_select"/>
+    <Action name="draw_highlight"/>
+    <Action name="draw_underline"/>
+    <Action name="draw_strikeout"/>
+    <Action name="draw_shape"/>
+    <Action name="draw_textbox"/>
+    <Action name="draw_note"/>
+    <Separator/>
+    <Action name="edit_apply"/>
+  </ToolBar>
+
+  <!-- Laying a form out. Every kind of field at once on purpose: you reach for
+       these dozens of times while drawing a form and never otherwise. -->
+  <ToolBar name="formToolBar" newline="true">
+    <text context="@title:menu">Form Fields</text>
+    <Action name="go_previous_page"/>
+    <Action name="go_next_page"/>
+    <Separator/>
+    <Action name="field_none"/>
+    <Separator/>
+    <Action name="field_text"/>
+    <Action name="field_checkbox"/>
+    <Action name="field_radio"/>
+    <Action name="field_dropdown"/>
+    <Action name="field_list"/>
+    <Separator/>
+    <Action name="field_button"/>
+    <Action name="field_signature"/>
+    <Separator/>
+    <Action name="tool_form_behaviour"/>
+    <Action name="edit_apply"/>
+  </ToolBar>
+
+  <!-- Whole pages: turning, throwing away, bringing more in, taking some out.
+       Rotating keeps both directions as buttons of their own rather than a
+       menu, because it is the one thing on this bar done over and over. -->
+  <ToolBar name="organiseToolBar" newline="true">
+    <text context="@title:menu">Pages</text>
+    <Action name="page_rotate_left"/>
+    <Action name="page_rotate_right"/>
+    <Separator/>
+    <Action name="page_duplicate"/>
+    <Action name="page_delete"/>
+    <Separator/>
+    <Action name="insert_pages"/>
+    <Action name="export_pages"/>
+    <Separator/>
+    <Action name="page_crop"/>
+    <Action name="page_number"/>
+    <Action name="page_nup"/>
+    <Separator/>
+    <Action name="edit_select_all"/>
+  </ToolBar>
+
+</gui>

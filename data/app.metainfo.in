@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SPDX-FileCopyrightText: 2026 Tom Bueng <tombueng@gmail.com>
+    SPDX-License-Identifier: CC0-1.0
+-->
+<component type="desktop-application">
+  <id>@PS_APPID@</id>
+  <launchable type="desktop-id">@PS_APPID@.desktop</launchable>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>@PS_DISPLAY@</name>
+  <name xml:lang="de">@PS_DISPLAY@</name>
+
+  <summary>Edit PDF documents on your own machine</summary>
+  <summary xml:lang="de">PDF-Dokumente auf dem eigenen Rechner bearbeiten</summary>
+
+  <description>
+    <p>
+      PDF Smithy is a native PDF editor for Linux. It reorders, merges, splits,
+      rotates, compresses, signs and OCRs documents — and it does all of it
+      locally, so confidential contracts and medical records never leave the
+      machine they are on.
+    </p>
+    <p xml:lang="de">
+      PDF Smithy ist ein nativer PDF-Editor für Linux. Er sortiert, fügt
+      zusammen, teilt, dreht, komprimiert, signiert und erkennt Text — und zwar
+      vollständig lokal, damit vertrauliche Verträge und Arztbriefe den eigenen
+      Rechner nie verlassen.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Reorder pages by dragging them, across several documents at once</li>
+      <li>Merge, split and extract without re-encoding a single page</li>
+      <li>Rotate, duplicate and delete with full undo</li>
+      <li>Lossless saving — a scanned contract keeps its exact image data</li>
+    </ul>
+  </description>
+
+  <categories>
+    <category>Office</category>
+    <category>Graphics</category>
+  </categories>
+
+  <keywords>
+    <keyword>PDF</keyword>
+    <keyword>merge</keyword>
+    <keyword>split</keyword>
+    <keyword>OCR</keyword>
+    <keyword>sign</keyword>
+  </keywords>
+
+  <provides>
+    <binary>@PS_NAME@</binary>
+  </provides>
+
+  <url type="homepage">https://github.com/tombueng/@PS_NAME@</url>
+  <url type="bugtracker">https://github.com/tombueng/@PS_NAME@/issues</url>
+
+  <developer id="io.github.tombueng">
+    <name>Tom Bueng</name>
+  </developer>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="@PS_VERSION@" date="2026-07-27">
+      <description>
+        <p>First release: page management, merging, splitting and lossless saving.</p>
+      </description>
+    </release>
+  </releases>
+</component>

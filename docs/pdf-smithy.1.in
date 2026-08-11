@@ -1,0 +1,70 @@
+.\" SPDX-FileCopyrightText: 2026 Tom Bueng <tombueng@gmail.com>
+.\" SPDX-License-Identifier: GPL-3.0-or-later
+.TH PDF-SMITHY 1 "2026" "PDF Smithy @PS_VERSION@" "User Commands"
+.SH NAME
+pdf-smithy \- edit PDF documents on your own machine
+.SH SYNOPSIS
+.B pdf-smithy
+.RI [ options ]
+.RI [ file ...]
+.SH DESCRIPTION
+.B PDF Smithy
+is a PDF editor for the desktop. It reorders, merges and splits pages, makes
+scans searchable and straight, fills in forms, marks documents up, takes content
+out for good, corrects the words on a page, converts for archiving and compares
+two drafts \(em all of it locally.
+.PP
+The point is the last part. The usual way to do any of this is to upload the
+document to a website, which for a contract, a payslip or a medical letter is
+not a reasonable thing to be asked to do. Nothing here leaves the machine.
+.SH OPTIONS
+.TP
+.I file
+Opens the given documents. Several files open as one, in the order named, which
+is how merging starts.
+.TP
+.B --help
+Shows the standard Qt and KDE options as well as these.
+.SH FEATURES
+.TP
+.B Pages
+Reorder by dragging, across several documents at once. Rotate, duplicate,
+delete, extract, crop, and arrange several to a sheet. Every step is undoable.
+.TP
+.B Text recognition
+Turns a scan into something selectable without re-rendering the page: the image
+bytes that went in come back out, with the recognised words laid over them
+invisibly.
+.TP
+.B Redaction
+Content is taken out of the file rather than painted over. Text goes character by
+character so the rest of the line survives; a picture that overlaps is edited
+pixel by pixel.
+.TP
+.B Comments
+Highlight, underline, strike out, boxes, ovals, lines, freehand, text boxes and
+notes, each written with its own appearance so it looks the same in every
+reader. They can be exported on their own as XFDF \(em sending back a marked-up
+contract otherwise means sending the contract.
+.TP
+.B Forms
+Fill in official forms and, when the answers are final, make them permanent.
+.TP
+.B Correcting text
+Fix a typo, a date or a name in the page's own font. It says plainly what it will
+not do: there is no reflow, because a PDF does not record which line follows
+which.
+.TP
+.B Archiving and comparing
+Convert to PDF/A for long-term keeping, look for what would stop a file being
+archival, and see what changed between two drafts side by side.
+.SH FILES
+.TP
+.I ~/.config/pdf-smithyrc
+Window geometry, toolbar layout and recent files.
+.SH SEE ALSO
+.BR pdf-smithy-cli (1)
+.PP
+Everything the window can do to a document, the command line can do too.
+.SH AUTHOR
+Tom Bueng <tombueng@gmail.com>

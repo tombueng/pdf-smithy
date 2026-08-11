@@ -1,0 +1,104 @@
+Source: pdf-smithy
+Section: graphics
+Priority: optional
+Maintainer: Tom Bueng <tombueng@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               cmake,
+               ninja-build,
+               extra-cmake-modules,
+               gettext,
+               pkgconf,
+               qt6-base-dev,
+               qt6-tools-dev,
+               libkf6coreaddons-dev,
+               libkf6xmlgui-dev,
+               libkf6config-dev,
+               libkf6configwidgets-dev,
+               libkf6i18n-dev,
+# Without this the handbook is not built, and F1 opens nothing. A package that
+# quietly ships no documentation is worse than one that fails to build.
+               libkf6doctools-dev | kdoctools5,
+               libkf6kio-dev,
+               libkf6crash-dev,
+               libkf6iconthemes-dev,
+               libkf6widgetsaddons-dev,
+               libkf6guiaddons-dev,
+               libpoppler-qt6-dev,
+               libqpdf-dev,
+               libtesseract-dev,
+               libleptonica-dev,
+# Optional in CMake and named here on purpose. Without it the colour tools hand
+# every ICC conversion to Ghostscript instead of doing it in process, and the
+# build says so in one line of output that nobody reads. A package that quietly
+# loses a feature is worse than one that fails to build.
+               liblcms2-dev,
+# ── What the suite needs in order to run its cases rather than skip them.
+# dh_auto_test runs the whole suite, and nearly every one of these tests reports
+# itself as passing when its tool is absent, so a shorter list here would turn a
+# real suite into a green tick.
+#
+#   xvfb              the end-to-end tests drive a real window
+#   ghostscript       the scan fixtures are rasterised with gs, and the
+#                     compression and PDF/A cases shell out to it
+#   fonts-urw-base35  gs needs a Helvetica to draw those fixtures with, and OCR
+#                     over a page drawn in a fallback font proves nothing. It
+#                     arrives today as a dependency of libgs10-common; it is
+#                     named here because the fixtures depend on the fonts
+#                     themselves, not on that chain staying as it happens to be
+#   tesseract-ocr-*   with no language data ScanProcessor reports itself
+#                     unavailable and the entire OCR suite skips. Both languages,
+#                     because the scan tests recognise German as well as English
+#   appstream         appstreamcli backs the metadata test, which data's
+#                     CMakeLists registers only when it finds the program
+#   python3           the four Python guards: translatable strings, duplicate
+#                     shortcuts, unreachable actions, and the man page
+#   libxml2-utils     xmllint, which the handbook check needs
+#   docbook-xml       the DTDs locally, so validating the handbook neither
+#                     reaches for the network nor fails without it
+#   locales-all       every C++ test is registered twice, once under LC_ALL=C
+#                     and once under de_DE.UTF-8. Asking for a locale that does
+#                     not exist is not an error: the C locale quietly applies
+#                     instead, so in a clean chroot half the suite would pass
+#                     while testing nothing
+               xvfb <!nocheck>,
+               ghostscript <!nocheck>,
+               fonts-urw-base35 <!nocheck>,
+               tesseract-ocr-eng <!nocheck>,
+               tesseract-ocr-deu <!nocheck>,
+               appstream <!nocheck>,
+               python3 <!nocheck>,
+               libxml2-utils <!nocheck>,
+               docbook-xml <!nocheck>,
+               locales-all <!nocheck>
+Standards-Version: 4.7.0
+Homepage: https://github.com/tombueng/pdf-smithy
+Rules-Requires-Root: no
+
+Package: pdf-smithy
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+# Ghostscript and the language data are run as subprocesses rather than linked,
+# so nothing in the build discovers them and nothing but these lines asks for
+# them. Breeze is here because a KDE application away from Plasma asks the icon
+# theme for names such as "object-rotate-right" and gets nothing back, which
+# shows up as an empty toolbar rather than as an error.
+Recommends: ghostscript,
+            tesseract-ocr-eng,
+            breeze-icon-theme
+Suggests: tesseract-ocr-deu
+Description: native PDF editor that keeps your documents on your machine
+ PDF Smithy reorders, merges, splits, rotates, compresses, signs and OCRs PDF
+ documents locally, so confidential contracts and medical records never leave
+ the computer they are on.
+ .
+ Page operations are lossless: the document's object structure is edited rather
+ than its pages re-rendered, so a scanned contract keeps the exact image data it
+ arrived with. Text recognition adds an invisible layer over the scan instead of
+ replacing it, and crooked pages are straightened by transform rather than by
+ resampling.
+ .
+ Everything the window can do is also available from pdf-smithy-cli, so the same
+ operations can be scripted.
+ .
+ Ghostscript is needed for image compression and the tesseract-ocr language
+ packages for text recognition; both are optional.

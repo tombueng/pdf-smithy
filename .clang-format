@@ -1,0 +1,30 @@
+# Based on the KDE Frameworks coding style so that contributions from the
+# wider KDE ecosystem land without reformatting churn.
+---
+Language: Cpp
+BasedOnStyle: WebKit
+Standard: c++20
+
+AlignAfterOpenBracket: Align
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+ColumnLimit: 120
+IndentWidth: 4
+NamespaceIndentation: None
+PointerAlignment: Right
+SortIncludes: false
+SpaceAfterTemplateKeyword: false
+TabWidth: 4
+UseTab: Never

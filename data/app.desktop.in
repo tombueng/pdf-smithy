@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Application
+Name=@PS_DISPLAY@
+GenericName=PDF Editor
+GenericName[de]=PDF-Editor
+Comment=Reorder, merge, split, sign and OCR PDF documents without uploading them anywhere
+Comment[de]=PDF-Dokumente sortieren, zusammenfügen, teilen, signieren und mit Texterkennung versehen — ohne Upload
+Exec=@PS_NAME@ %U
+Icon=@PS_APPID@
+Terminal=false
+MimeType=application/pdf;
+Categories=Office;Graphics;Publishing;Qt;KDE;
+Keywords=PDF;merge;split;rotate;OCR;scan;sign;compress;form;
+Keywords[de]=PDF;zusammenfügen;teilen;drehen;OCR;Scan;signieren;komprimieren;Formular;
+StartupNotify=true
+X-DBUS-ServiceName=@PS_APPID@
+X-KDE-Protocols=file,smb,sftp,fish,webdav,webdavs

@@ -1,0 +1,14 @@
+/*
+    SPDX-FileCopyrightText: 2026 Tom Bueng <tombueng@gmail.com>
+    SPDX-License-Identifier: MIT
+
+    Generated from config.h.in. Do not edit. The project's identity is defined
+    in the top-level CMakeLists.txt and flows from there into the binary, the
+    .desktop file and the AppStream metainfo.
+*/
+#pragma once
+
+#define PS_NAME    "@PS_NAME@"
+#define PS_DISPLAY "@PS_DISPLAY@"
+#define PS_APPID   "@PS_APPID@"
+#define PS_VERSION "@PROJECT_VERSION@"

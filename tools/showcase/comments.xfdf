@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SPDX-FileCopyrightText: 2026 Tom Bueng <tombueng@gmail.com>
+    SPDX-License-Identifier: GPL-3.0-or-later
+
+    The four marks the handbook needs a picture of: a highlight over a line of
+    body text, a note anchored beside it, an ink stroke drawn by hand, and a
+    rectangle round a figure.
+
+    Pages count from the start of the remarks section rather than from the start
+    of the document, because the section moves whenever a page is added ahead of
+    it. make-showcase.py adds the section's own first page before importing.
+-->
+<xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve">
+  <annots>
+
+    <highlight page="0" rect="70.87,612,340,626" color="#ffd23f" opacity="0.55"
+               title="Wren Halloway" creationdate="D:20260214093000+01'00'"
+               coords="70.87,626,340,626,70.87,612,340,612">
+      <contents>The count for March is the one worth checking against the ringing log.</contents>
+    </highlight>
+
+    <text page="0" rect="360,596,384,620" color="#ef476f"
+          title="Wren Halloway" creationdate="D:20260214093200+01'00'">
+      <contents>Ask the warden whether the March figure includes the second island.</contents>
+    </text>
+
+    <ink page="0" rect="70,470,300,540" color="#118ab2" width="1.6"
+         title="Wren Halloway" creationdate="D:20260214094500+01'00'"
+         inklist="82,486;110,522;138,478;166,520;194,482;222,516;250,488">
+      <contents>The shape of the season, sketched.</contents>
+    </ink>
+
+    <square page="0" rect="70,300,330,440" color="#06d6a0" width="2.0"
+            title="Wren Halloway" creationdate="D:20260214095100+01'00'">
+      <contents>This plate goes on the facing page in the printed edition.</contents>
+    </square>
+
+  </annots>
+</xfdf>

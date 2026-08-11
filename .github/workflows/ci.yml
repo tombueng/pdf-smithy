@@ -1,0 +1,311 @@
+name: CI
+#
+# The fast checks: compile, run the suite, build the .deb, look at the metadata.
+# The Flatpak bundle and the AppImage are built in release.yml instead, because
+# between them they download a KDE runtime and compile QPDF, Poppler, Tesseract
+# and Ghostscript from source — three quarters of an hour that would sit in
+# front of every pull request without telling anybody anything new.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  build:
+    name: ${{ matrix.os }} · ${{ matrix.compiler }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-latest]
+        compiler: [gcc, clang]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build extra-cmake-modules gettext \
+            qt6-base-dev qt6-tools-dev \
+            libkf6coreaddons-dev libkf6xmlgui-dev libkf6config-dev \
+            libkf6i18n-dev libkf6kio-dev libkf6crash-dev \
+            libkf6iconthemes-dev libkf6widgetsaddons-dev \
+            libkf6configwidgets-dev libkf6guiaddons-dev \
+            libpoppler-qt6-dev libqpdf-dev libtesseract-dev libleptonica-dev
+          if [ "${{ matrix.compiler }}" = "clang" ]; then sudo apt-get install -y clang; fi
+
+      # A separate step because none of this is needed to compile anything: it
+      # is what the suite needs in order to run its cases rather than skip them.
+      # Nearly every one of these tests reports itself as passing when its tool
+      # is absent — QSKIP, or a check CMake never registers at all — and a suite
+      # that quietly drops half its cases is worse than one that fails.
+      #
+      #   xvfb              the end-to-end tests drive a real window
+      #   ghostscript       the scan fixtures are rasterised with gs, and the
+      #                     compression and PDF/A cases shell out to it
+      #   fonts-urw-base35  gs needs a Helvetica to draw those fixtures with,
+      #                     and OCR over a page drawn in a fallback font proves
+      #                     nothing. It arrives today as a hard dependency of
+      #                     libgs10-common; it is named here because the
+      #                     fixtures depend on the fonts themselves, not on that
+      #                     chain staying the way it happens to be
+      #   tesseract-ocr-*   with no language data ScanProcessor reports itself
+      #                     unavailable and the entire OCR suite skips
+      #   appstream         appstreamcli backs the two metadata tests, which
+      #                     data/CMakeLists.txt and ECM register only when they
+      #                     find the program
+      #   python3           likewise for the Python checks — translatable
+      #                     strings, duplicate shortcuts, the man page, the
+      #                     handbook, and whatever is added after them
+      #   libxml2-utils     xmllint, which the handbook check needs
+      #   docbook-xml       the DocBook DTDs locally, so validating a handbook
+      #                     neither reaches for the network nor fails without it
+      #   locales           locale-gen, for the step below
+      - name: Install what the tests need
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            xvfb ghostscript fonts-urw-base35 \
+            tesseract-ocr-eng tesseract-ocr-deu \
+            appstream python3 libxml2-utils docbook-xml locales
+
+      # The handbook refers to the KDE variant of the DocBook DTD, which is
+      # resolved through an XML catalogue that KDocTools installs rather than
+      # through a path. Without it tools/check-docbook.py can only say the
+      # handbook is well-formed XML and says so out loud instead of failing —
+      # true, and much weaker than what it is for.
+      #
+      # KDocTools for KF6 reached the archive only after 24.04, so the release is
+      # asked before the package is named. The KF5 tools carry the same
+      # catalogue, and check-docbook.py looks for it under any framework version,
+      # so the handbook is validated on both; only where the KF6 package exists
+      # does CMake also compile and install the handbook itself, which is the
+      # other half of the reason to install it. An install that fails for any
+      # reason other than "this release does not have it" still fails the job.
+      - name: Install the DocBook tooling
+        run: |
+          if apt-cache show libkf6doctools-dev > /dev/null 2>&1; then
+            sudo apt-get install -y --no-install-recommends libkf6doctools-dev
+          else
+            echo "No KF6 KDocTools on this release — falling back to the KF5 tools,"
+            echo "which validate the handbook but cannot build it."
+            sudo apt-get install -y --no-install-recommends kdoctools5
+          fi
+
+      # Every C++ test is registered twice — once under LC_ALL=C and once under
+      # LC_ALL=de_DE.UTF-8 — because PDF numbers must be written with a full
+      # stop whatever the desktop's decimal separator is, and the German run is
+      # the one that proves it. The runner images generate only C and en_US, and
+      # asking for a locale that does not exist is not an error: the C locale
+      # quietly applies instead, so those runs would pass while testing nothing
+      # and the guard would be gone without a word. Generating it is what makes
+      # them real, and the last line is here so that a failure to generate it
+      # fails now rather than turning into silence later.
+      - name: Generate the German locale
+        run: |
+          sudo locale-gen de_DE.UTF-8
+          sudo update-locale
+          locale -a | grep -qiE '^de_DE\.utf-?8$'
+
+      - name: Configure
+        run: |
+          if [ "${{ matrix.compiler }}" = "clang" ]; then
+            export CC=clang CXX=clang++
+          fi
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build build
+
+      # Under Xvfb even though tests/CMakeLists.txt hands every test
+      # QT_QPA_PLATFORM=offscreen: the plugin covers the widgets, and the
+      # display is here for anything underneath them that asks the X server a
+      # question anyway. It costs a second and it removes a whole class of
+      # "works on my machine".
+      #
+      # --no-tests=error rather than the default: if the tests subdirectory ever
+      # stops being configured — a missing Qt6Test, a renamed option — an empty
+      # run would otherwise be a green tick.
+      - name: Test
+        run: |
+          xvfb-run -a --server-args="-screen 0 1400x900x24" \
+            ctest --test-dir build --output-on-failure --no-tests=error
+
+      - name: Install
+        run: |
+          sudo cmake --install build
+          test -x /usr/local/bin/pdf-smithy
+          test -x /usr/local/bin/pdf-smithy-cli
+
+  sanitizers:
+    name: Address and UB sanitizers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          # appstream is deliberately absent from this list: the two metadata
+          # tests only run appstreamcli over an XML file, so there is nothing
+          # here for a sanitizer to see, and the build job already runs them.
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build extra-cmake-modules gettext \
+            qt6-base-dev qt6-tools-dev \
+            libkf6coreaddons-dev libkf6xmlgui-dev libkf6config-dev \
+            libkf6i18n-dev libkf6kio-dev libkf6crash-dev \
+            libkf6iconthemes-dev libkf6widgetsaddons-dev \
+            libkf6configwidgets-dev libkf6guiaddons-dev \
+            libpoppler-qt6-dev libqpdf-dev libtesseract-dev libleptonica-dev \
+            tesseract-ocr-eng tesseract-ocr-deu ghostscript fonts-urw-base35 \
+            xvfb locales
+
+      # This job runs the same ctest suite, so it needs the same German locale
+      # for the second half of it to mean anything. See the build job for why.
+      - name: Generate the German locale
+        run: |
+          sudo locale-gen de_DE.UTF-8
+          sudo update-locale
+          locale -a | grep -qiE '^de_DE\.utf-?8$'
+
+      - name: Configure with sanitizers
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DBUILD_TESTING=ON \
+            -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer -g" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+
+      - name: Build
+        run: cmake --build build
+
+      # Qt and Poppler leak a little at exit by design; the sanitizers are here
+      # to catch our own memory errors, not to police library shutdown.
+      - name: Test
+        env:
+          ASAN_OPTIONS: detect_leaks=0:abort_on_error=1
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+        run: xvfb-run -a ctest --test-dir build --output-on-failure --no-tests=error
+
+  package:
+    name: Debian package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends devscripts equivs
+          # Reads debian/control and installs exactly what it asks for, so the
+          # dependency list cannot drift away from what actually builds.
+          sudo mk-build-deps --install --remove \
+            --tool "apt-get -y --no-install-recommends" debian/control
+
+      # debian/rules runs the suite through dh_auto_test, so this job runs the
+      # German half of it too and needs the locale for the same reason the build
+      # job does.
+      - name: Generate the German locale
+        run: |
+          sudo apt-get install -y --no-install-recommends locales
+          sudo locale-gen de_DE.UTF-8
+          sudo update-locale
+          locale -a | grep -qiE '^de_DE\.utf-?8$'
+
+      - name: Build the package
+        run: dpkg-buildpackage -us -uc -b
+
+      - name: Check it with lintian
+        run: |
+          sudo apt-get install -y --no-install-recommends lintian
+          lintian ../pdf-smithy_*.deb || true
+
+      - name: Install it and check it runs
+        run: |
+          sudo apt-get install -y ../pdf-smithy_*.deb
+          pdf-smithy-cli --version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: debian-package
+          path: ../pdf-smithy_*.deb
+
+  format:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: sudo apt-get update && sudo apt-get install -y clang-format
+
+      - name: Check formatting
+        run: |
+          files=$(find src tests -name '*.cpp' -o -name '*.h')
+          clang-format --dry-run --Werror $files
+
+  translations:
+    name: Translations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install gettext
+        run: sudo apt-get update && sudo apt-get install -y gettext
+
+      - name: Validate catalogues
+        run: |
+          for po in po/*/*.po; do
+            echo "── $po"
+            msgfmt --check --statistics -o /dev/null "$po"
+          done
+
+      # A string added without re-running Messages.sh silently ships
+      # untranslated, so the extraction is verified to be current.
+      - name: Check the template is up to date
+        run: |
+          cp po/pdf-smithy.pot /tmp/committed.pot
+          ./Messages.sh
+          if ! diff -q \
+              <(grep -v '^"POT-Creation-Date' /tmp/committed.pot) \
+              <(grep -v '^"POT-Creation-Date' po/pdf-smithy.pot) > /dev/null; then
+            echo "::error::po/pdf-smithy.pot is stale — run ./Messages.sh and commit the result"
+            diff <(grep '^msgid' /tmp/committed.pot) <(grep '^msgid' po/pdf-smithy.pot) || true
+            exit 1
+          fi
+
+  metadata:
+    name: Desktop metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install validators
+        run: sudo apt-get update && sudo apt-get install -y appstream desktop-file-utils
+
+      - name: Validate
+        run: |
+          sed -e 's/@PS_APPID@/io.github.tombueng.PdfSmithy/g' \
+              -e 's/@PS_NAME@/pdf-smithy/g' \
+              -e 's/@PS_DISPLAY@/PDF Smithy/g' \
+              -e 's/@PS_VERSION@/0.1.0/g' \
+              data/app.metainfo.in > /tmp/app.metainfo.xml
+          appstreamcli validate --no-net --explain /tmp/app.metainfo.xml
+
+          sed -e 's/@PS_APPID@/io.github.tombueng.PdfSmithy/g' \
+              -e 's/@PS_NAME@/pdf-smithy/g' \
+              -e 's/@PS_DISPLAY@/PDF Smithy/g' \
+              data/app.desktop.in > /tmp/app.desktop
+          desktop-file-validate /tmp/app.desktop

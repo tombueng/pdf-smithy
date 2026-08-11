@@ -1,0 +1,28 @@
+build/
+build-*/
+.cache/
+compile_commands.json
+*.user
+*.kdev4
+.kdev4/
+CMakeLists.txt.user*
+.DS_Store
+
+# Downloaded test scans — third-party documents, fetched on demand
+testdata/
+
+# Debian build artefacts
+debian/.debhelper/
+debian/pdf-smithy/
+debian/files
+debian/*.substvars
+debian/*.debhelper.log
+debian/debhelper-build-stamp
+build-appimage/
+obj-*/
+
+# The harness's own settings, which belong to whoever is running it
+.claude/
+
+# Scratch from a translation run, rebuilt whenever it is needed
+po/slices/

@@ -1,0 +1,2998 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY pdfsmithy "<application>PDF Smithy</application>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
+]>
+
+<book id="pdf-smithy" lang="&language;">
+
+<bookinfo>
+<title>The &pdfsmithy; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Tom</firstname>
+<surname>Bueng</surname>
+<affiliation>
+<address><email>tombueng@gmail.com</email></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<copyright>
+<year>2026</year>
+<holder>Tom Bueng</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2026-08-10</date>
+<releaseinfo>0.1.0</releaseinfo>
+
+<abstract>
+<para>&pdfsmithy; is a &PDF; editor for the &Linux; desktop. It reads
+documents, corrects the words on a page, draws and fills in forms, arranges and
+merges pages, reads scans, signs, stamps, comments, redacts, compresses, prints
+and hands files to an archive. All of it happens on the machine it is installed
+on. Nothing is uploaded anywhere.</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>pdf-smithy</keyword>
+<keyword>PDF</keyword>
+<keyword>OCR</keyword>
+<keyword>scan</keyword>
+<keyword>redaction</keyword>
+<keyword>signature</keyword>
+<keyword>watermark</keyword>
+<keyword>forms</keyword>
+<keyword>PDF/A</keyword>
+<keyword>preflight</keyword>
+<keyword>privacy</keyword>
+</keywordset>
+</bookinfo>
+
+
+<!-- ==================================================================== -->
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>&pdfsmithy; edits &PDF; documents. It opens one at reading size, where
+you turn its pages, select and copy its text and fill in its form. From there
+you can correct the words on the page, move what it draws, mark it up, draw a
+form onto it, or step back and put its pages in a different order. It also
+signs, stamps, blacks out for good, makes documents smaller, reads scans,
+prints them as booklets and converts them for an archive.</para>
+
+<para>It exists because of how that work is usually done. The quickest way to
+merge two &PDF; files or turn a scan into searchable text is to find a website
+that will do it, and the file in front of you is an employment contract, a
+payslip, a tenancy agreement or a letter from a hospital. Uploading any of
+those to a stranger's server in order to rotate a page is not a reasonable
+thing to be asked to do, and it is what most people end up doing, because the
+alternative was five separate tools that do not know about each other. Nothing
+in &pdfsmithy; leaves this machine. There is no account and no upload. The only
+time it touches the network at all is when you ask it to open or save a
+document on a share you named yourself, and even then the file is fetched,
+edited here and copied back.</para>
+
+<sect1 id="introduction-modes">
+<title>Four modes, and why the program is built on them</title>
+
+<para>What you are here to do is the first thing the program asks, and it is
+the only steering it has. Four buttons sit at the left of the toolbar, one of
+them always pressed, and the one that is pressed decides which view is in the
+middle of the window, what a click on the page means, which second toolbar is
+up, and what the status bar says at the bottom.</para>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F5</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Read &amp; Fill In</guimenuitem></menuchoice></term>
+<listitem><para>Turn the pages, select and copy text, and fill in forms.
+Nothing can be changed by accident. This is where the program starts, because a
+document is something you open to read; changing it is a decision, and a
+decision should take a click. See <xref linkend="reading"/>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F6</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Edit the Page</guimenuitem></menuchoice></term>
+<listitem><para>Correct the words, move the pictures, mark the page up. The
+same page, at the same size, with handles on it. See
+<xref linkend="page-editing"/>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F7</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Edit the Form</guimenuitem></menuchoice></term>
+<listitem><para>Draw form fields onto the page, move them and set what they do.
+Only the fields answer the mouse here, so a field cannot be dropped on a
+paragraph and take it with it. See <xref linkend="form-editing"/>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F8</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Arrange the Pages</guimenuitem></menuchoice></term>
+<listitem><para>Reorder, turn, duplicate and throw away whole pages. The
+document appears as a grid of thumbnails instead of as a page.
+See <xref linkend="arranging"/>.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>The reason for making this explicit, rather than letting it follow from
+whichever tool was last pressed, is that <quote>can I break this document by
+clicking on it</quote> is a question you ought to be able to answer by looking
+at the window. A program with six independent switches cannot answer it.</para>
+
+<para>Three of the four modes show the same document at the same size, so
+changing between them moves nothing: the page you were on, the size you had set
+and the line you had reached are all where you left them. Opening another
+document does not change the mode either. Somebody who has said they are here
+to arrange pages is still here to arrange pages when the second file
+arrives.</para>
+</sect1>
+
+<sect1 id="introduction-window">
+<title>What the window shows</title>
+
+<para>There are two rows of toolbars and never more. The top row is the same in
+every mode: opening, saving, printing, undoing, the four mode buttons, and two
+buttons with arrows on them, <guibutton>Zoom</guibutton> and
+<guibutton>Sidebars</guibutton>, holding the zoom levels and the side panels.
+The row under it belongs to the mode and changes with it, so the tools on
+screen are the tools that do something to the document on screen.</para>
+
+<para>The status bar says which mode is in force, in words, and holds a box
+saying which page of how many is showing. Type a number into that box to go to
+that page. Beside it is how many pages the document has and how many of them
+are selected. In <guimenuitem>Arrange the Pages</guimenuitem> a slider appears
+at the right-hand end for the size of the thumbnails; it is hidden in the other
+three modes, where there is no grid for it to act on.</para>
+
+<para>Three side panels can be opened and closed independently:</para>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F9</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Page Thumbnails</guimenuitem></menuchoice></term>
+<listitem><para>A narrow strip of pages beside the document, marking the one
+you are on and travelling with you as you scroll. It hides itself while the
+page grid is up, because the grid already shows every page and a second strip
+of the same thing costs a third of the window twice.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Contents Sidebar</guimenuitem></menuchoice></term>
+<listitem><para>The document's table of contents, which can be read, followed
+and rewritten. See <xref linkend="contents"/>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycap>F4</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Properties Sidebar</guimenuitem></menuchoice></term>
+<listitem><para>Names whatever you last clicked and lists its attributes.
+See <xref linkend="properties"/>.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>A fourth panel appears when a tool that works on the page is opened
+(trimming, redacting, signing, watermarking, stamping numbers, or filling in a
+form as a list). It puts the page where the grid was and its own controls at
+the edge of the window. Closing that panel is the same as cancelling, and you
+are asked whether to keep what you have done first.</para>
+
+<para>All four are ordinary &kde; docks: drag the title bar to another edge,
+tear one off to float it on a second screen, or drop one on top of another so
+that they share their space as tabs. The window remembers where you left them,
+so every tool from then on opens where you put the last one.</para>
+
+<para>The menu bar can be hidden with
+<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo></shortcut>
+<guimenu>Settings</guimenu><guimenuitem>Show Menubar</guimenuitem></menuchoice>.
+The button at the right-hand end of the top toolbar then holds every menu, so
+nothing becomes unreachable.</para>
+</sect1>
+
+<sect1 id="introduction-collecting">
+<title>Work is collected, then kept</title>
+
+<para>Typing on a page, dragging a picture about, marking a paragraph up,
+drawing a form field and answering a form all collect rather than write. Until
+they are written down, the page underneath still shows the document as it was
+opened.</para>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Enter;</keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Keep the Changes on the Page</guimenuitem></menuchoice>
+writes them into the document as one undo step, and saving does it for you.
+Losing an afternoon of typing to a
+<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo> would be the worst
+bug this program could have.</para>
+
+<para>The reason for collecting is that a page's worth of corrections should be
+one undo step rather than one per keystroke, and that a page can only be
+rewritten in a single pass. Anything that had to be refused, or could not be
+made to fit, is said in words at the moment the changes are kept.</para>
+</sect1>
+
+<sect1 id="introduction-lossless">
+<title>Lossless by default</title>
+
+<para>Reordering a scanned contract does not re-encode it. &pdfsmithy; works on
+the document's object structure rather than on pictures of its pages, so the
+pages that come out of a save are byte for byte the pages that went in, and
+saving the same document twice produces identical files.</para>
+
+<para>Editing a page works the same way. Correcting a line or moving a picture
+rewrites the page's instruction stream rather than rebuilding the page, so
+everything that was not touched comes out exactly as it went in: the same
+fonts, the same image bytes, the same vector art at the same precision. That is
+what makes it safe to fix a typo in a scanned contract and still be able to say
+that nothing else about the document changed.</para>
+
+<para>Where an operation cannot avoid changing the page, compressing its images
+or redacting a picture for instance, it says so before it does it, and this
+handbook says so in the chapter concerned.</para>
+</sect1>
+
+<sect1 id="introduction-several-documents">
+<title>Several documents at once</title>
+
+<para>&pdfsmithy; holds any number of opened files and one ordered list of
+pages drawn from them. Merging is therefore the ordinary state of affairs
+rather than a special command: insert a second file and its pages join the
+grid, where they can be dragged in among the pages that were already there.
+Reordering a two-thousand-page document costs nothing, because no page is
+copied to do it.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="reading">
+<title>Reading a Document</title>
+
+<para>This is the mode the program starts in and the one a document opens into.
+<menuchoice><shortcut><keycap>F5</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Read &amp; Fill In</guimenuitem></menuchoice>
+comes back to it from anywhere. Text can be dragged over, selected and copied,
+form fields can be filled in, and the comments the document carries are drawn
+and can be read. Nothing about the document can be altered by accident, which
+is what makes it safe to hand somebody a program that can alter
+everything.</para>
+
+<sect1 id="reading-opening">
+<title>Opening a document</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>
+opens a document, replacing whatever was in the window. The file dialog is
+&kde;'s own, so a document on a network share can be opened as easily as one on
+the disk; it is fetched, edited here, and copied back where it came from when
+you save. <guimenuitem>Open Recent</guimenuitem> holds the last files you
+worked on.</para>
+
+<para>Dragging &PDF; files from the file manager onto the window opens the
+first of them into an empty window and appends them to a document that is
+already open. Dropping them between two pages of the page grid puts them
+exactly there, which is the quickest way to merge two documents.</para>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
+starts a document with one blank page, so the program can be started at rather
+than only opened into. It has no file until you save it, which is why
+<guimenuitem>Save</guimenuitem> asks where it should go.</para>
+
+<sect2 id="reading-password">
+<title>A document that asks for a password</title>
+
+<para>A locked file is a question rather than a failure. &pdfsmithy; asks for
+the password that opens it, saying which file it is about, and asks again as
+often as it takes; a wrong answer says so plainly instead of showing the same
+prompt a second time with nothing to explain it. Somebody typing a long
+password off a card gets it wrong occasionally, and one refusal with no way
+back would shut them out of a document this very program can lock.</para>
+
+<para>The password is kept for as long as the document is open, and saving
+locks the file again with it. Without that, a plain
+<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo> would quietly
+write an unprotected copy over a document its owner had protected. Opening a
+different document forgets it, so a password is never carried into a file that
+never had one. To change or remove it, see <xref linkend="document-password"/>.</para>
+</sect2>
+</sect1>
+
+<sect1 id="reading-moving">
+<title>Moving about</title>
+
+<para>The pages run down the window one under another at reading size. The page
+that owns the middle of the window is the one you are said to be on, rather
+than the topmost one, which on a tall page is the one you finished with two
+screens ago.</para>
+
+<para>Scrolling glides rather than jumps: the wheel, <keycap>Page Down</keycap>
+and <keycap>Page Up</keycap> all travel a little less than a windowful, so a
+line or two of what you have already read stays on screen and the eye has somewhere to
+land. A touchpad is not glided, because the distance the fingers travelled is
+already as smooth as the hand that made it, and gliding it as well would put
+the page behind the fingers.</para>
+
+<para>The box in the status bar says which page is showing. Type a number into
+it to go there. The <guimenu>View</guimenu> menu and the reading toolbar hold
+<guimenuitem>First Page</guimenuitem>
+(<keycombo action="simul">&Ctrl;&Home;</keycombo>),
+<guimenuitem>Previous Page</guimenuitem>,
+<guimenuitem>Next Page</guimenuitem> and
+<guimenuitem>Last Page</guimenuitem>
+(<keycombo action="simul">&Ctrl;&End;</keycombo>).</para>
+
+<note><para><keycap>Page Up</keycap> and <keycap>Page Down</keycap>
+deliberately have no menu command attached to them. A window-wide shortcut is
+matched before the key reaches the page, so claiming those two keys would have
+made the gliding motion the document view is built around unreachable.</para></note>
+
+<para>The thumbnail strip
+(<menuchoice><shortcut><keycap>F9</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Page Thumbnails</guimenuitem></menuchoice>)
+answers <quote>where am I in this file</quote> in a way a page number cannot. A
+number tells you nothing about a two-hundred-page report; a strip of pictures
+tells you that the chapter you want is the one with the table in it, four
+thumbnails down. Click a thumbnail to go to its page. The strip marks the page
+you are on and travels smoothly with the scrolling, so reading slowly down one
+tall page does not leave it standing still long enough to look broken. Its own
+slider and its two buttons make the thumbnails wider or narrower.</para>
+
+<para>The contents sidebar
+(<keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>) lists the
+document's bookmarks and follows you through it. See
+<xref linkend="contents"/>.</para>
+</sect1>
+
+<sect1 id="reading-zoom">
+<title>Sizing the pages to the window</title>
+
+<para>The number you usually want is not a number. The
+<guimenu>View</guimenu> menu, and the <guibutton>Zoom</guibutton> button on the
+top toolbar, offer five answers instead:</para>
+
+<variablelist>
+<varlistentry><term><guimenuitem>Fit Width</guimenuitem>
+(<keycombo action="simul">&Ctrl;<keycap>1</keycap></keycombo>)</term>
+<listitem><para>The page as wide as the window.</para></listitem></varlistentry>
+
+<varlistentry><term><guimenuitem>Fit Height</guimenuitem>
+(<keycombo action="simul">&Ctrl;<keycap>2</keycap></keycombo>)</term>
+<listitem><para>A whole page down the window, allowed to be wider than the
+window if it must.</para></listitem></varlistentry>
+
+<varlistentry><term><guimenuitem>One Whole Page</guimenuitem>
+(<keycombo action="simul">&Ctrl;<keycap>3</keycap></keycombo>)</term>
+<listitem><para>One page, both ways.</para></listitem></varlistentry>
+
+<varlistentry><term><guimenuitem>Two Pages Side by Side</guimenuitem>
+(<keycombo action="simul">&Ctrl;<keycap>4</keycap></keycombo>)</term>
+<listitem><para>Pages laid out as spreads, sized so that two of them really do
+fit.</para></listitem></varlistentry>
+
+<varlistentry><term><guimenuitem>Free Zoom</guimenuitem>
+(<keycombo action="simul">&Ctrl;<keycap>0</keycap></keycombo>)</term>
+<listitem><para>The size stays where it is and the window stops claiming
+it.</para></listitem></varlistentry>
+</variablelist>
+
+<para>These are modes rather than one-off jumps: resize the window, open a
+panel or turn a page to landscape, and the fit is worked out again. Turning the
+wheel with &Ctrl; held, or using
+<guimenuitem>Larger Pages</guimenuitem> and
+<guimenuitem>Smaller Pages</guimenuitem>, means you have overruled the fit, and
+the size stays where you put it. One of the five is always ticked, and it is
+the one describing the view you are actually looking at.</para>
+
+<para><menuchoice><guimenu>View</guimenu><guimenuitem>Two Pages Side by Side in
+the Document</guimenuitem></menuchoice> is the spread layout without a word
+about the size, for a reader who has already set a size they are happy with. It
+stays ticked while <guimenuitem>Two Pages Side by Side</guimenuitem> is in
+force, since that is the same layout with the size worked out to match.</para>
+
+<para>The page grid and the document each keep a size of their own, and the
+five commands act on whichever of the two is on screen. Arranging pages and
+reading them are different jobs at different sizes, and a single number shared
+between them would mean every trip to the grid resized the document and
+back.</para>
+</sect1>
+
+<sect1 id="reading-dragging">
+<title>What a drag does</title>
+
+<para>Three answers to one question, in the <guimenu>View</guimenu> menu and
+behind the <guibutton>Drag</guibutton> button on the reading toolbar. That
+button wears whichever of the three is in hand, so what a drag will do can be
+answered by looking.</para>
+
+<variablelist>
+<varlistentry><term><guimenuitem>Select Text</guimenuitem></term>
+<listitem><para>Drag across words to select and copy them.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Select an Area</guimenuitem></term>
+<listitem><para>Drag a box and take the text and the picture inside
+it.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Move the Page</guimenuitem></term>
+<listitem><para>Drag the page about.</para></listitem></varlistentry>
+</variablelist>
+
+<para>Holding <keycap>Space</keycap> moves the page without leaving the tool
+you have in hand.</para>
+</sect1>
+
+<sect1 id="reading-text">
+<title>Selecting and copying text</title>
+
+<para>With <guimenuitem>Select Text</guimenuitem> in hand, drag across the page
+to mark text. The pointer becomes an I-beam only where there really is text
+under it, so a scan says plainly that there is nothing to select, until text
+recognition has been run over it, after which the invisible layer it added
+marks and copies like any other text (<xref linkend="scans"/>). A double click
+picks the word under it, a selection carries on across pages so that a
+quotation running over a page break comes out in one piece,
+<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo> copies what is
+marked, and &Esc; clears it.</para>
+
+<para>The marking moves a word at a time rather than a letter at a time,
+because a word is the unit the renderer reports and half of one cannot be asked
+for. The spaces and the line breaks in what you copy are the renderer's own
+rather than guessed from where the letters sit, which is why a word broken
+across a hyphen does not acquire a space in the middle and two words set tight
+against one another do not run together.</para>
+
+<para>Dragging over a line that happens to be highlighted still selects the
+words underneath it. Copying a quoted sentence out of a marked-up contract is
+the reason the marks were made in the first place.</para>
+</sect1>
+
+<sect1 id="reading-area">
+<title>Taking a picture off the page</title>
+
+<para><guimenuitem>Select an Area</guimenuitem> draws a box instead. What is
+inside it, the text and the picture both, goes to the clipboard, so a diagram
+can be pasted into a mail or a report without exporting anything.
+<xref linkend="export-images"/> is the command for whole pages.</para>
+</sect1>
+
+<sect1 id="reading-forms">
+<title>Filling in a form</title>
+
+<para>A form is filled in where it stands on the page. Filling one in through a
+list of labels somewhere else means reading the form twice, once on the page to
+find out what is being asked and once in the list to find the box that asks it,
+and three fields called <quote>Date</quote> are indistinguishable in a list and
+obvious on the page.</para>
+
+<para>What is underneath is the real document, appearance streams and all, so a
+field that draws its own frame already looks like a field and nothing is added
+to it. Drawn over it is only what the document does not say visibly:</para>
+
+<itemizedlist>
+<listitem><para>a pale wash, so that which parts of the sheet are to be filled
+in can be seen at a glance;</para></listitem>
+<listitem><para>a hairline round each field, so that a box which draws nothing
+at all can be found;</para></listitem>
+<listitem><para>a red outline round the fields the form marks as
+required;</para></listitem>
+<listitem><para>a grey dashed outline round the fields that will not take an
+answer: the ones the form locks, and signature fields, which cannot be signed
+from here. The pointer turns to the forbidden sign over them, which answers
+<quote>why can I not type here</quote> before the click rather than after
+it.</para></listitem>
+</itemizedlist>
+
+<para>Pointing at one button of a radio group deepens the wash on all of them,
+which is how the group is shown to be a group. It answers the question that
+matters before the click rather than after it: which other buttons will go off
+when I press this one. Drawing a line from button to button instead would be
+ink this program invented, laid across whatever the form printed between them,
+which on a real form is the words of the choices themselves.</para>
+
+<para>Click a text field and a real text box appears over it, at its size and
+in its place. A tick box or a radio button gets no box at all: one click is the
+whole interaction.</para>
+
+<para>&Tab; walks the fields and <keycombo action="simul">&Shift;&Tab;</keycombo>
+walks them backwards, in the order the form's author declared them and grouped
+by page rather than in the order they happen to sit on the paper. Sorting by
+position looks tidier and then walks a two-column form across the gutter, which
+is exactly the thing people complain about. Fields that cannot take an answer
+are left out of the walk, since a dead stop in a tab run is worse than a gap.
+The walk wraps round at the end and the page scrolls to whichever field it
+reaches. &Enter; finishes a one-line answer and moves on,
+<keycap>Space</keycap> ticks the box that is picked, and &Esc; leaves the
+field.</para>
+
+<para>Nothing is written into the file as you type. The answers are held until
+the changes on the page are kept or the document is saved, which is why a new
+answer is drawn over a white patch rather than beside the old one. Filling a
+field sets its value and asks for its appearance to be regenerated; that second
+half matters, because a value with no appearance shows up blank in about half
+the readers in use, including some of the ones that print.</para>
+
+<sect2 id="reading-form-list">
+<title>The same form as a list</title>
+
+<para><menuchoice><guimenu>Forms</guimenu><guimenuitem>Fill In the Form as a
+List…</guimenuitem></menuchoice> is worth having when the form is long. It puts
+the page on one side and a list of every field on the other, each with whatever
+label its author wrote beside it and the page it sits on, so that a form can be
+worked through from top to bottom without hunting for the next box. Clicking a
+field in the list moves the page to it, and clicking a box on the page picks it
+in the list. Required fields are marked, and the line under the list says how
+many of the fields can be filled in and how many are locked. A document with no
+form fields says so rather than opening an empty list.</para>
+
+<para>A field the form locks is shown and refused rather than left out: on the
+page it is outlined in grey dashes, and in the list it is there but greyed and
+says that the form locks it. Hiding it would leave you wondering whether you
+had missed a question.</para>
+
+<para>The panel also offers to make the answers permanent, which draws the
+fields as they stand and removes the interactivity. That is what to do before
+sending a filled form back, for the same reason as above: what a form looks
+like when its values have no appearance is up to the reader, and flattening
+ends the argument. It cannot be undone in the finished file, so keep the
+fillable version if you might need to change an answer. Answers typed on the
+page are written as answers and nothing more; the form stays a form. Making it
+permanent is a deliberate act and has its own switch.</para>
+</sect2>
+</sect1>
+
+<sect1 id="reading-comments">
+<title>Reading somebody else's comments</title>
+
+<para>Every comment the document carries is drawn here, can be clicked to bring
+its attributes into the properties sidebar, and a note still gives up its text
+when it is clicked. Nothing can be drawn, moved or deleted, so a document can
+be handed to somebody in this mode without its markup being at risk. Making
+marks of your own is <xref linkend="page-comments"/>.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="page-editing">
+<title>Editing the Page</title>
+
+<para><menuchoice><shortcut><keycap>F6</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Edit the Page</guimenuitem></menuchoice>
+makes the page editable where it stands: click into a line and type, drag a
+picture, pull a handle, mark a paragraph up. It is the same page at the same
+size as the one you were reading.</para>
+
+<para>Three layers are live at once and they are asked in a fixed order. A pen
+in hand wins the press, because that is what you have told the program you
+are doing. Then the words, because a click on a line of text means the words
+rather than the block. The block comes last, and the handles round it are what
+moving is for.</para>
+
+<para>Nothing here is written as you work. See
+<xref linkend="page-keeping"/>.</para>
+
+<sect1 id="page-correcting">
+<title>Correcting the words</title>
+
+<para>Every run of text that can be written into is outlined faintly before
+anything is clicked, so the shape of what can be changed is visible rather than
+discovered by surprise. Click into one and type. The caret opens where you
+clicked rather than at the end of the line, which is the difference between
+typing on a page and filling in a box that happens to sit on one.</para>
+
+<para>A run is not a paragraph and often not even a whole line. A &PDF; page is
+a list of instructions, one of which draws a run of glyphs at a coordinate, and
+that run is the unit that can be replaced. What is outlined is therefore what
+the file holds rather than what the layout looks like.</para>
+
+<para>&Tab; moves the caret to the next run on the page that can be written
+into and <keycombo action="simul">&Shift;&Tab;</keycombo> to the one before,
+wrapping round at the bottom rather than stopping dead; tabbing is how somebody
+checks a whole page, and a caret that dies at the bottom sends them back to the
+mouse. &Enter; keeps what you typed and leaves the line, &Esc; puts the line
+back as it was, and clicking somewhere else keeps it, which is what clicking
+out of a cell does in every table anyone has used. While the caret is in a
+line, <keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>,
+<keycombo action="simul">&Ctrl;<keycap>X</keycap></keycombo> and
+<keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo> mean the letters
+in that line, as they do in any text box.</para>
+
+<para>A third of a second after you stop typing, the edit is written to a
+scratch copy of that one page and the page is drawn again from it. From then on
+what is on the screen is the file rather than a picture of what the file will
+say. It waits for the typing to stop because it costs about a tenth of a second
+on a dense page.</para>
+
+<sect2 id="page-correcting-box">
+<title>The box grows, the letters do not shrink</title>
+
+<para>Adding a word to a line makes the line longer. Narrowing the type to keep
+the old width instead is what a layout program does when it has nowhere to put
+the extra letters, and doing that by default would make every correction
+quietly disfigure the page. So a run's box follows what is typed into it at the
+size the page sets.</para>
+
+<para>The exception is offered per line, on the padlock button beside the
+caret. Pressed, it reads <quote>This line keeps its box: the type is narrowed
+until the text fits inside it</quote>, which is what a table cell or a boxed
+figure needs. Released, it reads <quote>This line's box grows with the
+text</quote>. The properties sidebar says which of the two a line is set to
+under <guilabel>Box</guilabel>.</para>
+
+<para>Growing costs something, and it costs it immediately, because a &PDF;
+page has no paragraphs and nothing beside a run moves aside to make room for
+it. A line that has grown over its neighbour, or past where the rest of the
+page's text stops, says so while you are typing: the paper under the caret
+turns a warm colour, the outline turns orange, and the message names what has
+happened. The three it can say are that the line now reaches past the edge of
+the page where nothing is printed, that it reaches into the margin past where
+the rest of the page's text stops, or what it has grown over. Finding that out
+in the saved file instead would be finding it out too late.</para>
+</sect2>
+
+<sect2 id="page-correcting-refusals">
+<title>Two refusals, both while you are working</title>
+
+<para>These arrive at the gesture rather than at saving time, and that
+difference is the whole difference between a feature and a trap.</para>
+
+<para>A run set in a font that cannot be written into is outlined with a dotted
+line instead of a solid one, the pointer turns to the forbidden sign over it,
+and clicking it says why on the spot. The reasons the page can give are that it
+does not say which font the text uses, that the font does not say which
+characters it holds (so replacing its text would produce the wrong letters), or
+that some of the text uses characters the font does not explain.</para>
+
+<para>A font that does not hold a character you have typed refuses that
+character, naming it beside the line as you type. A font embedded in a &PDF;
+usually carries only the characters that document actually used, so a document
+which never contained a <quote>ü</quote> has no <quote>ü</quote> to draw, and
+the line is left as it is rather than being given a blank or a wrong glyph you
+would not notice. The Fonts tool can add the missing characters to the document
+(<xref linkend="tools-fonts"/>), which is what lifts this limit.</para>
+</sect2>
+
+<sect2 id="page-correcting-format">
+<title>Setting a line differently</title>
+
+<para>With the caret in a line, the properties sidebar offers its typeface, its
+size, bold, italic and its colour, and a <guibutton>Set as the page
+does</guibutton> button that puts all of it back. Each control writes through
+the moment it is touched.</para>
+
+<para>Formatting applies to the <emphasis>whole run</emphasis>. A &PDF;'s unit
+of type is the run: one text-showing operation carries one font at one size,
+and a page cannot express half a run in something else without being cut into
+two operations. Selecting part of a line and restyling only that is therefore
+refused rather than quietly applied to the lot.</para>
+
+<para><guilabel>Bold</guilabel> and <guilabel>Italic</guilabel> are available
+only once a different typeface has been chosen from the list, and say so in
+their tooltip: the document carries one cut of its own face, so a bold or
+italic of it has to come from a typeface chosen above. A cut is a separate font
+programme, and there is no bold of the page's own face to reach for. A disabled
+box that explains itself is better than a checkbox that does nothing.</para>
+
+<para>The typeface is a list rather than a font picker for a related reason.
+The page names a face such as <quote>Graphik-Semibold</quote>, which is a cut
+and not a family and is not what this machine calls anything it has. Putting
+that name into a font chooser would make it snap to some other family and read
+as though you had asked for that. So what the page says is shown as a fact, and
+asking for something else is a separate, deliberate choice; a different face
+has to be found, cut down and carried inside the document, which is not the
+same act as reading one. A face whose glyphs cannot be embedded from this
+system is refused by name, because the alternative is a page of empty boxes
+discovered far too late.</para>
+</sect2>
+
+<sect2 id="page-correcting-limits">
+<title>What correcting text cannot do</title>
+
+<itemizedlist>
+<listitem><para>It does not reflow. There is no paragraph model in a &PDF;: a
+page is a list of glyphs at coordinates, and nothing in the file records which
+line follows which. Making a sentence longer therefore cannot push the next
+line down, because there is no <quote>next line</quote> written down anywhere
+to push.</para></listitem>
+<listitem><para>A replacement that is too wide for a line whose box is being
+kept is squeezed to fit, down to about three fifths of normal letter width and
+no further, so that it does not run into whatever sits to its right. Letters at
+a tenth of their width are not text any more. Anything still too long is named
+afterwards rather than left for you to find.</para></listitem>
+<listitem><para>A font embedded in a document usually carries only the
+characters that document used, and asking for one it does not hold is refused
+rather than drawn wrongly.</para></listitem>
+<listitem><para>Text drawn inside an embedded drawing, and text that is part of
+a scanned picture, cannot be changed this way. For a scan, what looks like text
+is pixels, and the invisible layer that text recognition adds describes the
+picture rather than being drawn from it.</para></listitem>
+</itemizedlist>
+
+<para>What <emphasis>is</emphasis> promised is worth stating too: the
+replacement is written in the page's own font, in the page's own instruction
+stream, and everything else on the page is left byte for byte alone.</para>
+</sect2>
+</sect1>
+
+<sect1 id="page-objects">
+<title>Moving and restyling what the page draws</title>
+
+<para>A &PDF; page is a list of drawing instructions rather than a list of
+objects. &pdfsmithy; invents the handle: every painting operation gets a
+boundary that lights up under the pointer, and whatever is chosen gets eight
+handles round it and a ninth above it to turn it by. A picture is moved by
+dragging the picture, which is the one thing every other program on the machine
+has taught you to try first.</para>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>O</keycap></keycombo></shortcut>
+<guimenu>Tools</guimenu><guimenuitem>Move What the Page Draws…</guimenuitem></menuchoice>
+is the way in from the menu. It takes you to this mode with the properties
+sidebar open. (It is deliberately not called <quote>Edit the Page…</quote>: one
+menu bar carrying that name twice, for two different commands, is a menu bar
+that cannot be read.)</para>
+
+<variablelist>
+<varlistentry><term>Choosing</term>
+<listitem><para>Click something to take it. &Ctrl;-click adds to the choice.
+Clicking something already chosen keeps the whole choice, so a group of five
+can be dragged without picking them again one by one. A drag that starts on
+bare paper bands a selection round several. &Esc; lets go.</para></listitem></varlistentry>
+
+<varlistentry><term>Moving</term>
+<listitem><para>Drag it. The arrow keys move what is chosen a point at a time,
+and ten points with &Shift; held.</para></listitem></varlistentry>
+
+<varlistentry><term>Scaling</term>
+<listitem><para>Drag a corner to scale it keeping its proportions, or hold
+&Shift; to free them. Drag the middle of an edge to change one axis only. The
+far side stays put, which is what makes a handle feel attached to the object
+rather than to the pointer.</para></listitem></varlistentry>
+
+<varlistentry><term>Turning</term>
+<listitem><para>Drag the round handle on the stalk above the box. Holding
+&Shift; snaps to fifteen degrees.</para></listitem></varlistentry>
+
+<varlistentry><term>Removing</term>
+<listitem><para>&Del; or &Backspace; takes it off the page. While something on
+the page is chosen those keys mean that thing, not the page.</para></listitem></varlistentry>
+</variablelist>
+
+<para>Clicking a line of text offers to correct the words rather than to move
+the block; moving is what the handles round it are for.</para>
+
+<sect2 id="page-objects-clipboard">
+<title>Cut, copy and paste</title>
+
+<para>Copying an object does not duplicate an instruction; there is no way to
+draw an existing operator a second time somewhere else. So a copy is
+<emphasis>described</emphasis> well enough to be written from nothing: the
+words of a line, the pixels of a picture. Pasting writes that description onto
+the page as a new object, which is then an object like any other, with a
+boundary, handles and gestures of its own. Each paste steps twelve points
+further than the last, so pasting three times leaves three copies to be found
+rather than three in one place looking like one.</para>
+
+<para>What has no such description, a vector drawing or an embedded form, is
+named at the cut rather than pasted wrong. Copied text is set again in a
+standard font, so it will not match the letters that were already on the page
+exactly, and that is said as well.</para>
+</sect2>
+
+<sect2 id="page-objects-align">
+<title>Lining several things up</title>
+
+<para>From two objects upwards the properties sidebar grows a row of alignment
+buttons, because the eye cannot put two left edges on the same line by dragging
+and the arithmetic can.</para>
+
+<para><guibutton>Align Left</guibutton>, <guibutton>Align Centre</guibutton>
+and <guibutton>Align Right</guibutton> line the edges or the centres up
+sideways; <guibutton>Align Top</guibutton>,
+<guibutton>Align Middle</guibutton> and <guibutton>Align Bottom</guibutton> do
+the same up and down. The line is taken from the box enclosing everything
+chosen rather than from the first or the last of them, because a selection made
+by dragging a band has no first. Nothing is resized.</para>
+
+<para><guibutton>Space Out Sideways</guibutton> and <guibutton>Space Out
+Upright</guibutton> put equal gaps between them; the outermost two stay where
+they are, so distributing does not quietly change how much of the page the
+group covers. Gaps are measured between edges rather than between centres,
+which is what people mean and what looks right when the things are different
+sizes. Three things are needed, since two have nothing between them.</para>
+
+<para><guibutton>Same Width</guibutton>, <guibutton>Same Height</guibutton> and
+<guibutton>Same Size</guibutton> give everything the size of the largest,
+keeping each top left corner. Growing rather than shrinking, because a field
+made too small loses its text while one made too big only looks
+generous.</para>
+
+<para>Anything the engine cannot move is left where it is and counted out loud
+before anything moves, so <quote>four of the five lined up</quote> is not
+something you have to work out by staring at the page.</para>
+</sect2>
+
+<sect2 id="page-objects-limits">
+<title>What moving things cannot do, and why</title>
+
+<variablelist>
+<varlistentry><term>One waiting change per object</term>
+<listitem><para>Giving something a colour takes the place of a move that was
+waiting on the same object, and the window says so when it happens rather than
+leaving you to find it in the file. The page is rewritten in a single pass and
+every object number counts painting operations from the start of the page, so a
+second pass would be addressed to a page the first one had already renumbered.
+<menuchoice><guimenuitem>Undo the Change to This</guimenuitem></menuchoice> in
+the right-click menu drops what is waiting on the chosen objects; ordinary undo
+cannot reach it, because it is not in the document yet.</para></listitem></varlistentry>
+
+<varlistentry><term>A flattened placement cannot be moved</term>
+<listitem><para>An object whose placement is baked into the page cannot be
+moved at all, since the arithmetic cannot be reversed. The refusal arrives at
+the press.</para></listitem></varlistentry>
+
+<varlistentry><term>What lies on top of what cannot be changed yet</term>
+<listitem><para>It would mean moving whole blocks of drawing operators about,
+which is only safe when each block is properly enclosed, and on a real page
+they often are not. The properties sidebar says where an object comes in the
+painting order and says plainly that it cannot be changed, rather than offering
+a control that does nothing.</para></listitem></varlistentry>
+
+<varlistentry><term>A moved object travels on top of the page</term>
+<listitem><para>What the layer draws over is a picture of the file as it
+stands. The moment something is chosen, that picture is made twice: the page
+with the chosen objects left out, and the chosen objects on their own. The
+gesture then costs nothing at all, because it is only those two pictures being
+drawn in new places. The consequence is visible and worth knowing: the object
+travels on top of everything, so something that lay underneath it comes out
+from under it as soon as it moves, and a highlight or a comment lying over it
+stays where it is. That last one is right: the comment was put on the page, not
+on the object. Scaling and turning are a bitmap transform until the gesture
+settles; what makes the pixels exact for good is saving the document. Only one
+page is held this way, so changes waiting on other pages are seen after the
+save.</para></listitem></varlistentry>
+
+<varlistentry><term>An embedded drawing is one unit</term>
+<listitem><para>Objects inside it cannot be reached without dissolving the
+drawing first. Text is one object per drawing operation, which is usually a
+line rather than a paragraph. A shape's clickable outline is approximated,
+though what appears on the page is still drawn exactly as the file says, and
+clipping is followed only as far as a rectangle.</para></listitem></varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="page-comments">
+<title>Comments and the drawing tools</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guisubmenu>Mark Up</guisubmenu><guimenuitem>Comments…</guimenuitem></menuchoice>
+takes you to the page with the highlighter in hand, the author set to the name
+this machine knows you by, and the properties sidebar open. Marking up is done
+to a document you are looking at, so there is nothing left for a separate
+window to add.</para>
+
+<para>The pens are on the page toolbar and in
+<menuchoice><guimenu>Pages</guimenu><guisubmenu>Mark Up</guisubmenu></menuchoice>:
+<guimenuitem>Pick</guimenuitem>, <guimenuitem>Highlight</guimenuitem>,
+<guimenuitem>Underline</guimenuitem>, <guimenuitem>Strikethrough</guimenuitem>,
+<guimenuitem>Rectangle</guimenuitem>, <guimenuitem>Ellipse</guimenuitem>,
+<guimenuitem>Line</guimenuitem>, <guimenuitem>Freehand</guimenuitem>,
+<guimenuitem>Text Box</guimenuitem> and <guimenuitem>Note</guimenuitem>. The
+four shapes share the <guibutton>Shapes</guibutton> button on the toolbar,
+which wears whichever of them was chosen last. A toolbar rather than a menu, because
+choosing a pen is something done dozens of times in a session and never worth
+going looking for.</para>
+
+<sect2 id="page-comments-making">
+<title>Making a mark</title>
+
+<para>Drag along a line to mark it. What is marked is the band you dragged and
+not the words underneath it, so drag along the line rather than expecting the
+mark to find the text by itself. A drag that a steady hand kept too thin to see
+is grown about the line it followed rather than refused. A drag of under three
+points in both directions is treated as a slip and taken off the page
+again.</para>
+
+<para>A rectangle, an ellipse or a text box is dragged out as a box. A line
+uses the two ends the drag actually had, so a line dragged up to the right is
+not the same as one dragged down to the right. Freehand follows the pointer,
+keeping a point about every point of travel rather than every mouse move, since
+every one of those ends up in the file. A note is a single click: it is a fixed
+small marker, and dragging one out would only make it an odd size.</para>
+
+<para>What is being dragged out is drawn faintly and dashed, because it is a
+proposal and should not be mistaken for a mark that is already on the page.
+With any pen but <guimenuitem>Pick</guimenuitem> the pointer is a cross
+everywhere on the page, which is what stops somebody trying to select a word
+with a highlighter.</para>
+
+<para>With <guimenuitem>Pick</guimenuitem>, click a mark to take it and drag it
+to move it. &Del; removes it and &Esc; lets go. There are no resize handles: a
+comment is moved, not scaled. A comment is allowed to hang over the edge of the
+page it is about, because stopping it dead at the margin would feel like a
+fault.</para>
+</sect2>
+
+<sect2 id="page-comments-properties">
+<title>What a comment says</title>
+
+<para>The rest of a comment is in the properties sidebar, and unlike a form
+field all of it can be changed, because a comment is yours. It holds what the
+comment says, its colour, how thick its line is (marked-up text and notes take
+no notice of that), what kind of mark it is, who made it, and which page it is
+on. Setting the page carries the comment to that page and scrolls there.</para>
+
+<para>Changing the kind keeps whatever the old one used, so changing your mind
+twice comes back to where it started. Freehand is the one kind that cannot be
+made out of a mark you dragged: there is no ink in a rectangle, and an empty
+freehand comment draws nothing at all. A squiggly underline appears in the list
+although no pen draws one, because a document may well carry one and a list
+that cannot name what something is would be worse than one that cannot make
+it.</para>
+
+<para>A note gives up its text when it is clicked. Nothing else does, because
+everything else already shows what it is about: a text box draws its own words,
+and a highlight is the words it lies over.</para>
+</sect2>
+
+<sect2 id="page-comments-beside">
+<title>Beside the page, never in it</title>
+
+<para>Comments are the one kind of markup that &PDF; has a proper place for.
+They live beside the page rather than in its content stream, so adding, editing
+and removing one leaves everything underneath completely untouched. That also
+means a comment can be taken off again later without a trace, which is exactly
+what a remark on somebody else's contract ought to be.</para>
+
+<para>Every comment is written with its own appearance. The alternative, which
+is to leave each reader to draw it from the properties, is permitted by the
+specification and looks different in every program, and for a highlight over a
+piece of evidence that is not a cosmetic matter.</para>
+
+<para>Comments follow their page as the document is rearranged: moving a page,
+inserting a file or turning a sheet carries its comments with it. The one case
+that cannot be followed is a page deleted outright, and that is reported rather
+than being allowed to happen quietly.</para>
+</sect2>
+
+<sect2 id="page-comments-exchange">
+<title>Sending remarks without sending the document</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guisubmenu>Mark Up</guisubmenu><guimenuitem>Save
+Comments to a File…</guimenuitem></menuchoice> writes the comments out on their
+own, as XFDF, the interchange format readers agree on. The document is not in
+the file. Sending back a marked-up copy of a contract means sending the
+contract; sending an XFDF file means sending only your remarks, which is often
+the difference between being allowed to comment and not. Anything drawn a
+minute ago is written into the document first, so what goes out is what is on
+screen.</para>
+
+<para><menuchoice><guimenu>Pages</guimenu><guisubmenu>Mark Up</guisubmenu><guimenuitem>Load
+Comments from a File…</guimenuitem></menuchoice> reads such a file back and
+adds what it holds. Anything referring to a page the document does not have is
+skipped and reported rather than moved onto the last page, because a comment in
+the wrong place is worse than one that is missing and said to be. XFDF is also
+how comments travel between &pdfsmithy; and Acrobat without either having to
+understand the other.</para>
+</sect2>
+</sect1>
+
+<sect1 id="page-keeping">
+<title>Keeping what you have done</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Enter;</keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Keep the Changes on the
+Page</guimenuitem></menuchoice> writes everything waiting into the document as
+one undo step, and saving does it for you. The command is available exactly
+when there is something to keep.</para>
+
+<para>Things are written in a fixed order: what the page draws, then the words,
+then the comments, then the form's layout, then the form's answers. Correcting
+the words rewrites the page's instruction stream and renumbers its drawing
+operations, so a move worked out against the old numbering has to be written
+first; filling in a form touches only the field dictionaries and is independent
+of both.</para>
+
+<para>Anything that had to be refused, could not be made to fit, or was done
+differently from what you asked is said at that point, in words. That last
+category matters: a face whose licence says it may not travel with the file, or
+an italic cut that is not installed so the upright one went in instead, is not
+a refusal, because the change was made. But a document that silently ships
+without the font it was set in is a document that looks wrong on the next
+machine it opens on.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="properties">
+<title>The Properties Sidebar</title>
+
+<para><menuchoice><shortcut><keycap>F4</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Properties Sidebar</guimenuitem></menuchoice>
+opens a panel beside the document which names the thing you last clicked
+and lists its attributes. It holds no tools and no commands of its own, and it
+is empty when nothing is selected, saying so: <quote>Nothing is selected. Click
+a word, a form field, a comment or a picture in the document, and its
+properties appear here.</quote></para>
+
+<para>That is the point of it. A tool box asks you to remember which of twelve
+panels holds the setting you want; a properties panel can be glanced at.
+Editing happens in the document, and what belongs here are the attributes that
+have no gesture on the page: a field's rules, a comment's author, an exact
+point size. The moment something unrelated appears you have to start reading
+the panel instead of glancing at it.</para>
+
+<para>Several things can be selected at once, a picture on a page that also has
+a line of text marked, and the panel shows whichever one you touched last,
+because that is the one you are thinking about. It does not rebuild itself
+while the focus is inside it, so typing into one of its boxes cannot take the
+box out from under you mid-word.</para>
+
+<variablelist>
+<varlistentry><term>A line of text</term>
+<listitem><para>The face the page sets it in and the resource name the page
+gives that font, with whether the glyphs travel with the document; the typeface,
+size, bold, italic and colour it is to be set in, all of which can be changed;
+which page it is on; whether its box grows with the text or is kept with the
+type narrowed into it; where it sits and how big it is in points; and what the
+line said before you typed into it. A line that cannot be written into says why
+here as well as on the page. See <xref linkend="page-correcting-format"/>.</para></listitem></varlistentry>
+
+<varlistentry><term>Something the page draws</term>
+<listitem><para>Where it sits and how big it is, in points from the bottom left
+corner of the page, both of which can be typed into as well as dragged; the
+colour of the letters, or of a shape and its outline, and how thick that
+outline is; a text object's font and size; how many pixels a picture holds and
+the resolution that works out to, which keeps up while the picture is being
+dragged; and where it comes in the page's painting order, which cannot be
+changed yet and says so. A picture carries its own colours and takes no notice
+of one set here. With more than one thing chosen, the alignment buttons appear
+above the numbers.</para></listitem></varlistentry>
+
+<varlistentry><term>A comment</term>
+<listitem><para>What it says, its colour, how thick its line is, what kind of
+mark it is, who made it, and which page it is on. All of it can be changed
+here, and setting the page carries the comment to that page.</para></listitem></varlistentry>
+
+<varlistentry><term>A form field being filled in</term>
+<listitem><para>Its name, the label its author wrote beside it, its kind, the
+page you are looking at it on, how many boxes on the paper it is made of,
+whether the form insists on an answer, whether it locks the field, whether it
+takes several lines, the choices a list offers, and the answer it holds now,
+which keeps up as you type on the page. All of it is shown rather than changed:
+a field's name and rules are the form author's, and the one thing that is
+yours, the answer, is given on the page where you can see what you are
+answering. The name can be selected and copied out, because that is what a
+form's own instructions quote.</para></listitem></varlistentry>
+
+<varlistentry><term>A form field being designed</term>
+<listitem><para>Everything above, and all of it editable, plus how the field
+looks and what it does. See <xref linkend="form-properties"/>.</para></listitem></varlistentry>
+
+<varlistentry><term>A bookmark</term>
+<listitem><para>What it says, which page it opens, whether it opens showing its
+sub-entries, and the bold, italic and colour a reader will draw it in. See
+<xref linkend="contents-properties"/>.</para></listitem></varlistentry>
+
+<varlistentry><term>Nothing in particular</term>
+<listitem><para>With nothing chosen the panel describes the document itself,
+and in the page grid it describes the sheets that are selected, so that it is
+not an empty panel in the two modes where there is often nothing to
+click.</para></listitem></varlistentry>
+</variablelist>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="form-editing">
+<title>Editing the Form</title>
+
+<para><menuchoice><shortcut><keycap>F7</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Edit the Form</guimenuitem></menuchoice>
+draws a form onto the page. A form is a layout before it is a data structure,
+and a layout is designed by looking at it; a dialog full of coordinate spin
+boxes asks the author to hold the page in their head while typing numbers about
+it.</para>
+
+<para>Only the field layer answers the mouse here. Laying a form out over a
+page whose text also answers to the mouse is how a field ends up moving a
+paragraph.</para>
+
+<para><menuchoice><guimenu>Forms</guimenu><guimenuitem>Build a
+Form…</guimenuitem></menuchoice> is the way in from the menu: it brings you
+here with a text field already in hand and the properties sidebar open.</para>
+
+<sect1 id="form-drawing">
+<title>Drawing the fields</title>
+
+<para>Pick a kind from the form toolbar or the <guimenu>Forms</guimenu> menu
+and drag out the box it is to occupy. The kinds are:</para>
+
+<variablelist>
+<varlistentry><term><guimenuitem>Text Field</guimenuitem></term>
+<listitem><para>A box to type into, on one line or several.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Tick Box</guimenuitem></term>
+<listitem><para>On or off, on its own.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Radio Group</guimenuitem></term>
+<listitem><para>One choice out of several. Consecutive drags join the same
+group, because that is what <quote>yes, no, maybe</quote> is; changing the kind
+away from radio and back again starts a second group.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Drop-Down</guimenuitem></term>
+<listitem><para>A list that opens when it is clicked, and which can also accept
+typing.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>List</guimenuitem></term>
+<listitem><para>A list that stays open, and which can allow several entries to
+be picked.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Push Button</guimenuitem></term>
+<listitem><para>A button that does something: emptying the form, sending the
+answers, jumping to a page or opening an address.</para></listitem></varlistentry>
+<varlistentry><term><guimenuitem>Signature Field</guimenuitem></term>
+<listitem><para>An empty place for a signature. Signing itself is a separate
+job and cannot be done here.</para></listitem></varlistentry>
+</variablelist>
+
+<para>A click rather than a drag still places a field, at a sensible default
+size for its kind, with its corner where the pointer was. The kind stays in
+hand after a field is placed, because a form is laid out several boxes at a
+time; <guimenuitem>Pick a Field</guimenuitem> puts it back. &Esc; first
+disarms the kind and only then clears the choice, because <quote>stop doing
+what I am about to do</quote> comes before <quote>forget what I
+picked</quote>.</para>
+
+<para>Move a field by dragging it, resize it by its eight handles, and hold
+&Shift; on a corner to keep its proportions. The arrow keys nudge by a point,
+and by ten with &Shift; held. &Del; marks the chosen fields for removal; they
+are drawn crossed through until the changes are kept, because after that they
+are not there at all. A drag on bare paper bands a selection, but only on a
+page that already carries fields, so a document with no form never takes the
+band away from the layer underneath. With two or more chosen, the alignment
+buttons appear in the properties sidebar
+(<xref linkend="page-objects-align"/>).</para>
+
+<para>There is no handle to turn a field by. A widget's rectangle is stated as
+two corners and cannot be written at an angle, so a turn handle would be an
+offer the file format does not accept.</para>
+
+<para>Field names are drawn inside the boxes where there is room, because three
+fields called <quote>Date</quote> are what a form author spends the afternoon
+telling apart. A field that has been drawn but not yet written into the
+document is dashed.</para>
+</sect1>
+
+<sect1 id="form-properties">
+<title>What a field can be told</title>
+
+<para>Everything else about a field is in the properties sidebar. The geometry
+and the name appear with one field chosen; the rules appear when everything
+chosen is of the same kind; the styling always does.</para>
+
+<variablelist>
+<varlistentry><term>Where and what it is called</term>
+<listitem><para><guilabel>Place</guilabel> and <guilabel>Size</guilabel> in
+points, <guilabel>Name</guilabel> (a full stop makes a group, so
+<userinput>Address.Street</userinput> and <userinput>Address.Town</userinput>
+become two fields under one heading) and <guilabel>Label</guilabel>, which is
+what a reader shows beside the field and what a push button
+says.</para></listitem></varlistentry>
+
+<varlistentry><term>Rules</term>
+<listitem><para><guilabel>Kind</guilabel>, <guilabel>Required</guilabel>,
+<guilabel>Read-only</guilabel>, and then whatever the kind allows:
+<guilabel>Several lines</guilabel>, <guilabel>Hidden as it is typed</guilabel>,
+<guilabel>Character limit</guilabel> and <guilabel>One box per letter</guilabel>
+for text; <guilabel>Also accepts typing</guilabel> for a drop-down;
+<guilabel>Several may be picked</guilabel> for a list;
+<guilabel>Choices</guilabel>, one to a line, for both;
+<guilabel>Ticked state</guilabel> for a tick box or a radio button, which is
+the name that button's own drawing answers to; and <guilabel>Value</guilabel>,
+what the field holds before anybody fills it in.</para></listitem></varlistentry>
+
+<varlistentry><term>How it looks</term>
+<listitem><para><guilabel>Font</guilabel> and its size (zero means
+<quote>fit</quote>, leaving the size to whoever draws the field),
+<guilabel>Ink</guilabel>, <guilabel>Background</guilabel>,
+<guilabel>Border</guilabel> and <guilabel>Border style</guilabel> (solid,
+dashed, raised, sunken or an underline only) with its width, and where the
+<guilabel>Text</guilabel> sits in the box. Background and border have a
+<guibutton>None</guibutton> button, because a form that states no background
+and a form that states white are different documents and there has to be a way
+back to neither.</para></listitem></varlistentry>
+
+<varlistentry><term>Scripts</term>
+<listitem><para>A field's formatting, keystroke, validation and calculation
+scripts are shown as the document wrote them and are kept exactly as they are.
+They cannot be edited here: the engine writes only the actions it generates
+itself, and hand-written script is not something it can promise to write back.
+The scripts are only shown when the field has any.</para></listitem></varlistentry>
+</variablelist>
+
+<note><para>A password box, a list that takes several answers and a drop-down
+that also accepts typing are not among what is read back from a form, so those
+three start unticked whatever the document says. Changing anything at all about
+a field rewrites all of its flags, so tick them again here if the field had
+them.</para></note>
+</sect1>
+
+<sect1 id="form-appearance">
+<title>What the field appearance can and cannot promise</title>
+
+<para>The page underneath is drawn without its fields, and this mode draws all
+of them itself from the very description the engine will be handed. That is why
+dragging a field does not leave a copy of it behind where the file still has
+it: nothing was ever there.</para>
+
+<para>What is drawn is a reconstruction from four things the file says about a
+field: its colours, its border, its type and its alignment. It is exact for a
+field &pdfsmithy; made, because the same four things are what it draws the
+appearance from. It cannot be exact for a field whose author drew their own
+appearance stream, a logo on a button or a bevel with a gradient in it, because
+an appearance stream is a small program and this is not running it.</para>
+
+<para>So the gesture is not the end of it. A third of a second after the last
+change, the page and the work waiting on it are written to a scratch copy, the
+copy is drawn with its fields, and the result is put back over the boxes. From
+then on what is on the screen is the file.</para>
+
+<para>Two further things about appearance are worth knowing before relying on
+them. Every field is written with a border, a background and, for a tick box,
+its tick, because a field with no drawing of its own is invisible in about half
+the readers in use. And a field can only be set in one of the fourteen fonts
+every reader already knows; a field in a font of your own would need that font
+embedding, which is a separate job.</para>
+</sect1>
+
+<sect1 id="form-refusals">
+<title>What is refused, and when</title>
+
+<para>All of these arrive while the mouse is still on the spot rather than at
+saving time, when the work would already be done.</para>
+
+<itemizedlist>
+<listitem><para>A document carrying an XFA form is refused outright, the moment
+a field kind is picked up or a field is drawn. XFA is a second and incompatible
+description of the same fields; Acrobat honours it and everything else honours
+the ordinary fields, so anything added would behave differently in every
+reader.</para></listitem>
+<listitem><para>A field with more than one box sharing its name keeps the
+places its author gave it, so its box cannot be moved or resized from here.
+A radio group is the ordinary case of this and its buttons are drawn plainly
+with no handles. Its properties are still yours to change.</para></listitem>
+<listitem><para>A field needs a name, and the name has to be free. A field can
+be renamed but not moved into another group, because anything in the document
+referring to it by name would be left pointing at nothing. A refused rename is
+put back in the box rather than left on screen looking as though it
+took.</para></listitem>
+<listitem><para>A field waiting on a page that is then deleted is dropped and
+said out loud, rather than written onto whichever page has moved into that
+slot.</para></listitem>
+</itemizedlist>
+
+<para>Formatting, validation and calculation are JavaScript, which is how every
+&PDF; form does them, which PDF/A forbids, and which several readers do not run
+at all. What a reader will not run, it shows as typed.</para>
+</sect1>
+
+<sect1 id="form-behaviour">
+<title>Behaviour, tab order and the answers</title>
+
+<para><menuchoice><guimenu>Forms</guimenu><guimenuitem>Form Behaviour and
+Answers…</guimenuitem></menuchoice> opens a window for the parts of a form that
+are not a gesture on a page. It has five tabs.</para>
+
+<variablelist>
+<varlistentry><term><guilabel>The Fields It Has</guilabel></term>
+<listitem><para>Every field with its kind, page and place. Fields can be
+renamed and removed here, and the box at the foot lists what building a form
+cannot promise.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Tab Order</guilabel></term>
+<listitem><para>The order the &Tab; key walks the fields of one page, set by
+dragging the list into shape. Fields left out keep their place behind the ones
+listed.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Behaviour</guilabel></term>
+<listitem><para>How a value is shown (as typed, a number, an amount of money, a
+percentage, a date, a time, a postcode or a telephone number), a range a number
+must fall in, a value worked out from other fields (total, product, average,
+smallest or largest), and what pressing a button does.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Answers</guilabel></term>
+<listitem><para>Writing the answers out and reading them back (FDF, XFDF or
+comma-separated values, chosen by the file name), gathering many filled-in
+copies into one table with a row per document and a column per field, and
+copying the fields from another document. That last needs the two to have the
+same layout: the fields land at the coordinates they had, not next to whatever
+text they were beside.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Place a Field</guilabel></term>
+<listitem><para>The older way of putting a field on a page, by typing its four
+numbers. Drawing it on the page is the ordinary way now, and this tab remains
+for a field whose position is genuinely known as a
+number.</para></listitem></varlistentry>
+</variablelist>
+
+<para>This window works on the file as it stood when it opened, and writes a
+new file rather than changing the one in the window. It closes itself after a
+successful write, because a second change made afterwards would be made to the
+older file and would quietly drop what the first one did. See
+<xref linkend="tools"/> for how all such windows behave.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="arranging">
+<title>Arranging the Pages</title>
+
+<para><menuchoice><shortcut><keycap>F8</keycap></shortcut>
+<guimenu>View</guimenu><guimenuitem>Arrange the Pages</guimenuitem></menuchoice>
+puts every page of every file you have opened or inserted into one grid, in the
+order the document will be saved in. It answers <quote>which pages, and in what
+order</quote>. What the pages say is the other three modes' question, and one
+view that tried to answer both would answer neither well.</para>
+
+<para>It opens on a windowful of pages rather than on whatever size you last
+read at, because rearranging a document is done by eye and needs a page's
+neighbours on screen beside it. Set a size there yourself, with the status-bar
+slider or with &Ctrl; and the wheel, and that is the size it keeps from then
+on. Leaving puts the document back exactly as you left it: the same size, the
+same spread or single column, and the same line.</para>
+
+<para>Everything in this chapter is undoable, and each command counts as one
+step however many pages it touched. Undo also covers what you keep on the page
+in the other modes, and editing the bookmarks, because <quote>undo</quote>
+meaning different things in different parts of one window is its own kind of
+bug. The menu entry names the step it will undo.</para>
+
+<sect1 id="arranging-selecting">
+<title>Selecting and reordering</title>
+
+<para>Click a page to select it, &Ctrl;-click to add a page to the selection,
+&Shift;-click to select a run, and
+<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Select All</guimenuitem></menuchoice> to
+take the lot. The status bar says how many are selected.</para>
+
+<para>Drag a page to move it. A whole selection moves together, and it moves
+between the pages of every file in the grid rather than only within the file it
+came from, so a chapter from one document can be dropped into the middle of
+another in one gesture. The drop position is shown as a line between thumbnails
+while you drag. Dragging &PDF; files in from the file manager and dropping them
+between two pages inserts them exactly there.</para>
+
+<para>Almost everything works on the selection. Text recognition, compression,
+watermarking, trimming, page numbering and exporting as images each offer the
+choice between the pages you picked and the whole document, and start on the
+selection when there is one. <quote>Make this one page searchable</quote> is a
+normal thing to ask for. Two commands work differently and say so where they
+are described: signing goes on the page you are looking at, or on every page
+(<xref linkend="signing-placing"/>), and redaction acts on the pages you
+actually marked (<xref linkend="redaction-marking"/>).</para>
+
+<para>The right button opens a menu, and there is a different one in each mode,
+because the mode is the whole of what a click means. On the page grid it offers
+what can be done to whole pages. On the document it offers copying and marking
+while reading, cutting and keeping while editing the page, and the field kinds
+while editing the form. None of them offers to delete the page, which is the
+page grid's question.</para>
+</sect1>
+
+<sect1 id="arranging-turning">
+<title>Turning, duplicating and deleting</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Rotate Left</guimenuitem></menuchoice></term>
+<listitem><para>Turns the selected pages a quarter turn anticlockwise, or the
+whole document when nothing is selected. Rotation is recorded as an attribute
+of the page, so no image is resampled.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Rotate Right</guimenuitem></menuchoice></term>
+<listitem><para>The same, clockwise.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Duplicate Pages</guimenuitem></menuchoice></term>
+<listitem><para>Puts a second copy of each selected page after it. The copy
+refers to the same page in the same file, so duplicating a page costs no space
+in the saved document.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut>&Del;</shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Delete Pages</guimenuitem></menuchoice></term>
+<listitem><para>Removes the selected pages. The file on disk is untouched until
+you save, and deleting every page asks first. The command works only where the
+pages are on show: &Del; means something else on an open page, and one
+keystroke removing the page being read, in a mode whose own tooltip promises
+nothing can be changed by accident, is not a trade worth
+making.</para></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="arranging-inserting">
+<title>Bringing more pages in</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Insert File…</guimenuitem></menuchoice>
+adds one or more documents to the one you already have. Because appending is
+right only about half the time, and the other half you have a page selected
+precisely because that is where the new material belongs, you are asked where
+the pages should go: at the beginning, before the selected page, after it, or
+at the end. Your answer is remembered for next time. Everything inserted in one
+go is one undo step, however many files, and the new pages are selected
+afterwards.</para>
+
+<para>A locked file being inserted asks for its password, with the same
+retrying as opening one, because a locked file being inserted is one you have
+the password to, and refusing it in silence is how pages go missing from a
+merge. Files taken from a network share are fetched all or nothing, for the
+same reason.</para>
+
+<para><menuchoice><guimenu>File</guimenu><guimenuitem>Add Blank
+Pages…</guimenuitem></menuchoice> asks how many and what size. The first choice
+is <guilabel>Same as this document</guilabel>, and it is matched to the page
+the new ones will sit beside rather than to page one, so a book with a
+landscape plate in the middle gets another landscape sheet there rather than an
+upright one. The named papers are offered as well, with an orientation, which
+is disabled while the size is being matched, since offering to change it there
+would be offering to break the match.</para>
+
+<para><menuchoice><guimenu>File</guimenu><guimenuitem>Import
+Images…</guimenuitem></menuchoice> makes one page per picture and appends them,
+at the picture's own size read at 300 &dpi;, which is what stops an A4 scan
+arriving as a poster. With nothing open it starts a document instead.</para>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Set Text as
+Pages…</guimenuitem></menuchoice> makes pages out of typed or pasted text; see
+<xref linkend="tools-typeset"/>.</para>
+</sect1>
+
+<sect1 id="arranging-extracting">
+<title>Taking pages out</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>E</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Extract Pages to New File…</guimenuitem></menuchoice>
+writes the selected pages to a new document and leaves the one you are working
+on exactly as it was. It is the command for <quote>I need pages 4 to 9 as their
+own file</quote>. The copy carries the original's password and permissions: an
+extract is the same content and has no business being the unprotected
+one.</para>
+
+<para><menuchoice><guimenu>File</guimenu><guimenuitem>Split…</guimenuitem></menuchoice>
+breaks the whole document into several files, and offers the four questions
+people actually ask:</para>
+
+<itemizedlist>
+<listitem><para>every so many pages, where one page per file gives one file per
+invoice;</para></listitem>
+<listitem><para>at named ranges, where each comma-separated group such as
+<userinput>1-3, 4-9, 10-last</userinput> becomes its own file;</para></listitem>
+<listitem><para>in pieces no larger than a size you give, for when the limit is
+a mail server rather than a chapter boundary. The pieces are measured as they
+are written, so the exact split is only known afterwards, and the dialog says
+so instead of guessing;</para></listitem>
+<listitem><para>at each top-level bookmark, which for a manual or a scanned
+book is usually the split you meant. The files can be named after the
+bookmarks.</para></listitem>
+</itemizedlist>
+
+<para>The dialog lists the file names it is about to write, and how many pages
+each will get, before anything is written. Writing twenty files is not
+something anyone should have to do speculatively to find out what they get. The
+document has to be on disk first, and you are asked to save if it is not.</para>
+</sect1>
+
+<sect1 id="arranging-trimming">
+<title>Trimming the edges</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Trim
+Pages…</guimenuitem></menuchoice> takes the empty border off pages. Nothing is
+cut away: trimming sets the visible area of the page, so the content is all
+still there, readers show less of it, and <guilabel>Show the full pages
+again</guilabel> puts it back at any time. A scan therefore keeps its exact
+pixels, which cropping by re-rendering would not.</para>
+
+<para>The page goes where the grid was and the four measurements go into a
+panel at the edge of the window; drag the edges of the bright area on the page
+and the numbers follow, or type them. The trim applies to every page in the
+chosen range rather than only to the one on screen.</para>
+
+<para><guibutton>Find the border for me</guibutton> renders a sample of the
+pages and measures the white edge around them. It then offers the largest trim
+that is safe for <emphasis>every</emphasis> page in the selection, because
+trimming each page to its own content would produce a document whose pages are
+all slightly different sizes, which looks worse than the margins did. Margins
+are measured on the page as it is displayed, so <quote>left</quote> is your
+left whatever the page's own rotation says.</para>
+</sect1>
+
+<sect1 id="arranging-sheets">
+<title>Several pages on one sheet</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Arrange on
+Sheets…</guimenuitem></menuchoice> produces a <emphasis>file</emphasis> with 2,
+4, 6, 8, 9 or 16 pages on each sheet. It is what you want for a handout, for a
+reading copy that fits in a bag, and for anything that has to be sent rather
+than printed; printing the same way is <xref linkend="printing"/>.</para>
+
+<para>Nothing is rasterised. Each page is placed on the sheet whole, so the
+text stays text and the sheets stay selectable and searchable; a four-up
+handout of a scanned book is the same scan at the same resolution, arranged
+differently. You can set the border around the sheet and the gap between pages,
+draw a thin line around each page, and fill the grid downwards instead of in
+reading order. A preview beside the settings shows the arrangement, and a line
+under it says how many pages go across and down.</para>
+
+<para>This is the one command here that changes how many pages the document
+has. Undo puts all of them back, not half of them.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="contents">
+<title>Contents and Bookmarks</title>
+
+<para>A document's table of contents is the thing that makes a three-hundred-page
+manual usable.
+<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Contents Sidebar</guimenuitem></menuchoice>
+shows it at the side of the window. It stays closed until you ask for it: most
+documents have bookmarks, so opening it by itself cost a third of the window to
+a panel nobody had asked for, and closing it did no good because the next file
+opened it again.</para>
+
+<sect1 id="contents-navigating">
+<title>Getting about</title>
+
+<para>The sidebar lists the entries as a tree, each with the page it points at
+in a column of its own. Click one to go and read that page. It also follows you
+the other way round: as you move through the document, the entry covering the
+current page is highlighted, so you can always see where in the document you
+are.</para>
+</sect1>
+
+<sect1 id="contents-editing">
+<title>Editing the contents</title>
+
+<para>The sidebar edits the table of contents as well as showing it, and every
+change goes onto the same undo stack as everything else.</para>
+
+<variablelist>
+<varlistentry><term>Renaming</term>
+<listitem><para>Double-click an entry and type. A single click goes to the
+page, which is the thing done a hundred times a session; renaming is the thing
+done once.</para></listitem></varlistentry>
+
+<varlistentry><term>Adding</term>
+<listitem><para><guimenuitem>Add for Page …</guimenuitem> in the &RMB; menu
+names the page now showing. The new entry appears beside whatever you had
+selected rather than at the very end, because a bookmark added while a chapter
+is selected belongs next to it, and goes straight into renaming, because nobody
+wants a bookmark called <quote>New bookmark</quote>.</para></listitem></varlistentry>
+
+<varlistentry><term>Re-nesting</term>
+<listitem><para>Drag an entry onto another to make it a sub-entry, or between
+two to move it among them; the whole subtree travels with it. An entry dropped
+into a closed one would appear to have vanished, so its new parents are opened,
+and recorded as open, since that is what the file will be asked to save. The
+&RMB; menu does the same by keystrokes: <guimenuitem>Move Up</guimenuitem> and
+<guimenuitem>Move Down</guimenuitem> among its siblings,
+<guimenuitem>Make a Sub-entry</guimenuitem> to put it under the entry above it,
+and <guimenuitem>Move Out One Level</guimenuitem> to bring it back out. There
+are also <guimenuitem>Expand All</guimenuitem> and <guimenuitem>Collapse
+All</guimenuitem>.</para></listitem></varlistentry>
+
+<varlistentry><term>Deleting</term>
+<listitem><para>&Del;, or <guimenuitem>Delete</guimenuitem>. An entry with
+sub-entries under it raises the one question that matters:
+<guibutton>Keep Them</guibutton> lifts them into the hole their parent leaves,
+in their own order and at their own place in the document, while
+<guibutton>Delete Them Too</guibutton> takes the whole chapter. The question
+comes before anything is changed, so cancelling costs nothing. Taking the
+sub-entries silently is one of the two things you might have meant and never
+the one you expected.</para></listitem></varlistentry>
+</variablelist>
+
+<para>Opening and closing an entry to read the tree is deliberately not an undo
+step: an undo stack full of <quote>opened a chapter</quote> is an undo stack
+nobody dares press. What the saved file says about an entry being open is set
+on purpose in the properties sidebar instead, and a triangle turned in passing
+travels along with the next real change.</para>
+
+<para>A document with no table of contents shows a hint and two buttons rather
+than an empty panel. <guibutton>Add a Bookmark for This Page</guibutton> starts
+the tree by hand. <guibutton>Build From Headings</guibutton> makes an entry out
+of every paragraph set larger than the text around it, which is a guess and is
+said to be one both before and afterwards, because nothing in a &PDF; records
+which paragraph is a heading. A document set in one size throughout, or one
+whose words are part of a scanned picture, offers nothing to go on and is told
+so plainly. Read what it built before saving.</para>
+</sect1>
+
+<sect1 id="contents-properties">
+<title>What an entry can say</title>
+
+<para>A bookmark has no appearance on the page to click, so its attributes live
+in the properties sidebar (<xref linkend="properties"/>) rather than behind a
+dialog. Selecting an entry shows what it says, which page it opens
+(<guilabel>None</guilabel> is allowed, and makes it a heading for the entries
+under it rather than a place to go), whether it opens showing its sub-entries,
+and the bold, italic and colour a reader will draw it in.
+<guibutton>Default</guibutton> beside the colour hands that decision back to
+the reader.</para>
+</sect1>
+
+<sect1 id="contents-survives">
+<title>Bookmarks follow their page</title>
+
+<para>While a document is open, a bookmark is anchored to the page itself
+rather than to its number. Reordering pages, deleting them or inserting a file
+therefore moves each bookmark with its page instead of leaving it pointing at
+whatever now happens to sit at that number. An entry whose page has left the
+document altogether is marked as such rather than quietly retargeted, and
+entries pointing outside the document are dropped when it is written, because a
+bookmark that goes nowhere is worse than one that is missing.</para>
+
+<para>The table of contents also survives saving. That is worth stating because
+it is not a given: a document editor that loses a manual's navigation the first
+time somebody rotates a page is not a document editor.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="scans">
+<title>Scans</title>
+
+<para>A scanned page is a picture of text. It cannot be searched, selected,
+copied or indexed, which is why a scanned contract is so much less useful than
+the same contract as a document.
+<menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Recognise Text (OCR)…</guimenuitem></menuchoice>
+fixes that.</para>
+
+<sect1 id="scans-recognition">
+<title>Text recognition</title>
+
+<para>The page itself is never re-rendered. Each page is rasterised only in
+order to be read, and the words that were recognised are then written back over
+the picture as an <emphasis>invisible</emphasis> text layer, positioned over
+the words you can see. The page looks exactly as it did, a scan that went in at
+600 &dpi; comes out with the very same image bytes, and it suddenly selects,
+copies, searches and indexes.</para>
+
+<para>Pick the languages of the document under <guilabel>Languages</guilabel>.
+Only the languages Tesseract has data files for on this machine are offered,
+under their proper names, with the one matching your desktop language ticked to
+start with; if the one you need is missing, install its package.
+<literal>tesseract-ocr-deu</literal> and <literal>tesseract-ocr-eng</literal>
+are the usual two. <guilabel>Detail</guilabel> chooses the resolution the page
+is read at: 200 &dpi; is fastest, 300 &dpi; is the sensible default, and 400 or
+600 &dpi; are for small print and poor scans respectively, at the cost of
+time.</para>
+
+<para><guilabel>Skip pages that already have text</guilabel> is on by default
+and should stay on. Running recognition over a page that was generated
+digitally adds a second, slightly wrong text layer on top of a perfectly good
+one, which is the classic way to ruin a searchable document.</para>
+
+<para>Recognition runs page by page behind a progress window that can be
+cancelled; cancelling stops at the next page boundary and leaves the document
+as it was.</para>
+</sect1>
+
+<sect1 id="scans-straightening">
+<title>Straightening</title>
+
+<para><guilabel>Straighten crooked pages</guilabel> measures how far the page
+is tilted and corrects it with a transformation wrapped around the page's
+existing content. There is no resampling, so nothing softens and no detail is
+lost; the report afterwards says how many pages were straightened and what the
+worst tilt was.</para>
+</sect1>
+
+<sect1 id="scans-cleanup">
+<title>Helping the recognition along</title>
+
+<para>Two settings under <guilabel>Help the recognition along</guilabel> deal
+with bad originals. <guilabel>Ignore specks up to</guilabel> discards specks
+smaller than the given number of pixels: dust and scanner noise that Tesseract
+would otherwise try to read as punctuation. <guilabel>Even out uneven
+lighting</guilabel> is for a page that was photographed rather than scanned,
+bright in the middle and dim at the edges, which Tesseract reads far worse at
+the edges than it needs to.</para>
+
+<para>Both affect only the image that is handed to the recognition. Neither
+touches the page: cleaning up the page itself would mean re-encoding it, and
+&pdfsmithy; does not re-encode pages.</para>
+</sect1>
+
+<sect1 id="scans-unavailable">
+<title>When it is not available</title>
+
+<para>Text recognition is done by Tesseract, with Leptonica cleaning up the
+images it is given. A build made on a machine without them has no recognition
+at all and says so. A build that has them but finds no language data installed
+says that instead, and names the kind of package to install.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="signing">
+<title>Signing and Stamping</title>
+
+<para>Signatures, watermarks and page numbers are the same operation
+underneath: something is embedded as a resource and then placed on top of the
+page. The page's own content is never decoded or re-encoded, so a signed scan
+is byte for byte the scan it was, plus a signature.</para>
+
+<sect1 id="signing-signature">
+<title>Capturing a signature</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo></shortcut>
+<guimenu>Pages</guimenu><guimenuitem>Sign…</guimenuitem></menuchoice> puts the
+page where the grid was and the signing tools in a panel beside it. Signing is
+a repeated act, so a signature is captured once and then kept for every
+document afterwards. There are two ways to capture one:</para>
+
+<itemizedlist>
+<listitem><para><guibutton>From File…</guibutton> reads a photograph or a scan
+of your signature on paper. A photograph taken with a phone is
+fine.</para></listitem>
+<listitem><para><guibutton>Draw…</guibutton> lets you sign in a box with the
+mouse, a trackpad or a pen tablet.</para></listitem>
+</itemizedlist>
+
+<para>Either way you are asked to name it, so that a list of three signatures
+is a list of three names.</para>
+
+<para>A photographed or scanned signature arrives as dark strokes on light
+paper, and stamped as it is it would cover the document with a white box that
+looks obviously pasted on. The paper is therefore made transparent
+automatically: pixels brighter than a threshold become fully transparent and
+the ones a little below it partly so, which keeps the edges of the strokes soft
+rather than jagged, and the fully transparent margin is cropped away so that
+the stamp is all signature.</para>
+
+<para>Your signatures are kept as image files with transparency in the
+application's own data directory. They never leave the machine, and they are
+deliberately kept as files rather than inside the configuration so that you can
+find, back up and delete them yourself; <guibutton>Remove</guibutton> in the
+panel deletes one from this machine, after asking.</para>
+</sect1>
+
+<sect1 id="signing-placing">
+<title>Placing it</title>
+
+<para>Pick a signature from the list and the page appears beside it. Drag the
+signature to where it belongs, or click anywhere on the page to put it there,
+and pull the corner handle to resize it; the <guilabel>Size</guilabel> slider
+does the same thing numerically, as a proportion of the page width.</para>
+
+<para>The signature goes on the page you were looking at.
+<guilabel>Put it on every page</guilabel> stamps the same signature at the same
+coordinates on every page of the document, for initialling a contract, which is
+otherwise thirty separate acts.</para>
+</sect1>
+
+<sect1 id="signing-not-cryptographic">
+<title>What this is not</title>
+
+<important><para>This is a picture of your signature placed on the page. It is
+not a cryptographic signature: the document is not sealed, nothing about it can
+be checked afterwards, and a reader will not report it as signed. It is the
+electronic equivalent of signing a printout, which is what most forms and most
+contracts actually ask for, and it should not be relied on where a verifiable
+signature is the point. A signature <emphasis>field</emphasis> drawn onto a
+form (<xref linkend="form-drawing"/>) is likewise an empty place for a
+signature rather than a signature.</para></important>
+</sect1>
+
+<sect1 id="signing-watermark">
+<title>Watermarks</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Watermark…</guimenuitem></menuchoice>
+lays text or a picture across the selected pages. <guilabel>Draft</guilabel>,
+<guilabel>Confidential</guilabel>, <guilabel>Copy</guilabel>,
+<guilabel>Sample</guilabel> and <guilabel>Do not copy</guilabel> are there as
+presets, and you can type anything else. Size, colour, how faint it is and the
+angle are yours to set, and <guilabel>Outline only, so the page stays
+readable</guilabel> draws the letters hollow, which is worth using on anything
+anyone still has to read. A picture, such as a logo or a departmental stamp,
+can be used instead of text, anchored to the centre or to any corner, at a
+width you give as a share of the page.</para>
+
+<para>The preview is the page itself with the stamp drawn on it the way it will
+be written, so turn to a busy page to check that it stays readable through the
+watermark. Judging a watermark against a white rectangle means applying it,
+looking, undoing and starting again.</para>
+</sect1>
+
+<sect1 id="signing-numbering">
+<title>Page numbers, headers and Bates stamping</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Page
+Numbers…</guimenuitem></menuchoice> stamps a short line of text into a corner
+of every selected page. The text is built from placeholders:</para>
+
+<variablelist>
+<varlistentry><term><literal>{page}</literal></term>
+<listitem><para>the running number.</para></listitem></varlistentry>
+<varlistentry><term><literal>{pages}</literal></term>
+<listitem><para>how many pages the run covers.</para></listitem></varlistentry>
+<varlistentry><term><literal>{bates}</literal></term>
+<listitem><para>the Bates number, with its prefix and zero padding
+applied.</para></listitem></varlistentry>
+<varlistentry><term><literal>{file}</literal></term>
+<listitem><para>the document's file name.</para></listitem></varlistentry>
+<varlistentry><term><literal>{date}</literal></term>
+<listitem><para>today's date, in your short format.</para></listitem></varlistentry>
+</variablelist>
+
+<para>Presets cover the usual shapes, and the page shows the stamp where it
+will land as you change the settings, with a line under it reading what this
+page will say. Turn to a page outside the run and it says that instead of
+showing you nothing. You choose the corner, the type size, how far in from the
+edge it sits, its colour, and the number the first stamped page is called,
+which is what it is called rather than which page it is.</para>
+
+<para>Bates stamping is the same mechanism with a prefix and zero padding, so
+that every page of a bundle carries a unique, sequential, quotable identifier
+such as <literal>ACME-000147</literal>. Legal and audit work needs that, and
+doing it by hand across a four-hundred-page disclosure is how mistakes
+happen.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="redaction">
+<title>Redaction</title>
+
+<para>A black rectangle drawn over a name is not redaction. The name is still
+in the file, and anybody who selects the text, copies it, or opens the document
+in an editor has it. That mistake has ended careers and lost court cases, and
+it is made most often by people who believed they had removed something.</para>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Redact…</guimenuitem></menuchoice>
+does the only thing that counts: it takes the content out of the page's
+instruction stream, and only then paints the black box. The box is cosmetic.
+The content is gone whether or not anyone looks at the result.</para>
+
+<sect1 id="redaction-marking">
+<title>Marking what has to go</title>
+
+<para>The page goes where the grid was and the tools into a panel at the edge
+of the window. It moves between pages itself, because a redaction usually spans
+several and having to start again on each one would guarantee a missed
+page.</para>
+
+<para>Drag across anything that has to go. Click a box to select it, and
+<guibutton>Remove</guibutton> or <guibutton>Remove All</guibutton> to unmark.
+<guilabel>Marked areas</guilabel> lists them with their page and size, and,
+this is the part worth reading, <guilabel>Text that will be destroyed</guilabel>
+shows the actual words that your marks will remove, so that a box drawn two
+millimetres too far left is caught before it takes a word you needed. On a scan
+there is nothing to list and the panel says so: the picture itself is edited
+instead, and any recognised text over it goes with it.</para>
+
+<para>Within the session, undo puts the untouched pages back. Once the file has
+been written, though, the content is not in it any more and cannot be recovered
+from it, which is the point, and which the panel states plainly, under
+<guilabel>What this does and does not do</guilabel>, before you press
+<guibutton>Redact</guibutton>.</para>
+</sect1>
+
+<sect1 id="redaction-text">
+<title>How text is removed</title>
+
+<para>The page's instruction stream is walked operator by operator, tracking
+the matrices that decide where anything lands, so that every glyph can be given
+a box of its own. Glyphs whose box touches a marked area are dropped, and each
+one is replaced by the equivalent spacing, so that everything which survives
+stays exactly where it was.</para>
+
+<para>The removal is per character rather than per instruction because a whole
+line of text is usually drawn by a single operation: throwing that operation
+away would take the rest of the line with it. Removing a name from a line
+therefore leaves the rest of the sentence intact and correctly spaced.</para>
+
+<para>Where the width of a character is not stated by the document's own font
+tables, it is estimated generously, and the estimate errs deliberately towards
+removing too much. An over-wide estimate deletes a character more than you
+asked for; an under-wide one leaves half a name behind. Only one of those two
+failures matters.</para>
+</sect1>
+
+<sect1 id="redaction-images">
+<title>How pictures are removed</title>
+
+<para>A picture that overlaps a marked area is decoded, the area is painted out
+in its pixels, and the result is embedded again under a new name, so a second
+placement of the same picture elsewhere on the page keeps its own pixels rather
+than losing them to your mark.</para>
+</sect1>
+
+<sect1 id="redaction-limits">
+<title>What it cannot promise</title>
+
+<para>The panel states these limits, and so does this handbook, because a
+redaction tool that is vague about its edges is worse than none.</para>
+
+<itemizedlist>
+<listitem><para>Text drawn inside an embedded drawing is not searched character
+by character. When such a drawing overlaps a marked area, the whole drawing is
+removed instead.</para></listitem>
+
+<listitem><para>Fax pictures (CCITT and JBIG2) and JPEG 2000 pictures cannot be
+edited in place. Rather than choose silently between destroying the page and
+not redacting it, the page is flattened to an image, which removes the marked
+content but costs that page its selectable text. You are told afterwards, in
+words, which pages this happened to.</para></listitem>
+
+<listitem><para>Attachments, and text hidden in the document's own properties,
+are not touched. Use
+<menuchoice><guimenu>Document</guimenu><guimenuitem>Clean Up
+Document…</guimenuitem></menuchoice> for those
+(<xref linkend="document-cleanup"/>).</para></listitem>
+</itemizedlist>
+
+<para>Afterwards you are told how many areas were dealt with, and, separately
+and in words rather than in a status line, what else you should know before
+trusting the result. Anything the program had to compromise on is said out loud
+rather than left for you to discover in the published file.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="smaller">
+<title>Making Documents Smaller</title>
+
+<para><menuchoice><guimenu>Pages</guimenu><guimenuitem>Make
+Smaller…</guimenuitem></menuchoice> offers four levels. The first cannot lose
+anything; the other three trade picture quality for size, and cannot be undone
+by compressing again, though they can be undone in the window.</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Lossless (nothing is re-encoded)</guilabel></term>
+<listitem><para>Structural packing only: object streams, re-compressed streams,
+duplicate objects merged. Every pixel survives. On a text document the saving
+is typically somewhere between 5 and 30 percent; on a scan it is close to
+nothing, because the bulk of a scan is its pictures and this level does not
+touch them.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Balanced (good for reading and printing)</guilabel></term>
+<listitem><para>Images are re-encoded at 150 &dpi;. Comfortable on screen and
+still prints acceptably. This is the default.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Strong (good for email)</guilabel></term>
+<listitem><para>Images at 110 &dpi;. The level to reach for when something has
+to fit under an attachment limit.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Smallest (visibly softer images)</guilabel></term>
+<listitem><para>Images at 72 &dpi;. As small as is still useful, and it looks
+it.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para><guilabel>Convert to grayscale</guilabel> often halves a colour scan and
+does nothing at all to a document that was black text on white to begin with.
+Monochrome images are treated far more gently than the level suggests, since
+downsampling a black-and-white scan to 110 &dpi; would destroy it.</para>
+
+<para>The three lossy levels need Ghostscript, which does the image
+downsampling. It is run as a separate program and is an optional dependency:
+without it, the lossless level still works and the dialog says why the others
+are unavailable. Install the <literal>ghostscript</literal> package to get
+them.</para>
+
+<sect1 id="smaller-estimate">
+<title>Asking first</title>
+
+<para><guibutton>How much would this save?</guibutton> answers the question
+before you commit to it. A handful of pages are compressed for real and the
+ratio is applied to the rest, so you are told roughly what the document would
+come down to in a second or two rather than after compressing a
+four-hundred-page scan to find out whether compressing it was worth doing. The
+result says how many pages it was measured on, and calls itself a rough guess
+when that number was very small. A number presented as exact when it came from
+four pages would be a small lie repeated on every document.</para>
+
+<para>Afterwards, the report says what was actually achieved. It also says when
+nothing was: scans are very often already stored below the target resolution,
+in which case no level will help. The result is only kept when it is genuinely
+smaller than the original, and when it is not, nothing is changed and no undo
+step is made.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="document">
+<title>The Document as a Whole</title>
+
+<sect1 id="document-properties">
+<title>Properties</title>
+
+<para><menuchoice><guimenu>Document</guimenu><guimenuitem>Document
+Properties…</guimenuitem></menuchoice> holds the title, author, subject and
+keywords, what the document was created with, what wrote it, and the two dates.
+An empty date reads <guilabel>not recorded</guilabel> rather than showing a
+made-up one. Emptying a field removes it from the document entirely.</para>
+
+<para>The producer, <guilabel>Written by</guilabel>, is kept as it was rather
+than overwritten on save, so that saving a document does not announce which
+tool you used.</para>
+
+<para>Changing the properties is an ordinary undo step and is written on the
+next save.</para>
+</sect1>
+
+<sect1 id="document-cleanup">
+<title>Cleaning up</title>
+
+<para><menuchoice><guimenu>Document</guimenu><guimenuitem>Clean Up
+Document…</guimenuitem></menuchoice> begins by naming what the document
+actually carries: the author, the title, what it was created with and when, an
+XMP metadata packet, JavaScript that runs when the document opens, and how many
+files are embedded in it. <quote>Author: A. Person</quote> is a fact somebody
+can act on; <quote>metadata</quote> is not. A document with nothing worth
+removing is told so.</para>
+
+<para>Two things can then be removed, both ticked by default: the document
+information, and JavaScript, attachments and link actions. The pages themselves
+are not touched, and nothing changes on disk until you save.</para>
+
+<para>What is listed is read from the file on disk, so save first if you want
+the inventory to include something you have added in this session.</para>
+</sect1>
+
+<sect1 id="document-password">
+<title>Protection and passwords</title>
+
+<para><menuchoice><guimenu>Document</guimenu><guimenuitem>Password…</guimenuitem></menuchoice>
+sets or removes the password that opens the document.
+<guilabel>Remove the password</guilabel> is available only when there is one.
+The document has to have been saved once before it can be protected.</para>
+
+<para>Encryption is AES-256. Nothing weaker is offered, because the older
+schemes in the &PDF; specification are broken.</para>
+
+<para>Two permissions can be set alongside it: <guilabel>Ask readers not to
+print</guilabel> and <guilabel>Ask readers not to copy text</guilabel>. The
+dialog says what they are worth, and so does this handbook: permission settings
+are a request, not a lock. Any reader may ignore them, so the password is what
+actually protects the document.</para>
+
+<para>Unlike almost everything else in the program, this is not an undo step:
+the document is saved immediately, because a password the window knows about
+and the file does not is a password the next
+<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo> would write
+straight over. The dialog says plainly that a document whose password is lost
+cannot be opened again, by this program or by any other.</para>
+
+<para>The protection a document was opened with is carried into every save,
+including into pages extracted out of it, so a plain save never quietly unlocks
+a file its owner had locked. Opening a different document forgets it.</para>
+</sect1>
+
+<sect1 id="document-compare">
+<title>Comparing two documents</title>
+
+<para><menuchoice><guimenu>Document</guimenu><guimenuitem>Compare
+with…</guimenuitem></menuchoice> answers the question behind nearly every
+comparison of two &PDF; files: is this still the contract I read? The
+comparison works on two files on disk, so you are offered the chance to save
+first.</para>
+
+<para>An honest answer needs two witnesses, so both are used. The extracted
+text finds the changes that matter to a reader, a name, a figure, a negation,
+and says which words went and which arrived. The rendered pixels find
+everything text cannot see: a swapped signature image, a redrawn table, a font
+substitution that reflowed a page without altering a single word. A page whose
+words match but whose appearance does not gets a verdict of its own and says
+how much of the page differs, because that is exactly the case a reader is
+least likely to catch unaided.</para>
+
+<para>The words are compared as a sequence, never as a set. The distinction is
+not academic: <quote>the tenant shall not sublet the property</quote> and
+<quote>the tenant shall sublet the property not</quote> hold precisely the same
+words, and any comparison built on sets or word counts declares them
+equal.</para>
+
+<para>Two limits are worth knowing. Pages are paired by position, which is
+right for the ordinary case of one document saved twice and wrong for a page
+inserted in the middle: that shifts everything after it, and the whole tail is
+reported as changed. And a scan carries no text, so two scans are judged on
+their pixels alone; nothing can tell whether a picture of a sentence says
+something different without reading it.</para>
+
+<para>The window lists the changed pages, shows the two versions side by side
+with the differences marked, and names the words that went and the words that
+arrived. Two identical documents are told so and no window opens.</para>
+</sect1>
+
+<sect1 id="document-archiving">
+<title>Archiving</title>
+
+<para>PDF/A is the shape a document has to be in before an archive will take
+it. The standard is mostly a list of things a file may not do: no encryption,
+no scripts, no dependency on anything outside itself, and above all no font it
+does not carry, because a document that borrows Helvetica from the reader's
+machine stops looking like itself the moment that machine is gone.</para>
+
+<para><menuchoice><guimenu>File</guimenu><guisubmenu>Export as</guisubmenu><guimenuitem>Save
+for Archiving…</guimenuitem></menuchoice> writes a copy as PDF/A-2b, which is
+what most archives ask for today. It writes the document as it stands in the
+window, including changes you have not saved. The other two levels, PDF/A-1b
+(the oldest and strictest, no transparency and no layers, accepted everywhere)
+and PDF/A-3b (as 2b, but a file may be carried along inside the document), are
+written from the command line (<xref linkend="command-line"/>).</para>
+
+<para>The conversion is done by Ghostscript, run as a separate program, so it
+is an optional dependency; without it installed the command says so and points
+at the <literal>ghostscript</literal> package.</para>
+
+<para>Everything the conversion changed and everything it could not fix is
+reported afterwards, in words, because both belong in front of somebody about
+to hand a file to an archive. The usual things it will tell you are that the
+password protection was removed because PDF/A does not allow it, that scripts
+and actions which run on their own were removed, that the files carried inside
+the document were dropped (convert to PDF/A-3 if they matter), that the fonts
+were embedded, and which colour profile was used.</para>
+
+<para>The other half of archiving is inspection, and it is deliberately called
+a look rather than a validation.
+<userinput><command>pdf-smithy-cli</command> archive-check
+<replaceable>file.pdf</replaceable></userinput> finds the handful of faults
+that account for most rejections: encryption, scripts, attachments, fonts that
+are not embedded, a missing output intent. A file can pass every check here and
+still be refused by a strict validator. A real PDF/A validator is a substantial
+piece of software; veraPDF is the reference one, and it is what to reach for
+when an archive has to sign the file off. The check also reads only what the
+file says about itself, so a document claiming to be PDF/A-2b is taken at its
+word on that point.</para>
+</sect1>
+
+<sect1 id="document-exports">
+<title>Everything else the engine can write</title>
+
+<para><menuchoice><guimenu>File</guimenu><guisubmenu>Export as</guisubmenu></menuchoice>
+gathers the eight things the program can write that are not this document as it
+stands. They are one menu rather than eight entries in the File menu because
+they are eight answers to one question, and <quote>Export as</quote> is where
+somebody with that question looks. None of them changes the document in the
+window.</para>
+
+<sect2 id="export-images">
+<title>Pages as pictures</title>
+
+<para><guimenuitem>Export as Images…</guimenuitem> writes one picture per page
+into a directory you choose. <guilabel>Format</guilabel> offers PNG (sharp,
+larger files), JPEG (smaller, for photographs) and TIFF (for print workflows);
+<guilabel>Detail</guilabel> offers 96 &dpi; for the screen, 150 for every day,
+300 for print and 600 for archival use. <guilabel>Quality</guilabel> goes quiet
+for PNG rather than sitting there implying it does something to a lossless
+format. It acts on the selected pages or on the whole document. Any page that
+could not be drawn is counted and reported, since nothing else on screen
+distinguishes eight images from the two of them that worked.</para>
+
+<para><guimenuitem>Import Images…</guimenuitem> is the way back;
+see <xref linkend="arranging-inserting"/>.</para>
+</sect2>
+
+<sect2 id="export-text">
+<title>Text, HTML, Markdown and tables</title>
+
+<para><guimenuitem>Plain Text…</guimenuitem>,
+<guimenuitem>HTML…</guimenuitem>, <guimenuitem>Markdown…</guimenuitem> and
+<guimenuitem>Tables as a Spreadsheet…</guimenuitem> write the document's words
+out. Every one of them says the same thing afterwards, every time, because it
+is true every time: a &PDF; holds letters at positions rather than sentences,
+so what came out was worked out from the layout, and it is worth reading over
+before relying on it.</para>
+
+<para>The reconstruction is good and it guesses in known places. Reading order
+is worked out by cutting the page into blocks, so a layout with the columns
+interleaved by hand, or one whose gutter is filled by a picture, comes out in
+the wrong order. Which paragraph is a heading, which line is a list item and
+which words are emphasised are guessed from size, from leading characters and
+from the font's own name. A word broken by a hyphen at the end of a line is
+joined back together when the next line starts in lower case, which is wrong
+for a compound whose hyphen was real. A table is read column by column by the
+plain-text export, because its columns look exactly like a page's columns; use
+the table export for tables. Text that is part of a scanned picture is not text
+and does not come out at all, so run the page through text recognition first
+(<xref linkend="scans"/>).</para>
+
+<para>Table detection needs every row to have the same number of cells, so a
+table with cells left empty or merged across columns is found in pieces or not
+at all, and the confidence it reports is a judgement about how table-like the
+geometry is rather than a probability. HTML carries pictures across only where
+the page draws them itself and they are in a format that can be decoded here;
+fax and JPEG 2000 pictures, and pictures drawn inside an embedded drawing, are
+left out.</para>
+</sect2>
+
+<sect2 id="export-web">
+<title>For the web and for a printing press</title>
+
+<para><guimenuitem>Save for the Web…</guimenuitem> writes a copy laid out so
+that a reader on a slow connection can show page one before it has the rest.
+It is worth almost nothing on a local disk and a great deal on a slow link,
+which is the only reason the format has the feature. It is a separate file
+rather than a way of saving this one: how the bytes are laid out for somebody
+downloading them is no business of the copy you are working on.</para>
+
+<para><guimenuitem>Save for Commercial Printing…</guimenuitem> writes PDF/X-1a,
+which is what most printers still ask for. The other levels are a choice for
+somebody who already knows they need one, and the command line is where that
+somebody is. Ghostscript does the conversion, so the command says plainly when
+it is not installed rather than writing something that only looks like PDF/X.
+An output intent for print has to be a CMYK profile describing a real printing
+condition; if none is found on this system that is reported rather than guessed
+around, because guessing a printing condition is how a job comes back the wrong
+colour. This is a conversion and not a preflight check: a file that comes out
+of it still has to pass whatever your printer runs, which is what
+<xref linkend="tools-preflight"/> is for.</para>
+</sect2>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="printing">
+<title>Printing</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> and
+<menuchoice><guimenu>File</guimenu><guimenuitem>Print Preview</guimenuitem></menuchoice>
+open the usual print dialog with an extra tab, <guilabel>Pages &amp;
+Layout</guilabel>. Most viewers hand the file to the printing system and call
+that printing, which works until you want two pages on a sheet, or a booklet,
+or only one side of the paper, which are the things people actually print for.
+Here the imposition is done first and the printer is only ever given finished
+sheets.</para>
+
+<para>The controls live inside the system dialog rather than in a second window
+in front of it, so that Cancel really cancels everything.</para>
+
+<variablelist>
+<varlistentry><term><guilabel>Pages</guilabel></term>
+<listitem><para>Empty prints everything. Otherwise a range such as
+<userinput>1-4, 8, 12-last</userinput>; <userinput>odd</userinput> and
+<userinput>even</userinput> are accepted too, the order you write is the order
+that is printed, and a repeated page is printed repeatedly. Odd and even mean
+the position in the job rather than the page number in the file, which is what
+makes manual duplex line up after the stack is turned
+over.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Layout</guilabel></term>
+<listitem><para>One page per sheet, or 2, 4, 6, 9 or 16 of them, or
+<guilabel>Booklet (fold in the middle)</guilabel>, which orders the pages so
+that the stack folds and staples into a booklet that reads correctly. A booklet
+is padded to a multiple of four; booklets and two-up use landscape
+sheets.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Size</guilabel></term>
+<listitem><para><guilabel>Shrink oversized pages</guilabel> only ever shrinks,
+so small pages keep their size; <guilabel>Fit to the paper</guilabel> also
+enlarges; <guilabel>Actual size</guilabel> prints exact physical dimensions and
+may clip; <guilabel>Custom scale</guilabel> takes a
+percentage.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Sides</guilabel></term>
+<listitem><para>Every page, front sides only, or back sides only: the two
+halves of manual duplex on a printer that cannot turn the paper over itself.
+Print the front sides, put the stack back in, print the back
+sides.</para></listitem></varlistentry>
+
+<varlistentry><term><guilabel>Extra margin</guilabel></term>
+<listitem><para>Millimetres of white kept around the printable area, for a
+printer whose margins are tighter than it admits.</para></listitem></varlistentry>
+</variablelist>
+
+<para>Three further switches: <guilabel>Print back to front</guilabel> for
+printers that stack face up, <guilabel>Print in grayscale</guilabel>, and
+<guilabel>Draw a line around each page</guilabel>, which is useful as a cut
+mark when several pages share a sheet. A line in the tab says how many sheets
+of paper the job will take before you commit to it, and says so instead if the
+range cannot be read.</para>
+
+<para>The preview runs the same imposition, so what is on screen is what will
+come out, down to booklet order and blank slots. A preview of the source
+document instead of the print job would be worse than none. It has no settings
+of its own and uses whatever the print dialog was last set to; settings are
+remembered even when the dialog is cancelled, because you have said what
+you want and the preview should show that.</para>
+
+<para>Pages are rasterised for printing, but at exactly the size they are drawn
+at rather than at a fixed resolution and scaled afterwards, which is what makes
+printed output look soft.</para>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="tools">
+<title>The Tools</title>
+
+<para>The <guimenu>Tools</guimenu> menu holds the windows that look
+<emphasis>into</emphasis> a document: what colour it uses, which fonts it
+carries, how big its pictures really are, what its page boxes say, and whether
+a printer or an archive will accept it. Two entries in it, and two in the
+<guimenu>Forms</guimenu> menu, are not windows at all but ways into the editing
+modes, and they are listed here too so that the whole menu is accounted
+for.</para>
+
+<sect1 id="tools-how">
+<title>How the windows behave</title>
+
+<para>All of them read a <emphasis>file</emphasis> rather than the list of
+pages in the window, so the document is saved first if it has unsaved changes,
+and you are asked before that happens. Anything waiting on the page is written
+into the document before the save, so a comment drawn a minute ago is in the
+file the tool reads.</para>
+
+<para>Each of them writes a <emphasis>new</emphasis> file beside the original,
+tells you what it actually did, and offers <guibutton>Open the
+Result</guibutton> or <guibutton>Leave It on Disk</guibutton>. None of these
+operations is one to have applied silently to the document you are working on.
+The consequence is that they are not undo steps: what they produce is a
+different file, and the way back is the file you still have.</para>
+
+<para>Three of them close themselves after a successful write, because
+everything in them was worked out against the file as it stood when they
+opened, and a second change made afterwards would be addressed to a document
+the first one has already superseded.</para>
+
+<para>Every one of these windows has a box or a button saying what it cannot
+promise. It is not an apology: <quote>no problems found</quote> means nothing
+unless you also know what nobody looked at.</para>
+
+<para>All of them are greyed out with nothing open, except
+<guimenuitem>Set Text as Pages…</guimenuitem>, which makes a document out of
+text and is the one thing here worth reaching for with an empty
+window.</para>
+</sect1>
+
+<sect1 id="tools-preflight">
+<title>Checking the document</title>
+
+<para><menuchoice><shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>P</keycap></keycombo></shortcut>
+<guimenu>Tools</guimenu><guimenuitem>Check the Document…</guimenuitem></menuchoice>
+runs the document against a profile, a list of rules with a severity each, and
+reports what it found, grouped so that anything which would get the file
+rejected is at the top. The profiles cover the PDF/A levels, the PDF/X levels
+and a general print-ready one, and a profile saved in a file can be loaded.
+Problems that can be mended are ticked and fixed in one pass, and the report
+can be written out as a PDF to hand to a printer.</para>
+
+<para>The box headed <guilabel>What was not checked</guilabel> is the most
+important part of the window. A profile may name rules this program cannot
+judge; those are listed there rather than quietly left out. Ink outside the
+trim box is not measured, only what is drawn on the pages themselves is
+examined (so a font used only inside an annotation's appearance is not seen),
+font licences can be read only for OpenType and TrueType, a picture that is
+never drawn is not judged for resolution, emptiness is decided from drawing
+instructions so white on white counts as painted, and tagging is checked only
+for presence and missing alternative text, because reading order is a judgement
+no program makes well.</para>
+
+<para>This is a preflight check and not a certification. A file that passes
+here can still be refused by a strict validator.</para>
+</sect1>
+
+<sect1 id="tools-colour">
+<title>Colour</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Colour…</guimenuitem></menuchoice>
+reads what the document does with colour, which spaces it uses, which spot inks
+it needs a separate plate for, whether it carries an ICC profile or an output
+intent, and how thin its thinnest stroke is, and then changes it. It can also
+measure the ink coverage, page by page, and report the highest total it found,
+which is what tells a printer whether a page will dry.</para>
+
+<para>Converting to greyscale, black and white, RGB or CMYK rewrites the colour
+operators of text and vector art <emphasis>in place</emphasis>, which is exact:
+every byte that is not a colour comes out untouched. Only pictures have their
+pixels converted. Where a colour-managed conversion into CMYK is asked for and
+this build cannot do it itself, the window says so plainly and hands the whole
+document to Ghostscript instead, which means the page selection cannot be
+honoured on that route, rather than applying some arithmetic and calling the
+result a conversion.</para>
+
+<para>The other tabs replace one colour with another throughout, rename or
+merge spot inks (a printer plates by name, so pointing two inks at one new name
+is how they are merged onto one plate), dissolve a spot ink into process colour
+through the tint transform the document already carries, thicken hairlines so
+they survive the press, set black to overprint or to knock out, and show one
+ink on its own as a plate, which looks like the plate rather than like the page
+and is the point of it.</para>
+</sect1>
+
+<sect1 id="tools-fonts">
+<title>Fonts</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Fonts…</guimenuitem></menuchoice>
+lists every font the document uses, whether it travels with the file, whether
+only part of it is there, and whether its text can be copied out and searched.
+Most of the questions people actually have about a &PDF; are font questions in
+disguise: why is this eleven megabytes, why can nobody copy the text, why does
+the printer say Helvetica is missing, why does the same typeface appear four
+times.</para>
+
+<para>The repairs follow from the reading. It embeds the faces the document is
+missing without rewriting a single page, so every character code keeps its
+meaning and every width the document states is kept, which is what stops the
+text reflowing; left to itself it picks a metrically compatible stand-in.
+It writes the tables that make text copyable, joins duplicate copies of one
+font, cuts embedded fonts down to the glyphs actually used, throws the glyphs
+of a standard face away where the reference is enough, and replaces one font
+with another.</para>
+
+<para>The last tab adds a font to the document, with the characters you name.
+That is what lifts the one real limit on correcting text
+(<xref linkend="page-correcting-refusals"/>): a document that never contained
+an umlaut cannot be made to say a word with one in the font it carries, and
+this is how the umlaut gets in. At most 255 characters can be added at a time,
+and nothing outside the basic multilingual plane, which rules out most emoji
+and the rarer Chinese characters.</para>
+
+<para>Some of this cannot be done honestly, and the window says which. A
+composite font's character codes are glyph numbers meaningful only inside the
+font programme that is missing, so nothing can be put behind them; a font whose
+codes the document never explains cannot be given a substitute with the same
+meaning; and a Type 3 font draws its letters with the document's own drawing
+operators rather than carrying a font programme at all, so there is nothing to
+supply and no substitute that would mean the same thing. Those are named rather
+than guessed at. Font licences are reported and never enforced.</para>
+</sect1>
+
+<sect1 id="tools-pictures">
+<title>Pictures</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Pictures…</guimenuitem></menuchoice>
+shows every picture in the document with the number that actually matters, its
+effective resolution on the page rather than its pixel count, alongside its
+colour space, its compression, how many bytes it takes and how often it is
+drawn.</para>
+
+<para>From there a picture can be written out, replaced, turned, cropped,
+adjusted or taken off the page, and the whole document can be brought down to a
+target resolution. Turning is lossless: the stored bytes are not touched, only
+the matrix that places them, so a fax or a JPEG 2000 picture turns as well as a
+JPEG does. A JPEG asked for as a <literal>.jpg</literal> is copied out
+compressed, byte for byte, which is the one extraction that loses nothing at
+all.</para>
+
+<para>Everything here addresses a picture the way a content stream does, by
+page and resource name, which is why picking a row comes first.
+<quote>The photograph on page four</quote> is not a question a &PDF; can
+answer, and an operation naming one picture applies to every place that page
+draws it. Fax and JPEG 2000 pictures can be listed, removed and deduplicated
+but not opened, so they cannot be recompressed, adjusted or cropped. Pictures
+inside an embedded drawing are not listed at all.</para>
+</sect1>
+
+<sect1 id="tools-layout">
+<title>Page setup</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Page
+Setup…</guimenuitem></menuchoice> (the window calls itself
+<guilabel>Page Layout</guilabel>) deals with the five boxes a &PDF; page can
+carry, media, crop, bleed, trim and art, which is what a print shop means by
+page setup. The table shows them per page in millimetres and says
+<guilabel>absent</guilabel> where a page defines none, which is different from
+one that matches the media box. The four optional boxes are written as one set,
+so a box left unticked is taken away, and you are asked before that happens.
+Boxes have to nest, and an arrangement where they do not is refused with the
+offender named.</para>
+
+<para>The other tabs resize pages to a named paper, bring every page to one
+size, add bleed, draw crop and registration marks, cut pages in two (the
+scanned-book fix, where one photograph holds two facing pages), tile one page
+across several sheets as a poster, reorder to printer's spreads and back, lay
+another document over this one, find the pages that draw nothing and take pages
+out, and write the page labels a reader shows instead of 1, 2, 3.</para>
+
+<para>Two things it will not do quietly: resizing scales line widths and
+hairlines with the page, and laying one document over another does not merge
+their forms, so two forms with a field of the same name keep only the base
+document's.</para>
+</sect1>
+
+<sect1 id="tools-object-list">
+<title>The page as a list</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>The Page as a
+List…</guimenuitem></menuchoice> lists what a page draws, each picture, each
+block of text, each piece of vector art, topmost first, and lets each one be
+moved, resized, turned, recoloured or removed. The boxes on the page and the
+rows beside it are the same list twice, so that <quote>the caption near the
+bottom</quote> and <quote>object 47</quote> are the same thing. It is kept
+alongside the on-page way of doing it
+(<xref linkend="page-objects"/>) because a list can be read down, sorted and
+searched, and because an object too small to click is still a row here. It can
+also add text, a picture or a simple shape to a page.</para>
+
+<para>Changes are collected and written in one pass, for the same reason they
+are on the page: an object carries one change at a time.</para>
+</sect1>
+
+<sect1 id="tools-typeset">
+<title>Setting text as pages</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Set Text as
+Pages…</guimenuitem></menuchoice> is the one tool here that makes a document
+instead of examining one. Type or paste text, or load a file, choose whether to
+read it as plain text or as Markdown, and set the paper, the margins, the
+columns, the running heads, the typeface, the size, the leading and the
+hyphenation. It does not need a document open, and it does not touch the one
+that is.</para>
+
+<para>The preview is written by the same engine that writes the finished
+document, so where the lines and the pages break on screen is where they will
+break in the file, rather than an approximation drawn with a different layout
+engine which would be wrong in exactly the places that matter.</para>
+
+<para>Distances across the paper are in millimetres and distances inside the
+type are in points, and every box says which, because a margin of 20 and a
+leading of 20 are not the same length.</para>
+
+<para>It can only set text in the fourteen fonts every reader knows, which
+means western European alphabets: Greek, Cyrillic, Hebrew, Arabic and the CJK
+scripts are reported rather than drawn. It does not draw pictures, a Markdown
+image contributes its description in italics instead. Tables come out as a
+plain ruled grid with no merged cells, no repeated headings and no row split
+across a page. There are no footnotes, no cross-references, no index and no
+table of contents, and no right-to-left layout.</para>
+</sect1>
+
+<sect1 id="tools-modes">
+<title>The two menu entries that are not windows</title>
+
+<para><menuchoice><guimenu>Tools</guimenu><guimenuitem>Move What the Page
+Draws…</guimenuitem></menuchoice> and
+<menuchoice><guimenu>Forms</guimenu><guimenuitem>Build a
+Form…</guimenuitem></menuchoice> open no window. What a page draws is moved by
+dragging it, and a form is laid out by drawing it, so both of them take you to
+the page with the right mode in force and the properties sidebar open. See
+<xref linkend="page-objects"/> and <xref linkend="form-drawing"/>.</para>
+
+<para><menuchoice><guimenu>Forms</guimenu><guimenuitem>Form Behaviour and
+Answers…</guimenuitem></menuchoice> is a window and behaves like the ones
+above; see <xref linkend="form-behaviour"/>.</para>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="command-line">
+<title>The Command Line</title>
+
+<para>Everything the window can do to a document, a script can do too. That is
+a design rule of the project rather than a bonus:
+<command>pdf-smithy-cli</command> runs the same engine as the window, so a
+workflow you worked out by hand can be automated without reaching for another
+tool. Nothing is uploaded there either.</para>
+
+<para>This chapter is an orientation. The full reference, every command with
+every option, is
+<userinput><command>man</command> pdf-smithy-cli</userinput>, and
+<userinput><command>pdf-smithy-cli</command> <option>--help</option></userinput>
+prints the same list at the terminal.</para>
+
+<sect1 id="command-line-shape">
+<title>The shape of a command</title>
+
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> <replaceable>command</replaceable> [<replaceable>options</replaceable>] <replaceable>file</replaceable>…</userinput></screen>
+
+<para>The command comes first and is not case-sensitive. Nine of the commands
+take a second word saying which of their jobs is meant, so they read as a
+sentence:</para>
+
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> colour inspect heft.pdf</userinput>
+<prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> images list scan.pdf</userinput></screen>
+
+<para>Those nine are <command>colour</command>, <command>fonts</command>,
+<command>images</command>, <command>layout</command>,
+<command>objects</command>, <command>field</command>,
+<command>preflight</command>, <command>typeset</command> and the conversions.
+Each of them ends with a <userinput>limits</userinput> action that says what it
+cannot promise, which is worth reading before trusting a result and is
+short.</para>
+
+<para><option>-o</option> says where the output goes. Left out, a command that
+has to write something writes it beside the input under a new name rather than
+over the input, because a command line that overwrites its input by default is
+one bad flag away from losing the only copy. A few commands take
+<option>-o</option> as a pattern for several files
+(<command>split</command>) or as a directory
+(<option>--out-dir</option> for <command>batch</command>).</para>
+
+<para><option>--json</option> asks for machine-readable output, and
+<option>--limits</option> makes any command say what it cannot promise and do
+nothing else.</para>
+
+<warning><para>All the options are registered on one parser, so an option a
+command does not use is ignored rather than refused. A flag borrowed from
+another command, or misspelt, is accepted in silence and does nothing. Read the
+report the command prints rather than assuming the flag took.</para></warning>
+
+<para>Reports go to standard output and errors and progress go to standard
+error, so <userinput>2&gt;/dev/null</userinput> is the quiet mode and
+<option>--json</option> is the parseable one. The reports are translated like
+the rest of the program, so a script that reads them should set
+<userinput>LC_ALL=C</userinput> or ask for JSON.</para>
+</sect1>
+
+<sect1 id="command-line-commands">
+<title>What it can do</title>
+
+<para>Forty-one commands, in seven families.</para>
+
+<variablelist>
+<varlistentry><term>Documents and pages</term>
+<listitem><para><command>info</command>, <command>merge</command>,
+<command>split</command>, <command>pages</command> (select, reorder, duplicate
+and rotate), <command>compress</command>, <command>linearise</command> (spelt
+<command>linearize</command> as well, the way <command>color</command> is
+accepted for <command>colour</command>) and <command>set-version</command>.
+A version below what the file actually needs is refused and the features that
+forced the refusal are named, because lowering the number would remove nothing
+and only mislead a reader that then met them.</para></listitem></varlistentry>
+
+<varlistentry><term>Things put on pages</term>
+<listitem><para><command>sign</command>, <command>watermark</command>,
+<command>number</command>, <command>nup</command>, <command>crop</command>,
+<command>redact</command>, <command>annotate</command> (list, add, clear,
+flatten, and XFDF in and out) and <command>outline</command> (show or rewrite
+the table of contents).</para></listitem></varlistentry>
+
+<varlistentry><term>Text</term>
+<listitem><para><command>text</command> (show a page's text, or replace a
+line), <command>to-text</command>, <command>to-markdown</command>,
+<command>to-html</command>, <command>tables</command>,
+<command>to-csv</command>, <command>to-svg</command> and
+<command>typeset</command>.</para></listitem></varlistentry>
+
+<varlistentry><term>Pictures</term>
+<listitem><para><command>from-images</command>,
+<command>export-images</command>, and the <command>images</command> group:
+listing, compressing, resampling, replacing, turning, removing, extracting,
+adjusting, cropping and merging duplicates.</para></listitem></varlistentry>
+
+<varlistentry><term>Forms</term>
+<listitem><para><command>form</command> for the everyday jobs, listing, filling
+in and flattening, and the <command>field</command> group for building one:
+adding, removing, renaming, moving, copying, importing and exporting answers,
+gathering many filled-in copies, formatting, validation, calculation, buttons
+and tab order.</para></listitem></varlistentry>
+
+<varlistentry><term>Looking inside</term>
+<listitem><para><command>meta</command>, <command>protect</command>,
+<command>fonts</command>, <command>colour</command>, <command>layout</command>,
+<command>objects</command> and <command>preflight</command>: the same work the
+tool windows do (<xref linkend="tools"/>), one action at a
+time.</para></listitem></varlistentry>
+
+<varlistentry><term>Standards, comparing and bulk work</term>
+<listitem><para><command>archive</command> (to PDF/A, any of the three levels),
+<command>archive-check</command>, <command>to-pdfx</command>,
+<command>compare</command>, <command>ocr</command> and
+<command>batch</command>. Batch runs its files one after another on purpose:
+Ghostscript and Tesseract each take a core, so four at once makes the machine
+unusable and finishes no sooner. It never writes over an original, and says so
+when it had to skip one.</para></listitem></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="command-line-ranges">
+<title>Page ranges, coordinates and units</title>
+
+<para>Page ranges accept <userinput>1-4</userinput>, <userinput>8</userinput>,
+<userinput>12-last</userinput>, the open-ended <userinput>12-</userinput>,
+<userinput>odd</userinput>, <userinput>even</userinput>, and
+<userinput>9-1</userinput> to reverse. Order and repetition are preserved, so
+<option>--keep</option> <userinput>1,1,2</userinput> writes the first page
+twice, which is why duplicating pages needs no command of its own. It is the
+same syntax the window uses, on purpose.</para>
+
+<para>Coordinates are in points (1/72 inch) measured from the bottom-left
+corner of the page <emphasis>as it is shown</emphasis>, with any rotation
+already applied, which is what a ruler held against a viewer measures. An area
+is written <userinput>page:left,bottom,width,height</userinput>.</para>
+
+<para>Lengths carry one unit per option name, and the help text says which. A
+name never means points to one command and millimetres to another: everything
+spelled <option>--margin</option>, <option>--top</option>,
+<option>--bottom</option>, <option>--left</option>, <option>--right</option>,
+<option>--gutter</option>, <option>--sheet-margin</option> or
+<option>--font-size</option> is points, and where the trade talks in
+millimetres the option says so, so <option>--bleed</option>,
+<option>--mark-length</option> and <option>--overlap</option> are millimetres,
+and the margins <command>typeset</command> puts round a page are
+<option>--margin-mm</option> and its four siblings. Where a number may carry
+its own unit, <userinput>18pt</userinput>, <userinput>5mm</userinput>,
+<userinput>0.5cm</userinput>, <userinput>0.25in</userinput>, it is taken at its
+word. A paper size given as a pair of numbers must carry its unit, so
+<option>--size</option> <userinput>210x297mm</userinput> is A4 and
+<option>--size</option> <userinput>595x842pt</userinput> is the same page
+measured the other way; <userinput>210x297</userinput> on its own is turned
+down rather than guessed at. Named papers such as <userinput>a4</userinput> and
+<userinput>letter</userinput> need no unit.</para>
+</sect1>
+
+<sect1 id="command-line-exit">
+<title>Exit codes</title>
+
+<para>Written so that a command can be used in a shell condition the way
+<command>diff</command> is.</para>
+
+<table id="command-line-exit-table">
+<title>What the exit status means</title>
+<tgroup cols="2">
+<thead><row><entry>Code</entry><entry>Meaning</entry></row></thead>
+<tbody>
+<row><entry>0</entry><entry>It worked, and nothing was found.</entry></row>
+<row><entry>1</entry><entry>Differences or findings. <command>compare</command>,
+<command>archive-check</command>, <command>preflight</command> and
+<command>fonts check</command> all report this way.</entry></row>
+<row><entry>2</entry><entry>The command line was not understood, including an
+unknown command and no arguments at all.</entry></row>
+<row><entry>3</entry><entry>The input could not be read, or part of the work
+was refused and reported.</entry></row>
+<row><entry>4</entry><entry>The output could not be written.</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>So a print job can be gated on a check:</para>
+
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> preflight job.pdf &amp;&amp; lp job.pdf</userinput></screen>
+</sect1>
+
+<sect1 id="command-line-examples">
+<title>Worked examples</title>
+
+<para>One file per invoice:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> split invoices.pdf <option>--every</option> 1</userinput></screen>
+
+<para>Keep some pages of a report, turn one of them, and write the rest away:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> pages report.pdf <option>--keep</option> 1-3,7,12-last <option>--rotate</option> 4:90 <option>-o</option> short.pdf</userinput></screen>
+
+<para>Make a crooked German scan searchable and straight, and then small enough
+to email:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> ocr scan.pdf <option>--languages</option> deu+eng <option>--straighten</option> <option>-o</option> searchable.pdf</userinput>
+<prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> compress searchable.pdf <option>--level</option> strong <option>-o</option> small.pdf</userinput></screen>
+
+<para>Make a whole folder of scans searchable, keeping the originals:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> batch scans/*.pdf <option>--op</option> ocr <option>--out-dir</option> searchable/</userinput></screen>
+
+<para>Take a name out of a document for good, removed rather than covered over.
+The area is page, then left, bottom, width and height in points:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> redact case.pdf <option>--area</option> 1:72,700,180,16 <option>-o</option> public.pdf</userinput></screen>
+
+<para>Bates-stamp a disclosure bundle:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> number bundle.pdf <option>--text</option> {bates} <option>--bates</option> ACME- <option>-o</option> stamped.pdf</userinput></screen>
+
+<para>Fill a form in and then make the answers permanent:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> form application.pdf <option>--set</option> Name=Bueng <option>--set</option> Town=Bern <option>-o</option> filled.pdf</userinput>
+<prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> form filled.pdf <option>--flatten</option> <option>-o</option> final.pdf</userinput></screen>
+
+<para>See what changed between two drafts. The exit status is nonzero when
+something did, so a script can act on it:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> compare contract-v1.pdf contract-v2.pdf</userinput></screen>
+
+<para>Convert for an archive only if it is not already archival:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> archive-check invoice.pdf &gt;/dev/null 2&gt;&amp;1 \
+      || <command>pdf-smithy-cli</command> archive invoice.pdf <option>--level</option> 2b <option>-o</option> invoice-archival.pdf</userinput></screen>
+
+<para>Prepare a cover for a printing press. Ghostscript does the conversion, so
+the command says plainly when it is not installed rather than writing something
+that only looks like PDF/X. The profile is the printing condition the job will
+be run under; left out, a CMYK profile on this system is looked for and its
+absence reported:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> to-pdfx cover.pdf <option>--pdfx-level</option> x1a <option>--icc-profile</option> /usr/share/color/icc/ISOcoated_v2.icc <option>-o</option> cover-print.pdf</userinput></screen>
+
+<para>Read a table off a page before trusting it, then write it out. There is
+no table in a &PDF;, only text that lines up, so the confidence figure is worth
+reading first:</para>
+<screen><prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> tables report.pdf <option>--pages</option> 3-5</userinput>
+<prompt>$</prompt> <userinput><command>pdf-smithy-cli</command> to-csv report.pdf <option>--pages</option> 3-5 <option>-o</option> figures.csv</userinput></screen>
+</sect1>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="shortcuts">
+<title>Keyboard Shortcuts</title>
+
+<para>All of these can be changed under
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Keyboard
+Shortcuts…</guimenuitem></menuchoice>.</para>
+
+<table id="shortcuts-modes">
+<title>Choosing what you are here to do</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>Command</entry></row></thead>
+<tbody>
+<row><entry><keycap>F5</keycap></entry><entry>Read &amp; Fill In</entry></row>
+<row><entry><keycap>F6</keycap></entry><entry>Edit the Page</entry></row>
+<row><entry><keycap>F7</keycap></entry><entry>Edit the Form</entry></row>
+<row><entry><keycap>F8</keycap></entry><entry>Arrange the Pages</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Enter;</keycombo></entry><entry>Keep the Changes on the Page</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<table id="shortcuts-files">
+<title>Files</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>Command</entry></row></thead>
+<tbody>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></entry><entry>New</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo></entry><entry>Open</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo></entry><entry>Insert File…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo></entry><entry>Save</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></entry><entry>Save As</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>E</keycap></keycombo></entry><entry>Extract Pages to New File…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo></entry><entry>Print</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo></entry><entry>Close</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry><entry>Quit</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<table id="shortcuts-edit">
+<title>Editing</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>Command</entry></row></thead>
+<tbody>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>Z</keycap></keycombo></entry><entry>Undo</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>Z</keycap></keycombo></entry><entry>Redo</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>X</keycap></keycombo></entry><entry>Cut</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo></entry><entry>Copy</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo></entry><entry>Paste</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo></entry><entry>Select All, meaning every page of the document</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<table id="shortcuts-pages">
+<title>Pages</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>Command</entry></row></thead>
+<tbody>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo></entry><entry>Rotate Left</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo></entry><entry>Rotate Right</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo></entry><entry>Duplicate Pages</entry></row>
+<row><entry>&Del;</entry><entry>Delete Pages, where the page grid is showing</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo></entry><entry>Recognise Text (OCR)…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo></entry><entry>Sign…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo></entry><entry>Correct Text…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo></entry><entry>Comments…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>O</keycap></keycombo></entry><entry>Move What the Page Draws…</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&Shift;<keycap>P</keycap></keycombo></entry><entry>Check the Document…</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<table id="shortcuts-view">
+<title>Looking at the document</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>Command</entry></row></thead>
+<tbody>
+<row><entry><keycombo action="simul">&Ctrl;&Home;</keycombo></entry><entry>First Page</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;&End;</keycombo></entry><entry>Last Page</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>1</keycap></keycombo></entry><entry>Fit Width</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>2</keycap></keycombo></entry><entry>Fit Height</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>3</keycap></keycombo></entry><entry>One Whole Page</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>4</keycap></keycombo></entry><entry>Two Pages Side by Side</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>0</keycap></keycombo></entry><entry>Free Zoom</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo></entry><entry>Larger Pages</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></entry><entry>Smaller Pages</entry></row>
+<row><entry><keycap>F4</keycap></entry><entry>Properties Sidebar</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo></entry><entry>Contents Sidebar</entry></row>
+<row><entry><keycap>F9</keycap></entry><entry>Page Thumbnails</entry></row>
+<row><entry><keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo></entry><entry>Show the menu bar, or hide it</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>These next ones are not commands and are not in the shortcut editor. They
+belong to whatever has the keyboard at the time, which is what lets one key
+mean the right thing in four different places.</para>
+
+<table id="shortcuts-keys">
+<title>Keys that belong to the page</title>
+<tgroup cols="2">
+<thead><row><entry>Key</entry><entry>What it does</entry></row></thead>
+<tbody>
+<row><entry>&PgUp;, &PgDn;</entry><entry>Glide up or down a little less than a windowful</entry></row>
+<row><entry><keycap>Up</keycap>, <keycap>Down</keycap></entry><entry>Glide a line</entry></row>
+<row><entry>&Ctrl; and the wheel</entry><entry>Make the pages larger or smaller, around the pointer</entry></row>
+<row><entry>&Space; held</entry><entry>Drag the page about without changing tool</entry></row>
+<row><entry>&Ctrl; and a drag</entry><entry>Take a box of the page rather than its words</entry></row>
+<row><entry>Double click</entry><entry>Select the word under the pointer</entry></row>
+<row><entry>Triple click</entry><entry>Select the line</entry></row>
+<row><entry>&Esc;</entry><entry>Let go: clears the selection, cancels a mark being drawn, leaves a line without keeping what was typed, disarms a field kind</entry></row>
+<row><entry>&Tab;, <keycombo action="simul">&Shift;&Tab;</keycombo></entry><entry>The next or previous form field to fill in, or the next or previous line to correct</entry></row>
+<row><entry>&Enter;</entry><entry>Finish a one-line answer or a correction and move on</entry></row>
+<row><entry>&Space;</entry><entry>Tick the form field that is picked</entry></row>
+<row><entry>Arrow keys</entry><entry>Move what is chosen a point at a time, or step through a group of radio buttons</entry></row>
+<row><entry><keycombo action="simul">&Shift;</keycombo> and the arrow keys</entry><entry>Move what is chosen ten points at a time</entry></row>
+<row><entry>&Del;, &Backspace;</entry><entry>Remove what is chosen on the page: an object, a comment, a form field</entry></row>
+<row><entry>&Shift; and a corner handle</entry><entry>Free the proportions of an object, or keep the proportions of a form field</entry></row>
+<row><entry>&Shift; and the turn handle</entry><entry>Snap the turn to fifteen degrees</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+</chapter>
+
+
+<!-- ==================================================================== -->
+<chapter id="credits">
+<title>Credits and Licence</title>
+
+<para>&pdfsmithy;</para>
+
+<para>Program copyright 2026 Tom Bueng
+<email>tombueng@gmail.com</email></para>
+
+<para>Documentation copyright 2026 Tom Bueng
+<email>tombueng@gmail.com</email></para>
+
+<para>&pdfsmithy; stands on other people's work. QPDF does the structural
+manipulation that makes lossless editing possible, Poppler renders the pages
+and extracts their text, Tesseract recognises the text on scans and Leptonica
+cleans up the images it is given, and Ghostscript, run as a separate program
+and never linked, does the image compression and the PDF/A conversion. It is
+built on &Qt; and &kf6-full;.</para>
+
+&underFDL;
+&underGPL;
+
+</chapter>
+
+&documentation.index;
+</book>

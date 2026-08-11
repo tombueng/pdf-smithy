@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@ --buildsystem=cmake+ninja
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+		-DBUILD_TESTING=ON
+
+# The end-to-end tests drive a real window, so the build needs a display even
+# though nobody is looking at it.
+override_dh_auto_test:
+	xvfb-run -a --server-args="-screen 0 1400x900x24" dh_auto_test

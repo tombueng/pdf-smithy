@@ -1,0 +1,42 @@
+[
+  { "section": "cover", "title": "Kestrel Island Field Station Review" },
+  {
+    "section": "contents",
+    "title": "Front matter",
+    "children": [
+      { "section": "contents", "title": "What is in here" },
+      { "section": "foreword", "title": "Foreword" }
+    ]
+  },
+  {
+    "section": "spread",
+    "title": "The season in brief",
+    "children": [
+      { "section": "spread", "title": "Getting on and off" },
+      { "section": "spread", "title": "Weather and the buildings", "offset": 1 },
+      { "section": "spread", "title": "The gauge in the sound", "offset": 1 }
+    ]
+  },
+  {
+    "section": "plate-photograph",
+    "title": "Four plates",
+    "children": [
+      { "section": "plate-photograph", "title": "Plate I: First light on the north shore" },
+      { "section": "plate-chart", "title": "Plate II: Birds ringed, by month" },
+      { "section": "plate-diagram", "title": "Plate III: How the tide gauge works" },
+      { "section": "plate-colour", "title": "Plate IV: Colour, transparency and stroke" }
+    ]
+  },
+  { "section": "timeline", "title": "The year, end to end" },
+  { "section": "turned", "title": "A page that arrived turned" },
+  {
+    "section": "permit",
+    "title": "Visitor permit",
+    "children": [
+      { "section": "permit", "title": "The visitor and the stay" },
+      { "section": "declaration", "title": "Declaration and signature" }
+    ]
+  },
+  { "section": "remarks", "title": "A page with remarks on it" },
+  { "section": "colophon", "title": "Colophon" }
+]

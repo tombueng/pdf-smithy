@@ -1,0 +1,25 @@
+{
+  "permit": {
+    "headings": [
+      { "y": 676, "text": "The visitor" },
+      { "y": 492, "text": "The stay" }
+    ],
+    "labels": [
+      { "x": 70.87, "y": 423, "text": "Where you will sleep" },
+      { "x": 204, "y": 423, "text": "Meals" },
+      { "x": 340, "y": 423, "text": "Skills you can offer" }
+    ],
+    "note": "Two answers are not optional: the name in full and the electronic address. Everything else can wait.",
+    "noteY": 316
+  },
+  "declaration": {
+    "headings": [
+      { "y": 576, "text": "Agreement" },
+      { "y": 506, "text": "In your own words" },
+      { "y": 372, "text": "Signing" }
+    ],
+    "labels": [],
+    "note": "Sending the form does not book the crossing. The warden writes back, and the boat is the boatman's to give.",
+    "noteY": 176
+  }
+}

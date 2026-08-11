@@ -1,0 +1,126 @@
+# Maintainer: Tom Bueng <tombueng@gmail.com>
+#
+# Arch package for PDF Smithy, in the form the AUR expects. To build it from a
+# checkout instead of from a published tag:
+#
+#   packaging/arch/build.sh
+#
+# which swaps in a tarball made from the working tree and runs makepkg.
+#
+# sha256sums is SKIP because the tarball this points at does not exist until the
+# tag is pushed. The release job runs updpkgsums against the real tarball and
+# attaches the filled-in PKGBUILD to the release, so what people copy into the
+# AUR carries a checksum and this file stays buildable in between.
+
+pkgname=pdf-smithy
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Native PDF editor that keeps your documents on your machine"
+arch=('x86_64' 'aarch64')
+url="https://github.com/tombueng/pdf-smithy"
+
+# Both programs link Poppler, which is GPL, so the binaries are
+# GPL-3.0-or-later however permissive the sources that went into them: the
+# engine under src/core is MIT and is linked statically into them, and the
+# combination is governed by the GPL. The application icon is CC-BY-SA-4.0 and
+# the AppStream metadata is CC0-1.0, and both are files this package installs.
+# LICENSING.md sets out the whole arrangement.
+license=('GPL-3.0-or-later' 'CC-BY-SA-4.0' 'CC0-1.0')
+
+depends=(
+    'qt6-base'
+    'kcoreaddons'
+    'ki18n'
+    'kxmlgui'
+    'kconfig'
+    'kconfigwidgets'
+    'kio'
+    'kcrash'
+    'kiconthemes'
+    'kwidgetsaddons'
+    'kguiaddons'
+    'qpdf'
+    'poppler-qt6'
+    'tesseract'
+    'leptonica'
+    'lcms2'
+    'hicolor-icon-theme'
+)
+
+makedepends=(
+    'cmake'
+    'ninja'
+    'extra-cmake-modules'
+    'qt6-tools'
+    # Without it the handbook is neither built nor installed and F1 opens
+    # nothing.
+    'kdoctools'
+    'gettext'
+)
+
+# What the suite needs in order to run its cases rather than skip them. Nearly
+# every one of these tests reports itself as passing when its tool is absent,
+# so a shorter list would turn a real suite into a green tick: xvfb for the
+# tests that drive a window, ghostscript and gsfonts to rasterise the scan
+# fixtures, the tesseract data because without it the whole OCR suite skips,
+# and appstream, python, libxml2 and docbook-xml for the metadata check, the
+# handbook check and the four Python guards.
+checkdepends=(
+    'xorg-server-xvfb'
+    'ghostscript'
+    'gsfonts'
+    'tesseract-data-eng'
+    'tesseract-data-deu'
+    'appstream'
+    'python'
+    'libxml2'
+    'docbook-xml'
+)
+
+optdepends=(
+    'ghostscript: image compression and PDF/A conversion'
+    'tesseract-data-eng: English text recognition'
+    'tesseract-data-deu: German text recognition'
+    'qt6-svg: scalable icons outside a Qt installation that already has it'
+    'breeze-icons: the complete icon set, for desktops other than Plasma'
+)
+
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cmake -S "${pkgname}-${pkgver}" -B build -G Ninja \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DBUILD_TESTING=ON
+    cmake --build build
+}
+
+check() {
+    # Every C++ test is registered twice, once under LC_ALL=C and once under
+    # de_DE.UTF-8, because PDF numbers must be written with a full stop whatever
+    # the desktop's decimal separator is. Asking for a locale that does not
+    # exist is not an error: the C locale quietly applies instead, so on a
+    # machine without de_DE half the suite would pass while testing nothing.
+    #
+    # Compiled into the build directory rather than into /etc/locale.gen,
+    # because makepkg does not run as root and a package build has no business
+    # editing the host's locales either way. LOCPATH is inherited by every test
+    # ctest starts.
+    localedef -i de_DE -f UTF-8 "${srcdir}/locale/de_DE.UTF-8"
+    export LOCPATH="${srcdir}/locale"
+
+    # Under Xvfb even though every test is handed QT_QPA_PLATFORM=offscreen: the
+    # plugin covers the widgets, and the display is here for anything underneath
+    # them that asks the X server a question anyway. --no-tests=error so that a
+    # tests directory which stops being configured fails the build instead of
+    # passing an empty run.
+    xvfb-run -a --server-args="-screen 0 1400x900x24" \
+        ctest --test-dir build --output-on-failure --no-tests=error
+}
+
+package() {
+    DESTDIR="${pkgdir}" cmake --install build
+    install -Dm644 "${pkgname}-${pkgver}/LICENSING.md" \
+        "${pkgdir}/usr/share/licenses/${pkgname}/LICENSING.md"
+}

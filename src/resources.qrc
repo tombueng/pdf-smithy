@@ -1,0 +1,12 @@
+<!--
+    SPDX-FileCopyrightText: 2026 Tom Bueng <tombueng@gmail.com>
+    SPDX-License-Identifier: GPL-3.0-or-later
+
+    The KXmlGui layout is compiled in as well as installed, so that the
+    application has working menus when run straight from the build directory.
+-->
+<RCC>
+  <qresource prefix="/kxmlgui5/pdf-smithy">
+    <file>pdf-smithyui.rc</file>
+  </qresource>
+</RCC>

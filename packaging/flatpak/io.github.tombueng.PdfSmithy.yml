@@ -1,0 +1,187 @@
+# Flatpak manifest for PDF Smithy.
+#
+#   flatpak install flathub org.kde.Platform//6.10 org.kde.Sdk//6.10
+#   flatpak-builder --user --install --force-clean build-flatpak \
+#       packaging/flatpak/io.github.tombueng.PdfSmithy.yml
+#
+# The KDE runtime brings Qt 6 and KDE Frameworks. Everything else this program
+# reads and writes PDFs with is built here, because no runtime ships QPDF,
+# Poppler, Tesseract or Ghostscript — Flathub's own Okular manifest builds
+# Poppler and Ghostscript for the same reason.
+#
+# Built by the flatpak job in .github/workflows/release.yml: on a tag, on a pull
+# request that touches this directory, and once a week so that an upstream tag
+# moving out from under us is found on a Monday rather than on a release day.
+#
+# runtime-version and the container image that job runs in have to name the same
+# KDE runtime. Bumping one means bumping the other.
+#
+# It says 6.10 and not the 6.8 it used to, for one reason: Flathub now reports
+# 6.8 as end of life — "we strongly recommend moving to the latest stable
+# version" — which means no more security updates for Qt or the Frameworks
+# underneath us, and an application submitted on an end-of-life runtime is
+# refused. 6.10 is the newest branch that both is still supported and has a
+# matching Flathub build image for CI, and it is what Flathub's own Okular is
+# built against today.
+
+id: io.github.tombueng.PdfSmithy
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+command: pdf-smithy
+rename-icon: io.github.tombueng.PdfSmithy
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  # Printing.
+  - --socket=cups
+  # Documents the user picks, nothing more. There is deliberately no network
+  # permission at all: the whole point of this application is that files stay
+  # on the machine, and the sandbox should say so too.
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-download
+
+modules:
+  - name: qpdf
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_STATIC_LIBS=OFF
+      - -DBUILD_DOC=OFF
+    sources:
+      # Git tags rather than tarballs: a tag needs no checksum, and an invented
+      # one is worse than none at all — it fails at build time with a message
+      # that points at the wrong thing.
+      - type: git
+        url: https://github.com/qpdf/qpdf.git
+        tag: v12.3.0
+
+  # Page rendering and text extraction. The KDE runtime does not carry Poppler,
+  # so the Qt 6 frontend that src/render is written against has to be built.
+  #
+  # A release tarball with a checksum rather than a git tag, because a tarball is
+  # something flatpak-builder can prove it received intact, and this is the only
+  # dependency here whose exact bytes the rendering tests were calibrated
+  # against. The checksum below was taken from the file on
+  # poppler.freedesktop.org and matches the one Flathub's Okular manifest pins.
+  - name: poppler
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_QT6=ON
+      - -DENABLE_QT5=OFF
+      - -DENABLE_GLIB=OFF
+      - -DENABLE_CPP=OFF
+      - -DENABLE_UTILS=OFF
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT6_TESTS=OFF
+      - -DBUILD_CPP_TESTS=OFF
+      # Boost is a performance aid for the Splash rasteriser and nothing more,
+      # but Poppler's CMake treats it as fatal unless told otherwise, and the KDE
+      # SDK has no Boost. Building all of Boost to enable one header-only
+      # optimisation would cost more image and more build time than the
+      # optimisation is worth.
+      - -DENABLE_BOOST=OFF
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-26.07.0.tar.xz
+        sha256: 304832f48f8a47fdca90c6b6d1f684e68f37c10c9a0726f345f4ca9df4ca01e2
+
+  - name: leptonica
+    buildsystem: autotools
+    config-opts:
+      - --disable-static
+      - --without-libwebp
+      - --without-libopenjpeg
+    sources:
+      - type: git
+        url: https://github.com/DanBloomberg/leptonica.git
+        tag: 1.85.0
+
+  - name: tesseract
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_TRAINING_TOOLS=OFF
+      - -DDISABLE_ARCHIVE=ON
+      - -DDISABLE_CURL=ON
+    sources:
+      - type: git
+        url: https://github.com/tesseract-ocr/tesseract.git
+        tag: 5.5.0
+
+  # Language data, so text recognition works out of the box rather than
+  # failing with an error the user cannot act on inside a sandbox. Tesseract is
+  # configured with /app as its prefix, so /app/share/tessdata is where it looks.
+  #
+  # Three pinned files rather than a clone of tessdata_fast: the repository holds
+  # every language Tesseract supports and runs to something over a gigabyte,
+  # which is a lot of network for sixteen megabytes of data. The commit is the
+  # one tag 4.1.0 points at, and each file carries the checksum of the bytes the
+  # OCR tests were written against — a tag can be moved, a commit cannot, and a
+  # checksum says so out loud.
+  - name: tessdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 eng.traineddata /app/share/tessdata/eng.traineddata
+      - install -Dm644 deu.traineddata /app/share/tessdata/deu.traineddata
+      - install -Dm644 osd.traineddata /app/share/tessdata/osd.traineddata
+    sources:
+      - type: file
+        url: https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/65727574dfcd264acbb0c3e07860e4e9e9b22185/eng.traineddata
+        sha256: 7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2
+      - type: file
+        url: https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/65727574dfcd264acbb0c3e07860e4e9e9b22185/deu.traineddata
+        sha256: 19d219bbb6672c869d20a9636c6816a81eb9a71796cb93ebe0cb1530e2cdb22d
+      - type: file
+        url: https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/65727574dfcd264acbb0c3e07860e4e9e9b22185/osd.traineddata
+        sha256: 9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff
+
+  # Ghostscript, because a sandboxed application cannot borrow the host's copy.
+  # Image compression and PDF/A conversion run "gs" as a subprocess, and inside
+  # the sandbox /app/bin/gs is the only gs there is: without this module both
+  # features fail with a message telling the user to install a package they
+  # cannot install from where they are.
+  #
+  # Pinned to the release tarball, checksum verified against the bytes Artifex
+  # publishes. The build follows Flathub's Okular manifest, which has been
+  # building this exact recipe against the KDE runtime for years: the shared
+  # library targets install the interpreter as "gsc", and everything in the world
+  # that runs Ghostscript looks for "gs".
+  - name: ghostscript
+    buildsystem: autotools
+    config-opts:
+      - --disable-cups
+      # Ghostscript can link Tesseract itself. Ours is built above for the
+      # application; a second copy inside gs would add to the image and to the
+      # build for a feature this program does not use.
+      - --without-tesseract
+    make-args:
+      - so
+    make-install-args:
+      - soinstall
+    post-install:
+      - mv -f ${FLATPAK_DEST}/bin/gsc ${FLATPAK_DEST}/bin/gs
+    cleanup:
+      - /share/ghostscript/*/doc
+      - /share/ghostscript/*/examples
+    sources:
+      - type: archive
+        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10071/ghostscript-10.07.1.tar.gz
+        sha256: 2fc74362f9be6fae1b0a65d38fdcfd4f0b518cc3b07c5581fb661eb4d2e15251
+
+  # The application itself, from the working tree rather than from a tag, so that
+  # what is built is what is checked out — a pull request that changes the
+  # manifest is tried against the code beside it. No checksum applies to a
+  # directory, and none is invented.
+  - name: pdf-smithy
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: dir
+        path: ../..

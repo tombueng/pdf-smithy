@@ -1,0 +1,154 @@
+name: Release artefacts
+#
+# The two self-contained bundles, kept out of ci.yml on purpose. The Flatpak job
+# downloads a multi-gigabyte KDE runtime and compiles QPDF, Poppler, Leptonica,
+# Tesseract and Ghostscript from source; the AppImage job builds the whole
+# project again and fetches the linuxdeploy tooling. That is most of an hour of
+# machine time that tells nobody anything about a change to a dialog, so it runs
+# when it is worth running:
+#
+#   * on a version tag, which is when the artefacts are actually wanted,
+#   * on a pull request that touches packaging/, so a change to a recipe is
+#     tried rather than merely read,
+#   * once a week, because these builds rot from the outside — a moved upstream
+#     tag, a retired runtime branch, a linuxdeploy release — and a Monday
+#     morning failure is a great deal cheaper to fix than a release-day one,
+#   * and on demand.
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+    paths:
+      - 'packaging/**'
+      - '.github/workflows/release.yml'
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  flatpak:
+    name: Flatpak bundle
+    runs-on: ubuntu-latest
+    # flatpak-builder needs a Flatpak installation with the SDK the manifest
+    # asks for, which is what this image is: Flathub's own build container,
+    # tagged by runtime. The tag has to track runtime-version in the manifest —
+    # kde-6.10 here, org.kde.Platform 6.10 there — so if one is ever bumped the
+    # other has to move with it. --privileged is what lets flatpak-builder set
+    # up its own mounts inside a container that is already inside a container.
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.10
+      options: --privileged
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the bundle
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          manifest-path: packaging/flatpak/io.github.tombueng.PdfSmithy.yml
+          bundle: io.github.tombueng.PdfSmithy.flatpak
+          # Keyed on the manifest's contents, so bumping a dependency rebuilds
+          # it and editing the application does not: the application module is a
+          # directory source, which flatpak-builder rebuilds on any change to
+          # the tree anyway.
+          cache-key: flatpak-builder-${{ hashFiles('packaging/flatpak/io.github.tombueng.PdfSmithy.yml') }}
+          # Uploaded by hand below, under a name that does not change with the
+          # architecture or the action's own conventions.
+          upload-artifact: false
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flatpak-bundle
+          path: io.github.tombueng.PdfSmithy.flatpak
+          if-no-files-found: error
+
+  appimage:
+    name: AppImage
+    # The oldest Ubuntu this project's CI targets, and deliberately not
+    # ubuntu-latest. An AppImage carries the libraries it was linked against but
+    # not glibc, and glibc compatibility only runs forwards: a bundle built
+    # against 26.04's glibc refuses to start on 24.04, while one built here runs
+    # on 24.04 and on everything after it. Whatever the build matrix in ci.yml
+    # starts at is what this should say.
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build extra-cmake-modules gettext \
+            qt6-base-dev qt6-tools-dev \
+            libkf6coreaddons-dev libkf6xmlgui-dev libkf6config-dev \
+            libkf6i18n-dev libkf6kio-dev libkf6crash-dev \
+            libkf6iconthemes-dev libkf6widgetsaddons-dev \
+            libkf6configwidgets-dev libkf6guiaddons-dev \
+            libpoppler-qt6-dev libqpdf-dev libtesseract-dev libleptonica-dev \
+            curl file
+          # The script copies the Breeze icon theme into the bundle, and those
+          # icons are SVG files: without the Qt SVG plugins beside them there is
+          # nothing to draw them with, and a KDE application away from Plasma
+          # opens with an empty toolbar. xvfb is for the smoke test below.
+          sudo apt-get install -y --no-install-recommends \
+            breeze-icon-theme libqt6svg6 xvfb
+
+      # The same script a developer runs, rather than a second copy of it in
+      # YAML that can drift away from the documented one.
+      - name: Build the AppImage
+        run: packaging/appimage/build-appimage.sh
+
+      # That a bundle was produced says nothing about whether it opens: the
+      # interesting failure is a library linuxdeploy did not notice, and it shows
+      # up as a loader error on the first start. --version starts the real
+      # application, prints and leaves. It needs a display because QApplication
+      # is constructed before the arguments are looked at, and it needs
+      # APPIMAGE_EXTRACT_AND_RUN because mounting an AppImage wants libfuse2,
+      # which Ubuntu 24.04 no longer ships.
+      - name: Check that it starts
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: 1
+        run: |
+          image=$(ls build-appimage/pdf-smithy-*.AppImage)
+          xvfb-run -a "./${image}" --version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: appimage
+          path: build-appimage/pdf-smithy-*.AppImage
+          if-no-files-found: error
+
+  release:
+    name: Attach the bundles to the release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [flatpak, appimage]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artefacts
+          merge-multiple: true
+
+      # A tag can be pushed with or without a release behind it, so the release
+      # is created when it is missing rather than assumed to be there.
+      - name: Upload them
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if ! gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
+            gh release create "${GITHUB_REF_NAME}" --verify-tag --generate-notes
+          fi
+          gh release upload "${GITHUB_REF_NAME}" artefacts/* --clobber
