@@ -21,21 +21,32 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.os }} · ${{ matrix.compiler }}
+    name: ${{ matrix.compiler }}
     runs-on: ${{ matrix.os }}
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that. Everything therefore happens
+    # inside an image that has it.
+    container: ubuntu:25.10
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, ubuntu-latest]
+        os: [ubuntu-latest]
         compiler: [gcc, clang]
 
     steps:
+      # Before checkout: the action needs git in the image, and a bare Ubuntu
+      # image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
+
       - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
+          apt-get update
+          apt-get install -y --no-install-recommends \
             build-essential cmake ninja-build extra-cmake-modules gettext \
             qt6-base-dev qt6-tools-dev \
             libkf6coreaddons-dev libkf6xmlgui-dev libkf6config-dev \
@@ -43,7 +54,7 @@ jobs:
             libkf6iconthemes-dev libkf6widgetsaddons-dev \
             libkf6configwidgets-dev libkf6guiaddons-dev \
             libpoppler-qt6-dev libqpdf-dev libtesseract-dev libleptonica-dev
-          if [ "${{ matrix.compiler }}" = "clang" ]; then sudo apt-get install -y clang; fi
+          if [ "${{ matrix.compiler }}" = "clang" ]; then apt-get install -y clang; fi
 
       # A separate step because none of this is needed to compile anything: it
       # is what the suite needs in order to run its cases rather than skip them.
@@ -74,7 +85,7 @@ jobs:
       #   locales           locale-gen, for the step below
       - name: Install what the tests need
         run: |
-          sudo apt-get install -y --no-install-recommends \
+          apt-get install -y --no-install-recommends \
             xvfb ghostscript fonts-urw-base35 \
             tesseract-ocr-eng tesseract-ocr-deu \
             appstream python3 libxml2-utils docbook-xml locales
@@ -95,11 +106,11 @@ jobs:
       - name: Install the DocBook tooling
         run: |
           if apt-cache show libkf6doctools-dev > /dev/null 2>&1; then
-            sudo apt-get install -y --no-install-recommends libkf6doctools-dev
+            apt-get install -y --no-install-recommends libkf6doctools-dev
           else
             echo "No KF6 KDocTools on this release — falling back to the KF5 tools,"
             echo "which validate the handbook but cannot build it."
-            sudo apt-get install -y --no-install-recommends kdoctools5
+            apt-get install -y --no-install-recommends kdoctools5
           fi
 
       # Every C++ test is registered twice — once under LC_ALL=C and once under
@@ -113,8 +124,8 @@ jobs:
       # fails now rather than turning into silence later.
       - name: Generate the German locale
         run: |
-          sudo locale-gen de_DE.UTF-8
-          sudo update-locale
+          locale-gen de_DE.UTF-8
+          update-locale
           locale -a | grep -qiE '^de_DE\.utf-?8$'
 
       - name: Configure
@@ -145,23 +156,33 @@ jobs:
 
       - name: Install
         run: |
-          sudo cmake --install build
+          cmake --install build
           test -x /usr/local/bin/pdf-smithy
           test -x /usr/local/bin/pdf-smithy-cli
 
   sanitizers:
     name: Address and UB sanitizers
     runs-on: ubuntu-latest
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that.
+    container: ubuntu:25.10
     steps:
+      # Before checkout: the action needs git in the image, and a bare Ubuntu
+      # image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
+
       - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
+          apt-get update
           # appstream is deliberately absent from this list: the two metadata
           # tests only run appstreamcli over an XML file, so there is nothing
           # here for a sanitizer to see, and the build job already runs them.
-          sudo apt-get install -y --no-install-recommends \
+          apt-get install -y --no-install-recommends \
             build-essential cmake ninja-build extra-cmake-modules gettext \
             qt6-base-dev qt6-tools-dev \
             libkf6coreaddons-dev libkf6xmlgui-dev libkf6config-dev \
@@ -176,8 +197,8 @@ jobs:
       # for the second half of it to mean anything. See the build job for why.
       - name: Generate the German locale
         run: |
-          sudo locale-gen de_DE.UTF-8
-          sudo update-locale
+          locale-gen de_DE.UTF-8
+          update-locale
           locale -a | grep -qiE '^de_DE\.utf-?8$'
 
       - name: Configure with sanitizers
@@ -202,16 +223,25 @@ jobs:
   package:
     name: Debian package
     runs-on: ubuntu-latest
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that.
+    container: ubuntu:25.10
     steps:
+      # Before checkout: the action needs git in the image, and a bare
+      # Ubuntu image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
       - uses: actions/checkout@v4
 
       - name: Install build tooling
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends devscripts equivs
+          apt-get update
+          apt-get install -y --no-install-recommends devscripts equivs
           # Reads debian/control and installs exactly what it asks for, so the
           # dependency list cannot drift away from what actually builds.
-          sudo mk-build-deps --install --remove \
+          mk-build-deps --install --remove \
             --tool "apt-get -y --no-install-recommends" debian/control
 
       # debian/rules runs the suite through dh_auto_test, so this job runs the
@@ -219,9 +249,9 @@ jobs:
       # job does.
       - name: Generate the German locale
         run: |
-          sudo apt-get install -y --no-install-recommends locales
-          sudo locale-gen de_DE.UTF-8
-          sudo update-locale
+          apt-get install -y --no-install-recommends locales
+          locale-gen de_DE.UTF-8
+          update-locale
           locale -a | grep -qiE '^de_DE\.utf-?8$'
 
       - name: Build the package
@@ -229,12 +259,12 @@ jobs:
 
       - name: Check it with lintian
         run: |
-          sudo apt-get install -y --no-install-recommends lintian
+          apt-get install -y --no-install-recommends lintian
           lintian ../pdf-smithy_*.deb || true
 
       - name: Install it and check it runs
         run: |
-          sudo apt-get install -y ../pdf-smithy_*.deb
+          apt-get install -y ../pdf-smithy_*.deb
           pdf-smithy-cli --version
 
       - uses: actions/upload-artifact@v4
@@ -245,11 +275,20 @@ jobs:
   format:
     name: Code style
     runs-on: ubuntu-latest
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that.
+    container: ubuntu:25.10
     steps:
+      # Before checkout: the action needs git in the image, and a bare
+      # Ubuntu image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
       - uses: actions/checkout@v4
 
       - name: Install clang-format
-        run: sudo apt-get update && sudo apt-get install -y clang-format
+        run: apt-get update && apt-get install -y clang-format
 
       - name: Check formatting
         run: |
@@ -259,11 +298,21 @@ jobs:
   translations:
     name: Translations
     runs-on: ubuntu-latest
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that.
+    container: ubuntu:25.10
     steps:
+      # Before checkout: the action needs git in the image, and a bare
+      # Ubuntu image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
+
       - uses: actions/checkout@v4
 
       - name: Install gettext
-        run: sudo apt-get update && sudo apt-get install -y gettext
+        run: apt-get update && apt-get install -y gettext
 
       - name: Validate catalogues
         run: |
@@ -289,11 +338,20 @@ jobs:
   metadata:
     name: Desktop metadata
     runs-on: ubuntu-latest
+    # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
+    # 24.10 and the runners are older than that.
+    container: ubuntu:25.10
     steps:
+      # Before checkout: the action needs git in the image, and a bare
+      # Ubuntu image has neither git nor the certificates to fetch over https.
+      - name: Make the image able to check out
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends git ca-certificates sudo locales
       - uses: actions/checkout@v4
 
       - name: Install validators
-        run: sudo apt-get update && sudo apt-get install -y appstream desktop-file-utils
+        run: apt-get update && apt-get install -y appstream desktop-file-utils
 
       - name: Validate
         run: |
