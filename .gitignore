@@ -27,9 +27,4 @@ obj-*/
 # Scratch from a translation run, rebuilt whenever it is needed
 po/slices/
 
-# Catalogues still being translated. A half-finished one fails the checks, and
-# rightly: an interface that changes language halfway down a menu is worse than
-# an English one. They join the repository when they are complete.
-po/es/
-po/fr/
 tools/__pycache__/
