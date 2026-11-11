@@ -412,7 +412,8 @@ int embedFont(const QStringList &arguments, const QCommandLineParser &parser)
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(output).constData());
+        const QByteArray nativePath = QFile::encodeName(output);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_compress);
         writer.write();

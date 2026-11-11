@@ -2691,7 +2691,8 @@ bool Preflight::applyFixes(const QString &in, const QString &out, const QStringL
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setCompressStreams(true);
         writer.setDeterministicID(true);
@@ -3000,7 +3001,8 @@ bool Preflight::writeReport(const QString &pdf, const Report &report, const QStr
         out.getTrailer().replaceKey("/Info", info);
 
         QPDFWriter writer(out);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setCompressStreams(true);
         writer.setDeterministicID(true);

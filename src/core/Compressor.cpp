@@ -33,7 +33,8 @@ bool compressLossless(const QString &input, const QString &output, const Compres
         PdfFile::open(pdf, input);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(output).constData());
+        const QByteArray nativePath = QFile::encodeName(output);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setCompressStreams(true);
         // Re-deflating already-deflated streams is off by default because it

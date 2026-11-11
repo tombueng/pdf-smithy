@@ -149,7 +149,8 @@ bool TestPagelayout::writeWithBlankPages(const QString &file, int pageCount, int
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(file).constData());
+        const QByteArray nativePath = QFile::encodeName(file);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &) {

@@ -117,7 +117,8 @@ bool Encryption::encrypt(const QString &inputPath, const QString &outputPath, co
         PdfFile::open(pdf, inputPath, openPassword);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         // No deterministic ID here, deliberately. The file ID feeds into the
         // encryption key, so making it reproducible would make the key
         // reproducible. QPDF refuses outright, and it is right to. Encrypted
@@ -153,7 +154,8 @@ bool Encryption::decrypt(const QString &inputPath, const QString &outputPath, co
         PdfFile::open(pdf, inputPath, openPassword);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         // Explicitly, because the default is the opposite: QPDFWriter carries
         // the source document's encryption over unless told not to. Saying
         // nothing here would produce a file that is still locked.

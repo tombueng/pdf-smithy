@@ -261,7 +261,8 @@ bool Outline::write(const QString &inputPdf, const QString &outputPdf, const QVe
         PdfFile::open(pdf, inputPdf);
         applyTo(pdf, items);
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();

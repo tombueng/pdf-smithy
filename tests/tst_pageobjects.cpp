@@ -92,7 +92,8 @@ QString TestPageobjects::writeMixedPage(const QString &name, int rotate)
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return path;
     } catch (const std::exception &) {
@@ -232,7 +233,8 @@ void TestPageobjects::movesByTheAmountAskedForRegardlessOfScaling()
         page.replaceKey("/Contents", QPDFObjectHandle::newStream(&pdf, content));
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     } catch (const std::exception &e) {
         QFAIL(e.what());

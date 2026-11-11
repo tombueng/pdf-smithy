@@ -592,7 +592,8 @@ bool rewrite(const QString &input, const QString &output,
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         // Form XObjects built out of existing pages arrive with no filter on
         // them, and preserving stream data would write them that way, so a

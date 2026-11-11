@@ -319,7 +319,8 @@ QString TestImageedit::writeImagePdf(const QString &name, const QImage &picture,
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
     }
 
-    QPDFWriter writer(pdf, path.toUtf8().constData());
+    const QByteArray nativePath = path.toUtf8();
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.setStreamDataMode(qpdf_s_preserve);
     writer.write();
     return path;
@@ -354,7 +355,8 @@ QString TestImageedit::writeUnreadablePdf(const QString &name)
     QPDFPageDocumentHelper documents(pdf);
     documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
-    QPDFWriter writer(pdf, path.toUtf8().constData());
+    const QByteArray nativePath = path.toUtf8();
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.setStreamDataMode(qpdf_s_preserve);
     writer.write();
     return path;

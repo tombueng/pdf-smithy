@@ -502,7 +502,8 @@ bool Annotations::add(const QString &inputPdf, const QString &outputPdf, const Q
             existing.appendItem(object);
         }
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();
@@ -680,7 +681,8 @@ bool Annotations::remove(const QString &inputPdf, const QString &outputPdf, cons
             }
         }
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();
@@ -772,7 +774,8 @@ bool Annotations::flatten(const QString &inputPdf, const QString &outputPdf, con
             }
         }
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();

@@ -269,7 +269,8 @@ bool writePicturePdf(const QString &path)
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
         return true;

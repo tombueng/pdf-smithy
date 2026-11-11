@@ -104,7 +104,8 @@ QString TestTextWysiwyg::writePdf(const QString &name, const QByteArray &font, c
     page.replaceKey("/Contents", QPDFObjectHandle::newStream(&pdf, content));
     QPDFPageDocumentHelper(pdf).addPage(pdf.makeIndirectObject(page), false);
 
-    QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+    const QByteArray nativePath = QFile::encodeName(path);
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.write();
     return path;
 }

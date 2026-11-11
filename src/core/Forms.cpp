@@ -809,7 +809,8 @@ bool Forms::fill(const QString &inputPdf, const QString &outputPdf, const QHash<
             drawFilledValue(pdf, field, entry.kind, entry.value, rotationOfWidget);
         }
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();
@@ -858,7 +859,8 @@ bool Forms::flatten(const QString &inputPdf, const QString &outputPdf, int *flat
         pdf.getRoot().removeKey("/AcroForm");
         pdf.getRoot().removeKey("/Perms");
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();

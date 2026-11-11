@@ -2919,7 +2919,8 @@ bool runOverPages(const QString &in, const QString &out, Work &work, const QVect
             }
         }
 
-        QPDFWriter writer(pdf, QFile::encodeName(out).constData());
+        const QByteArray nativePath = QFile::encodeName(out);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setStreamDataMode(qpdf_s_compress);
         writer.write();

@@ -285,7 +285,8 @@ bool DocumentWriter::writeSelection(const Document &document, const QVector<int>
         }
 
         QPDFWriter writer(out);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(options.objectStreams ? qpdf_o_generate : qpdf_o_disable);
         writer.setCompressStreams(options.compressStreams);
         writer.setLinearization(options.linearize);

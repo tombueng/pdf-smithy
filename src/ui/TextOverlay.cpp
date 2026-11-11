@@ -527,6 +527,14 @@ TextOverlay::~TextOverlay()
     if (m_liveWatcher) {
         m_liveWatcher->waitForFinished();
     }
+    if (m_editor) {
+        // Stop filtering it before it goes: deleting a widget sends events
+        // through its own filters while its QLineEdit part is already gone and
+        // only the QWidget base remains, and eventFilter() compares against a
+        // QPointer<QLineEdit> whose downcast of that half-destroyed object is
+        // undefined behaviour.
+        m_editor->removeEventFilter(this);
+    }
     delete m_editor;
     delete m_boxButton;
     delete m_note;

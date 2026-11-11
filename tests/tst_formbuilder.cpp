@@ -260,7 +260,8 @@ bool writeXfaPdf(const QString &path)
         acroForm.replaceKey("/XFA", xfa);
         pdf.getRoot().replaceKey("/AcroForm", pdf.makeIndirectObject(acroForm));
 
-        QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {

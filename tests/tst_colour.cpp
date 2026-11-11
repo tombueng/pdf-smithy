@@ -124,7 +124,8 @@ QString TestColour::writePdf(const QString &name, const QStringList &contents,
         documents.addPage(pdf.makeIndirectObject(page), false);
     }
 
-    QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+    const QByteArray nativePath = QFile::encodeName(path);
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.write();
     return path;
 }

@@ -147,7 +147,8 @@ QString TestPageTurn::markedSheet()
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return path;
     } catch (const std::exception &) {

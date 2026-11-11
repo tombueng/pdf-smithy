@@ -1733,7 +1733,8 @@ bool stampMetadata(const QString &path, const QString &packet, const QString &mi
         metadata.getDict().replaceKey("/Subtype", QPDFObjectHandle::newName("/XML"));
         pdf.getRoot().replaceKey("/Metadata", pdf.makeIndirectObject(metadata));
 
-        QPDFWriter writer(pdf, QFile::encodeName(temporary).constData());
+        const QByteArray nativePath = QFile::encodeName(temporary);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setMinimumPDFVersion(minimumVersion.toStdString());
         // The packet has to stay readable by a tool that does not decompress
         // streams, which is what every version of the standard asks for, and it
@@ -2511,7 +2512,8 @@ bool Convert::linearise(const QString &in, const QString &out, QString *error)
     try {
         QPDF pdf;
         PdfFile::open(pdf, in);
-        QPDFWriter writer(pdf, QFile::encodeName(out).constData());
+        const QByteArray nativePath = QFile::encodeName(out);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setLinearization(true);
         writer.setObjectStreamMode(qpdf_o_preserve);
         writer.setStreamDataMode(qpdf_s_preserve);
@@ -2573,7 +2575,8 @@ bool Convert::setVersion(const QString &in, const QString &out, const QString &v
                                current, version));
         }
 
-        QPDFWriter writer(pdf, QFile::encodeName(out).constData());
+        const QByteArray nativePath = QFile::encodeName(out);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.forcePDFVersion(version.toStdString());
         // Object streams and cross-reference streams arrived in 1.5, so writing
         // an older version has to leave them out rather than claim they are not

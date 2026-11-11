@@ -734,7 +734,8 @@ QByteArray toUnicodeCMap(const QMap<int, QChar> &characterForCode)
 void writeOut(QPDF &pdf, const QString &path)
 {
     QPDFWriter writer(pdf);
-    writer.setOutputFilename(QFile::encodeName(path).constData());
+    const QByteArray nativePath = QFile::encodeName(path);
+    writer.setOutputFilename(nativePath.constData());
     writer.setObjectStreamMode(qpdf_o_generate);
     writer.setStreamDataMode(qpdf_s_compress);
     writer.write();

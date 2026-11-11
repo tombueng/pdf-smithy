@@ -378,7 +378,8 @@ private:
             }
 
             QPDFWriter writer(pdf);
-            writer.setOutputFilename(QFile::encodeName(output).constData());
+            const QByteArray nativePath = QFile::encodeName(output);
+            writer.setOutputFilename(nativePath.constData());
             writer.setObjectStreamMode(qpdf_o_generate);
             writer.setStreamDataMode(qpdf_s_compress);
             writer.write();
@@ -430,7 +431,8 @@ private:
             documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
             QPDFWriter writer(pdf);
-            writer.setOutputFilename(QFile::encodeName(output).constData());
+            const QByteArray nativePath = QFile::encodeName(output);
+            writer.setOutputFilename(nativePath.constData());
             writer.setDeterministicID(true);
             writer.write();
         } catch (const std::exception &) {

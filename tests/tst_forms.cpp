@@ -120,7 +120,8 @@ bool writeStyledFormPdf(const QString &path)
         acroForm.replaceKey("/DA", QPDFObjectHandle::newString("/Helv 0 Tf 0 g"));
         pdf.getRoot().replaceKey("/AcroForm", pdf.makeIndirectObject(acroForm));
 
-        QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {
@@ -211,7 +212,8 @@ bool writeGroupedFormPdf(const QString &path)
         acroForm.replaceKey("/DA", QPDFObjectHandle::newString("/Helv 9 Tf 0 g"));
         pdf.getRoot().replaceKey("/AcroForm", pdf.makeIndirectObject(acroForm));
 
-        QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {

@@ -39,7 +39,8 @@ bool rewrite(const QString &input, const QString &output, const std::function<vo
         work(pdf);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(output).constData());
+        const QByteArray nativePath = QFile::encodeName(output);
+        writer.setOutputFilename(nativePath.constData());
         if (restrictive) {
             // An empty user password with an owner password is the "protected"
             // file people actually send: it opens without being asked for
@@ -243,7 +244,8 @@ bool writeAwkwardPdf(const QString &path)
         pages.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(page)), false);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &) {

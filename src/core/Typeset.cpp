@@ -1338,7 +1338,8 @@ bool writePdf(const QVector<OutPage> &pages, const Typeset::Document &document, 
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(outPdf).constData());
+        const QByteArray nativePath = QFile::encodeName(outPdf);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setCompressStreams(true);
         writer.setDeterministicID(true);

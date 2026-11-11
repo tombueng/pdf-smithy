@@ -144,7 +144,8 @@ bool NUp::apply(const QString &inputPdf, const QString &outputPdf, const Options
             documents.addPage(sheetPage, false);
         }
 
-        QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
+        const QByteArray nativePath = outputPdf.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         // The form XObjects arrive uncompressed, and preserving would write them
         // that way. Compressing only re-deflates what is already lossless;

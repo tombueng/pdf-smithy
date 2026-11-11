@@ -1258,7 +1258,8 @@ void applyRewrite(QPDF &pdf, QPDFPageObjectHelper &page, QPDFObjectHandle::Token
 
 bool writeOut(QPDF &pdf, const QString &out)
 {
-    QPDFWriter writer(pdf, out.toUtf8().constData());
+    const QByteArray nativePath = out.toUtf8();
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.setObjectStreamMode(qpdf_o_generate);
     // Preserve rather than compress: an image nobody asked about must come out
     // of the far end with the bytes it went in with.

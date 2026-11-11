@@ -88,7 +88,8 @@ bool rewrite(const QString &input, const QString &output,
         work(pdf, pages);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setObjectStreamMode(qpdf_o_generate);
         writer.setCompressStreams(true);
         writer.setDeterministicID(true);

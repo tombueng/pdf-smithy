@@ -40,7 +40,8 @@ bool rewrite(const QString &input, const QString &output, const std::function<vo
         work(pdf);
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(output).constData());
+        const QByteArray nativePath = QFile::encodeName(output);
+        writer.setOutputFilename(nativePath.constData());
         if (encrypt) {
             // A file ID feeds the encryption key, so QPDF refuses to make
             // encrypted output deterministic. Nothing here depends on that.

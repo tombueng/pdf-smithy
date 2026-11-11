@@ -165,7 +165,8 @@ QString TestRedaction::writeTextPdf(const QString &name, bool withWidths, int ro
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
     }
 
-    QPDFWriter writer(pdf, path.toUtf8().constData());
+    const QByteArray nativePath = path.toUtf8();
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.write();
     return path;
 }
@@ -309,7 +310,8 @@ void TestRedaction::editsThePixelsOfAnOverlappingImage()
 
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     }
 
@@ -382,7 +384,8 @@ void TestRedaction::editsAJpegWithoutDroppingIt()
 
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     }
 
@@ -434,7 +437,8 @@ void TestRedaction::seesThroughAFormMatrix()
 
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     }
 
@@ -484,7 +488,8 @@ void TestRedaction::flattensPagesItCannotEdit()
 
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     }
 
@@ -540,7 +545,8 @@ void TestRedaction::dropsAnnotationsUnderTheBox()
                                                   "     /Contents (harmless) >> ]"));
         QPDFPageDocumentHelper documents(pdf);
         documents.addPage(QPDFPageObjectHelper(pdf.makeIndirectObject(object)), false);
-        QPDFWriter writer(pdf, path.toUtf8().constData());
+        const QByteArray nativePath = path.toUtf8();
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
     }
 

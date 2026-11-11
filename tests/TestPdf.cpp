@@ -67,7 +67,8 @@ bool build(const QString &path, int pageCount, const QSizeF &sizePoints, int rot
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &) {
@@ -139,7 +140,8 @@ bool writeTextHeavyPdf(const QString &path, int pageCount, double skewDegrees)
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &) {
@@ -201,7 +203,8 @@ bool writeBookmarkedPdf(const QString &path, int pageCount, const QMap<int, QStr
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &) {
@@ -317,7 +320,8 @@ bool addWidgetAnnotation(const QString &input, const QString &output, int page)
         }
         annots.appendItem(widget);
 
-        QPDFWriter writer(pdf, QFile::encodeName(output).constData());
+        const QByteArray nativePath = QFile::encodeName(output);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {
@@ -380,7 +384,8 @@ bool writeLinkedPdf(const QString &path, int pageCount, int target)
         annots.appendItem(link);
         pages[0].getObjectHandle().replaceKey("/Annots", annots);
 
-        QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {
@@ -480,7 +485,8 @@ bool writeFormPdf(const QString &path)
         acroForm.replaceKey("/NeedAppearances", QPDFObjectHandle::newBool(true));
         pdf.getRoot().replaceKey("/AcroForm", pdf.makeIndirectObject(acroForm));
 
-        QPDFWriter writer(pdf, QFile::encodeName(path).constData());
+        const QByteArray nativePath = QFile::encodeName(path);
+        QPDFWriter writer(pdf, nativePath.constData());
         writer.write();
         return true;
     } catch (const std::exception &) {

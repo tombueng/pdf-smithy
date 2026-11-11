@@ -237,7 +237,8 @@ bool checkNoXfa(QPDF &pdf, QString *error)
 
 void writeDocument(QPDF &pdf, const QString &path)
 {
-    QPDFWriter writer(pdf, path.toUtf8().constData());
+    const QByteArray nativePath = path.toUtf8();
+    QPDFWriter writer(pdf, nativePath.constData());
     writer.setObjectStreamMode(qpdf_o_generate);
     writer.setStreamDataMode(qpdf_s_preserve);
     writer.write();
@@ -1321,7 +1322,6 @@ bool editField(const QString &in, const QString &out, const QString &fieldName, 
 
 } // namespace
 
-bool FormBuilder::addFields(const QString &in, const QString &out, const QVector<Field> &fields, int *added,
 void drawFieldValueAppearance(QPDF &pdf, QPDFObjectHandle widget, const FormBuilder::Field &spec, int rotate)
 {
     // Only enough of a Build to put the font /DA names where the appearance's
@@ -1354,6 +1354,7 @@ void drawFieldValueAppearance(QPDF &pdf, QPDFObjectHandle widget, const FormBuil
     widget.replaceKey("/AP", appearance);
 }
 
+bool FormBuilder::addFields(const QString &in, const QString &out, const QVector<Field> &fields, int *added,
                             QString *error)
 {
     if (fields.isEmpty()) {
@@ -1601,8 +1602,12 @@ bool FormBuilder::removeFields(const QString &in, const QString &out, const QStr
 
         std::set<QPDFObjGen> doomedWidgets;
         std::set<QPDFObjGen> doomedFields;
+        // allFields returns a vector by value and findField a pointer into it,
+        // so the vector has to outlive the pointer: held here, not rebuilt as a
+        // temporary in the call, whose handles would be freed before use.
+        const QVector<Located> fields = allFields(acroForm);
         for (const QString &name : names) {
-            const Located *found = findField(allFields(acroForm), name);
+            const Located *found = findField(fields, name);
             if (!found) {
                 continue;
             }

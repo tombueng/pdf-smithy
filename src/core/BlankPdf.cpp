@@ -69,7 +69,8 @@ bool BlankPdf::write(const QString &path, int pageCount, const QSizeF &sizePoint
         }
 
         QPDFWriter writer(pdf);
-        writer.setOutputFilename(QFile::encodeName(tempPath).constData());
+        const QByteArray nativePath = QFile::encodeName(tempPath);
+        writer.setOutputFilename(nativePath.constData());
         writer.setDeterministicID(true);
         writer.write();
     } catch (const std::exception &e) {
