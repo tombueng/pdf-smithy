@@ -173,7 +173,7 @@ msgstr "Was geschehen ist:"
 #: src/cli/CommandsColour.cpp:259
 #, kde-format
 msgid "Give both colours: --from red --to-colour '#0044cc'."
-msgstr "Geben Sie beide Farben an: --from red --to-colour '#0044cc'."
+msgstr "Beide Farben angeben: --from red --to-colour '#0044cc'."
 
 #: src/cli/CommandsColour.cpp:264 src/cli/CommandsColour.cpp:268
 #: src/cli/CommandsForm.cpp:274 src/cli/CommandsForm.cpp:590
@@ -220,8 +220,8 @@ msgid ""
 "Say what to do with the inks: --rename OLD=NEW, or --to-process INK to "
 "dissolve one into process colour."
 msgstr ""
-"Sagen Sie, was mit den Druckfarben geschehen soll: --rename ALT=NEU oder --"
-"to-process DRUCKFARBE, um eine davon in Prozessfarbe aufzulösen."
+"Angeben, was mit den Druckfarben geschehen soll: --rename ALT=NEU oder --to-"
+"process DRUCKFARBE, um eine davon in Prozessfarbe aufzulösen."
 
 #: src/cli/CommandsColour.cpp:335
 #, kde-format
@@ -281,8 +281,8 @@ msgid ""
 "Over 300 %, which most presses cannot dry. Ask the print shop for their ink "
 "limit."
 msgstr ""
-"Über 300 %, das bekommen die meisten Druckmaschinen nicht trocken. Fragen "
-"Sie die Druckerei nach ihrer Deckungsgrenze."
+"Über 300 %, das bekommen die meisten Druckmaschinen nicht trocken. Bei der "
+"Druckerei nach ihrer Deckungsgrenze fragen."
 
 #: src/cli/CommandsColour.cpp:447
 #, kde-format
@@ -290,7 +290,7 @@ msgid ""
 "Say which plate: --ink Cyan, Magenta, Yellow, Black, or a separation name as "
 "“colour inspect” reports it."
 msgstr ""
-"Sagen Sie, welche Druckplatte: --ink Cyan, Magenta, Yellow, Black oder ein "
+"Angeben, welche Druckplatte: --ink Cyan, Magenta, Yellow, Black oder ein "
 "Separationsname, wie ihn „colour inspect“ meldet."
 
 #: src/cli/CommandsColour.cpp:455
@@ -348,7 +348,7 @@ msgid ""
 "wants; pass it with --icc-profile."
 msgstr ""
 "Auf diesem System wurde kein CMYK-Profil gefunden. Ein Druckauftrag nennt "
-"das Profil, das er verlangt; geben Sie es mit --icc-profile an."
+"das Profil, das er verlangt; es mit --icc-profile angeben."
 
 #: src/cli/CommandsColour.cpp:499
 #, kde-format
@@ -536,10 +536,10 @@ msgid_plural ""
 "check them against the page."
 msgstr[0] ""
 "%1 Tabelle gefunden. Die Verlässlichkeit sagt, wie sehr sie geraten war; "
-"unter 0,5 vergleichen Sie sie mit der Seite."
+"unter 0,5 mit der Seite vergleichen."
 msgstr[1] ""
 "%1 Tabellen gefunden. Die Verlässlichkeit sagt, wie sehr jede davon geraten "
-"war; unter 0,5 vergleichen Sie sie mit der Seite."
+"war; unter 0,5 mit der Seite vergleichen."
 
 #: src/cli/CommandsConvert.cpp:267
 #, kde-format
@@ -573,7 +573,7 @@ msgid ""
 "the “ghostscript” package and try again."
 msgstr ""
 "Ghostscript ist nicht installiert, und es erledigt die Umwandlung nach PDF/"
-"X. Installieren Sie das Paket „ghostscript“ und versuchen Sie es erneut."
+"X. Das Paket „ghostscript“ installieren und es erneut versuchen."
 
 #: src/cli/CommandsConvert.cpp:308
 #, kde-format
@@ -609,8 +609,7 @@ msgstr ""
 #: src/cli/CommandsConvert.cpp:373
 #, kde-format
 msgid "Say which version the header should claim: --pdf-version 1.7."
-msgstr ""
-"Sagen Sie, welche Version der Dateikopf angeben soll: --pdf-version 1.7."
+msgstr "Angeben, welche Version der Dateikopf nennen soll: --pdf-version 1.7."
 
 #: src/cli/CommandsConvert.cpp:390
 #, kde-format
@@ -955,8 +954,8 @@ msgstr[1] "Eine /ToUnicode-Zuordnung für %1 Schriften geschrieben."
 msgid ""
 "Their text can be copied and searched now, by this program and by any other."
 msgstr ""
-"Ihr Text lässt sich jetzt kopieren und durchsuchen, von diesem Programm wie "
-"von jedem anderen."
+"Deren Text lässt sich jetzt kopieren und durchsuchen, von diesem Programm "
+"wie von jedem anderen."
 
 #: src/cli/CommandsFonts.cpp:505
 #, kde-format
@@ -1119,13 +1118,13 @@ msgstr "„%1“ ist keine Ausrichtung. Möglich sind left, centre oder right."
 msgid ""
 "Say where the field goes and how big it is, e.g. --at 72,700 --size 200x18."
 msgstr ""
-"Sagen Sie, wohin das Feld kommt und wie groß es ist, z. B. --at 72,700 --"
-"size 200x18."
+"Angeben, wohin das Feld kommt und wie groß es ist, z. B. --at 72,700 --size "
+"200x18."
 
 #: src/cli/CommandsForm.cpp:292
 #, kde-format
 msgid "Give one --size for them all, or one for every --at."
-msgstr "Geben Sie ein --size für alle an oder eines für jedes --at."
+msgstr "Ein --size für alle angeben oder eines für jedes --at."
 
 #: src/cli/CommandsForm.cpp:299 src/cli/CommandsForm.cpp:860
 #, kde-format
@@ -1148,7 +1147,7 @@ msgid ""
 "Say what kind of field with --type: text, password, checkbox, radio, choice, "
 "list, button or signature."
 msgstr ""
-"Sagen Sie mit --type, welche Art von Feld: text, password, checkbox, radio, "
+"Mit --type angeben, welche Art von Feld: text, password, checkbox, radio, "
 "choice, list, button oder signature."
 
 #: src/cli/CommandsForm.cpp:332
@@ -1184,21 +1183,21 @@ msgstr "„%1“ ist keine Seitenzahl."
 #: src/cli/CommandsForm.cpp:364
 #, kde-format
 msgid "Only a radio group takes more than one --at."
-msgstr "Nur eine Gruppe von Optionsschaltern nimmt mehr als ein --at."
+msgstr "Nur eine Optionsgruppe nimmt mehr als ein --at."
 
 #: src/cli/CommandsForm.cpp:374
 #, kde-format
 msgid "A radio group needs at least two choices, as --options Frau,Herr."
 msgstr ""
-"Eine Gruppe von Optionsschaltern benötigt mindestens zwei "
-"Auswahlmöglichkeiten, als --options Frau,Herr."
+"Eine Optionsgruppe braucht mindestens zwei Auswahlmöglichkeiten, als --"
+"options Frau,Herr."
 
 #: src/cli/CommandsForm.cpp:378
 #, kde-format
 msgid "A radio group needs one --at for every choice: %1 given for %2 choices."
 msgstr ""
-"Eine Optionsschaltergruppe braucht ein --at für jede Auswahl: %1 angegeben "
-"bei %2 Auswahlmöglichkeiten."
+"Eine Optionsgruppe braucht ein --at für jede Auswahl: %1 angegeben bei %2 "
+"Auswahlmöglichkeiten."
 
 #: src/cli/CommandsForm.cpp:409
 #, kde-format
@@ -1211,8 +1210,8 @@ msgstr ""
 "Hinweis: Das Feld wird mit dem Standardrahmen, dem Standardhintergrund und "
 "der Standardschrift zurückgeschrieben. Was sein Urheber über Name, Ort, "
 "Merkmale, Auswahl und Wert hinaus festgelegt hat, lässt sich nicht aus dem "
-"Dokument lesen; geben Sie --colour, --background, --border-colour und den "
-"Rest daher erneut an, um sie zu behalten."
+"Dokument lesen; --colour, --background, --border-colour und den Rest daher "
+"erneut angeben, um sie zu behalten."
 
 #: src/cli/CommandsForm.cpp:462
 #, kde-format
@@ -1259,8 +1258,8 @@ msgid ""
 "“%1” has no rectangle. Give it as \"rect\": { \"x\": 72, \"y\": 700, "
 "\"width\": 200, \"height\": 18 }."
 msgstr ""
-"„%1“ hat kein Rechteck. Geben Sie es als \"rect\": { \"x\": 72, \"y\": 700, "
-"\"width\": 200, \"height\": 18 } an."
+"„%1“ hat kein Rechteck. Es als \"rect\": { \"x\": 72, \"y\": 700, \"width\": "
+"200, \"height\": 18 } angeben."
 
 #: src/cli/CommandsForm.cpp:677 src/cli/main.cpp:1302
 #, kde-format
@@ -1326,8 +1325,8 @@ msgid ""
 "Note: a radio group takes its labels from --options, so --tooltip is not "
 "used for it."
 msgstr ""
-"Hinweis: Eine Optionsschaltergruppe nimmt ihre Beschriftungen aus --options, "
-"--tooltip wird für sie daher nicht verwendet."
+"Hinweis: Eine Optionsgruppe nimmt ihre Beschriftungen aus --options, --"
+"tooltip wird für sie daher nicht verwendet."
 
 #: src/cli/CommandsForm.cpp:740
 #, kde-format
@@ -1346,8 +1345,7 @@ msgstr[1] "„%2“ %1 Felder hinzugefügt."
 #: src/cli/CommandsForm.cpp:753
 #, kde-format
 msgid "Give the description to build from with --from-json."
-msgstr ""
-"Geben Sie mit --from-json die Beschreibung an, aus der gebaut werden soll."
+msgstr "Mit --from-json die Beschreibung angeben, aus der gebaut werden soll."
 
 #: src/cli/CommandsForm.cpp:757 src/cli/CommandsTypeset.cpp:704
 #: src/cli/main.cpp:1432 src/core/Annotation.cpp:1014
@@ -1380,7 +1378,7 @@ msgstr "„%1“ beschreibt keine Felder."
 #, kde-format
 msgid "Say which field to take out with --name. Repeat it for more."
 msgstr ""
-"Sagen Sie mit --name, welches Feld herausgenommen werden soll. Mehrfach "
+"Mit --name angeben, welches Feld herausgenommen werden soll. Mehrfach "
 "angebbar."
 
 #: src/cli/CommandsForm.cpp:802
@@ -1403,7 +1401,7 @@ msgstr[1] "%1 Felder aus „%2“ entfernt."
 #, kde-format
 msgid "Say which field and what to call it: --name Alt --to-name Neu."
 msgstr ""
-"Sagen Sie, welches Feld und wie es heißen soll: --name Alt --to-name Neu."
+"Angeben, welches Feld und wie es heißen soll: --name Alt --to-name Neu."
 
 #: src/cli/CommandsForm.cpp:822
 #, kde-format
@@ -1413,7 +1411,7 @@ msgstr "„%1“ heißt in %3 jetzt „%2“."
 #: src/cli/CommandsForm.cpp:831
 #, kde-format
 msgid "Say which field with --name."
-msgstr "Sagen Sie mit --name, welches Feld."
+msgstr "Mit --name angeben, welches Feld."
 
 #: src/cli/CommandsForm.cpp:844
 #, kde-format
@@ -1422,15 +1420,15 @@ msgid ""
 "add it again."
 msgstr ""
 "Hinweis: --page wird hier nicht verwendet. Um „%1“ auf eine andere Seite zu "
-"setzen, nehmen Sie es heraus und fügen es erneut hinzu."
+"setzen, es herausnehmen und erneut hinzufügen."
 
 #: src/cli/CommandsForm.cpp:871
 #, kde-format
 msgid ""
 "“%1” has nothing on a page to take a size from, so give one with --size."
 msgstr ""
-"„%1“ hat nichts auf einer Seite, woher eine Größe zu nehmen wäre; geben Sie "
-"mit --size eine an."
+"„%1“ hat nichts auf einer Seite, woher eine Größe zu nehmen wäre; mit --size "
+"eine angeben."
 
 #: src/cli/CommandsForm.cpp:877
 #, kde-format
@@ -1438,14 +1436,14 @@ msgid ""
 "Note: a radio group keeps where its buttons are, unless it has only one. To "
 "move them, take the group out and add it again."
 msgstr ""
-"Hinweis: Eine Optionsschaltergruppe behält die Plätze ihrer Schalter, außer "
-"sie hat nur einen. Um sie zu verschieben, nehmen Sie die Gruppe heraus und "
-"fügen sie erneut hinzu."
+"Hinweis: Eine Optionsgruppe behält die Plätze ihrer Schalter, außer sie hat "
+"nur einen. Um sie zu verschieben, die Gruppe herausnehmen und erneut "
+"hinzufügen."
 
 #: src/cli/CommandsForm.cpp:883
 #, kde-format
 msgid "Say where the field goes with --at, e.g. --at 72,700."
-msgstr "Sagen Sie mit --at, wohin das Feld kommt, z. B. --at 72,700."
+msgstr "Mit --at angeben, wohin das Feld kommt, z. B. --at 72,700."
 
 #: src/cli/CommandsForm.cpp:904
 #, kde-format
@@ -1454,7 +1452,7 @@ msgid ""
 "drop-down. Add --type list to keep a list box."
 msgstr ""
 "Hinweis: Ein Listenfeld und eine Auswahlliste lesen sich gleich zurück, „%1“ "
-"wird daher als Auswahlliste geschrieben. Ergänzen Sie --type list, um ein "
+"wird daher als Auswahlliste geschrieben. --type list ergänzen, um ein "
 "Listenfeld zu behalten."
 
 #: src/cli/CommandsForm.cpp:909
@@ -1465,8 +1463,7 @@ msgstr "„%1“ in %2 geändert."
 #: src/cli/CommandsForm.cpp:917
 #, kde-format
 msgid "Give the order with --order, as one list of field names."
-msgstr ""
-"Geben Sie mit --order die Reihenfolge an, als eine Liste von Feldnamen."
+msgstr "Mit --order die Reihenfolge angeben, als eine Liste von Feldnamen."
 
 #: src/cli/CommandsForm.cpp:930
 #, kde-format
@@ -1486,8 +1483,7 @@ msgstr[1] ""
 #, kde-format
 msgid "Say which field and how it should look: --name Betrag --as currency."
 msgstr ""
-"Sagen Sie, welches Feld und wie es aussehen soll: --name Betrag --as "
-"currency."
+"Angeben, welches Feld und wie es aussehen soll: --name Betrag --as currency."
 
 #: src/cli/CommandsForm.cpp:970
 #, kde-format
@@ -1521,7 +1517,7 @@ msgstr ""
 #, kde-format
 msgid "Say which field and what it may hold: --name Alter --between 18,120."
 msgstr ""
-"Sagen Sie, welches Feld und was es enthalten darf: --name Alter --between "
+"Angeben, welches Feld und was es enthalten darf: --name Alter --between "
 "18,120."
 
 #: src/cli/CommandsForm.cpp:1006
@@ -1541,7 +1537,7 @@ msgid ""
 "Say which field, what to work out and from where: --name Summe --how sum --"
 "sources Netto,Steuer."
 msgstr ""
-"Sagen Sie, welches Feld, was zu errechnen ist und woraus: --name Summe --how "
+"Angeben, welches Feld, was zu errechnen ist und woraus: --name Summe --how "
 "sum --sources Netto,Steuer."
 
 #: src/cli/CommandsForm.cpp:1044
@@ -1565,15 +1561,15 @@ msgid ""
 "Say which button and what it should do: --name Senden --action submit --"
 "target https://example.org/eingang."
 msgstr ""
-"Sagen Sie, welche Schaltfläche und was sie tun soll: --name Senden --action "
-"submit --target https://example.org/eingang."
+"Angeben, welcher Schalter und was er tun soll: --name Senden --action submit "
+"--target https://example.org/eingang."
 
 #: src/cli/CommandsForm.cpp:1080
 #, kde-format
 msgid "“%1” is not something a button can do. Use reset, submit, goto or url."
 msgstr ""
-"„%1“ ist nichts, was eine Schaltfläche tun kann. Möglich sind reset, submit, "
-"goto oder url."
+"„%1“ ist nichts, was ein Schalter tun kann. Möglich sind reset, submit, goto "
+"oder url."
 
 #: src/cli/CommandsForm.cpp:1088
 #, kde-format
@@ -1584,7 +1580,7 @@ msgstr "Ein Druck auf „%1“ tut das jetzt. Das Ergebnis steht in %2."
 #, kde-format
 msgid "Say which document to take the fields from with --template."
 msgstr ""
-"Sagen Sie mit --template, aus welchem Dokument die Felder zu nehmen sind."
+"Mit --template angeben, aus welchem Dokument die Felder zu nehmen sind."
 
 #: src/cli/CommandsForm.cpp:1100 src/cli/CommandsForm.cpp:1160
 #: src/cli/CommandsLayout.cpp:661 src/cli/Common.cpp:50
@@ -1604,7 +1600,7 @@ msgstr[1] "%1 Felder aus „%2“ genommen und auf „%3“ gesetzt."
 #, kde-format
 msgid "Say where the answers go with -o, in a file ending .fdf, .xfdf or .csv."
 msgstr ""
-"Sagen Sie mit -o, wohin die Antworten gehen, in eine Datei auf .fdf, .xfdf "
+"Mit -o angeben, wohin die Antworten gehen, in eine Datei auf .fdf, .xfdf "
 "oder .csv."
 
 #: src/cli/CommandsForm.cpp:1125 src/ui/ToolFormBuilderDialog.cpp:1663
@@ -1617,8 +1613,8 @@ msgstr "Antworten nach %1 geschrieben. Das Dokument selbst steht nicht darin."
 msgid ""
 "Say which answers to read with --data, in a file ending .fdf, .xfdf or .csv."
 msgstr ""
-"Sagen Sie mit --data, welche Antworten gelesen werden sollen, aus einer "
-"Datei auf .fdf, .xfdf oder .csv."
+"Mit --data angeben, welche Antworten gelesen werden sollen, aus einer Datei "
+"auf .fdf, .xfdf oder .csv."
 
 #: src/cli/CommandsForm.cpp:1141
 #, kde-format
@@ -1635,7 +1631,7 @@ msgstr "field collect benötigt die ausgefüllten Dokumente."
 #: src/cli/CommandsForm.cpp:1154
 #, kde-format
 msgid "Say where the table goes with -o, in a file ending .csv."
-msgstr "Sagen Sie mit -o, wohin die Tabelle geht, in eine Datei auf .csv."
+msgstr "Mit -o angeben, wohin die Tabelle geht, in eine Datei auf .csv."
 
 #: src/cli/CommandsForm.cpp:1169
 #, kde-format
@@ -1697,8 +1693,8 @@ msgstr "Text"
 msgid ""
 "What may be chosen, as A,B,C. For a radio group, one --at goes with each."
 msgstr ""
-"Was gewählt werden kann, als A,B,C. Bei einer Optionsschaltergruppe gehört "
-"zu jedem ein --at."
+"Was gewählt werden kann, als A,B,C. Bei einer Optionsgruppe gehört zu jedem "
+"ein --at."
 
 #: src/cli/CommandsForm.cpp:1194 src/cli/CommandsForm.cpp:1196
 #, kde-format
@@ -1904,8 +1900,7 @@ msgstr "Die Felder, aus denen es errechnet wird, als NAME,NAME,…"
 #: src/cli/CommandsForm.cpp:1238
 #, kde-format
 msgid "What pressing a button does: reset, submit, goto or url."
-msgstr ""
-"Was ein Druck auf eine Schaltfläche bewirkt: reset, submit, goto oder url."
+msgstr "Was ein Druck auf den Schalter bewirkt: reset, submit, goto oder url."
 
 #: src/cli/CommandsForm.cpp:1239
 #, kde-format
@@ -1917,8 +1912,7 @@ msgstr "Was"
 #, kde-format
 msgid "Where the button sends or goes: an address, or a page number."
 msgstr ""
-"Wohin die Schaltfläche sendet oder springt: eine Adresse oder eine "
-"Seitenzahl."
+"Wohin der Schalter sendet oder springt: eine Adresse oder eine Seitenzahl."
 
 #: src/cli/CommandsForm.cpp:1241
 #, kde-format
@@ -1934,7 +1928,7 @@ msgstr "field benötigt eine Aufgabe: %1."
 #: src/cli/CommandsForm.cpp:1320
 #, kde-format
 msgid "“%1” is not something field can do. Try one of: %2."
-msgstr "„%1“ ist nichts, was field tun kann. Versuchen Sie eines von: %2."
+msgstr "„%1“ ist nichts, was field tun kann. Möglich ist eines davon: %2."
 
 #: src/cli/CommandsForm.cpp:1325
 #, kde-format
@@ -1948,7 +1942,7 @@ msgid ""
 "  field button    FILE  -o OUT      Make a button reset, submit, jump or "
 "open a link"
 msgstr ""
-"  field button    DATEI  -o AUS     Eine Schaltfläche zurücksetzen, senden, "
+"  field button    DATEI  -o AUS     Einen Schalter zurücksetzen, senden, "
 "springen oder öffnen lassen"
 
 #: src/cli/CommandsForm.cpp:1327
@@ -2070,18 +2064,18 @@ msgstr ""
 #: src/cli/CommandsImages.cpp:61
 #, kde-format
 msgid "Which page? Give --page, counting from 1."
-msgstr "Welche Seite? Geben Sie --page an, von 1 an gezählt."
+msgstr "Welche Seite? Mit --page angeben, von 1 an gezählt."
 
 #: src/cli/CommandsImages.cpp:79
 #, kde-format
 msgid "Which picture? Give --resource, as “images list” shows it."
-msgstr "Welches Bild? Geben Sie --resource an, so wie „images list“ es zeigt."
+msgstr "Welches Bild? Mit --resource angeben, so wie „images list“ es zeigt."
 
 #: src/cli/CommandsImages.cpp:92
 #, kde-format
 msgid "That would write over the original. Give -o another name."
 msgstr ""
-"Das würde das Original überschreiben. Geben Sie -o einen anderen Namen."
+"Das würde das Original überschreiben. Mit -o einen anderen Namen angeben."
 
 #: src/cli/CommandsImages.cpp:105 src/cli/CommandsTypeset.cpp:432
 #, kde-format
@@ -2225,7 +2219,7 @@ msgid ""
 "JPEG 2000 cannot be written. Use --format jpeg, or --format keep to re-pack "
 "the pixels without any loss at all."
 msgstr ""
-"JPEG 2000 kann nicht geschrieben werden. Verwenden Sie --format jpeg oder --"
+"JPEG 2000 kann nicht geschrieben werden. --format jpeg verwenden oder --"
 "format keep, um die Pixel ganz ohne Verlust neu zu packen."
 
 #: src/cli/CommandsImages.cpp:392
@@ -2279,7 +2273,7 @@ msgid ""
 "How fine should the pictures still be? Give --max-dpi, for example 150 for "
 "reading on screen or 300 for printing."
 msgstr ""
-"Wie fein sollen die Bilder noch sein? Geben Sie --max-dpi an, zum Beispiel "
+"Wie fein sollen die Bilder noch sein? Mit --max-dpi angeben, zum Beispiel "
 "150 zum Lesen am Bildschirm oder 300 zum Drucken."
 
 #: src/cli/CommandsImages.cpp:490
@@ -2295,7 +2289,7 @@ msgstr "Jedes Bild liegt bereits bei %1 dpi oder darunter."
 #: src/cli/CommandsImages.cpp:535
 #, kde-format
 msgid "Which picture should go in? Give --with a file."
-msgstr "Welches Bild soll hinein? Geben Sie --with eine Datei."
+msgstr "Welches Bild soll hinein? Mit --with eine Datei angeben."
 
 #: src/cli/CommandsImages.cpp:539 src/ui/ToolImagesDialog.cpp:599
 #: src/ui/ToolObjectsDialog.cpp:1275
@@ -2316,7 +2310,7 @@ msgstr "Es wurde gedehnt, um diesen Platz genau auszufüllen."
 #: src/cli/CommandsImages.cpp:569
 #, kde-format
 msgid "By how much? Give --angle 90, or any number of degrees."
-msgstr "Um wie viel? Geben Sie --angle 90 an, oder eine beliebige Gradzahl."
+msgstr "Um wie viel? --angle 90 angeben oder eine beliebige Gradzahl."
 
 #: src/cli/CommandsImages.cpp:574
 #, kde-format
@@ -2366,7 +2360,7 @@ msgid ""
 "Nothing to adjust. Try --brightness, --contrast, --gamma, --sharpen, --"
 "despeckle, --auto-levels, --grayscale or --black-white."
 msgstr ""
-"Nichts zu verändern. Versuchen Sie --brightness, --contrast, --gamma, --"
+"Nichts zu verändern. Möglich sind --brightness, --contrast, --gamma, --"
 "sharpen, --despeckle, --auto-levels, --grayscale oder --black-white."
 
 #: src/cli/CommandsImages.cpp:688 src/ui/ToolImagesDialog.cpp:1036
@@ -2384,9 +2378,9 @@ msgid ""
 "picture, measured from its top-left corner, for example 0,0,1,0.5 for the "
 "upper half."
 msgstr ""
-"Welcher Teil soll bleiben? Geben Sie --keep-box X,Y,BREITE,HÖHE als Anteile "
-"des Bildes an, gemessen von seiner linken oberen Ecke, zum Beispiel "
-"0,0,1,0.5 für die obere Hälfte."
+"Welcher Teil soll bleiben? --keep-box X,Y,BREITE,HÖHE als Anteile des Bildes "
+"angeben, gemessen von seiner linken oberen Ecke, zum Beispiel 0,0,1,0.5 für "
+"die obere Hälfte."
 
 #: src/cli/CommandsImages.cpp:718
 #, kde-format
@@ -2413,7 +2407,7 @@ msgstr ""
 #: src/cli/CommandsImages.cpp:765
 #, kde-format
 msgid "Where should the pictures go? Give --out-dir a folder."
-msgstr "Wohin sollen die Bilder? Geben Sie --out-dir einen Ordner."
+msgstr "Wohin sollen die Bilder? Mit --out-dir einen Ordner angeben."
 
 #: src/cli/CommandsImages.cpp:768 src/cli/main.cpp:1049
 #, kde-format
@@ -2551,7 +2545,7 @@ msgstr "images muss wissen, was zu tun ist: %1."
 #: src/cli/CommandsImages.cpp:979
 #, kde-format
 msgid "“images %1” is not something this can do. Try %2."
-msgstr "„images %1“ ist nichts, was hier möglich ist. Versuchen Sie %2."
+msgstr "„images %1“ gibt es hier nicht. Möglich sind %2."
 
 #: src/cli/CommandsImages.cpp:987
 #, kde-format
@@ -2638,8 +2632,8 @@ msgid ""
 "“%1” is not a box. Give X,Y,WIDTH,HEIGHT in points from the bottom-left "
 "corner, or “none” to take the box away."
 msgstr ""
-"„%1“ ist kein Rahmen. Geben Sie X,Y,BREITE,HÖHE in Punkt von der linken "
-"unteren Ecke an oder „none“, um den Rahmen zu entfernen."
+"„%1“ ist kein Rahmen. X,Y,BREITE,HÖHE in Punkt von der linken unteren Ecke "
+"angeben oder „none“, um den Rahmen zu entfernen."
 
 #: src/cli/CommandsLayout.cpp:381
 #, kde-format
@@ -2707,7 +2701,7 @@ msgstr[1] "%1 Seiten auf %2 × %3 mm gebracht."
 #: src/cli/CommandsLayout.cpp:476
 #, kde-format
 msgid "layout unify works on the whole document; leave --pages off."
-msgstr "layout unify wirkt auf das ganze Dokument; lassen Sie --pages weg."
+msgstr "layout unify wirkt auf das ganze Dokument; --pages weglassen."
 
 #: src/cli/CommandsLayout.cpp:502
 #, kde-format
@@ -2730,8 +2724,8 @@ msgid ""
 "“%1” is not a length. Give millimetres, or a number with mm, cm, in or pt "
 "after it."
 msgstr ""
-"„%1“ ist keine Länge. Geben Sie Millimeter an oder eine Zahl mit mm, cm, in "
-"oder pt dahinter."
+"„%1“ ist keine Länge. Millimeter angeben oder eine Zahl mit mm, cm, in oder "
+"pt dahinter."
 
 #: src/cli/CommandsLayout.cpp:537
 #, kde-format
@@ -2753,7 +2747,7 @@ msgstr ""
 #: src/cli/CommandsLayout.cpp:555
 #, kde-format
 msgid "layout marks marks every page; leave --pages off."
-msgstr "layout marks versieht jede Seite mit Marken; lassen Sie --pages weg."
+msgstr "layout marks versieht jede Seite mit Marken; --pages weglassen."
 
 #: src/cli/CommandsLayout.cpp:560
 #, kde-format
@@ -2770,8 +2764,8 @@ msgid ""
 "“%1” is not a length. Give points, or a number with mm, cm, in or pt after "
 "it."
 msgstr ""
-"„%1“ ist keine Länge. Geben Sie Punkt an oder eine Zahl mit mm, cm, in oder "
-"pt dahinter."
+"„%1“ ist keine Länge. Punkt angeben oder eine Zahl mit mm, cm, in oder pt "
+"dahinter."
 
 #: src/cli/CommandsLayout.cpp:594 src/ui/ToolLayoutDialog.cpp:909
 #, kde-format
@@ -2808,8 +2802,8 @@ msgid ""
 "“%1” is not a place to cut. Give a fraction between 0 and 1, for example 0.5 "
 "for the middle."
 msgstr ""
-"„%1“ ist keine Stelle zum Schneiden. Geben Sie einen Anteil zwischen 0 und 1 "
-"an, zum Beispiel 0.5 für die Mitte."
+"„%1“ ist keine Stelle zum Schneiden. Einen Anteil zwischen 0 und 1 angeben, "
+"zum Beispiel 0.5 für die Mitte."
 
 #: src/cli/CommandsLayout.cpp:643
 #, kde-format
@@ -2869,8 +2863,8 @@ msgid ""
 "The page is tiled at its own size. Resize it first for a bigger poster. "
 "Wrote %1."
 msgstr ""
-"Die Seite wird in ihrer eigenen Größe aufgeteilt. Vergrößern Sie sie vorher "
-"für ein größeres Poster. %1 geschrieben."
+"Die Seite wird in ihrer eigenen Größe aufgeteilt. Für ein größeres Poster "
+"die Seite vorher vergrößern. %1 geschrieben."
 
 #: src/cli/CommandsLayout.cpp:742
 #, kde-format
@@ -2878,8 +2872,8 @@ msgid ""
 "Reordered into printer's spreads. Run “nup --per-sheet 2” over this to get "
 "the sheets themselves."
 msgstr ""
-"In Druckerdoppelseiten umsortiert. Lassen Sie „nup --per-sheet 2“ darüber "
-"laufen, um die Bogen selbst zu erhalten."
+"In Druckerdoppelseiten umsortiert. „nup --per-sheet 2“ darüber laufen "
+"lassen, um die Bogen selbst zu erhalten."
 
 #: src/cli/CommandsLayout.cpp:744 src/ui/ToolLayoutDialog.cpp:1161
 #, kde-format
@@ -2961,7 +2955,7 @@ msgstr[1] "%1 Seiten malen nichts: %2"
 #: src/cli/CommandsLayout.cpp:890
 #, kde-format
 msgid "Take them out with “layout remove --pages %1”."
-msgstr "Mit „layout remove --pages %1“ entfernen Sie sie."
+msgstr "Mit „layout remove --pages %1“ entfernen."
 
 #: src/cli/CommandsLayout.cpp:904
 #, kde-format
@@ -3335,8 +3329,8 @@ msgid ""
 "“%1” is not an object number. Use the number in the first column of “objects "
 "list”."
 msgstr ""
-"„%1“ ist keine Objektnummer. Nehmen Sie die Zahl aus der ersten Spalte von "
-"„objects list“."
+"„%1“ ist keine Objektnummer. Die Zahl aus der ersten Spalte von „objects "
+"list“ nehmen."
 
 #: src/cli/CommandsObjects.cpp:238
 #, kde-format
@@ -3344,8 +3338,8 @@ msgid ""
 "Say which object with --object. “objects list FILE --page N” prints the "
 "numbers."
 msgstr ""
-"Sagen Sie mit --object, welches Objekt. „objects list DATEI --page N“ gibt "
-"die Nummern aus."
+"Mit --object angeben, welches Objekt. „objects list DATEI --page N“ gibt die "
+"Nummern aus."
 
 #: src/cli/CommandsObjects.cpp:279
 #, kde-format
@@ -3409,7 +3403,7 @@ msgid ""
 "Give a point with --at X,Y, or an area with --area X,Y,WIDTH,HEIGHT, in "
 "points from the bottom-left corner of the page."
 msgstr ""
-"Geben Sie mit --at X,Y einen Punkt an oder mit --area X,Y,BREITE,HÖHE einen "
+"Mit --at X,Y einen Punkt angeben oder mit --area X,Y,BREITE,HÖHE einen "
 "Bereich, in Punkt von der linken unteren Ecke der Seite."
 
 #: src/cli/CommandsObjects.cpp:434 src/cli/CommandsObjects.cpp:600
@@ -3452,8 +3446,8 @@ msgstr[1] "%1 Objekte, das oberste zuerst."
 msgid ""
 "Say how far with --by DX,DY, in points. Positive numbers move right and up."
 msgstr ""
-"Sagen Sie mit --by DX,DY, wie weit, in Punkt. Positive Zahlen verschieben "
-"nach rechts und nach oben."
+"Mit --by DX,DY angeben, wie weit, in Punkt. Positive Zahlen verschieben nach "
+"rechts und nach oben."
 
 #: src/cli/CommandsObjects.cpp:571
 #, kde-format
@@ -3461,7 +3455,7 @@ msgid ""
 "Say how much with --by FACTOR, e.g. 1.5, or --by FX,FY to stretch one way "
 "only."
 msgstr ""
-"Sagen Sie mit --by FAKTOR, wie stark, z. B. 1.5, oder mit --by FX,FY, um nur "
+"Mit --by FAKTOR angeben, wie stark, z. B. 1.5, oder mit --by FX,FY, um nur "
 "in eine Richtung zu dehnen."
 
 #: src/cli/CommandsObjects.cpp:575
@@ -3473,7 +3467,7 @@ msgstr "Ein Faktor von null würde das Objekt zu nichts zusammendrücken."
 #, kde-format
 msgid "Say how far round with --angle DEGREES, counter-clockwise."
 msgstr ""
-"Sagen Sie mit --angle GRAD, wie weit gedreht wird, gegen den Uhrzeigersinn."
+"Mit --angle GRAD angeben, wie weit gedreht wird, gegen den Uhrzeigersinn."
 
 #: src/cli/CommandsObjects.cpp:709 src/cli/CommandsObjects.cpp:835
 #, kde-format
@@ -3483,15 +3477,14 @@ msgstr "„%1“ ist keine Linienstärke in Punkt."
 #: src/cli/CommandsObjects.cpp:714
 #, kde-format
 msgid "Say what to change: --fill, --stroke or --line-width."
-msgstr ""
-"Sagen Sie, was geändert werden soll: --fill, --stroke oder --line-width."
+msgstr "Angeben, was geändert werden soll: --fill, --stroke oder --line-width."
 
 #: src/cli/CommandsObjects.cpp:780
 #, kde-format
 msgid ""
 "Say what to insert with --shape: text, image, rectangle, ellipse or line."
 msgstr ""
-"Sagen Sie mit --shape, was eingefügt wird: text, image, rectangle, ellipse "
+"Mit --shape angeben, was eingefügt wird: text, image, rectangle, ellipse "
 "oder line."
 
 #: src/cli/CommandsObjects.cpp:785
@@ -3500,13 +3493,13 @@ msgid ""
 "Say where with --rect X,Y,WIDTH,HEIGHT, in points from the bottom-left "
 "corner of the page."
 msgstr ""
-"Sagen Sie mit --rect X,Y,BREITE,HÖHE, wohin, in Punkt von der linken unteren "
+"Mit --rect X,Y,BREITE,HÖHE angeben, wohin, in Punkt von der linken unteren "
 "Ecke der Seite."
 
 #: src/cli/CommandsObjects.cpp:796
 #, kde-format
 msgid "Say what it should read with --text."
-msgstr "Sagen Sie mit --text, was dastehen soll."
+msgstr "Mit --text angeben, was dastehen soll."
 
 #: src/cli/CommandsObjects.cpp:806
 #, kde-format
@@ -3516,7 +3509,7 @@ msgstr "„%1“ ist keine Textgröße in Punkt."
 #: src/cli/CommandsObjects.cpp:814
 #, kde-format
 msgid "Say which picture with --image."
-msgstr "Sagen Sie mit --image, welches Bild."
+msgstr "Mit --image angeben, welches Bild."
 
 #: src/cli/CommandsObjects.cpp:818 src/cli/main.cpp:414
 #: src/ui/SignEditor.cpp:271 src/ui/WatermarkEditor.cpp:330
@@ -3656,8 +3649,8 @@ msgid ""
 "Say what to do: objects list, at, move, scale, rotate, delete, restyle, "
 "insert or limits."
 msgstr ""
-"Sagen Sie, was geschehen soll: objects list, at, move, scale, rotate, "
-"delete, restyle, insert oder limits."
+"Angeben, was geschehen soll: objects list, at, move, scale, rotate, delete, "
+"restyle, insert oder limits."
 
 #: src/cli/CommandsObjects.cpp:968
 #, kde-format
@@ -3710,8 +3703,8 @@ msgid ""
 "There is no profile called “%1”. Use one of these, or the path to a saved "
 "profile: %2"
 msgstr ""
-"Es gibt kein Profil namens „%1“. Nehmen Sie eines davon oder den Pfad zu "
-"einem gespeicherten Profil: %2"
+"Es gibt kein Profil namens „%1“. Eines davon nehmen oder den Pfad zu einem "
+"gespeicherten Profil: %2"
 
 #: src/cli/CommandsPreflight.cpp:174
 #, kde-format
@@ -3877,8 +3870,8 @@ msgid ""
 "Check against one with “preflight FILE --profile ID”, or against a profile "
 "of your own by giving its file name instead."
 msgstr ""
-"Prüfen Sie dagegen mit „preflight DATEI --profile ID“ oder gegen ein eigenes "
-"Profil, indem Sie stattdessen dessen Dateinamen angeben."
+"Mit „preflight DATEI --profile ID“ dagegen prüfen oder gegen ein eigenes "
+"Profil, indem stattdessen dessen Dateiname angegeben wird."
 
 #: src/cli/CommandsPreflight.cpp:570
 #, kde-format
@@ -3952,8 +3945,7 @@ msgstr "„%1“ nach %2 geschrieben."
 #: src/cli/CommandsPreflight.cpp:664
 #, kde-format
 msgid "Edit it and check against it with “preflight FILE --profile %1”."
-msgstr ""
-"Bearbeiten Sie es und prüfen Sie dagegen mit „preflight DATEI --profile %1“."
+msgstr "Es bearbeiten und mit „preflight DATEI --profile %1“ dagegen prüfen."
 
 #: src/cli/CommandsPreflight.cpp:673
 #, kde-format
@@ -4457,7 +4449,7 @@ msgstr[1] "%1 Lesezeichen gefunden:"
 #: src/cli/main.cpp:264
 #, kde-format
 msgid "“%1” is not a size. Try 5M or 500k."
-msgstr "„%1“ ist keine Größenangabe. Versuchen Sie 5M oder 500k."
+msgstr "„%1“ ist keine Größenangabe. Möglich sind 5M oder 500k."
 
 #: src/cli/main.cpp:280
 #, kde-format
@@ -4852,8 +4844,8 @@ msgid ""
 "Ghostscript is not installed, and it does the conversion. Install the "
 "“ghostscript” package and try again."
 msgstr ""
-"Ghostscript ist nicht installiert, und es erledigt die Umwandlung. "
-"Installieren Sie das Paket „ghostscript“ und versuchen Sie es erneut."
+"Ghostscript ist nicht installiert, und es erledigt die Umwandlung. Das Paket "
+"„ghostscript“ installieren und es erneut versuchen."
 
 #: src/cli/main.cpp:888
 #, kde-format
@@ -5219,8 +5211,8 @@ msgstr ""
 #, kde-format
 msgid "Say what to do: --highlight, --note, --clear, --flatten or --list."
 msgstr ""
-"Sagen Sie, was geschehen soll: --highlight, --note, --clear, --flatten oder "
-"--list."
+"Angeben, was geschehen soll: --highlight, --note, --clear, --flatten oder --"
+"list."
 
 #: src/cli/main.cpp:1645
 #, kde-format
@@ -5270,7 +5262,7 @@ msgstr "Für redact wird eine Ausgabedatei benötigt (-o)."
 #: src/cli/main.cpp:1722
 #, kde-format
 msgid "Give at least one area, e.g. --area 1:72,700,120,16"
-msgstr "Geben Sie mindestens einen Bereich an, z. B. --area 1:72,700,120,16"
+msgstr "Mindestens einen Bereich angeben, z. B. --area 1:72,700,120,16"
 
 #: src/cli/main.cpp:1772
 #, kde-format
@@ -6070,8 +6062,8 @@ msgid ""
 "The files carried inside the document were dropped. Convert to PDF/A-3 if "
 "they matter."
 msgstr ""
-"Die im Dokument mitgeführten Dateien wurden verworfen. Wandeln Sie in PDF/"
-"A-3 um, wenn sie wichtig sind."
+"Die im Dokument mitgeführten Dateien wurden verworfen. In PDF/A-3 umwandeln, "
+"wenn sie wichtig sind."
 
 #: src/core/Archival.cpp:379
 #, kde-format
@@ -6158,7 +6150,7 @@ msgid ""
 "archiving. Install the “ghostscript” package."
 msgstr ""
 "Ghostscript ist nicht installiert, daher können Dokumente nicht für die "
-"Archivierung umgewandelt werden. Installieren Sie das Paket „ghostscript“."
+"Archivierung umgewandelt werden. Das Paket „ghostscript“ installieren."
 
 #: src/core/Archival.cpp:630 src/core/Convert.cpp:2343
 #, kde-format
@@ -6344,8 +6336,8 @@ msgid ""
 "Ghostscript is not installed, so this cannot be measured. Install the "
 "“ghostscript” package."
 msgstr ""
-"Ghostscript ist nicht installiert, daher lässt sich das nicht messen. "
-"Installieren Sie das Paket „ghostscript“."
+"Ghostscript ist nicht installiert, daher lässt sich das nicht messen. Das "
+"Paket „ghostscript“ installieren."
 
 #: src/core/ColourTools.cpp:2965
 #, kde-format
@@ -6375,8 +6367,8 @@ msgstr ""
 "Ghostscript hat das ganze Dokument gewandelt, weil kein ICC-Profil "
 "bereitstand, um es an Ort und Stelle zu tun. Jede Seite wurde neu "
 "geschrieben, das Ergebnis ist die eigene Umwandlung von Ghostscript und "
-"nicht ein von Ihnen gewähltes Profil, und die Datei wurde von vorn bis "
-"hinten neu aufgebaut statt bearbeitet."
+"nicht ein selbst gewähltes Profil, und die Datei wurde von vorn bis hinten "
+"neu aufgebaut statt bearbeitet."
 
 #: src/core/ColourTools.cpp:3271
 #, kde-format
@@ -6387,7 +6379,7 @@ msgid ""
 msgstr ""
 "Nur einzelne Seiten nach CMYK zu wandeln braucht ein ICC-Profil, denn der "
 "einzige andere Weg ist Ghostscript, und das schreibt das ganze Dokument neu. "
-"Geben Sie ein CMYK-Profil an oder wandeln Sie alle Seiten."
+"Ein CMYK-Profil angeben oder alle Seiten wandeln."
 
 #: src/core/ColourTools.cpp:3283
 #, kde-format
@@ -6417,7 +6409,7 @@ msgid ""
 msgstr ""
 "CMYK wurde mit der Formel nach RGB gewandelt, die die PDF-Spezifikation "
 "festlegt. Sie ist vorhersehbar und braucht kein Profil, ist aber kein "
-"Farbmanagement. Geben Sie dafür ein ICC-Profil an."
+"Farbmanagement. Dafür ein ICC-Profil angeben."
 
 #: src/core/ColourTools.cpp:3301
 #, kde-format
@@ -6495,8 +6487,8 @@ msgid ""
 "Nothing was asked for: name an ink to rename or one to turn into process "
 "colour."
 msgstr ""
-"Es wurde nichts verlangt: Geben Sie eine Druckfarbe zum Umbenennen an oder "
-"eine, die in Prozessfarbe umgewandelt werden soll."
+"Es wurde nichts verlangt: eine Druckfarbe zum Umbenennen angeben oder eine, "
+"die in Prozessfarbe umgewandelt werden soll."
 
 #: src/core/ColourTools.cpp:3492
 #, kde-format
@@ -6517,7 +6509,7 @@ msgid ""
 "Ghostscript. Install the “ghostscript” package."
 msgstr ""
 "Die Farbdeckung wird gemessen, indem jede Seite in CMYK gerendert wird, und "
-"das braucht Ghostscript. Installieren Sie das Paket „ghostscript“."
+"das braucht Ghostscript. Das Paket „ghostscript“ installieren."
 
 #: src/core/ColourTools.cpp:3547 src/core/ColourTools.cpp:3621
 #, kde-format
@@ -6535,8 +6527,8 @@ msgid ""
 "A separations preview is produced by Ghostscript. Install the “ghostscript” "
 "package."
 msgstr ""
-"Die Vorschau der Farbauszüge erzeugt Ghostscript. Installieren Sie das Paket "
-"„ghostscript“."
+"Die Vorschau der Farbauszüge erzeugt Ghostscript. Das Paket „ghostscript“ "
+"installieren."
 
 #: src/core/ColourTools.cpp:3649
 #, kde-format
@@ -6568,8 +6560,8 @@ msgid ""
 msgstr ""
 "Die Umwandlung nach CMYK braucht ein ICC-Profil. Ohne eines wandelt "
 "stattdessen Ghostscript das ganze Dokument, was eine Seitenauswahl nicht "
-"berücksichtigen kann und die Umwandlung von Ghostscript statt einer von "
-"Ihnen gewählten liefert."
+"berücksichtigen kann und die Umwandlung von Ghostscript statt einer selbst "
+"gewählten liefert."
 
 #: src/core/ColourTools.cpp:3709
 #, kde-format
@@ -6772,8 +6764,8 @@ msgid ""
 "“ghostscript” package, or use lossless compression."
 msgstr ""
 "Ghostscript ist nicht installiert, daher können Bilder nicht "
-"heruntergerechnet werden. Installieren Sie das Paket „ghostscript“ oder "
-"nutzen Sie die verlustfreie Komprimierung."
+"heruntergerechnet werden. Das Paket „ghostscript“ installieren oder die "
+"verlustfreie Komprimierung nutzen."
 
 #: src/core/Compressor.cpp:261
 #, kde-format
@@ -6862,7 +6854,7 @@ msgid ""
 "SVG. Install the “poppler-utils” package."
 msgstr ""
 "Weder pdftocairo noch Ghostscript ist installiert, daher können Seiten nicht "
-"als SVG gespeichert werden. Installieren Sie das Paket „poppler-utils“."
+"als SVG gespeichert werden. Das Paket „poppler-utils“ installieren."
 
 #: src/core/Convert.cpp:2241
 #, kde-format
@@ -6890,7 +6882,7 @@ msgid ""
 "Install the “ghostscript” package."
 msgstr ""
 "Ghostscript ist nicht installiert, daher können Dokumente nicht für den "
-"Druck vorbereitet werden. Installieren Sie das Paket „ghostscript“."
+"Druck vorbereitet werden. Das Paket „ghostscript“ installieren."
 
 #: src/core/Convert.cpp:2352
 #, kde-format
@@ -6900,9 +6892,8 @@ msgid ""
 "name the profile your printer asked for."
 msgstr ""
 "Auf diesem System wurde kein CMYK-Druckprofil gefunden, daher hat die Datei "
-"keinen Output Intent und ist noch kein PDF/X. Installieren Sie das Paket "
-"„icc-profiles-free“ oder geben Sie das Profil an, das Ihre Druckerei "
-"verlangt hat."
+"keinen Output Intent und ist noch kein PDF/X. Das Paket „icc-profiles-free“ "
+"installieren oder das Profil angeben, das die Druckerei verlangt hat."
 
 #: src/core/Convert.cpp:2359
 #, kde-format
@@ -6937,8 +6928,8 @@ msgid ""
 "rather than in whatever the press happens to have."
 msgstr ""
 "Die Schriften wurden eingebettet, die Druckerei setzt den Text daher in den "
-"von Ihnen gewählten Schnitten und nicht in dem, was die Druckmaschine gerade "
-"zur Hand hat."
+"gewählten Schnitten und nicht in dem, was die Druckmaschine gerade zur Hand "
+"hat."
 
 #: src/core/Convert.cpp:2477
 #, kde-format
@@ -7033,7 +7024,7 @@ msgid ""
 "Run the page through text recognition first."
 msgstr ""
 "Text, der Teil eines gescannten Bildes ist, ist kein Text und kommt nicht "
-"heraus. Lassen Sie die Seite zuerst durch die Texterkennung laufen."
+"heraus. Die Seite zuerst durch die Texterkennung laufen lassen."
 
 #: src/core/Convert.cpp:2604
 #, kde-format
@@ -7056,8 +7047,8 @@ msgid ""
 "tables."
 msgstr ""
 "Eine Tabelle liest der Textexport Spalte für Spalte, denn ihre Spalten sehen "
-"genauso aus wie die Spalten einer Seite. Für Tabellen verwenden Sie die "
-"Tabellenerkennung."
+"genauso aus wie die Spalten einer Seite. Für Tabellen die Tabellenerkennung "
+"verwenden."
 
 #: src/core/Convert.cpp:2609
 #, kde-format
@@ -7114,8 +7105,8 @@ msgid ""
 "probability. Check the result before relying on it."
 msgstr ""
 "Die Verlässlichkeit ist ein Urteil darüber, wie tabellenartig die Geometrie "
-"ist, keine Wahrscheinlichkeit. Prüfen Sie das Ergebnis, bevor Sie sich "
-"darauf verlassen."
+"ist, keine Wahrscheinlichkeit. Das Ergebnis prüfen, bevor man sich darauf "
+"verlässt."
 
 #: src/core/Convert.cpp:2621
 #, kde-format
@@ -7125,7 +7116,7 @@ msgid ""
 msgstr ""
 "Die PDF/X-Umwandlung ist die von Ghostscript, und dies ist keine Preflight-"
 "Prüfung. Eine Datei, die dabei herauskommt, muss immer noch bestehen, was "
-"Ihre Druckerei prüft."
+"die Druckerei prüft."
 
 #: src/core/Convert.cpp:2623
 #, kde-format
@@ -7863,8 +7854,8 @@ msgid ""
 "guarantee that what arrives back is valid."
 msgstr ""
 "Andere Leseprogramme als Acrobat führen davon unterschiedlich viel aus, "
-"manche gar nichts. Nehmen Sie das Verhalten als Bequemlichkeit, nie als "
-"Gewähr dafür, dass gültig ist, was zurückkommt."
+"manche gar nichts. Das Verhalten als Bequemlichkeit nehmen, nie als Gewähr "
+"dafür, dass gültig ist, was zurückkommt."
 
 #: src/core/FormBuilder.cpp:1296 src/core/FormBuilder.cpp:1564
 #: src/core/FormBuilder.cpp:1706
@@ -7931,8 +7922,8 @@ msgstr "Eine Berechnung braucht mindestens ein Feld, mit dem sie rechnen kann."
 #, kde-format
 msgid "A button that submits a form needs an address to submit it to."
 msgstr ""
-"Eine Schaltfläche, die ein Formular absendet, braucht eine Adresse, an die "
-"sie es sendet."
+"Ein Schalter, der ein Formular absendet, braucht eine Adresse, an die er es "
+"sendet."
 
 #: src/core/FormBuilder.cpp:1942
 #, kde-format
@@ -7960,8 +7951,8 @@ msgid ""
 "This document already has a field called “%1”; remove it first, or the form "
 "would end up with two fields of one name."
 msgstr ""
-"Dieses Dokument hat bereits ein Feld namens „%1“; entfernen Sie es zuerst, "
-"sonst hätte das Formular am Ende zwei Felder gleichen Namens."
+"Dieses Dokument hat bereits ein Feld namens „%1“; es zuerst entfernen, sonst "
+"hätte das Formular am Ende zwei Felder gleichen Namens."
 
 #: src/core/FormBuilder.cpp:2082
 #, kde-format
@@ -7979,8 +7970,8 @@ msgstr ""
 msgid ""
 "“%1” is not a kind of data file this can write. Use .fdf, .xfdf or .csv."
 msgstr ""
-"„%1“ ist keine Art von Datendatei, die hier geschrieben werden kann. "
-"Verwenden Sie .fdf, .xfdf oder .csv."
+"„%1“ ist keine Art von Datendatei, die hier geschrieben werden kann. Möglich "
+"sind .fdf, .xfdf oder .csv."
 
 #: src/core/FormBuilder.cpp:2233
 #, kde-format
@@ -7991,8 +7982,8 @@ msgstr "„%1“ hat eine Kopfzeile, aber keine Daten darunter."
 #, kde-format
 msgid "“%1” is not a kind of data file this can read. Use .fdf, .xfdf or .csv."
 msgstr ""
-"„%1“ ist keine Art von Datendatei, die hier gelesen werden kann. Verwenden "
-"Sie .fdf, .xfdf oder .csv."
+"„%1“ ist keine Art von Datendatei, die hier gelesen werden kann. Möglich "
+"sind .fdf, .xfdf oder .csv."
 
 #: src/core/FormBuilder.cpp:2253
 #, kde-format
@@ -8424,7 +8415,7 @@ msgid ""
 "more than the last of the detail."
 msgstr ""
 "Pixel anzupassen kodiert sie in hoher Qualität neu; ein geschärfter Scan "
-"kann danach größer sein als zuvor. Komprimieren Sie hinterher neu, wenn die "
+"kann danach größer sein als zuvor. Hinterher neu komprimieren, wenn die "
 "Größe wichtiger ist als das letzte bisschen Detail."
 
 #: src/core/ImageEdit.cpp:2268
@@ -8489,8 +8480,8 @@ msgid ""
 "The margins and gaps leave no room on the sheet. Reduce them or use a larger "
 "sheet."
 msgstr ""
-"Ränder und Abstände lassen keinen Platz auf dem Blatt. Verringern Sie sie "
-"oder wählen Sie ein größeres Blatt."
+"Ränder und Abstände lassen keinen Platz auf dem Blatt. Beide verringern oder "
+"ein größeres Blatt wählen."
 
 #: src/core/Overlay.cpp:202 src/core/Overlay.cpp:371
 #, kde-format
@@ -10020,8 +10011,7 @@ msgid ""
 "the original still travels with the file. Mark it everywhere it appears."
 msgstr ""
 "Ein bearbeitetes Bild wird auch an einer nicht markierten Stelle gezeigt, "
-"das Original bleibt also in der Datei. Markieren Sie es überall, wo es "
-"vorkommt."
+"das Original bleibt also in der Datei. Es überall markieren, wo es vorkommt."
 
 #: src/core/Redaction.cpp:1140
 #, kde-format
@@ -10144,8 +10134,8 @@ msgid ""
 "Text recognition could not be started for “%1”. Install the matching "
 "tesseract-ocr language package."
 msgstr ""
-"Die Texterkennung für „%1“ konnte nicht gestartet werden. Installieren Sie "
-"das passende tesseract-ocr-Sprachpaket."
+"Die Texterkennung für „%1“ konnte nicht gestartet werden. Das passende "
+"tesseract-ocr-Sprachpaket installieren."
 
 #: src/core/ScanProcessor.cpp:339
 #, kde-format
@@ -10897,9 +10887,8 @@ msgid ""
 "Drag the edges of the bright area to set what stays visible. The trim "
 "applies to every page in the chosen range, not only this one."
 msgstr ""
-"Ziehen Sie die Kanten des hellen Bereichs, um festzulegen, was sichtbar "
-"bleibt. Der Beschnitt gilt für jede Seite im gewählten Bereich, nicht nur "
-"für diese."
+"Die Kanten des hellen Bereichs ziehen, um festzulegen, was sichtbar bleibt. "
+"Der Beschnitt gilt für jede Seite im gewählten Bereich, nicht nur für diese."
 
 #: src/ui/CropEditor.cpp:102 src/ui/DocumentDialogs.cpp:29
 #: src/ui/NumberEditor.cpp:119 src/ui/OperationDialogs.cpp:47
@@ -10998,8 +10987,7 @@ msgid ""
 "Measured across %1 pages. Adjust anything that looks too tight before "
 "trimming."
 msgstr ""
-"Über %1 Seiten gemessen. Passen Sie an, was zu knapp wirkt, bevor Sie "
-"beschneiden."
+"Über %1 Seiten gemessen. Vor dem Beschneiden anpassen, was zu knapp wirkt."
 
 #: src/ui/CropEditor.cpp:245
 #, kde-format
@@ -11071,7 +11059,7 @@ msgid ""
 "that saving does not announce which tool you used."
 msgstr ""
 "Die Software, die die Datei geschrieben hat. Wird unverändert übernommen, "
-"damit das Speichern nicht verrät, welches Werkzeug Sie benutzt haben."
+"damit das Speichern nicht verrät, welches Werkzeug benutzt wurde."
 
 #: src/ui/DocumentDialogs.cpp:77 src/ui/DocumentProperties.cpp:710
 #: src/ui/ToolTypesetDialog.cpp:468
@@ -11197,7 +11185,7 @@ msgid ""
 "The pages themselves are not touched. Nothing changes on disk until you save."
 msgstr ""
 "Die Seiten selbst bleiben unangetastet. Auf der Festplatte ändert sich "
-"nichts, bis Sie speichern."
+"nichts bis zum Speichern."
 
 #: src/ui/DocumentDialogs.cpp:181
 #, kde-format
@@ -11287,7 +11275,7 @@ msgid ""
 "Keep the password somewhere safe. Without it the document cannot be opened "
 "again, not by this application and not by any other."
 msgstr ""
-"Bewahren Sie das Passwort sicher auf. Ohne es lässt sich das Dokument nicht "
+"Das Passwort sicher aufbewahren. Ohne es lässt sich das Dokument nicht "
 "wieder öffnen, weder mit diesem Programm noch mit einem anderen."
 
 #: src/ui/DocumentDialogs.cpp:315
@@ -12058,8 +12046,7 @@ msgstr ""
 "Auswahlliste, die auch Eingaben annimmt, gehören nicht zu dem, was aus einem "
 "Formular zurückgelesen wird; diese drei beginnen deshalb ohne Häkchen, was "
 "auch immer im Dokument steht. Jede Änderung an einem Feld schreibt alle "
-"seine Merkmale neu, kreuzen Sie sie hier also wieder an, wenn das Feld sie "
-"hatte."
+"seine Merkmale neu, sie hier also wieder ankreuzen, wenn das Feld sie hatte."
 
 #: src/ui/FormDesignOverlay.cpp:498
 #, kde-format
@@ -12455,8 +12442,8 @@ msgid ""
 "Click a box on the page to type into it. Dashed grey boxes are locked by the "
 "form."
 msgstr ""
-"Klicken Sie auf ein Feld auf der Seite, um hineinzuschreiben. Gestrichelte "
-"graue Felder sind vom Formular gesperrt."
+"Auf ein Feld auf der Seite klicken, um hineinzuschreiben. Gestrichelte graue "
+"Felder sind vom Formular gesperrt."
 
 #: src/ui/FormEditor.cpp:144
 #, kde-format
@@ -12644,9 +12631,8 @@ msgid ""
 "Nothing is selected. Click a word, a form field, a comment or a picture in "
 "the document, and its properties appear here."
 msgstr ""
-"Es ist nichts ausgewählt. Klicken Sie im Dokument auf ein Wort, ein "
-"Formularfeld, einen Kommentar oder ein Bild, und seine Eigenschaften "
-"erscheinen hier."
+"Es ist nichts ausgewählt. Im Dokument auf ein Wort, ein Formularfeld, einen "
+"Kommentar oder ein Bild klicken, und seine Eigenschaften erscheinen hier."
 
 #: src/ui/InspectorDock.cpp:211
 #, kde-format
@@ -13064,8 +13050,8 @@ msgid ""
 "Writes what you have typed and dragged into the document, as one undo step. "
 "Saving does this for you."
 msgstr ""
-"Schreibt, was Sie getippt und gezogen haben, als einen Rückgängig-Schritt in "
-"das Dokument. Beim Speichern geschieht das von selbst."
+"Schreibt das Getippte und Gezogene als einen Rückgängig-Schritt in das "
+"Dokument. Beim Speichern geschieht das von selbst."
 
 #: src/ui/MainWindow.cpp:941
 #, kde-format
@@ -13547,7 +13533,7 @@ msgstr "Passwort kann nicht gesetzt werden"
 #: src/ui/MainWindow.cpp:2159
 #, kde-format
 msgid "Save the document once before protecting it."
-msgstr "Speichern Sie das Dokument einmal, bevor Sie es schützen."
+msgstr "Das Dokument einmal speichern, bevor es geschützt wird."
 
 #: src/ui/MainWindow.cpp:2189
 #, kde-format
@@ -13718,8 +13704,8 @@ msgid ""
 "No recognition languages are installed. Install a package such as “tesseract-"
 "ocr-deu” and try again."
 msgstr ""
-"Es sind keine Erkennungssprachen installiert. Installieren Sie zum Beispiel "
-"„tesseract-ocr-deu“ und versuchen Sie es erneut."
+"Es sind keine Erkennungssprachen installiert. Ein Paket wie „tesseract-ocr-"
+"deu“ installieren und es erneut versuchen."
 
 #: src/ui/MainWindow.cpp:2499
 #, kde-format
@@ -13765,7 +13751,7 @@ msgid ""
 "until you save."
 msgstr ""
 "Damit werden alle Seiten aus dem Dokument entfernt. Die Datei auf der "
-"Festplatte bleibt unangetastet, bis Sie speichern."
+"Festplatte bleibt unangetastet bis zum Speichern."
 
 #: src/ui/MainWindow.cpp:2590
 #, kde-format
@@ -13867,7 +13853,7 @@ msgstr "Ungesicherte Änderungen"
 #: src/ui/MainWindow.cpp:2915
 #, kde-format
 msgid "Keep what you have done here?"
-msgstr "Möchten Sie behalten, was Sie hier gemacht haben?"
+msgstr "Behalten, was hier gemacht wurde?"
 
 #: src/ui/MainWindow.cpp:2916
 #, kde-format
@@ -14486,8 +14472,8 @@ msgid ""
 "“ghostscript” package, or choose the lossless level."
 msgstr ""
 "Ghostscript ist nicht installiert, daher können Bilder nicht verkleinert "
-"werden. Installieren Sie das Paket „ghostscript“ oder wählen Sie die "
-"verlustfreie Stufe."
+"werden. Das Paket „ghostscript“ installieren oder die verlustfreie Stufe "
+"wählen."
 
 #: src/ui/OperationDialogs.cpp:287
 #, kde-format
@@ -14689,10 +14675,10 @@ msgid ""
 "appears to have, or add a bookmark for the page you are looking at and drag "
 "entries onto one another to nest them."
 msgstr ""
-"Dieses Dokument hat kein Inhaltsverzeichnis. Erstellen Sie eines aus den "
-"Überschriften, die der Text zu haben scheint, oder fügen Sie ein Lesezeichen "
-"für die Seite hinzu, die Sie gerade ansehen, und ziehen Sie Einträge "
-"aufeinander, um sie zu verschachteln."
+"Dieses Dokument hat kein Inhaltsverzeichnis. Eines aus den Überschriften "
+"erstellen, die der Text zu haben scheint, oder ein Lesezeichen für die "
+"gerade angezeigte Seite hinzufügen und Einträge aufeinander ziehen, um sie "
+"zu verschachteln."
 
 #: src/ui/OutlineDock.cpp:195
 #, kde-format
@@ -14791,13 +14777,12 @@ msgid_plural ""
 "because nothing in the file says."
 msgstr[0] ""
 "Ein Lesezeichen wurde aus etwas gemacht, das wie eine Überschrift aussieht. "
-"Lesen Sie es vor dem Speichern durch: Welcher Absatz eine Überschrift ist, "
-"wurde allein aus der Schriftgröße erschlossen, denn nichts in der Datei sagt "
-"es."
-msgstr[1] ""
-"%1 Lesezeichen wurden aus dem gemacht, was wie Überschriften aussieht. Lesen "
-"Sie sie vor dem Speichern durch: Welcher Absatz eine Überschrift ist, wurde "
+"Vor dem Speichern durchlesen: Welcher Absatz eine Überschrift ist, wurde "
 "allein aus der Schriftgröße erschlossen, denn nichts in der Datei sagt es."
+msgstr[1] ""
+"%1 Lesezeichen wurden aus dem gemacht, was wie Überschriften aussieht. Vor "
+"dem Speichern durchlesen: Welcher Absatz eine Überschrift ist, wurde allein "
+"aus der Schriftgröße erschlossen, denn nichts in der Datei sagt es."
 
 #: src/ui/OutlineDock.cpp:562
 #, kde-format
@@ -15490,8 +15475,7 @@ msgstr ""
 msgctxt "@info"
 msgid "Nothing is chosen to copy. Click something on the page first."
 msgstr ""
-"Es ist nichts zum Kopieren gewählt. Klicken Sie zuerst etwas auf der Seite "
-"an."
+"Es ist nichts zum Kopieren gewählt. Zuerst etwas auf der Seite anklicken."
 
 #: src/ui/PageView.cpp:2220
 #, kde-format
@@ -15501,15 +15485,14 @@ msgid ""
 "to Edit to change the page."
 msgstr ""
 "Dieses Dokument ist zum Lesen geöffnet, es lässt sich also nichts daraus "
-"ausschneiden. Wechseln Sie zum Bearbeiten, um die Seite zu ändern."
+"ausschneiden. Zum Bearbeiten wechseln, um die Seite zu ändern."
 
 #: src/ui/PageView.cpp:2230
 #, kde-format
 msgctxt "@info"
 msgid "Nothing is chosen to cut. Click something on the page first."
 msgstr ""
-"Es ist nichts zum Ausschneiden gewählt. Klicken Sie zuerst etwas auf der "
-"Seite an."
+"Es ist nichts zum Ausschneiden gewählt. Zuerst etwas auf der Seite anklicken."
 
 #: src/ui/PageView.cpp:2237
 #, kde-format
@@ -15519,7 +15502,7 @@ msgid ""
 "to Edit to add something to it."
 msgstr ""
 "Dieses Dokument ist zum Lesen geöffnet, es lässt sich also nichts auf die "
-"Seite setzen. Wechseln Sie zum Bearbeiten, um etwas hinzuzufügen."
+"Seite setzen. Zum Bearbeiten wechseln, um etwas hinzuzufügen."
 
 #: src/ui/PageView.cpp:2244
 #, kde-format
@@ -15697,8 +15680,8 @@ msgid ""
 "Drag across anything that has to go. Click a box to select it, Delete to "
 "take it back."
 msgstr ""
-"Ziehen Sie über alles, was verschwinden soll. Klicken Sie einen Kasten an, "
-"um ihn auszuwählen, Entf nimmt ihn zurück."
+"Über alles ziehen, was verschwinden soll. Einen Kasten anklicken, um ihn "
+"auszuwählen, Entf nimmt ihn zurück."
 
 #: src/ui/RedactEditor.cpp:120
 #, kde-format
@@ -15815,8 +15798,8 @@ msgid ""
 "Drag the signature to where it belongs, or click anywhere on the page. Pull "
 "the corner handle to resize it."
 msgstr ""
-"Ziehen Sie die Unterschrift an ihren Platz oder klicken Sie irgendwo auf die "
-"Seite. Am Eckanfasser ändern Sie die Größe."
+"Die Unterschrift an ihren Platz ziehen oder irgendwo auf die Seite klicken. "
+"Am Eckanfasser lässt sich die Größe ändern."
 
 #: src/ui/SignEditor.cpp:113
 #, kde-format
@@ -15837,8 +15820,8 @@ msgid ""
 "A photo or scan of your signature. The paper around it is made transparent "
 "automatically."
 msgstr ""
-"Ein Foto oder Scan Ihrer Unterschrift. Das Papier ringsum wird automatisch "
-"transparent gemacht."
+"Ein Foto oder Scan der eigenen Unterschrift. Das Papier ringsum wird "
+"automatisch transparent gemacht."
 
 #: src/ui/SignEditor.cpp:122
 #, kde-format
@@ -15862,7 +15845,7 @@ msgstr "Signieren"
 #, kde-format
 msgctxt "@label"
 msgid "Your signatures:"
-msgstr "Ihre Unterschriften:"
+msgstr "Eigene Unterschriften:"
 
 #: src/ui/SignEditor.cpp:150
 #, kde-format
@@ -15894,9 +15877,9 @@ msgid ""
 "No signature yet. Add a photo or scan of one, or draw it here. It is kept on "
 "this machine and reused next time."
 msgstr ""
-"Noch keine Unterschrift vorhanden. Fügen Sie ein Foto oder einen Scan hinzu "
-"oder zeichnen Sie sie hier. Sie bleibt auf diesem Rechner und wird beim "
-"nächsten Mal wiederverwendet."
+"Noch keine Unterschrift vorhanden. Ein Foto oder einen Scan hinzufügen oder "
+"sie hier zeichnen. Sie bleibt auf diesem Rechner und wird beim nächsten Mal "
+"wiederverwendet."
 
 #: src/ui/SignEditor.cpp:262
 #, kde-format
@@ -15947,7 +15930,7 @@ msgstr "Übernehmen"
 #: src/ui/SignEditor.cpp:317
 #, kde-format
 msgid "Sign in the box below."
-msgstr "Unterschreiben Sie im Feld unten."
+msgstr "Im Feld unten unterschreiben."
 
 #: src/ui/SignEditor.cpp:329
 #, kde-format
@@ -16939,7 +16922,8 @@ msgstr "Nur ein Teil der Schrift ist hier."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Its text can be copied out, searched and read aloud."
-msgstr "Ihr Text lässt sich herauskopieren, durchsuchen und vorlesen."
+msgstr ""
+"Der Text dieser Schrift lässt sich herauskopieren, durchsuchen und vorlesen."
 
 #: src/ui/ToolFontsDialog.cpp:293
 #, kde-format
@@ -17282,8 +17266,8 @@ msgstr "Genau so belassen, wie sie waren:"
 #, kde-format
 msgid "Tick the fonts whose glyphs are to go, or ask for every embedded one."
 msgstr ""
-"Kreuzen Sie die Schriften an, deren Glyphen gehen sollen, oder verlangen Sie "
-"jede eingebettete."
+"Die Schriften ankreuzen, deren Glyphen gehen sollen, oder jede eingebettete "
+"verlangen."
 
 #: src/ui/ToolFontsDialog.cpp:809
 #, kde-format
@@ -17370,7 +17354,7 @@ msgstr "Zeichen:"
 #: src/ui/ToolFontsDialog.cpp:912
 #, kde-format
 msgid "Choose a family to see where this system keeps it."
-msgstr "Wählen Sie eine Familie, um zu sehen, wo dieses System sie ablegt."
+msgstr "Eine Familie wählen, um zu sehen, wo dieses System sie ablegt."
 
 #: src/ui/ToolFontsDialog.cpp:919
 #, kde-format
@@ -17413,7 +17397,7 @@ msgstr[1] "%1 Zeichen kommen hinein."
 #: src/ui/ToolFontsDialog.cpp:976
 #, kde-format
 msgid "Name a family to embed."
-msgstr "Nennen Sie eine einzubettende Familie."
+msgstr "Eine einzubettende Familie nennen."
 
 #: src/ui/ToolFontsDialog.cpp:991
 #, kde-format
@@ -17433,7 +17417,7 @@ msgstr "Gefunden: %1"
 #: src/ui/ToolFontsDialog.cpp:1018
 #, kde-format
 msgid "Name the family to embed."
-msgstr "Nennen Sie die einzubettende Familie."
+msgstr "Die einzubettende Familie nennen."
 
 #: src/ui/ToolFontsDialog.cpp:1023
 #, kde-format
@@ -17441,8 +17425,8 @@ msgid ""
 "Name the characters to put in. Only those go in, which is what keeps the "
 "document from growing by a whole font."
 msgstr ""
-"Nennen Sie die einzusetzenden Zeichen. Nur diese kommen hinein, was das "
-"Dokument davor bewahrt, um eine ganze Schrift zu wachsen."
+"Die einzusetzenden Zeichen nennen. Nur diese kommen hinein, was das Dokument "
+"davor bewahrt, um eine ganze Schrift zu wachsen."
 
 #: src/ui/ToolFontsDialog.cpp:1030
 #, kde-format
@@ -17792,8 +17776,8 @@ msgid ""
 "choice, in the order the choices are written above."
 msgstr ""
 "Eine Optionsgruppe ist ein Feld mit einem Kästchen je Schalter, und das ist "
-"es, was sie einander abwechseln lässt, statt gemeinsam umzuschalten. Ziehen "
-"Sie ein Kästchen je Auswahl auf, in der Reihenfolge, in der die "
+"es, was sie einander abwechseln lässt, statt gemeinsam umzuschalten. Ein "
+"Kästchen je Auswahl aufziehen, in der Reihenfolge, in der die "
 "Auswahlmöglichkeiten oben stehen."
 
 #: src/ui/ToolFormBuilderDialog.cpp:646
@@ -17944,8 +17928,8 @@ msgid ""
 "Drag one box on the page for each choice, in the order the choices are "
 "written. The boxes gather in the list on the right."
 msgstr ""
-"Ziehen Sie je Auswahl ein Kästchen auf der Seite auf, in der Reihenfolge, in "
-"der die Auswahlmöglichkeiten stehen. Die Kästchen sammeln sich in der Liste "
+"Je Auswahl ein Kästchen auf der Seite aufziehen, in der Reihenfolge, in der "
+"die Auswahlmöglichkeiten stehen. Die Kästchen sammeln sich in der Liste "
 "rechts."
 
 #: src/ui/ToolFormBuilderDialog.cpp:779
@@ -17954,9 +17938,9 @@ msgid ""
 "Drag the box where the field goes, or type the four numbers on the right. "
 "The faint boxes are the fields this page already has."
 msgstr ""
-"Ziehen Sie das Kästchen dorthin, wo das Feld hin soll, oder tippen Sie die "
-"vier Zahlen rechts ein. Die blassen Kästchen sind die Felder, die diese "
-"Seite bereits hat."
+"Das Kästchen dorthin ziehen, wo das Feld hin soll, oder die vier Zahlen "
+"rechts eintippen. Die blassen Kästchen sind die Felder, die diese Seite "
+"bereits hat."
 
 #: src/ui/ToolFormBuilderDialog.cpp:812
 #, kde-format
@@ -17981,13 +17965,12 @@ msgid ""
 "length."
 msgstr ""
 "Ein Feld mit einem Zeichen je Kästchen muss wissen, wie viele Kästchen es "
-"hat, geben Sie ihm also eine Länge."
+"hat, ihm also eine Länge geben."
 
 #: src/ui/ToolFormBuilderDialog.cpp:862
 #, kde-format
 msgid "A list needs something to choose from. Write one choice per line."
-msgstr ""
-"Eine Liste braucht etwas zur Auswahl. Schreiben Sie eine Auswahl je Zeile."
+msgstr "Eine Liste braucht etwas zur Auswahl. Je Zeile eine Auswahl schreiben."
 
 #: src/ui/ToolFormBuilderDialog.cpp:868
 #, kde-format
@@ -18013,16 +17996,16 @@ msgstr[1] ""
 #, kde-format
 msgid "Draw the box on the page, or give it a width and a height."
 msgstr ""
-"Ziehen Sie das Kästchen auf der Seite auf, oder geben Sie ihm eine Breite "
-"und eine Höhe."
+"Das Kästchen auf der Seite aufziehen oder ihm eine Breite und eine Höhe "
+"geben."
 
 #: src/ui/ToolFormBuilderDialog.cpp:943
 #, kde-format
 msgid ""
 "Nothing is waiting to be put on. Describe a field and add it to the list."
 msgstr ""
-"Es wartet nichts darauf, gesetzt zu werden. Beschreiben Sie ein Feld und "
-"fügen Sie es der Liste hinzu."
+"Es wartet nichts darauf, gesetzt zu werden. Ein Feld beschreiben und der "
+"Liste hinzufügen."
 
 #: src/ui/ToolFormBuilderDialog.cpp:963
 #, kde-format
@@ -18107,7 +18090,7 @@ msgstr "Auswahl: %1"
 #: src/ui/ToolFormBuilderDialog.cpp:1095
 #, kde-format
 msgid "Tick the fields to take out first."
-msgstr "Kreuzen Sie zuerst die zu entfernenden Felder an."
+msgstr "Zuerst die zu entfernenden Felder ankreuzen."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1108
 #, kde-format
@@ -18126,7 +18109,7 @@ msgstr[1] "%1 der angekreuzten Namen kamen im Dokument nicht vor."
 #: src/ui/ToolFormBuilderDialog.cpp:1123
 #, kde-format
 msgid "Choose the field to rename first."
-msgstr "Wählen Sie zuerst das umzubenennende Feld."
+msgstr "Zuerst das umzubenennende Feld wählen."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1130
 #, kde-format
@@ -18172,8 +18155,8 @@ msgid ""
 "the buttons. Fields left out keep their place behind the ones listed."
 msgstr ""
 "Die Reihenfolge, in der die Tabulatortaste durch die Felder dieser Seite "
-"läuft. Ziehen Sie die Namen, oder nutzen Sie die Schalter. Ausgelassene "
-"Felder behalten ihren Platz hinter den aufgeführten."
+"läuft. Die Namen ziehen oder die Schalter nutzen. Ausgelassene Felder "
+"behalten ihren Platz hinter den aufgeführten."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1182
 #, kde-format
@@ -18434,7 +18417,7 @@ msgstr ""
 #: src/ui/ToolFormBuilderDialog.cpp:1438
 #, kde-format
 msgid "Say which field should show its value that way."
-msgstr "Sagen Sie, welches Feld seinen Wert so anzeigen soll."
+msgstr "Angeben, welches Feld seinen Wert so anzeigen soll."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1458
 #, kde-format
@@ -18449,7 +18432,7 @@ msgstr "„%1“ zeigt jetzt, was hineingeschrieben wird, als: %2."
 #: src/ui/ToolFormBuilderDialog.cpp:1470
 #, kde-format
 msgid "Say which field the range belongs to."
-msgstr "Sagen Sie, zu welchem Feld der Bereich gehört."
+msgstr "Angeben, zu welchem Feld der Bereich gehört."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1476
 #, kde-format
@@ -18468,8 +18451,8 @@ msgstr "„%1“ nimmt jetzt nur noch Zahlen von %2 bis %3 an."
 msgid ""
 "Say which field is worked out, and tick the fields it is worked out from."
 msgstr ""
-"Sagen Sie, welches Feld errechnet wird, und kreuzen Sie die Felder an, aus "
-"denen es errechnet wird."
+"Angeben, welches Feld errechnet wird, und die Felder ankreuzen, aus denen es "
+"errechnet wird."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1515
 #, kde-format
@@ -18489,14 +18472,14 @@ msgid ""
 "Say which button this is about. A document with no push button on it has "
 "nothing to press."
 msgstr ""
-"Sagen Sie, um welchen Schalter es geht. Ein Dokument ohne Schalter hat "
-"nichts zu drücken."
+"Angeben, um welchen Schalter es geht. Ein Dokument ohne Schalter hat nichts "
+"zu drücken."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1555
 #, kde-format
 msgid "Say where it sends or goes: an address, or a page number."
 msgstr ""
-"Sagen Sie, wohin er sendet oder springt: eine Adresse oder eine Seitenzahl."
+"Angeben, wohin er sendet oder springt: eine Adresse oder eine Seitenzahl."
 
 #: src/ui/ToolFormBuilderDialog.cpp:1571
 #, kde-format
@@ -18835,7 +18818,7 @@ msgstr "%1 auf Seite %2: %3×%4 Pixel bei %5 dpi, %6 als %7"
 #: src/ui/ToolImagesDialog.cpp:476
 #, kde-format
 msgid "Nothing is picked. Choose a row in the table above."
-msgstr "Es ist nichts gewählt. Wählen Sie eine Zeile in der Tabelle oben."
+msgstr "Es ist nichts gewählt. Eine Zeile in der Tabelle oben wählen."
 
 #: src/ui/ToolImagesDialog.cpp:483
 #, kde-format
@@ -19075,8 +19058,8 @@ msgid ""
 "No picture is picked. Choose a row in the first tab, or work on the whole "
 "document."
 msgstr ""
-"Es ist kein Bild gewählt. Wählen Sie eine Zeile im ersten Reiter, oder "
-"bearbeiten Sie das ganze Dokument."
+"Es ist kein Bild gewählt. Eine Zeile im ersten Reiter wählen oder das ganze "
+"Dokument bearbeiten."
 
 #: src/ui/ToolImagesDialog.cpp:848
 #, kde-format
@@ -19085,8 +19068,8 @@ msgid ""
 "to do. Give it a resolution to come down to, or tick the last box."
 msgstr ""
 "Wenn jedes Pixel behalten und keine Neukodierung erzwungen wird, gibt es "
-"hier nichts zu tun. Geben Sie eine Auflösung an, auf die heruntergerechnet "
-"wird, oder kreuzen Sie das letzte Feld an."
+"hier nichts zu tun. Eine Auflösung angeben, auf die heruntergerechnet wird, "
+"oder das letzte Feld ankreuzen."
 
 #: src/ui/ToolImagesDialog.cpp:865
 #, kde-format
@@ -19885,8 +19868,8 @@ msgid ""
 "tiled would have to guess which of the two the sheet size meant."
 msgstr ""
 "Die Seite wird in der Größe gekachelt, die sie schon hat. Für ein wandgroßes "
-"Poster aus einer A4-Seite vergrößern Sie sie zuerst und kacheln dann das "
-"Ergebnis: ein Aufruf, der beides täte, müsste raten, welches von beiden die "
+"Poster aus einer A4-Seite die Seite zuerst vergrößern und dann das Ergebnis "
+"kacheln: ein Aufruf, der beides täte, müsste raten, welches von beiden die "
 "Bogengröße meint."
 
 #: src/ui/ToolLayoutDialog.cpp:1003
@@ -19939,13 +19922,13 @@ msgstr "Broschürenreihenfolge"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Reading order into printer's spreads"
-msgstr "Lesereihenfolge in Druckbogen"
+msgstr "Lesereihenfolge in Druckerdoppelseiten"
 
 #: src/ui/ToolLayoutDialog.cpp:1081
 #, kde-format
 msgctxt "@option:radio"
 msgid "Printer's spreads back into reading order"
-msgstr "Druckbogen zurück in die Lesereihenfolge"
+msgstr "Druckerdoppelseiten zurück in die Lesereihenfolge"
 
 #: src/ui/ToolLayoutDialog.cpp:1084
 #, kde-format
@@ -19957,8 +19940,8 @@ msgid ""
 msgstr ""
 "Aus acht Seiten wird 8, 1, 2, 7, 6, 3, 4, 5, also die Reihenfolge, in der "
 "eine rückstichgeheftete Broschüre angelegt wird. Die Seiten werden "
-"umsortiert, nicht auf Bogen gepaart: Lassen Sie „Bogenmontage“ mit zwei "
-"Seiten je Bogen über das Ergebnis laufen, um die Bogen selbst zu bekommen."
+"umsortiert, nicht auf Bogen gepaart: „Bogenmontage“ mit zwei Seiten je Bogen "
+"über das Ergebnis laufen lassen, um die Bogen selbst zu bekommen."
 
 #: src/ui/ToolLayoutDialog.cpp:1092
 #, kde-format
@@ -20022,14 +20005,13 @@ msgid ""
 "Reordered into printer's spreads. Run “Arrange on Sheets” with two pages per "
 "sheet over this to get the sheets themselves."
 msgstr ""
-"In Druckbogen umsortiert. Lassen Sie „Bogenmontage“ mit zwei Seiten je Bogen "
-"darüber laufen, um die Bogen selbst zu bekommen."
+"In Druckerdoppelseiten umsortiert. „Bogenmontage“ mit zwei Seiten je Bogen "
+"darüber laufen lassen, um die Bogen selbst zu bekommen."
 
 #: src/ui/ToolLayoutDialog.cpp:1170
 #, kde-format
 msgid "Choose a PDF to lay over this document first."
-msgstr ""
-"Wählen Sie zuerst ein PDF, das über dieses Dokument gelegt werden soll."
+msgstr "Zuerst ein PDF wählen, das über dieses Dokument gelegt werden soll."
 
 #: src/ui/ToolLayoutDialog.cpp:1183
 #, kde-format
@@ -20111,7 +20093,7 @@ msgstr "Nummerierung schreiben"
 #: src/ui/ToolLayoutDialog.cpp:1312
 #, kde-format
 msgid "Add a numbering range first."
-msgstr "Fügen Sie zuerst einen Nummerierungsbereich hinzu."
+msgstr "Zuerst einen Nummerierungsbereich hinzufügen."
 
 #: src/ui/ToolLayoutDialog.cpp:1330
 #, kde-format
@@ -20205,7 +20187,7 @@ msgstr[1] "%1 Seiten malen nichts: %2."
 #: src/ui/ToolLayoutDialog.cpp:1432
 #, kde-format
 msgid "Name the pages to take out. Leaving this empty would mean all of them."
-msgstr "Nennen Sie die zu entfernenden Seiten. Leer zu lassen hieße alle."
+msgstr "Die zu entfernenden Seiten nennen. Leer zu lassen hieße alle."
 
 #: src/ui/ToolLayoutDialog.cpp:1448
 #, kde-format
@@ -20317,10 +20299,10 @@ msgid ""
 "to draw a box round several. Dragging a chosen object moves it; so do the "
 "arrow keys, by a point at a time and ten with Shift."
 msgstr ""
-"Klicken Sie etwas an, um es zu wählen, Strg fügt zur Auswahl hinzu, Ziehen "
-"auf blankem Papier zieht einen Rahmen um mehrere. Ein gewähltes Objekt zu "
-"ziehen verschiebt es; die Pfeiltasten tun dasselbe, um einen Punkt und mit "
-"Umschalt um zehn."
+"Etwas anklicken, um es zu wählen, Strg fügt zur Auswahl hinzu, Ziehen auf "
+"blankem Papier zieht einen Rahmen um mehrere. Ein gewähltes Objekt zu ziehen "
+"verschiebt es; die Pfeiltasten tun dasselbe, um einen Punkt und mit Umschalt "
+"um zehn."
 
 #: src/ui/ToolObjectsDialog.cpp:703
 #, kde-format
@@ -20519,8 +20501,7 @@ msgstr ""
 #: src/ui/ToolObjectsDialog.cpp:1066
 #, kde-format
 msgid "Tick what should change: the fill, the outline or the line width."
-msgstr ""
-"Kreuzen Sie an, was sich ändern soll: Füllung, Kontur oder Linienbreite."
+msgstr "Ankreuzen, was sich ändern soll: Füllung, Kontur oder Linienbreite."
 
 #: src/ui/ToolObjectsDialog.cpp:1112
 #, kde-format
@@ -20555,7 +20536,7 @@ msgstr "Linie"
 #: src/ui/ToolObjectsDialog.cpp:1124
 #, kde-format
 msgid "One line per line; nothing is wrapped for you"
-msgstr "Eine Zeile je Zeile; es wird nichts für Sie umbrochen"
+msgstr "Eine Zeile je Zeile; es wird nichts automatisch umbrochen"
 
 #: src/ui/ToolObjectsDialog.cpp:1147
 #, kde-format
@@ -20615,8 +20596,8 @@ msgid ""
 "Drag a rectangle on the page to put it there. A line runs from the bottom "
 "left of that rectangle to its top right."
 msgstr ""
-"Ziehen Sie ein Rechteck auf der Seite auf, um es dort abzulegen. Eine Linie "
-"läuft von der linken unteren zur rechten oberen Ecke dieses Rechtecks."
+"Ein Rechteck auf der Seite aufziehen, um es dort abzulegen. Eine Linie läuft "
+"von der linken unteren zur rechten oberen Ecke dieses Rechtecks."
 
 #: src/ui/ToolObjectsDialog.cpp:1194
 #, kde-format
@@ -20638,12 +20619,12 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.tif *.tiff);;Alle Dateien (*)"
 #: src/ui/ToolObjectsDialog.cpp:1260
 #, kde-format
 msgid "Type what it should say first."
-msgstr "Tippen Sie zuerst ein, was dastehen soll."
+msgstr "Zuerst eintippen, was dastehen soll."
 
 #: src/ui/ToolObjectsDialog.cpp:1274
 #, kde-format
 msgid "Choose a picture first."
-msgstr "Wählen Sie zuerst ein Bild."
+msgstr "Zuerst ein Bild wählen."
 
 #: src/ui/ToolObjectsDialog.cpp:1298
 #, kde-format
@@ -21046,8 +21027,8 @@ msgid ""
 "Type or paste the text here, or load a file. A blank line starts a new "
 "paragraph."
 msgstr ""
-"Tippen Sie den Text hier ein oder fügen Sie ihn ein, oder laden Sie eine "
-"Datei. Eine Leerzeile beginnt einen neuen Absatz."
+"Den Text hier eintippen oder einfügen oder eine Datei laden. Eine Leerzeile "
+"beginnt einen neuen Absatz."
 
 #: src/ui/ToolTypesetDialog.cpp:328
 #, kde-format
@@ -21461,8 +21442,7 @@ msgstr "gesetzt"
 #: src/ui/ToolTypesetDialog.cpp:864
 #, kde-format
 msgid "There is no text to set. Type some, or load a file."
-msgstr ""
-"Es gibt keinen Text zu setzen. Tippen Sie etwas, oder laden Sie eine Datei."
+msgstr "Es gibt keinen Text zu setzen. Etwas eintippen oder eine Datei laden."
 
 #: src/ui/ToolTypesetDialog.cpp:868
 #, kde-format
@@ -21581,9 +21561,9 @@ msgid ""
 "What you see is drawn the same way the stamp will be, on the page it will go "
 "on. Turn to a busy page to check it stays readable through the watermark."
 msgstr ""
-"Was Sie sehen, wird genauso gezeichnet wie später der Stempel, und zwar auf "
-"der Seite, auf die er kommt. Blättern Sie zu einer vollen Seite, um zu "
-"prüfen, ob sie durch das Wasserzeichen hindurch lesbar bleibt."
+"Die Vorschau wird genauso gezeichnet wie später der Stempel, und zwar auf "
+"der Seite, auf die er kommt. Zu einer vollen Seite blättern, um zu prüfen, "
+"ob sie durch das Wasserzeichen hindurch lesbar bleibt."
 
 #: src/ui/WatermarkEditor.cpp:131
 #, kde-format
@@ -21960,12 +21940,12 @@ msgstr "Seiten"
 #~ "Click a boxed line to correct it. Dotted boxes use a font this cannot "
 #~ "write into."
 #~ msgstr ""
-#~ "Klicken Sie auf eine umrahmte Zeile, um sie zu korrigieren. Gepunktete "
-#~ "Rahmen verwenden eine Schrift, in die hier nicht geschrieben werden kann."
+#~ "Auf eine umrahmte Zeile klicken, um sie zu korrigieren. Gepunktete Rahmen "
+#~ "verwenden eine Schrift, in die hier nicht geschrieben werden kann."
 
 #, kde-format
 #~ msgid "Pick a line on the page first"
-#~ msgstr "Wählen Sie zuerst eine Zeile auf der Seite"
+#~ msgstr "Zuerst eine Zeile auf der Seite wählen"
 
 #, kde-format
 #~ msgctxt "@title:group"
@@ -22025,8 +22005,7 @@ msgstr "Seiten"
 #~ msgstr "Ein Kasten mit dem Kommentartext, direkt auf der Seite sichtbar."
 
 #~ msgid "A small marker holding a comment. Click where it should go."
-#~ msgstr ""
-#~ "Ein kleiner Marker mit einem Kommentar. Klicken Sie, wo er hin soll."
+#~ msgstr "Ein kleiner Marker mit einem Kommentar. Klicken, wo er hin soll."
 
 #, kde-format
 #~ msgctxt "@action:button"

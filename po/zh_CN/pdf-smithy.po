@@ -3552,8 +3552,8 @@ msgid ""
 "Check against one with “preflight FILE --profile ID”, or against a profile "
 "of your own by giving its file name instead."
 msgstr ""
-"可用“preflight FILE --profile ID”按其中一个配置文件检查，也可以改为给出您自己"
-"配置文件的文件名。"
+"可用“preflight FILE --profile ID”按其中一个配置文件检查，也可以改为给出自有配"
+"置文件的文件名。"
 
 #: src/cli/CommandsPreflight.cpp:570
 #, kde-format
@@ -5876,8 +5876,8 @@ msgid ""
 "has been rebuilt from end to end rather than edited."
 msgstr ""
 "由于没有可用的 ICC 配置文件在原位完成转换，Ghostscript 转换了整个文档。每一页"
-"都被重写，得到的是 Ghostscript 自己的转换结果，而不是您选择的配置文件的结果，"
-"并且文件是从头到尾重建的，而不是就地编辑的。"
+"都被重写，得到的是 Ghostscript 自己的转换结果，而不是所选配置文件的结果，并且"
+"文件是从头到尾重建的，而不是就地编辑的。"
 
 #: src/core/ColourTools.cpp:3271
 #, kde-format
@@ -6041,7 +6041,7 @@ msgid ""
 "Ghostscript's conversion rather than one you chose."
 msgstr ""
 "转换为 CMYK 需要 ICC 配置文件。没有配置文件时，改由 Ghostscript 转换整个文"
-"档，这样无法遵循页面选择，得到的也是 Ghostscript 的转换结果，而不是您选择的转"
+"档，这样无法遵循页面选择，得到的也是 Ghostscript 的转换结果，而不是所选的转"
 "换。"
 
 #: src/core/ColourTools.cpp:3709
@@ -6373,8 +6373,7 @@ msgid ""
 "Fonts were embedded, so the printer sets the text in the faces you chose "
 "rather than in whatever the press happens to have."
 msgstr ""
-"字体已嵌入，因此印厂会用您选择的字体来排印文本，而不是用印刷机上碰巧有的字"
-"体。"
+"字体已嵌入，因此印厂会用所选字体来排印文本，而不是用印刷机上碰巧有的字体。"
 
 #: src/core/Convert.cpp:2477
 #, kde-format
@@ -9541,8 +9540,7 @@ msgstr[0] "复制 %1 页"
 #, kde-format
 msgid ""
 "Edit, merge, split, sign and OCR PDF documents, entirely on your own machine."
-msgstr ""
-"编辑、合并、拆分、签名 PDF 文档并识别其中的文本，全部在您自己的计算机上完成。"
+msgstr "编辑、合并、拆分、签名 PDF 文档并识别其中的文本，全部在本机上完成。"
 
 #: src/main.cpp:38
 #, kde-format
@@ -10061,7 +10059,7 @@ msgid ""
 "Nothing was trimmed: this editor has no document behind it. That is a fault "
 "in the program, not in your file."
 msgstr ""
-"没有裁剪任何内容：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+"没有裁剪任何内容：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/CropEditor.cpp:280
 #, kde-format
@@ -10114,8 +10112,7 @@ msgid ""
 "The software that wrote the file. Kept as it was rather than overwritten, so "
 "that saving does not announce which tool you used."
 msgstr ""
-"写入该文件的软件。此项会保持原样而不被覆盖，这样保存时就不会暴露您使用了哪个"
-"工具。"
+"写入该文件的软件。此项会保持原样而不被覆盖，这样保存时就不会暴露所用的工具。"
 
 #: src/ui/DocumentDialogs.cpp:77 src/ui/DocumentProperties.cpp:710
 #: src/ui/ToolTypesetDialog.cpp:468
@@ -10239,7 +10236,7 @@ msgstr "移除:"
 #, kde-format
 msgid ""
 "The pages themselves are not touched. Nothing changes on disk until you save."
-msgstr "页面本身不会被改动。在您保存之前，磁盘上的文件不会有任何变化。"
+msgstr "页面本身不会被改动。在保存之前，磁盘上的文件不会有任何变化。"
 
 #: src/ui/DocumentDialogs.cpp:181
 #, kde-format
@@ -11495,8 +11492,7 @@ msgctxt "@info a fault inside the program, not anything the reader did"
 msgid ""
 "The form was not filled in: this editor has no document behind it. That is a "
 "fault in the program, not in your file."
-msgstr ""
-"没有填写表单：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+msgstr "没有填写表单：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/FormEditor.cpp:339
 #, kde-format
@@ -12047,7 +12043,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Writes what you have typed and dragged into the document, as one undo step. "
 "Saving does this for you."
-msgstr "把您输入和拖动的内容作为一个撤销步骤写入文档。保存时会自动完成这一步。"
+msgstr "把输入和拖动的内容作为一个撤销步骤写入文档。保存时会自动完成这一步。"
 
 #: src/ui/MainWindow.cpp:941
 #, kde-format
@@ -12726,7 +12722,7 @@ msgstr "已缩小%1。"
 msgid ""
 "This removes every page from the document. The file on disk is not touched "
 "until you save."
-msgstr "这将从文档中移除所有页面。在您保存之前，磁盘上的文件不会被改动。"
+msgstr "这将从文档中移除所有页面。在保存之前，磁盘上的文件不会被改动。"
 
 #: src/ui/MainWindow.cpp:2590
 #, kde-format
@@ -12820,7 +12816,7 @@ msgstr "未保存的更改"
 #: src/ui/MainWindow.cpp:2915
 #, kde-format
 msgid "Keep what you have done here?"
-msgstr "要保留您在这里所做的更改吗？"
+msgstr "要保留在这里所做的更改吗？"
 
 #: src/ui/MainWindow.cpp:2916
 #, kde-format
@@ -13019,7 +13015,7 @@ msgid ""
 "No page numbers were added: this editor has no document behind it. That is a "
 "fault in the program, not in your file."
 msgstr ""
-"没有添加任何页码：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+"没有添加任何页码：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/NumberEditor.cpp:330
 #, kde-format
@@ -13596,8 +13592,8 @@ msgid ""
 "appears to have, or add a bookmark for the page you are looking at and drag "
 "entries onto one another to nest them."
 msgstr ""
-"此文档没有目录。可以根据文本中看起来像标题的段落生成一个，或者为您正在查看的"
-"页面添加书签，再把条目拖到彼此之上使其嵌套。"
+"此文档没有目录。可以根据文本中看起来像标题的段落生成一个，或者为当前查看的页"
+"面添加书签，再把条目拖到彼此之上使其嵌套。"
 
 #: src/ui/OutlineDock.cpp:195
 #, kde-format
@@ -14600,7 +14596,7 @@ msgid ""
 "Nothing was redacted: this editor has no document behind it. That is a fault "
 "in the program, not in your file."
 msgstr ""
-"没有涂黑任何内容：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+"没有涂黑任何内容：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/RedactEditor.cpp:207
 #, kde-format
@@ -14684,7 +14680,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "A photo or scan of your signature. The paper around it is made transparent "
 "automatically."
-msgstr "您签名的照片或扫描件。周围的纸张背景会自动变为透明。"
+msgstr "签名的照片或扫描件。周围的纸张背景会自动变为透明。"
 
 #: src/ui/SignEditor.cpp:122
 #, kde-format
@@ -14708,7 +14704,7 @@ msgstr "签名"
 #, kde-format
 msgctxt "@label"
 msgid "Your signatures:"
-msgstr "您的签名:"
+msgstr "个人签名:"
 
 #: src/ui/SignEditor.cpp:150
 #, kde-format
@@ -14723,7 +14719,7 @@ msgid ""
 "Nothing was signed: this editor has no document behind it. That is a fault "
 "in the program, not in your file."
 msgstr ""
-"没有添加任何签名：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+"没有添加任何签名：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/SignEditor.cpp:194
 #, kde-format
@@ -14773,7 +14769,7 @@ msgstr "无法保存此签名。"
 #, kde-format
 msgctxt "@title:window"
 msgid "Draw Your Signature"
-msgstr "手写您的签名"
+msgstr "手写签名"
 
 #: src/ui/SignEditor.cpp:303
 #, kde-format
@@ -20259,7 +20255,7 @@ msgid ""
 "Nothing was stamped: this editor has no document behind it. That is a fault "
 "in the program, not in your file."
 msgstr ""
-"没有添加任何水印：此编辑器背后没有文档。这是程序内部的问题，与您的文件无关。"
+"没有添加任何水印：此编辑器背后没有文档。这是程序内部的问题，与该文件无关。"
 
 #: src/ui/WatermarkEditor.cpp:396
 #, kde-format
