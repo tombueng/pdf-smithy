@@ -80,5 +80,6 @@ Group typesetGroup();
 Group objectGroup();
 Group convertGroup();
 Group inspectGroup();
+Group autofillGroup();
 
 } // namespace ps::cli

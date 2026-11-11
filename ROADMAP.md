@@ -60,7 +60,7 @@ Impact·Edge·Safe at low Cost.
 | # | Item | Status | Impact | Edge | Fit | Safe | Cost | Rank |
 |---|------|--------|:--:|:--:|:--:|:--:|:--:|:--:|
 | 1 | **PDF object-graph inspector** (xref/trailer/root → dict/array/stream tree, searchable; core + CLI first, UI later) | **done ✓** | 5 | 5 | 5 | 5 | 3 | **A** |
-| 2 | **Form autofill vault** (local store of name/address/email/IBAN…, smart field→value mapping, opt-in learning; core + CLI first) | gap | 5 | 5 | 5 | 4 | 3 | **A** |
+| 2 | **Form autofill vault** (local store of name/address/email/IBAN…, smart field→value mapping, opt-in learning; core + CLI first) | **done ✓** | 5 | 5 | 5 | 4 | 3 | **A** |
 | 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | partial | 4 | 3 | 5 | 5 | 2 | **A** |
 | 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | gap | 4 | 5 | 4 | 4 | 4 | B |
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
@@ -105,3 +105,10 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   budget; new `inspect` CLI group (`info` / `objects` / `object` / `trailer` /
   `root` / `limits`, plain or `--json`); `tst_pdfinspect` (9 cases). Build clean,
   full suite green, message template refreshed. Next: **#2 autofill vault**.
+- _cycle 2_ — **#2 autofill vault done.** New `core/FormVault` (MIT): a local
+  JSON store, a multilingual field→meaning matcher (`keyFor`, DE/EN/ES/FR, accent-
+  and ß-folding, specific-before-generic), `fillFor` (text + offered drop-downs,
+  never read-only) and `learnFrom`. New `autofill` CLI group (`set` / `get` /
+  `list` / `remove` / `keys` / `fill` / `learn` / `limits`). `tst_formvault`
+  (9 cases). No cloud, no sync — a plain file on the machine. Next: **#3 form
+  completeness audit**.

@@ -37,6 +37,7 @@ add_library(ps_core STATIC
     core/Typeset.cpp
     core/PageObjects.cpp
     core/PdfInspect.cpp
+    core/FormVault.cpp
     core/TextEdit.cpp
     core/NUp.cpp
     core/PdfFile.cpp
@@ -219,6 +220,7 @@ if(PS_BUILD_CLI)
         cli/CommandsObjects.cpp
         cli/CommandsConvert.cpp
         cli/CommandsInspect.cpp
+        cli/CommandsAutofill.cpp
     )
     set_target_properties(${PS_NAME}-cli PROPERTIES AUTOMOC ON)
     target_link_libraries(${PS_NAME}-cli PRIVATE ps_core ps_render KF6::CoreAddons)
