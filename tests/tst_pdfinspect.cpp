@@ -36,6 +36,21 @@ int firstLeafPageObject(const QString &pdf)
     return -1;
 }
 
+int firstStreamObject(const QString &pdf)
+{
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    if (!PdfInspect::objects(pdf, &rows, &error)) {
+        return -1;
+    }
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        if (row.typeName == u"stream"_s) {
+            return row.obj;
+        }
+    }
+    return -1;
+}
+
 const PdfInspect::Node *childByLabel(const PdfInspect::Node &node, const QString &label)
 {
     for (const PdfInspect::Node &child : node.children) {
@@ -84,6 +99,8 @@ private Q_SLOTS:
     void setRefusesAMissingKey();
     void setRefusesAContainerValue();
     void setRejectsABadNumber();
+    void streamReadsContent();
+    void streamRefusesANonStream();
     void limitationsAreStated();
 };
 
@@ -427,6 +444,42 @@ void TestPdfInspect::setRejectsABadNumber()
     QString error;
     QVERIFY(!PdfInspect::setScalar(pdf, dir.filePath(u"out.pdf"_s), cat, -1, u"/Type"_s, u"notanumber"_s,
                                    PdfInspect::Scalar::Integer, &oldValue, &error));
+    QVERIFY(!error.isEmpty());
+}
+
+void TestPdfInspect::streamReadsContent()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    const int stream = firstStreamObject(pdf);
+    QVERIFY(stream >= 0);
+
+    QByteArray decoded;
+    QString filters;
+    QString error;
+    QVERIFY2(PdfInspect::streamData(pdf, stream, -1, false, &decoded, &filters, &error), qPrintable(error));
+    QVERIFY(!decoded.isEmpty());
+
+    QByteArray raw;
+    QVERIFY2(PdfInspect::streamData(pdf, stream, -1, true, &raw, &filters, &error), qPrintable(error));
+    QVERIFY(!raw.isEmpty());
+}
+
+void TestPdfInspect::streamRefusesANonStream()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    const int cat = catalogueObject(pdf);
+    QVERIFY(cat >= 0);
+
+    QByteArray bytes;
+    QString filters;
+    QString error;
+    QVERIFY(!PdfInspect::streamData(pdf, cat, -1, false, &bytes, &filters, &error));
     QVERIFY(!error.isEmpty());
 }
 

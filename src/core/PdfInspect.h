@@ -4,6 +4,7 @@
 */
 #pragma once
 
+#include <QByteArray>
 #include <QString>
 #include <QStringList>
 #include <QVector>
@@ -128,6 +129,16 @@ enum class Scalar { Keep, Name, String, Integer, Real, Boolean };
  */
 bool setScalar(const QString &in, const QString &out, int obj, int gen, const QString &key, const QString &value,
                Scalar as, QString *oldRendering, QString *error);
+
+/**
+ * The bytes of stream object @p obj, into @p out.
+ *
+ * Decoded through the filters QPDF can undo, unless @p raw, which returns them
+ * exactly as stored. @p filters, when not null, receives the /Filter as written.
+ * False, with @p error set, when the object is absent or is not a stream, or a
+ * filter cannot be undone — in which case @p raw returns the stored bytes.
+ */
+bool streamData(const QString &pdf, int obj, int gen, bool raw, QByteArray *out, QString *filters, QString *error);
 
 /** The trailer dictionary, expanded to @p depth. */
 bool trailer(const QString &pdf, int depth, Node *out, QString *error);

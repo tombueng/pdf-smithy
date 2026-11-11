@@ -63,6 +63,7 @@ Impact·Edge·Safe at low Cost.
 | 2 | **Form autofill vault** (local store of name/address/email/IBAN…, smart field→value mapping, opt-in learning; core + CLI first) | **done ✓** | 5 | 5 | 5 | 4 | 3 | **A** |
 | 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | **already covered ✓** | 4 | 3 | 5 | 5 | 2 | — |
 | 3b | **Object-graph search** (`inspect find` by /Type·/Subtype, key, or text — extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
+| 3c | **Stream content** (`inspect stream` — view decoded operators, extract embedded images; extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
 | 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | **done ✓** | 4 | 5 | 4 | 4 | 4 | B |
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
@@ -131,3 +132,11 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   `tst_pdfinspect` cases (replace-and-recast, refuse-missing-key, refuse-container,
   reject-bad-number). Next: **#5 certificate-file signing** (verify it is absent
   first) or **#6 preflight-fix surfacing**.
+- _cycle 5_ — **inspector completed with `inspect stream`.** View a stream's
+  decoded content (page operators read as text) or, for a filter QPDF cannot undo
+  (a JPEG), fall back to the stored bytes — which for an image *are* the image, so
+  `inspect stream --object N -o out.jpg` extracts it (verified: a real 535×652
+  JPEG out of a scan). Two new `tst_pdfinspect` cases. The RUPS-style inspector is
+  now whole: info, objects, object, find, set, stream, trailer, root. Next: a
+  diversifying cycle — likely **#6 preflight-fix surfacing** or a sanitizer pass
+  over the four cycles of new code.

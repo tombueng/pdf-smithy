@@ -16,6 +16,7 @@
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QFile>
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -331,6 +332,98 @@ int commandLimits()
     return Success;
 }
 
+/** Whether bytes are safe to print: no NUL, and few control characters. */
+bool looksTextual(const QByteArray &bytes)
+{
+    if (bytes.isEmpty()) {
+        return true;
+    }
+    const int sample = qMin<int>(bytes.size(), 4096);
+    int suspicious = 0;
+    for (int i = 0; i < sample; ++i) {
+        const unsigned char c = static_cast<unsigned char>(bytes.at(i));
+        if (c == 0) {
+            return false;
+        }
+        if (c < 9 || (c > 13 && c < 32)) {
+            ++suspicious;
+        }
+    }
+    return suspicious * 20 < sample; // under about 5% control bytes
+}
+
+int commandStream(const QStringList &arguments, const QCommandLineParser &parser)
+{
+    QString input;
+    int code = 0;
+    if (!oneInputFile(arguments, u"inspect stream"_s, &input, &code)) {
+        return code;
+    }
+    if (!parser.isSet(u"object"_s)) {
+        return fail(i18n("Say which object: inspect stream FILE --object N."), UsageError);
+    }
+    bool ok = false;
+    const int number = parser.value(u"object"_s).toInt(&ok);
+    if (!ok || number < 0) {
+        return fail(i18n("“%1” is not an object number.", parser.value(u"object"_s)), UsageError);
+    }
+    int generation = -1;
+    if (parser.isSet(u"gen"_s)) {
+        bool genOk = false;
+        generation = parser.value(u"gen"_s).toInt(&genOk);
+        if (!genOk || generation < 0) {
+            return fail(i18n("“%1” is not a generation number.", parser.value(u"gen"_s)), UsageError);
+        }
+    }
+
+    QByteArray bytes;
+    QString filters;
+    QString error;
+    const bool wantRaw = parser.isSet(u"raw"_s);
+    if (!PdfInspect::streamData(input, number, generation, wantRaw, &bytes, &filters, &error)) {
+        if (wantRaw) {
+            return fail(error.isEmpty() ? i18n("Could not read the stream.") : error);
+        }
+        // A filter QPDF cannot undo (a JPEG, say): show the bytes as stored
+        // instead of failing — for an image, those stored bytes are the image.
+        QString rawError;
+        if (!PdfInspect::streamData(input, number, generation, true, &bytes, &filters, &rawError)) {
+            return fail(error.isEmpty() ? rawError : error);
+        }
+        err() << i18nc("@info", "The filters on object %1 could not be undone; showing the bytes as stored.", number)
+              << Qt::endl;
+    }
+
+    if (parser.isSet(u"output"_s)) {
+        const QString path = parser.value(u"output"_s);
+        QFile file(path);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+            return fail(file.errorString(), OutputError);
+        }
+        file.write(bytes);
+        out() << i18ncp("@info", "Wrote %1 byte to %2.", "Wrote %1 bytes to %2.", bytes.size(),
+                        QFileInfo(path).fileName())
+              << Qt::endl;
+        return Success;
+    }
+
+    if (looksTextual(bytes)) {
+        out() << QString::fromUtf8(bytes);
+        if (!bytes.endsWith('\n')) {
+            out() << Qt::endl;
+        }
+        return Success;
+    }
+
+    out() << i18ncp("@info", "Object %2 is a binary stream of %1 byte.", "Object %2 is a binary stream of %1 bytes.",
+                    bytes.size(), number);
+    if (!filters.isEmpty()) {
+        out() << u" "_s << i18nc("@info the stream's /Filter", "Filter %1.", filters);
+    }
+    out() << u" "_s << i18nc("@info", "Use -o FILE to save it, or --raw for the bytes as stored.") << Qt::endl;
+    return Success;
+}
+
 std::optional<PdfInspect::Scalar> scalarFrom(const QString &given)
 {
     const QString name = given.trimmed().toLower();
@@ -428,8 +521,9 @@ void inspectOptions(QCommandLineParser &parser)
     const QCommandLineOption asTypeOption(
         u"as-type"_s, i18n("For set: store it as name, string, int, real or bool. Default: the old value's type."),
         u"type"_s);
+    const QCommandLineOption rawOption(u"raw"_s, i18n("For stream: the bytes exactly as stored, filters and all."));
     parser.addOptions({ depthOption, genOption, ofTypeOption, hasKeyOption, matchingOption, keyOption, newValueOption,
-                        asTypeOption });
+                        asTypeOption, rawOption });
 }
 
 std::optional<int> inspectRun(const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
@@ -442,7 +536,7 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     const QString action = rest.isEmpty() ? QString() : rest.takeFirst().toLower();
 
     if (action.isEmpty()) {
-        return fail(i18n("Say what to inspect: info, objects, object, find, set, trailer, root or limits."),
+        return fail(i18n("Say what to inspect: info, objects, object, find, set, stream, trailer, root or limits."),
                     UsageError);
     }
     if (action == QLatin1String("limits") || action == QLatin1String("limitations")) {
@@ -469,10 +563,14 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     if (action == QLatin1String("set")) {
         return commandSet(rest, parser);
     }
+    if (action == QLatin1String("stream")) {
+        return commandStream(rest, parser);
+    }
 
-    return fail(
-        i18n("“inspect %1” is not a command. Try info, objects, object, find, set, trailer, root or limits.", action),
-        UsageError);
+    return fail(i18n("“inspect %1” is not a command. Try info, objects, object, find, set, stream, trailer, root or "
+                     "limits.",
+                     action),
+                UsageError);
 }
 
 QStringList inspectHelp()
@@ -485,6 +583,7 @@ QStringList inspectHelp()
         line(u"inspect object   FILE --object N"_s, i18n("One object opened out as a tree, by its number")),
         line(u"inspect find     FILE --of-type /Font"_s, i18n("The objects that match a type, a key or some text")),
         line(u"inspect set      FILE --object N --key K"_s, i18n("Change one value, saving an edited copy")),
+        line(u"inspect stream   FILE --object N"_s, i18n("Read a stream object's content, or save it with -o")),
         line(u"inspect trailer  FILE"_s, i18n("The trailer, the way into everything else")),
         line(u"inspect root     FILE"_s, i18n("The catalogue, the document's own root")),
         line(u"inspect limits"_s, i18n("What this low-level view does not reach")),

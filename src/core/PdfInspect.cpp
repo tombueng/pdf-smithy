@@ -8,6 +8,7 @@
 
 #include <KLocalizedString>
 
+#include <qpdf/Buffer.hh>
 #include <qpdf/Constants.h>
 #include <qpdf/QPDF.hh>
 #include <qpdf/QPDFObjGen.hh>
@@ -18,6 +19,7 @@
 #include <QFile>
 
 #include <algorithm>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -542,6 +544,54 @@ bool setScalar(const QString &in, const QString &out, int obj, int gen, const QS
         writer.setObjectStreamMode(qpdf_o_preserve);
         writer.setStreamDataMode(qpdf_s_preserve);
         writer.write();
+        return true;
+    } catch (const std::exception &problem) {
+        if (error) {
+            *error = QString::fromUtf8(problem.what());
+        }
+        return false;
+    }
+}
+
+bool streamData(const QString &pdf, int obj, int gen, bool raw, QByteArray *out, QString *filters, QString *error)
+{
+    try {
+        QPDF document;
+        PdfFile::open(document, pdf);
+
+        bool found = false;
+        int actualGen = gen;
+        for (QPDFObjectHandle &candidate : document.getAllObjects()) {
+            QPDFObjGen og = candidate.getObjGen();
+            if (og.getObj() == obj && (gen < 0 || og.getGen() == gen)) {
+                found = true;
+                actualGen = og.getGen();
+                break;
+            }
+        }
+        if (!found) {
+            if (error) {
+                *error = i18n("There is no object %1 in this file.", obj);
+            }
+            return false;
+        }
+
+        QPDFObjectHandle object = document.getObject(obj, actualGen);
+        if (!object.isStream()) {
+            if (error) {
+                *error = i18n("Object %1 is a %2, not a stream.", obj, QString::fromStdString(object.getTypeName()));
+            }
+            return false;
+        }
+
+        if (filters) {
+            QPDFObjectHandle dict = object.getDict();
+            *filters = dict.hasKey("/Filter") ? QString::fromStdString(dict.getKey("/Filter").unparse()) : QString();
+        }
+
+        std::shared_ptr<Buffer> buffer = raw ? object.getRawStreamData() : object.getStreamData();
+        *out = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()),
+                          static_cast<qsizetype>(buffer->getSize()));
         return true;
     } catch (const std::exception &problem) {
         if (error) {
