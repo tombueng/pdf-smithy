@@ -101,6 +101,9 @@ private Q_SLOTS:
     void setRejectsABadNumber();
     void streamReadsContent();
     void streamRefusesANonStream();
+    void diffOfIdenticalFilesIsEmpty();
+    void diffSeesAChangedValue();
+    void diffSeesAStructuralChange();
     void limitationsAreStated();
 };
 
@@ -481,6 +484,73 @@ void TestPdfInspect::streamRefusesANonStream()
     QString error;
     QVERIFY(!PdfInspect::streamData(pdf, cat, -1, false, &bytes, &filters, &error));
     QVERIFY(!error.isEmpty());
+}
+
+void TestPdfInspect::diffOfIdenticalFilesIsEmpty()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    QVector<PdfInspect::Difference> diffs;
+    QString error;
+    QVERIFY2(PdfInspect::diff(pdf, pdf, &diffs, &error), qPrintable(error));
+    QVERIFY(diffs.isEmpty());
+}
+
+void TestPdfInspect::diffSeesAChangedValue()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    const int page = firstLeafPageObject(pdf);
+    QVERIFY(page >= 0);
+
+    const QString edited = dir.filePath(u"edited.pdf"_s);
+    QString oldValue;
+    QString error;
+    QVERIFY2(PdfInspect::setScalar(pdf, edited, page, -1, u"/Type"_s, u"hello"_s, PdfInspect::Scalar::String, &oldValue,
+                                   &error),
+             qPrintable(error));
+
+    QVector<PdfInspect::Difference> diffs;
+    QVERIFY2(PdfInspect::diff(pdf, edited, &diffs, &error), qPrintable(error));
+    QVERIFY(!diffs.isEmpty());
+
+    bool found = false;
+    for (const PdfInspect::Difference &entry : diffs) {
+        if (entry.kind == PdfInspect::Difference::Kind::Changed && entry.path.contains(u"/Type"_s)
+            && entry.before.contains(u"/Page"_s) && entry.after.contains(u"hello"_s)) {
+            found = true;
+        }
+    }
+    QVERIFY(found);
+}
+
+void TestPdfInspect::diffSeesAStructuralChange()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString three = dir.filePath(u"three.pdf"_s);
+    const QString five = dir.filePath(u"five.pdf"_s);
+    QVERIFY(ps::test::writeSamplePdf(three, 3));
+    QVERIFY(ps::test::writeSamplePdf(five, 5));
+
+    QVector<PdfInspect::Difference> diffs;
+    QString error;
+    QVERIFY2(PdfInspect::diff(three, five, &diffs, &error), qPrintable(error));
+    QVERIFY(!diffs.isEmpty());
+
+    bool countSeen = false;
+    for (const PdfInspect::Difference &entry : diffs) {
+        if (entry.path.contains(u"Count"_s)) {
+            countSeen = true;
+        }
+    }
+    QVERIFY(countSeen);
 }
 
 void TestPdfInspect::limitationsAreStated()

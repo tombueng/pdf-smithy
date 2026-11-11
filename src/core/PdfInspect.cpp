@@ -19,9 +19,11 @@
 #include <QFile>
 
 #include <algorithm>
+#include <cstring>
 #include <memory>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace Qt::Literals::StringLiterals;
@@ -242,6 +244,105 @@ QString withSlash(const QString &name)
         return name;
     }
     return u"/"_s + name;
+}
+
+/** Walks two objects in step, recording how the second differs from the first. */
+void collectDiff(QPDFObjectHandle a, QPDFObjectHandle b, const QString &path, int depth,
+                 std::set<std::pair<QPDFObjGen, QPDFObjGen>> &seen, int &budget, QVector<PdfInspect::Difference> &out)
+{
+    using Kind = PdfInspect::Difference::Kind;
+    if (budget <= 0) {
+        return;
+    }
+    if (a.isIndirect() && b.isIndirect()) {
+        const std::pair<QPDFObjGen, QPDFObjGen> key(a.getObjGen(), b.getObjGen());
+        if (seen.count(key) > 0) {
+            return;
+        }
+        seen.insert(key);
+    }
+    if (depth <= 0) {
+        return;
+    }
+
+    const bool bothDict = (a.isDictionary() || a.isStream()) && (b.isDictionary() || b.isStream());
+    const bool bothArray = a.isArray() && b.isArray();
+
+    if (bothDict) {
+        QPDFObjectHandle da = dictOf(a);
+        QPDFObjectHandle db = dictOf(b);
+        const std::set<std::string> ka = da.getKeys();
+        const std::set<std::string> kb = db.getKeys();
+        // getKeys() returns the keys with their leading slash, so the path parts
+        // are simply concatenated: "/Pages" + "/Count".
+        for (const std::string &key : ka) {
+            const QString childPath = path + QString::fromStdString(key);
+            if (kb.count(key) == 0) {
+                out.push_back({ childPath, Kind::Removed, summarize(da.getKey(key)), QString() });
+                --budget;
+            } else {
+                collectDiff(da.getKey(key), db.getKey(key), childPath, depth - 1, seen, budget, out);
+            }
+            if (budget <= 0) {
+                return;
+            }
+        }
+        for (const std::string &key : kb) {
+            if (ka.count(key) == 0) {
+                out.push_back(
+                    { path + QString::fromStdString(key), Kind::Added, QString(), summarize(db.getKey(key)) });
+                --budget;
+            }
+        }
+        if (a.isStream() && b.isStream()) {
+            try {
+                std::shared_ptr<Buffer> ba = a.getRawStreamData();
+                std::shared_ptr<Buffer> bb = b.getRawStreamData();
+                const bool same = ba->getSize() == bb->getSize()
+                    && (ba->getSize() == 0 || std::memcmp(ba->getBuffer(), bb->getBuffer(), ba->getSize()) == 0);
+                if (!same) {
+                    out.push_back({ path + u" (stream)"_s, Kind::Changed,
+                                    i18np("%1 byte", "%1 bytes", static_cast<int>(ba->getSize())),
+                                    i18np("%1 byte", "%1 bytes", static_cast<int>(bb->getSize())) });
+                    --budget;
+                }
+            } catch (const std::exception &) {
+                // A stream whose bytes will not decode is left uncompared.
+            }
+        }
+        return;
+    }
+
+    if (bothArray) {
+        const int na = a.getArrayNItems();
+        const int nb = b.getArrayNItems();
+        const int common = std::min(na, nb);
+        for (int i = 0; i < common; ++i) {
+            collectDiff(a.getArrayItem(i), b.getArrayItem(i), path + u'[' + QString::number(i) + u']', depth - 1, seen,
+                        budget, out);
+            if (budget <= 0) {
+                return;
+            }
+        }
+        for (int i = common; i < na; ++i) {
+            out.push_back(
+                { path + u'[' + QString::number(i) + u']', Kind::Removed, summarize(a.getArrayItem(i)), QString() });
+            --budget;
+        }
+        for (int i = common; i < nb; ++i) {
+            out.push_back(
+                { path + u'[' + QString::number(i) + u']', Kind::Added, QString(), summarize(b.getArrayItem(i)) });
+            --budget;
+        }
+        return;
+    }
+
+    const QString before = summarize(a);
+    const QString after = summarize(b);
+    if (before != after) {
+        out.push_back({ path.isEmpty() ? u"/"_s : path, Kind::Changed, before, after });
+        --budget;
+    }
 }
 
 } // namespace
@@ -592,6 +693,26 @@ bool streamData(const QString &pdf, int obj, int gen, bool raw, QByteArray *out,
         std::shared_ptr<Buffer> buffer = raw ? object.getRawStreamData() : object.getStreamData();
         *out = QByteArray(reinterpret_cast<const char *>(buffer->getBuffer()),
                           static_cast<qsizetype>(buffer->getSize()));
+        return true;
+    } catch (const std::exception &problem) {
+        if (error) {
+            *error = QString::fromUtf8(problem.what());
+        }
+        return false;
+    }
+}
+
+bool diff(const QString &a, const QString &b, QVector<Difference> *out, QString *error)
+{
+    try {
+        QPDF first;
+        PdfFile::open(first, a);
+        QPDF second;
+        PdfFile::open(second, b);
+
+        std::set<std::pair<QPDFObjGen, QPDFObjGen>> seen;
+        int budget = 5000;
+        collectDiff(first.getRoot(), second.getRoot(), QString(), 40, seen, budget, *out);
         return true;
     } catch (const std::exception &problem) {
         if (error) {

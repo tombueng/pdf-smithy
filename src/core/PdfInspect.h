@@ -140,6 +140,30 @@ bool setScalar(const QString &in, const QString &out, int obj, int gen, const QS
  */
 bool streamData(const QString &pdf, int obj, int gen, bool raw, QByteArray *out, QString *filters, QString *error);
 
+/** One way two documents differ, at a path reached from the catalogue. */
+struct Difference {
+    enum class Kind {
+        Added, //!< present in the second file, not the first
+        Removed, //!< present in the first file, not the second
+        Changed, //!< present in both, with a different value
+    };
+    QString path; //!< e.g. "/Pages/Kids/[0]/Type"
+    Kind kind = Kind::Changed;
+    QString before; //!< how it read in the first file
+    QString after; //!< how it reads in the second
+};
+
+/**
+ * How @p b differs from @p a, walked from each catalogue (the trailer's /Root)
+ * down, following references.
+ *
+ * The comparison starts at the catalogue rather than the trailer on purpose: the
+ * trailer's /ID and /Size change on every save and would drown the differences
+ * that are about content. Object numbers are never compared — only the structure
+ * the numbers point at.
+ */
+bool diff(const QString &a, const QString &b, QVector<Difference> *out, QString *error);
+
 /** The trailer dictionary, expanded to @p depth. */
 bool trailer(const QString &pdf, int depth, Node *out, QString *error);
 

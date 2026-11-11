@@ -502,6 +502,78 @@ int commandSet(const QStringList &arguments, const QCommandLineParser &parser)
 
 // ---- the group ----
 
+QString kindToken(PdfInspect::Difference::Kind kind)
+{
+    switch (kind) {
+    case PdfInspect::Difference::Kind::Added:
+        return u"added"_s;
+    case PdfInspect::Difference::Kind::Removed:
+        return u"removed"_s;
+    case PdfInspect::Difference::Kind::Changed:
+        return u"changed"_s;
+    }
+    return u"changed"_s;
+}
+
+int commandDiff(const QStringList &arguments, const QCommandLineParser &parser)
+{
+    if (arguments.size() != 2) {
+        return fail(i18n("Give two files: inspect diff OLD.pdf NEW.pdf."), UsageError);
+    }
+    const QString first = arguments.at(0);
+    const QString second = arguments.at(1);
+    for (const QString &file : { first, second }) {
+        const QFileInfo info(file);
+        if (!info.exists() || !info.isReadable()) {
+            return fail(i18n("Cannot read %1.", file));
+        }
+    }
+
+    QVector<PdfInspect::Difference> diffs;
+    QString error;
+    if (!PdfInspect::diff(first, second, &diffs, &error)) {
+        return fail(error.isEmpty() ? i18n("Could not compare the two files.") : error);
+    }
+
+    if (parser.isSet(u"json"_s)) {
+        QJsonArray array;
+        for (const PdfInspect::Difference &entry : diffs) {
+            QJsonObject object;
+            object.insert(u"path"_s, entry.path);
+            object.insert(u"change"_s, kindToken(entry.kind));
+            if (!entry.before.isEmpty()) {
+                object.insert(u"before"_s, entry.before);
+            }
+            if (!entry.after.isEmpty()) {
+                object.insert(u"after"_s, entry.after);
+            }
+            array.append(object);
+        }
+        emitJson(out(), { { u"differences"_s, array } });
+        return Success;
+    }
+
+    if (diffs.isEmpty()) {
+        out() << i18n("No differences from the catalogue down.") << Qt::endl;
+        return Success;
+    }
+    for (const PdfInspect::Difference &entry : diffs) {
+        switch (entry.kind) {
+        case PdfInspect::Difference::Kind::Changed:
+            out() << u"~ "_s << entry.path << u": "_s << entry.before << u" → "_s << entry.after << Qt::endl;
+            break;
+        case PdfInspect::Difference::Kind::Removed:
+            out() << u"- "_s << entry.path << u": "_s << entry.before << Qt::endl;
+            break;
+        case PdfInspect::Difference::Kind::Added:
+            out() << u"+ "_s << entry.path << u": "_s << entry.after << Qt::endl;
+            break;
+        }
+    }
+    out() << i18ncp("@info count of differences", "%1 difference.", "%1 differences.", diffs.size()) << Qt::endl;
+    return Success;
+}
+
 void inspectOptions(QCommandLineParser &parser)
 {
     const QCommandLineOption depthOption(u"depth"_s, i18n("How many levels of the tree to open. Default: 4."),
@@ -536,8 +608,9 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     const QString action = rest.isEmpty() ? QString() : rest.takeFirst().toLower();
 
     if (action.isEmpty()) {
-        return fail(i18n("Say what to inspect: info, objects, object, find, set, stream, trailer, root or limits."),
-                    UsageError);
+        return fail(
+            i18n("Say what to inspect: info, objects, object, find, set, stream, diff, trailer, root or limits."),
+            UsageError);
     }
     if (action == QLatin1String("limits") || action == QLatin1String("limitations")) {
         return commandLimits();
@@ -566,9 +639,12 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     if (action == QLatin1String("stream")) {
         return commandStream(rest, parser);
     }
+    if (action == QLatin1String("diff")) {
+        return commandDiff(rest, parser);
+    }
 
-    return fail(i18n("“inspect %1” is not a command. Try info, objects, object, find, set, stream, trailer, root or "
-                     "limits.",
+    return fail(i18n("“inspect %1” is not a command. Try info, objects, object, find, set, stream, diff, trailer, root "
+                     "or limits.",
                      action),
                 UsageError);
 }
@@ -584,6 +660,7 @@ QStringList inspectHelp()
         line(u"inspect find     FILE --of-type /Font"_s, i18n("The objects that match a type, a key or some text")),
         line(u"inspect set      FILE --object N --key K"_s, i18n("Change one value, saving an edited copy")),
         line(u"inspect stream   FILE --object N"_s, i18n("Read a stream object's content, or save it with -o")),
+        line(u"inspect diff     OLD.pdf NEW.pdf"_s, i18n("What changed between two files, from the catalogue down")),
         line(u"inspect trailer  FILE"_s, i18n("The trailer, the way into everything else")),
         line(u"inspect root     FILE"_s, i18n("The catalogue, the document's own root")),
         line(u"inspect limits"_s, i18n("What this low-level view does not reach")),

@@ -64,6 +64,7 @@ Impact·Edge·Safe at low Cost.
 | 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | **already covered ✓** | 4 | 3 | 5 | 5 | 2 | — |
 | 3b | **Object-graph search** (`inspect find` by /Type·/Subtype, key, or text — extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
 | 3c | **Stream content** (`inspect stream` — view decoded operators, extract embedded images; extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
+| 3d | **Structural diff** (`inspect diff` — which objects/keys/values differ between two PDFs, from the catalogue down; pairs with set) | **done ✓** | 4 | 5 | 5 | 5 | 3 | **A** |
 | 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | **done ✓** | 4 | 5 | 4 | 4 | 4 | B |
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
@@ -148,3 +149,11 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   this project is built on holds for everything added. Next: **inspect diff** —
   show exactly which objects and keys differ between two PDFs (pairs with inspect
   set; read-only).
+- _cycle 7_ — **inspect diff done.** Walks both catalogues in step, following
+  references with pair-cycle-detection and a node budget, and reports every
+  key/value that was added, removed or changed, at a readable path
+  (`/Pages/Kids[0]/Type: /Page → (hello)`). Starts at /Root, not the trailer, so
+  the /ID and /Size that churn on every save do not drown the real differences;
+  stream bodies are compared by bytes. Three new `tst_pdfinspect` cases
+  (identical→empty, a changed value, a page-count change). Pairs with `inspect
+  set`: make an edit, see exactly what it did.
