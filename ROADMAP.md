@@ -63,7 +63,7 @@ Impact·Edge·Safe at low Cost.
 | 2 | **Form autofill vault** (local store of name/address/email/IBAN…, smart field→value mapping, opt-in learning; core + CLI first) | **done ✓** | 5 | 5 | 5 | 4 | 3 | **A** |
 | 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | **already covered ✓** | 4 | 3 | 5 | 5 | 2 | — |
 | 3b | **Object-graph search** (`inspect find` by /Type·/Subtype, key, or text — extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
-| 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | gap | 4 | 5 | 4 | 4 | 4 | B |
+| 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | **done ✓** | 4 | 5 | 4 | 4 | 4 | B |
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
 | 7 | **Search-as-you-type** with a result list + in-page highlight | verify | 4 | 3 | 4 | 3 | 3 | B |
@@ -121,3 +121,13 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   `inspect find` filters the object graph by /Type or /Subtype, by a key an
   object carries, or by text — read-only, four new `tst_pdfinspect` cases.
   Next: **#4 attribute editing on the object tree** (a careful, reversible step).
+- _cycle 4_ — **#4 attribute editing done.** `inspect set FILE --object N --key
+  /Foo --new-value X [--as-type name|string|int|real|bool]` replaces one existing
+  scalar, keeping its type by default or casting on request. Deliberately narrow:
+  dictionaries only, the key must already exist and hold a scalar (not an array,
+  stream or sub-dictionary), and it writes a copy with `qpdf_o_preserve` so the
+  original is untouched and the file keeps its shape. Found and documented that
+  QPDF guards the catalogue's /Type (re-stamps /Catalog on write). Four new
+  `tst_pdfinspect` cases (replace-and-recast, refuse-missing-key, refuse-container,
+  reject-bad-number). Next: **#5 certificate-file signing** (verify it is absent
+  first) or **#6 preflight-fix surfacing**.

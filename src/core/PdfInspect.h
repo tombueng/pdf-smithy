@@ -110,6 +110,25 @@ struct Query {
  */
 bool find(const QString &pdf, const Query &query, QVector<ObjectSummary> *out, QString *error);
 
+/** How to store a new value; Keep uses the type the old value had. */
+enum class Scalar { Keep, Name, String, Integer, Real, Boolean };
+
+/**
+ * Replaces the scalar at object @p obj's dictionary key @p key with @p value,
+ * writing the result to @p out and leaving @p in untouched.
+ *
+ * @p as chooses the stored type, Keep keeping the one the old value had.
+ * @p oldRendering, when not null, receives how the replaced value read. False,
+ * with @p error set, when the object or the key is absent, the key holds
+ * something that is not a single value, or @p value does not fit the chosen type.
+ *
+ * It only sets an existing scalar. It does not add keys, nor touch arrays,
+ * streams or the structure of the document — the deliberate, reversible edit,
+ * and nothing wider.
+ */
+bool setScalar(const QString &in, const QString &out, int obj, int gen, const QString &key, const QString &value,
+               Scalar as, QString *oldRendering, QString *error);
+
 /** The trailer dictionary, expanded to @p depth. */
 bool trailer(const QString &pdf, int depth, Node *out, QString *error);
 

@@ -36,6 +36,31 @@ int firstLeafPageObject(const QString &pdf)
     return -1;
 }
 
+const PdfInspect::Node *childByLabel(const PdfInspect::Node &node, const QString &label)
+{
+    for (const PdfInspect::Node &child : node.children) {
+        if (child.label == label) {
+            return &child;
+        }
+    }
+    return nullptr;
+}
+
+int catalogueObject(const QString &pdf)
+{
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    if (!PdfInspect::objects(pdf, &rows, &error)) {
+        return -1;
+    }
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        if (row.pdfType.contains(u"/Catalog"_s)) {
+            return row.obj;
+        }
+    }
+    return -1;
+}
+
 } // namespace
 
 class TestPdfInspect : public QObject
@@ -55,6 +80,10 @@ private Q_SLOTS:
     void findByKeyFiltersDicts();
     void findByTextIsCaseInsensitive();
     void emptyQueryMatchesEverything();
+    void setReplacesAScalarAndChangesType();
+    void setRefusesAMissingKey();
+    void setRefusesAContainerValue();
+    void setRejectsABadNumber();
     void limitationsAreStated();
 };
 
@@ -302,6 +331,103 @@ void TestPdfInspect::emptyQueryMatchesEverything()
     QVector<PdfInspect::ObjectSummary> matched;
     QVERIFY(PdfInspect::find(pdf, PdfInspect::Query(), &matched, &error));
     QCOMPARE(matched.size(), all.size());
+}
+
+void TestPdfInspect::setReplacesAScalarAndChangesType()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    // A page, not the catalogue: QPDF guards the root's /Type, re-stamping
+    // /Catalog on write, which is the one place this edit cannot take.
+    const int page = firstLeafPageObject(pdf);
+    QVERIFY(page >= 0);
+
+    // Keep the type: set /Type back to /Page. The old value reads as /Page, and
+    // the file still opens.
+    const QString kept = dir.filePath(u"kept.pdf"_s);
+    QString oldValue;
+    QString error;
+    QVERIFY2(
+        PdfInspect::setScalar(pdf, kept, page, -1, u"/Type"_s, u"/Page"_s, PdfInspect::Scalar::Keep, &oldValue, &error),
+        qPrintable(error));
+    QCOMPARE(oldValue, u"/Page"_s);
+    PdfInspect::Overview overview;
+    QVERIFY2(PdfInspect::overview(kept, &overview, &error), qPrintable(error));
+
+    // Change the type: store /Type as a string instead of a name.
+    const QString changed = dir.filePath(u"changed.pdf"_s);
+    QVERIFY2(PdfInspect::setScalar(pdf, changed, page, -1, u"/Type"_s, u"hello"_s, PdfInspect::Scalar::String,
+                                   &oldValue, &error),
+             qPrintable(error));
+
+    // Follow references from the catalogue rather than trust a number: the edited
+    // page can no longer be found by being a /Page, and a save may renumber. Some
+    // page under /Pages /Kids now carries a string /Type.
+    PdfInspect::Node root;
+    QVERIFY2(PdfInspect::root(changed, 6, &root, &error), qPrintable(error));
+    const PdfInspect::Node *pages = childByLabel(root, u"/Pages"_s);
+    QVERIFY(pages != nullptr);
+    const PdfInspect::Node *kids = childByLabel(*pages, u"/Kids"_s);
+    QVERIFY(kids != nullptr);
+    QVERIFY(!kids->children.isEmpty());
+
+    bool checked = false;
+    for (const PdfInspect::Node &kid : kids->children) {
+        const PdfInspect::Node *type = childByLabel(kid, u"/Type"_s);
+        if (type != nullptr && type->type == PdfInspect::Type::String && type->value.contains(u"hello"_s)) {
+            checked = true;
+        }
+    }
+    QVERIFY(checked);
+}
+
+void TestPdfInspect::setRefusesAMissingKey()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    const int cat = catalogueObject(pdf);
+    QVERIFY(cat >= 0);
+
+    QString oldValue;
+    QString error;
+    QVERIFY(!PdfInspect::setScalar(pdf, dir.filePath(u"out.pdf"_s), cat, -1, u"/NoSuchKey"_s, u"x"_s,
+                                   PdfInspect::Scalar::String, &oldValue, &error));
+    QVERIFY(!error.isEmpty());
+}
+
+void TestPdfInspect::setRefusesAContainerValue()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    const int cat = catalogueObject(pdf);
+    QVERIFY(cat >= 0);
+
+    // The catalogue's /Pages is a dictionary, not a single value.
+    QString oldValue;
+    QString error;
+    QVERIFY(!PdfInspect::setScalar(pdf, dir.filePath(u"out.pdf"_s), cat, -1, u"/Pages"_s, u"x"_s,
+                                   PdfInspect::Scalar::String, &oldValue, &error));
+    QVERIFY(!error.isEmpty());
+}
+
+void TestPdfInspect::setRejectsABadNumber()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    const int cat = catalogueObject(pdf);
+    QVERIFY(cat >= 0);
+
+    QString oldValue;
+    QString error;
+    QVERIFY(!PdfInspect::setScalar(pdf, dir.filePath(u"out.pdf"_s), cat, -1, u"/Type"_s, u"notanumber"_s,
+                                   PdfInspect::Scalar::Integer, &oldValue, &error));
+    QVERIFY(!error.isEmpty());
 }
 
 void TestPdfInspect::limitationsAreStated()

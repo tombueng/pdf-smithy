@@ -13,6 +13,9 @@
 #include <qpdf/QPDFObjGen.hh>
 #include <qpdf/QPDFObjectHandle.hh>
 #include <qpdf/QPDFPageDocumentHelper.hh>
+#include <qpdf/QPDFWriter.hh>
+
+#include <QFile>
 
 #include <algorithm>
 #include <set>
@@ -415,6 +418,139 @@ bool object(const QString &pdf, int obj, int gen, int depth, Node *out, QString 
     }
 }
 
+bool setScalar(const QString &in, const QString &out, int obj, int gen, const QString &key, const QString &value,
+               Scalar as, QString *oldRendering, QString *error)
+{
+    try {
+        QPDF document;
+        PdfFile::open(document, in);
+
+        bool found = false;
+        int actualGen = gen;
+        for (QPDFObjectHandle &candidate : document.getAllObjects()) {
+            QPDFObjGen og = candidate.getObjGen();
+            if (og.getObj() == obj && (gen < 0 || og.getGen() == gen)) {
+                found = true;
+                actualGen = og.getGen();
+                break;
+            }
+        }
+        if (!found) {
+            if (error) {
+                *error = i18n("There is no object %1 in this file.", obj);
+            }
+            return false;
+        }
+
+        QPDFObjectHandle object = document.getObject(obj, actualGen);
+        if (!object.isDictionary()) {
+            if (error) {
+                *error = i18n("Object %1 is a %2, which has no keys to set.", obj,
+                              QString::fromStdString(object.getTypeName()));
+            }
+            return false;
+        }
+
+        const std::string k = withSlash(key).toStdString();
+        if (!object.hasKey(k)) {
+            if (error) {
+                *error = i18n("Object %1 has no key %2.", obj, withSlash(key));
+            }
+            return false;
+        }
+
+        QPDFObjectHandle current = object.getKey(k);
+        if (current.isDictionary() || current.isArray() || current.isStream()) {
+            if (error) {
+                *error = i18n("%1 holds a %2, not a single value this can set.", withSlash(key),
+                              QString::fromStdString(current.getTypeName()));
+            }
+            return false;
+        }
+        if (oldRendering) {
+            *oldRendering = QString::fromStdString(current.unparse());
+        }
+
+        Scalar target = as;
+        if (target == Scalar::Keep) {
+            if (current.isName()) {
+                target = Scalar::Name;
+            } else if (current.isInteger()) {
+                target = Scalar::Integer;
+            } else if (current.isReal()) {
+                target = Scalar::Real;
+            } else if (current.isBool()) {
+                target = Scalar::Boolean;
+            } else {
+                target = Scalar::String;
+            }
+        }
+
+        QPDFObjectHandle replacement;
+        switch (target) {
+        case Scalar::Name:
+            replacement = QPDFObjectHandle::newName(withSlash(value).toStdString());
+            break;
+        case Scalar::String:
+            replacement = QPDFObjectHandle::newString(value.toStdString());
+            break;
+        case Scalar::Integer: {
+            bool ok = false;
+            const long long number = value.toLongLong(&ok);
+            if (!ok) {
+                if (error) {
+                    *error = i18n("“%1” is not a whole number.", value);
+                }
+                return false;
+            }
+            replacement = QPDFObjectHandle::newInteger(number);
+            break;
+        }
+        case Scalar::Real: {
+            bool ok = false;
+            value.toDouble(&ok);
+            if (!ok) {
+                if (error) {
+                    *error = i18n("“%1” is not a number.", value);
+                }
+                return false;
+            }
+            replacement = QPDFObjectHandle::newReal(value.toStdString());
+            break;
+        }
+        case Scalar::Boolean: {
+            const QString lowered = value.trimmed().toLower();
+            if (lowered != u"true"_s && lowered != u"false"_s) {
+                if (error) {
+                    *error = i18n("“%1” is not true or false.", value);
+                }
+                return false;
+            }
+            replacement = QPDFObjectHandle::newBool(lowered == u"true"_s);
+            break;
+        }
+        case Scalar::Keep:
+            break; // resolved above
+        }
+
+        object.replaceKey(k, replacement);
+
+        QPDFWriter writer(document);
+        const QByteArray nativePath = QFile::encodeName(out);
+        writer.setOutputFilename(nativePath.constData());
+        // Keep the file as it was built — change the one value, not the shape.
+        writer.setObjectStreamMode(qpdf_o_preserve);
+        writer.setStreamDataMode(qpdf_s_preserve);
+        writer.write();
+        return true;
+    } catch (const std::exception &problem) {
+        if (error) {
+            *error = QString::fromUtf8(problem.what());
+        }
+        return false;
+    }
+}
+
 QString typeToken(Type type)
 {
     switch (type) {
@@ -454,7 +590,10 @@ QStringList limitations()
         i18n("Stream contents are summarised by filter and length, not decoded or shown."),
         i18n("An object kept inside a compressed object stream is shown resolved, not by "
              "its place within that stream."),
-        i18n("This view only reads. Changing an attribute is a separate, deliberate command."),
+        i18n("Editing (inspect set) changes one existing scalar value at a time; it does not add keys, nor alter "
+             "arrays, streams or the document's structure."),
+        i18n("Saving an edit writes the whole file afresh, so object numbers may change; inspect the saved copy to "
+             "find them again."),
         i18n("An encrypted document must be opened with its password before anything here "
              "can read it."),
     };

@@ -16,6 +16,7 @@
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -330,6 +331,82 @@ int commandLimits()
     return Success;
 }
 
+std::optional<PdfInspect::Scalar> scalarFrom(const QString &given)
+{
+    const QString name = given.trimmed().toLower();
+    if (name.isEmpty() || name == u"keep"_s || name == u"auto"_s) {
+        return PdfInspect::Scalar::Keep;
+    }
+    if (name == u"name"_s) {
+        return PdfInspect::Scalar::Name;
+    }
+    if (name == u"string"_s || name == u"text"_s) {
+        return PdfInspect::Scalar::String;
+    }
+    if (name == u"int"_s || name == u"integer"_s) {
+        return PdfInspect::Scalar::Integer;
+    }
+    if (name == u"real"_s || name == u"number"_s || name == u"float"_s) {
+        return PdfInspect::Scalar::Real;
+    }
+    if (name == u"bool"_s || name == u"boolean"_s) {
+        return PdfInspect::Scalar::Boolean;
+    }
+    return std::nullopt;
+}
+
+int commandSet(const QStringList &arguments, const QCommandLineParser &parser)
+{
+    QString input;
+    int code = 0;
+    if (!oneInputFile(arguments, u"inspect set"_s, &input, &code)) {
+        return code;
+    }
+    if (!parser.isSet(u"object"_s)) {
+        return fail(i18n("Say which object: inspect set FILE --object N --key /Foo --new-value X."), UsageError);
+    }
+    bool ok = false;
+    const int number = parser.value(u"object"_s).toInt(&ok);
+    if (!ok || number < 0) {
+        return fail(i18n("“%1” is not an object number.", parser.value(u"object"_s)), UsageError);
+    }
+    int generation = -1;
+    if (parser.isSet(u"gen"_s)) {
+        bool genOk = false;
+        generation = parser.value(u"gen"_s).toInt(&genOk);
+        if (!genOk || generation < 0) {
+            return fail(i18n("“%1” is not a generation number.", parser.value(u"gen"_s)), UsageError);
+        }
+    }
+    if (!parser.isSet(u"key"_s)) {
+        return fail(i18n("Say which key: --key /Foo. “inspect object FILE --object N” shows an object's keys."),
+                    UsageError);
+    }
+    if (!parser.isSet(u"new-value"_s)) {
+        return fail(i18n("Say the new value: --new-value X."), UsageError);
+    }
+    const std::optional<PdfInspect::Scalar> as = scalarFrom(parser.value(u"as-type"_s));
+    if (!as.has_value()) {
+        return fail(i18n("“%1” is not a type. Use name, string, int, real or bool.", parser.value(u"as-type"_s)),
+                    UsageError);
+    }
+
+    const QString key = parser.value(u"key"_s);
+    const QString value = parser.value(u"new-value"_s);
+    const QString output = outputOr(parser.value(u"output"_s), input, u"-edited.pdf"_s);
+
+    QString oldRendering;
+    QString error;
+    if (!PdfInspect::setScalar(input, output, number, generation, key, value, *as, &oldRendering, &error)) {
+        return fail(error.isEmpty() ? i18n("Could not set the value.") : error, OutputError);
+    }
+
+    out() << i18nc("@info the edit that was made, saved to a file", "Object %1 %2: %3 → %4, saved as %5.", number, key,
+                   oldRendering, value, QFileInfo(output).fileName())
+          << Qt::endl;
+    return Success;
+}
+
 // ---- the group ----
 
 void inspectOptions(QCommandLineParser &parser)
@@ -346,7 +423,13 @@ void inspectOptions(QCommandLineParser &parser)
                                             i18n("For find: only objects whose type or summary contains "
                                                  "this."),
                                             u"text"_s);
-    parser.addOptions({ depthOption, genOption, ofTypeOption, hasKeyOption, matchingOption });
+    const QCommandLineOption keyOption(u"key"_s, i18n("For set: the key to change, e.g. /Producer."), u"name"_s);
+    const QCommandLineOption newValueOption(u"new-value"_s, i18n("For set: the value to store."), u"value"_s);
+    const QCommandLineOption asTypeOption(
+        u"as-type"_s, i18n("For set: store it as name, string, int, real or bool. Default: the old value's type."),
+        u"type"_s);
+    parser.addOptions({ depthOption, genOption, ofTypeOption, hasKeyOption, matchingOption, keyOption, newValueOption,
+                        asTypeOption });
 }
 
 std::optional<int> inspectRun(const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
@@ -359,7 +442,8 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     const QString action = rest.isEmpty() ? QString() : rest.takeFirst().toLower();
 
     if (action.isEmpty()) {
-        return fail(i18n("Say what to inspect: info, objects, object, find, trailer, root or limits."), UsageError);
+        return fail(i18n("Say what to inspect: info, objects, object, find, set, trailer, root or limits."),
+                    UsageError);
     }
     if (action == QLatin1String("limits") || action == QLatin1String("limitations")) {
         return commandLimits();
@@ -382,9 +466,12 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     if (action == QLatin1String("find")) {
         return commandFind(rest, parser);
     }
+    if (action == QLatin1String("set")) {
+        return commandSet(rest, parser);
+    }
 
     return fail(
-        i18n("“inspect %1” is not a command. Try info, objects, object, find, trailer, root or limits.", action),
+        i18n("“inspect %1” is not a command. Try info, objects, object, find, set, trailer, root or limits.", action),
         UsageError);
 }
 
@@ -397,6 +484,7 @@ QStringList inspectHelp()
         line(u"inspect objects  FILE"_s, i18n("Every indirect object, with its number and type")),
         line(u"inspect object   FILE --object N"_s, i18n("One object opened out as a tree, by its number")),
         line(u"inspect find     FILE --of-type /Font"_s, i18n("The objects that match a type, a key or some text")),
+        line(u"inspect set      FILE --object N --key K"_s, i18n("Change one value, saving an edited copy")),
         line(u"inspect trailer  FILE"_s, i18n("The trailer, the way into everything else")),
         line(u"inspect root     FILE"_s, i18n("The catalogue, the document's own root")),
         line(u"inspect limits"_s, i18n("What this low-level view does not reach")),
