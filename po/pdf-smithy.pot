@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-11 21:00+0100\n"
+"POT-Creation-Date: 2026-11-11 23:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2335,6 +2335,160 @@ msgstr ""
 #: src/cli/CommandsImages.cpp:997
 #, kde-format
 msgid "What working on pictures cannot promise"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:59
+#, kde-format
+msgctxt "@info a reference to an object, not expanded here"
+msgid "→ %1 %2 R  "
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:65
+#, kde-format
+msgctxt "@info the stream's /Filter"
+msgid "  filter %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:68
+#, kde-format
+msgctxt "@info stream length in bytes"
+msgid "  %1 bytes"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:137 src/cli/CommandsInspect.cpp:198
+#: src/cli/CommandsInspect.cpp:243
+#, kde-format
+msgid "Could not read %1."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:156
+#, kde-format
+msgid ""
+"Say which object: inspect object FILE --object N. “inspect objects FILE” "
+"lists the numbers."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:162
+#, kde-format
+msgid "“%1” is not an object number."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:169
+#, kde-format
+msgid "“%1” is not a generation number."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:176
+#, kde-format
+msgid "Could not read object %1."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:228
+#, kde-format
+msgctxt "@info total count of indirect objects"
+msgid "%1 object."
+msgid_plural "%1 objects."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/CommandsInspect.cpp:263
+#, kde-format
+msgctxt "@info PDF header version"
+msgid "PDF version: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:264
+#, kde-format
+msgctxt "@info count of indirect objects"
+msgid "Objects: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:266
+#, kde-format
+msgctxt "@info page count"
+msgid "Pages: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:269 src/cli/CommandsInspect.cpp:272
+#, kde-format
+msgctxt "@info yes"
+msgid "yes"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:269 src/cli/CommandsInspect.cpp:272
+#, kde-format
+msgctxt "@info no"
+msgid "no"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:268
+#, kde-format
+msgctxt "@info whether the file is encrypted"
+msgid "Encrypted: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:271
+#, kde-format
+msgctxt "@info whether the file is linearized for the web"
+msgid "Linearized: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:275
+#, kde-format
+msgctxt "@info the /Producer string"
+msgid "Producer: %1"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:295
+#, kde-format
+msgid "How many levels of the tree to open. Default: 4."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:297
+#, kde-format
+msgid "The generation number, when an object has more than one."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:312
+#, kde-format
+msgid "Say what to inspect: info, objects, object, trailer, root or limits."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:333
+#, kde-format
+msgid ""
+"“inspect %1” is not a command. Try info, objects, object, trailer, root or "
+"limits."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:342
+#, kde-format
+msgid "Version, object and page counts, how it is secured"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:343
+#, kde-format
+msgid "Every indirect object, with its number and type"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:344
+#, kde-format
+msgid "One object opened out as a tree, by its number"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:345
+#, kde-format
+msgid "The trailer, the way into everything else"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:346
+#, kde-format
+msgid "The catalogue, the document's own root"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:347
+#, kde-format
+msgid "What this low-level view does not reach"
 msgstr ""
 
 #: src/cli/CommandsLayout.cpp:249 src/cli/CommandsLayout.cpp:322
@@ -4888,17 +5042,17 @@ msgid_plural "Straightened %1 pages, worst tilt %2°."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/main.cpp:1922
+#: src/cli/main.cpp:1923
 #, kde-format
 msgid "Edit PDF documents from the command line."
 msgstr ""
 
-#: src/cli/main.cpp:1923 src/main.cpp:35
+#: src/cli/main.cpp:1924 src/main.cpp:35
 #, kde-format
 msgid "© 2026 Tom Bueng"
 msgstr ""
 
-#: src/cli/main.cpp:1928
+#: src/cli/main.cpp:1929
 #, kde-format
 msgid ""
 "PDF Smithy (command line)\n"
@@ -4936,7 +5090,7 @@ msgid ""
 "archival\n"
 msgstr ""
 
-#: src/cli/main.cpp:1956
+#: src/cli/main.cpp:1957
 #, kde-format
 msgid ""
 "\n"
@@ -4987,189 +5141,189 @@ msgid ""
 "so \"pages FILE --keep 1,1,2-4\" writes page 1 twice."
 msgstr ""
 
-#: src/cli/main.cpp:1995
+#: src/cli/main.cpp:1996
 #, kde-format
 msgid "The command to run."
 msgstr ""
 
-#: src/cli/main.cpp:2000
+#: src/cli/main.cpp:2001
 #, kde-format
 msgid "Where to write the result."
 msgstr ""
 
-#: src/cli/main.cpp:2001
+#: src/cli/main.cpp:2002
 #, kde-format
 msgid "Machine-readable output."
 msgstr ""
 
-#: src/cli/main.cpp:2002
+#: src/cli/main.cpp:2003
 #, kde-format
 msgid "Pages to keep, e.g. 1-3,7,9-last."
 msgstr ""
 
-#: src/cli/main.cpp:2004
+#: src/cli/main.cpp:2005
 #, kde-format
 msgid "Rotate pages, e.g. 1-3:90,7:180."
 msgstr ""
 
-#: src/cli/main.cpp:2006
+#: src/cli/main.cpp:2007
 #, kde-format
 msgid "Split into chunks of this many pages."
 msgstr ""
 
-#: src/cli/main.cpp:2009
+#: src/cli/main.cpp:2010
 #, kde-format
 msgid "Split into one file per range, e.g. 1-3,4-9."
 msgstr ""
 
-#: src/cli/main.cpp:2011
+#: src/cli/main.cpp:2012
 #, kde-format
 msgid "Split into pieces no larger than this, e.g. 5M."
 msgstr ""
 
-#: src/cli/main.cpp:2013
+#: src/cli/main.cpp:2014
 #, kde-format
 msgid "Compression: lossless, balanced, strong or extreme."
 msgstr ""
 
-#: src/cli/main.cpp:2014
+#: src/cli/main.cpp:2015
 #, kde-format
 msgid "Convert to grayscale while compressing."
 msgstr ""
 
-#: src/cli/main.cpp:2015
+#: src/cli/main.cpp:2016
 #, kde-format
 msgid "OCR languages, e.g. deu+eng."
 msgstr ""
 
-#: src/cli/main.cpp:2017
+#: src/cli/main.cpp:2018
 #, kde-format
 msgid "Correct crooked scans."
 msgstr ""
 
-#: src/cli/main.cpp:2018
+#: src/cli/main.cpp:2019
 #, kde-format
 msgid "Signature image to stamp."
 msgstr ""
 
-#: src/cli/main.cpp:2020
+#: src/cli/main.cpp:2021
 #, kde-format
 msgid "Where to put it: bottom-right, centre, top-left…"
 msgstr ""
 
-#: src/cli/main.cpp:2022
+#: src/cli/main.cpp:2023
 #, kde-format
 msgid "Width as a fraction of the page, e.g. 0.3."
 msgstr ""
 
-#: src/cli/main.cpp:2028
+#: src/cli/main.cpp:2029
 #, kde-format
 msgid "Distance from the page edge, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2030
+#: src/cli/main.cpp:2031
 #, kde-format
 msgid "Watermark text."
 msgstr ""
 
-#: src/cli/main.cpp:2031
+#: src/cli/main.cpp:2032
 #, kde-format
 msgid "Watermark angle in degrees."
 msgstr ""
 
-#: src/cli/main.cpp:2033
+#: src/cli/main.cpp:2034
 #, kde-format
 msgid "Watermark strength, 1 to 100 percent."
 msgstr ""
 
-#: src/cli/main.cpp:2035
+#: src/cli/main.cpp:2036
 #, kde-format
 msgid "Watermark colour, a name or #rrggbb."
 msgstr ""
 
-#: src/cli/main.cpp:2038
+#: src/cli/main.cpp:2039
 #, kde-format
 msgid "Draw the watermark as an outline, keeping the page readable."
 msgstr ""
 
-#: src/cli/main.cpp:2039
+#: src/cli/main.cpp:2040
 #, kde-format
 msgid "Which pages, e.g. 1-3,last. Default: all."
 msgstr ""
 
-#: src/cli/main.cpp:2042
+#: src/cli/main.cpp:2043
 #, kde-format
 msgid "Fit images into a4, a3, a5, letter or legal."
 msgstr ""
 
-#: src/cli/main.cpp:2043
+#: src/cli/main.cpp:2044
 #, kde-format
 msgid "Resolution for image export, in dots per inch."
 msgstr ""
 
-#: src/cli/main.cpp:2045
+#: src/cli/main.cpp:2046
 #, kde-format
 msgid "Image format: png, jpeg or tiff."
 msgstr ""
 
-#: src/cli/main.cpp:2048
+#: src/cli/main.cpp:2049
 #, kde-format
 msgid "JPEG quality when importing, 0 keeps the pixels."
 msgstr ""
 
-#: src/cli/main.cpp:2051
+#: src/cli/main.cpp:2052
 #, kde-format
 msgid "Strip metadata, JavaScript and embedded files."
 msgstr ""
 
-#: src/cli/main.cpp:2052
+#: src/cli/main.cpp:2053
 #, kde-format
 msgid "Password to set."
 msgstr ""
 
-#: src/cli/main.cpp:2055
+#: src/cli/main.cpp:2056
 #, kde-format
 msgid "Password the input already has, if any."
 msgstr ""
 
-#: src/cli/main.cpp:2057
+#: src/cli/main.cpp:2058
 #, kde-format
 msgid "Remove the password instead of setting one."
 msgstr ""
 
-#: src/cli/main.cpp:2058
+#: src/cli/main.cpp:2059
 #, kde-format
 msgid "Ask readers not to print."
 msgstr ""
 
-#: src/cli/main.cpp:2059
+#: src/cli/main.cpp:2060
 #, kde-format
 msgid "Ask readers not to copy text."
 msgstr ""
 
-#: src/cli/main.cpp:2060
+#: src/cli/main.cpp:2061
 #, kde-format
 msgid "Split wherever a bookmark starts."
 msgstr ""
 
-#: src/cli/main.cpp:2063
+#: src/cli/main.cpp:2064
 #, kde-format
 msgid ""
 "A colour profile to embed: sRGB for “archive”, a CMYK printing condition for "
 "“to-pdfx”. Leave out to look for one on the system."
 msgstr ""
 
-#: src/cli/main.cpp:2066
+#: src/cli/main.cpp:2067
 #, kde-format
 msgid "Document title to write."
 msgstr ""
 
-#: src/cli/main.cpp:2068
+#: src/cli/main.cpp:2069
 #, kde-format
 msgid "Document author to write."
 msgstr ""
 
-#: src/cli/main.cpp:2072
+#: src/cli/main.cpp:2073
 #, kde-format
 msgid ""
 "How different two pixels may be before they count as changed, in levels of "
@@ -5177,196 +5331,196 @@ msgid ""
 "between 0 and 1."
 msgstr ""
 
-#: src/cli/main.cpp:2076
+#: src/cli/main.cpp:2077
 #, kde-format
 msgid "Treat a different line break as a change."
 msgstr ""
 
-#: src/cli/main.cpp:2078
+#: src/cli/main.cpp:2079
 #, kde-format
 msgid "Write a side-by-side picture of one page, with -o."
 msgstr ""
 
-#: src/cli/main.cpp:2080
+#: src/cli/main.cpp:2081
 #, kde-format
 msgid "Folder to write the finished files into."
 msgstr ""
 
-#: src/cli/main.cpp:2083
+#: src/cli/main.cpp:2084
 #, kde-format
 msgid ""
 "What to do to each file: compress, sanitize, flatten-comments, flatten-form "
 "or ocr."
 msgstr ""
 
-#: src/cli/main.cpp:2087
+#: src/cli/main.cpp:2088
 #, kde-format
 msgid "Replace a line, as PAGE:LINE=New text. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2089
+#: src/cli/main.cpp:2090
 #, kde-format
 msgid "Which page to list the text of."
 msgstr ""
 
-#: src/cli/main.cpp:2092
+#: src/cli/main.cpp:2093
 #, kde-format
 msgid "Fill in a field, as NAME=VALUE. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2094
+#: src/cli/main.cpp:2095
 #, kde-format
 msgid "Add a bookmark, as PAGE:Title. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2096
+#: src/cli/main.cpp:2097
 #, kde-format
 msgid "Replace the table of contents from a JSON file, as --json writes it."
 msgstr ""
 
-#: src/cli/main.cpp:2099
+#: src/cli/main.cpp:2100
 #, kde-format
 msgid "Write the comments to an XFDF file, without the document."
 msgstr ""
 
-#: src/cli/main.cpp:2102
+#: src/cli/main.cpp:2103
 #, kde-format
 msgid "Read comments from an XFDF file and add them."
 msgstr ""
 
-#: src/cli/main.cpp:2103
+#: src/cli/main.cpp:2104
 #, kde-format
 msgid "Show the comments instead of changing them."
 msgstr ""
 
-#: src/cli/main.cpp:2105
+#: src/cli/main.cpp:2106
 #, kde-format
 msgid "Highlight an area, as PAGE:X,Y,WIDTH,HEIGHT. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2107
+#: src/cli/main.cpp:2108
 #, kde-format
 msgid "Put a note marker at PAGE:X,Y. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2112
+#: src/cli/main.cpp:2113
 #, kde-format
 msgid "Take every comment out, leaving form fields alone."
 msgstr ""
 
-#: src/cli/main.cpp:2113
+#: src/cli/main.cpp:2114
 #, kde-format
 msgid "Name to put on the comment."
 msgstr ""
 
-#: src/cli/main.cpp:2116
+#: src/cli/main.cpp:2117
 #, kde-format
 msgid "Draw the comments into the pages and remove them."
 msgstr ""
 
-#: src/cli/main.cpp:2118
+#: src/cli/main.cpp:2119
 #, kde-format
 msgid "How many pages go on one sheet, e.g. 2, 4 or 9."
 msgstr ""
 
-#: src/cli/main.cpp:2120
+#: src/cli/main.cpp:2121
 #, kde-format
 msgid "Exact arrangement as COLUMNSxROWS, e.g. 2x3."
 msgstr ""
 
-#: src/cli/main.cpp:2122
+#: src/cli/main.cpp:2123
 #, kde-format
 msgid "Gap between the slots, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2125
+#: src/cli/main.cpp:2126
 #, kde-format
 msgid "Empty border around the sheet, in points."
 msgstr ""
 
-#: src/cli/main.cpp:2127
+#: src/cli/main.cpp:2128
 #, kde-format
 msgid "Draw a hairline around each slot."
 msgstr ""
 
-#: src/cli/main.cpp:2128
+#: src/cli/main.cpp:2129
 #, kde-format
 msgid "Fill downwards before moving right."
 msgstr ""
 
-#: src/cli/main.cpp:2130
+#: src/cli/main.cpp:2131
 #, kde-format
 msgid ""
 "Area to redact, as PAGE:X,Y,WIDTH,HEIGHT in points from the bottom-left "
 "corner. Repeat for more."
 msgstr ""
 
-#: src/cli/main.cpp:2134
+#: src/cli/main.cpp:2135
 #, kde-format
 msgid "Leave the gap open instead of painting it black."
 msgstr ""
 
-#: src/cli/main.cpp:2135
+#: src/cli/main.cpp:2136
 #, kde-format
 msgid "Find the empty border and trim it."
 msgstr ""
 
-#: src/cli/main.cpp:2136
+#: src/cli/main.cpp:2137
 #, kde-format
 msgid "Remove the crop instead of setting one."
 msgstr ""
 
-#: src/cli/main.cpp:2137
+#: src/cli/main.cpp:2138
 #, kde-format
 msgid "Points to trim from the left."
 msgstr ""
 
-#: src/cli/main.cpp:2139
+#: src/cli/main.cpp:2140
 #, kde-format
 msgid "Points to trim from the right."
 msgstr ""
 
-#: src/cli/main.cpp:2141
+#: src/cli/main.cpp:2142
 #, kde-format
 msgid "Points to trim from the top."
 msgstr ""
 
-#: src/cli/main.cpp:2143
+#: src/cli/main.cpp:2144
 #, kde-format
 msgid "Points to trim from the bottom."
 msgstr ""
 
-#: src/cli/main.cpp:2145
+#: src/cli/main.cpp:2146
 #, kde-format
 msgid "Prefix for Bates numbering, e.g. ACME-."
 msgstr ""
 
-#: src/cli/main.cpp:2147
+#: src/cli/main.cpp:2148
 #, kde-format
 msgid "Zero padding for the Bates number."
 msgstr ""
 
-#: src/cli/main.cpp:2149
+#: src/cli/main.cpp:2150
 #, kde-format
 msgid "Number the first stamped page as this."
 msgstr ""
 
-#: src/cli/main.cpp:2151
+#: src/cli/main.cpp:2152
 #, kde-format
 msgid "Text size in points."
 msgstr ""
 
-#: src/cli/main.cpp:2155
+#: src/cli/main.cpp:2156
 #, kde-format
 msgid "Recognise text even on pages that already have some."
 msgstr ""
 
-#: src/cli/main.cpp:2297
+#: src/cli/main.cpp:2298
 #, kde-format
 msgid "This build has no OCR support."
 msgstr ""
 
-#: src/cli/main.cpp:2310
+#: src/cli/main.cpp:2311
 #, kde-format
 msgid "Unknown command “%1”."
 msgstr ""
@@ -7812,6 +7966,67 @@ msgid_plural ""
 "read anyway, and the result should be sound."
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/core/PdfInspect.cpp:103
+#, kde-format
+msgctxt "@info number of dictionary keys"
+msgid "%1 key"
+msgid_plural "%1 keys"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/core/PdfInspect.cpp:106
+#, kde-format
+msgctxt "@info a stream object follows its dictionary"
+msgid " · stream"
+msgstr ""
+
+#: src/core/PdfInspect.cpp:111
+#, kde-format
+msgctxt "@info number of array elements"
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/core/PdfInspect.cpp:343
+#, kde-format
+msgid "There is no object %1 in this file."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:394
+#, kde-format
+msgid ""
+"Only numbered indirect objects are listed; a value written straight into "
+"another object is shown inside it, not on its own."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:396
+#, kde-format
+msgid ""
+"Stream contents are summarised by filter and length, not decoded or shown."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:397
+#, kde-format
+msgid ""
+"An object kept inside a compressed object stream is shown resolved, not by "
+"its place within that stream."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:399
+#, kde-format
+msgid ""
+"This view only reads. Changing an attribute is a separate, deliberate "
+"command."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:400
+#, kde-format
+msgid ""
+"An encrypted document must be opened with its password before anything here "
+"can read it."
+msgstr ""
 
 #: src/core/Preflight.cpp:1125
 #, kde-format
