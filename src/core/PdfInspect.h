@@ -97,6 +97,19 @@ bool overview(const QString &pdf, Overview *out, QString *error);
 /** Every indirect object, lowest number first. */
 bool objects(const QString &pdf, QVector<ObjectSummary> *out, QString *error);
 
+/** A filter over the indirect objects. A field left empty is simply not applied. */
+struct Query {
+    QString type; //!< /Type or /Subtype equals this (the leading slash is optional)
+    QString key; //!< the object's dictionary has this key (the leading slash is optional)
+    QString text; //!< the type or the summary contains this, case folded
+};
+
+/**
+ * Every indirect object that meets all the stated conditions of @p query,
+ * lowest number first. An all-empty query matches everything.
+ */
+bool find(const QString &pdf, const Query &query, QVector<ObjectSummary> *out, QString *error);
+
 /** The trailer dictionary, expanded to @p depth. */
 bool trailer(const QString &pdf, int depth, Node *out, QString *error);
 

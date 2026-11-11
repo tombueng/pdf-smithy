@@ -184,6 +184,33 @@ int commandObject(const QStringList &arguments, const QCommandLineParser &parser
     return Success;
 }
 
+void emitRows(const QVector<PdfInspect::ObjectSummary> &rows)
+{
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        const QString number = QStringLiteral("%1 %2").arg(row.obj).arg(row.gen);
+        out() << number.leftJustified(8) << row.typeName.leftJustified(12);
+        out() << (row.pdfType.isEmpty() ? QString(22, u' ') : row.pdfType.leftJustified(22));
+        out() << row.summary << Qt::endl;
+    }
+}
+
+void emitRowsJson(const QVector<PdfInspect::ObjectSummary> &rows)
+{
+    QJsonArray array;
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        QJsonObject entry;
+        entry.insert(u"object"_s, row.obj);
+        entry.insert(u"generation"_s, row.gen);
+        entry.insert(u"type"_s, row.typeName);
+        if (!row.pdfType.isEmpty()) {
+            entry.insert(u"pdfType"_s, row.pdfType);
+        }
+        entry.insert(u"summary"_s, row.summary);
+        array.append(entry);
+    }
+    emitJson(out(), { { u"objects"_s, array } });
+}
+
 int commandObjects(const QStringList &arguments, const QCommandLineParser &parser)
 {
     QString input;
@@ -199,33 +226,48 @@ int commandObjects(const QStringList &arguments, const QCommandLineParser &parse
     }
 
     if (parser.isSet(u"json"_s)) {
-        QJsonArray array;
-        for (const PdfInspect::ObjectSummary &row : rows) {
-            QJsonObject entry;
-            entry.insert(u"object"_s, row.obj);
-            entry.insert(u"generation"_s, row.gen);
-            entry.insert(u"type"_s, row.typeName);
-            if (!row.pdfType.isEmpty()) {
-                entry.insert(u"pdfType"_s, row.pdfType);
-            }
-            entry.insert(u"summary"_s, row.summary);
-            array.append(entry);
-        }
-        emitJson(out(), { { u"objects"_s, array } });
+        emitRowsJson(rows);
         return Success;
     }
-
-    for (const PdfInspect::ObjectSummary &row : rows) {
-        QString number = QStringLiteral("%1 %2").arg(row.obj).arg(row.gen);
-        out() << number.leftJustified(8) << row.typeName.leftJustified(12);
-        if (!row.pdfType.isEmpty()) {
-            out() << row.pdfType.leftJustified(22);
-        } else {
-            out() << QString(22, u' ');
-        }
-        out() << row.summary << Qt::endl;
-    }
+    emitRows(rows);
     out() << i18ncp("@info total count of indirect objects", "%1 object.", "%1 objects.", rows.size()) << Qt::endl;
+    return Success;
+}
+
+int commandFind(const QStringList &arguments, const QCommandLineParser &parser)
+{
+    QString input;
+    int code = 0;
+    if (!oneInputFile(arguments, u"inspect find"_s, &input, &code)) {
+        return code;
+    }
+
+    PdfInspect::Query query;
+    query.type = parser.value(u"of-type"_s);
+    query.key = parser.value(u"has-key"_s);
+    query.text = parser.value(u"matching"_s);
+    if (query.type.isEmpty() && query.key.isEmpty() && query.text.isEmpty()) {
+        return fail(i18n("Say what to look for: --of-type /Font, --has-key /JavaScript or --matching TEXT."),
+                    UsageError);
+    }
+
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    if (!PdfInspect::find(input, query, &rows, &error)) {
+        return fail(error.isEmpty() ? i18n("Could not read %1.", input) : error);
+    }
+
+    if (parser.isSet(u"json"_s)) {
+        emitRowsJson(rows);
+        return Success;
+    }
+    if (rows.isEmpty()) {
+        out() << i18n("Nothing matched.") << Qt::endl;
+        return Success;
+    }
+    emitRows(rows);
+    out() << i18ncp("@info count of matching objects", "%1 object matched.", "%1 objects matched.", rows.size())
+          << Qt::endl;
     return Success;
 }
 
@@ -296,7 +338,15 @@ void inspectOptions(QCommandLineParser &parser)
                                          u"levels"_s);
     const QCommandLineOption genOption(u"gen"_s, i18n("The generation number, when an object has more than one."),
                                        u"number"_s);
-    parser.addOptions({ depthOption, genOption });
+    const QCommandLineOption ofTypeOption(u"of-type"_s, i18n("For find: only objects of this /Type or /Subtype."),
+                                          u"name"_s);
+    const QCommandLineOption hasKeyOption(u"has-key"_s, i18n("For find: only objects whose dictionary has this key."),
+                                          u"name"_s);
+    const QCommandLineOption matchingOption(u"matching"_s,
+                                            i18n("For find: only objects whose type or summary contains "
+                                                 "this."),
+                                            u"text"_s);
+    parser.addOptions({ depthOption, genOption, ofTypeOption, hasKeyOption, matchingOption });
 }
 
 std::optional<int> inspectRun(const QString &verb, const QStringList &arguments, const QCommandLineParser &parser)
@@ -309,7 +359,7 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     const QString action = rest.isEmpty() ? QString() : rest.takeFirst().toLower();
 
     if (action.isEmpty()) {
-        return fail(i18n("Say what to inspect: info, objects, object, trailer, root or limits."), UsageError);
+        return fail(i18n("Say what to inspect: info, objects, object, find, trailer, root or limits."), UsageError);
     }
     if (action == QLatin1String("limits") || action == QLatin1String("limitations")) {
         return commandLimits();
@@ -329,9 +379,13 @@ std::optional<int> inspectRun(const QString &verb, const QStringList &arguments,
     if (action == QLatin1String("root")) {
         return commandTree(rest, parser, PdfInspect::root, u"inspect root"_s);
     }
+    if (action == QLatin1String("find")) {
+        return commandFind(rest, parser);
+    }
 
-    return fail(i18n("“inspect %1” is not a command. Try info, objects, object, trailer, root or limits.", action),
-                UsageError);
+    return fail(
+        i18n("“inspect %1” is not a command. Try info, objects, object, find, trailer, root or limits.", action),
+        UsageError);
 }
 
 QStringList inspectHelp()
@@ -342,6 +396,7 @@ QStringList inspectHelp()
         line(u"inspect info     FILE"_s, i18n("Version, object and page counts, how it is secured")),
         line(u"inspect objects  FILE"_s, i18n("Every indirect object, with its number and type")),
         line(u"inspect object   FILE --object N"_s, i18n("One object opened out as a tree, by its number")),
+        line(u"inspect find     FILE --of-type /Font"_s, i18n("The objects that match a type, a key or some text")),
         line(u"inspect trailer  FILE"_s, i18n("The trailer, the way into everything else")),
         line(u"inspect root     FILE"_s, i18n("The catalogue, the document's own root")),
         line(u"inspect limits"_s, i18n("What this low-level view does not reach")),

@@ -51,6 +51,10 @@ private Q_SLOTS:
     void depthLimitTruncates();
     void missingObjectIsReported();
     void brokenFileFailsCleanly();
+    void findByTypeMatchesPages();
+    void findByKeyFiltersDicts();
+    void findByTextIsCaseInsensitive();
+    void emptyQueryMatchesEverything();
     void limitationsAreStated();
 };
 
@@ -212,6 +216,92 @@ void TestPdfInspect::brokenFileFailsCleanly()
     if (!PdfInspect::overview(broken, &overview, &error)) {
         QVERIFY(!error.isEmpty());
     }
+}
+
+void TestPdfInspect::findByTypeMatchesPages()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir, 4);
+    QVERIFY(!pdf.isEmpty());
+
+    PdfInspect::Query query;
+    query.type = u"/Page"_s;
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    QVERIFY2(PdfInspect::find(pdf, query, &rows, &error), qPrintable(error));
+    QCOMPARE(rows.size(), 4);
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        QCOMPARE(row.pdfType, u"/Page"_s);
+    }
+
+    // The leading slash is optional.
+    PdfInspect::Query bare;
+    bare.type = u"Page"_s;
+    QVector<PdfInspect::ObjectSummary> same;
+    QVERIFY(PdfInspect::find(pdf, bare, &same, &error));
+    QCOMPARE(same.size(), rows.size());
+}
+
+void TestPdfInspect::findByKeyFiltersDicts()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    PdfInspect::Query query;
+    query.key = u"/Kids"_s; // the page tree node carries /Kids
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    QVERIFY2(PdfInspect::find(pdf, query, &rows, &error), qPrintable(error));
+    QVERIFY(!rows.isEmpty());
+
+    bool pagesNode = false;
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        if (row.pdfType == u"/Pages"_s) {
+            pagesNode = true;
+        }
+    }
+    QVERIFY(pagesNode);
+}
+
+void TestPdfInspect::findByTextIsCaseInsensitive()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    PdfInspect::Query query;
+    query.text = u"catalog"_s; // lower case, the file says /Catalog
+    QVector<PdfInspect::ObjectSummary> rows;
+    QString error;
+    QVERIFY2(PdfInspect::find(pdf, query, &rows, &error), qPrintable(error));
+
+    bool catalogue = false;
+    for (const PdfInspect::ObjectSummary &row : rows) {
+        if (row.pdfType.contains(u"/Catalog"_s)) {
+            catalogue = true;
+        }
+    }
+    QVERIFY(catalogue);
+}
+
+void TestPdfInspect::emptyQueryMatchesEverything()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    QString error;
+    QVector<PdfInspect::ObjectSummary> all;
+    QVERIFY(PdfInspect::objects(pdf, &all, &error));
+
+    QVector<PdfInspect::ObjectSummary> matched;
+    QVERIFY(PdfInspect::find(pdf, PdfInspect::Query(), &matched, &error));
+    QCOMPARE(matched.size(), all.size());
 }
 
 void TestPdfInspect::limitationsAreStated()

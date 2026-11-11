@@ -218,6 +218,27 @@ QString pdfTypeOf(QPDFObjectHandle object)
     return parts.join(u' ');
 }
 
+PdfInspect::ObjectSummary summaryOf(QPDFObjectHandle object)
+{
+    PdfInspect::ObjectSummary row;
+    const QPDFObjGen og = object.getObjGen();
+    row.obj = og.getObj();
+    row.gen = og.getGen();
+    row.typeName = QString::fromStdString(object.getTypeName());
+    row.pdfType = pdfTypeOf(object);
+    row.summary = summarize(object);
+    return row;
+}
+
+/** A PDF name with its leading slash, so "Font" and "/Font" both match /Font. */
+QString withSlash(const QString &name)
+{
+    if (name.isEmpty() || name.startsWith(u'/')) {
+        return name;
+    }
+    return u"/"_s + name;
+}
+
 } // namespace
 
 namespace PdfInspect {
@@ -266,13 +287,50 @@ bool objects(const QString &pdf, QVector<ObjectSummary> *out, QString *error)
         std::vector<QPDFObjectHandle> all = document.getAllObjects();
         out->reserve(static_cast<int>(all.size()));
         for (QPDFObjectHandle &object : all) {
-            ObjectSummary row;
-            QPDFObjGen og = object.getObjGen();
-            row.obj = og.getObj();
-            row.gen = og.getGen();
-            row.typeName = QString::fromStdString(object.getTypeName());
-            row.pdfType = pdfTypeOf(object);
-            row.summary = summarize(object);
+            out->push_back(summaryOf(object));
+        }
+        std::sort(out->begin(), out->end(),
+                  [](const ObjectSummary &a, const ObjectSummary &b) { return a.obj < b.obj; });
+        return true;
+    } catch (const std::exception &problem) {
+        if (error) {
+            *error = QString::fromUtf8(problem.what());
+        }
+        return false;
+    }
+}
+
+bool find(const QString &pdf, const Query &query, QVector<ObjectSummary> *out, QString *error)
+{
+    try {
+        QPDF document;
+        PdfFile::open(document, pdf);
+
+        const QString wantType = withSlash(query.type);
+        const std::string wantKey = withSlash(query.key).toStdString();
+
+        for (QPDFObjectHandle &object : document.getAllObjects()) {
+            if (!query.type.isEmpty()) {
+                QPDFObjectHandle dict = dictOf(object);
+                if (nameAt(dict, "/Type") != wantType && nameAt(dict, "/Subtype") != wantType) {
+                    continue;
+                }
+            }
+            if (!query.key.isEmpty()) {
+                if (!object.isDictionary() && !object.isStream()) {
+                    continue;
+                }
+                if (!dictOf(object).hasKey(wantKey)) {
+                    continue;
+                }
+            }
+            ObjectSummary row = summaryOf(object);
+            if (!query.text.isEmpty()) {
+                const QString hay = row.pdfType + u' ' + row.summary;
+                if (!hay.contains(query.text, Qt::CaseInsensitive)) {
+                    continue;
+                }
+            }
             out->push_back(row);
         }
         std::sort(out->begin(), out->end(),

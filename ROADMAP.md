@@ -61,7 +61,8 @@ Impact·Edge·Safe at low Cost.
 |---|------|--------|:--:|:--:|:--:|:--:|:--:|:--:|
 | 1 | **PDF object-graph inspector** (xref/trailer/root → dict/array/stream tree, searchable; core + CLI first, UI later) | **done ✓** | 5 | 5 | 5 | 5 | 3 | **A** |
 | 2 | **Form autofill vault** (local store of name/address/email/IBAN…, smart field→value mapping, opt-in learning; core + CLI first) | **done ✓** | 5 | 5 | 5 | 4 | 3 | **A** |
-| 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | partial | 4 | 3 | 5 | 5 | 2 | **A** |
+| 3 | **Form completeness audit** (every field type — text/checkbox/radio/choice/combo/list/pushbutton/sig — round-trips build→fill→flatten; fill gaps found) | **already covered ✓** | 4 | 3 | 5 | 5 | 2 | — |
+| 3b | **Object-graph search** (`inspect find` by /Type·/Subtype, key, or text — extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
 | 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | gap | 4 | 5 | 4 | 4 | 4 | B |
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
@@ -112,3 +113,11 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   `list` / `remove` / `keys` / `fill` / `learn` / `limits`). `tst_formvault`
   (9 cases). No cloud, no sync — a plain file on the machine. Next: **#3 form
   completeness audit**.
+- _cycle 3_ — **#3 found already done; shipped #3b instead.** The forms are
+  comprehensively tested already (`tst_formbuilder` makes one of every kind and
+  reads them back, checks each is drawn, covers formats/validation/calculation/
+  button-actions/FDF/collect/XFA-refusal; `tst_forms` finds every kind, fills,
+  flattens keeping answers). Rather than duplicate that, extended the inspector:
+  `inspect find` filters the object graph by /Type or /Subtype, by a key an
+  object carries, or by text — read-only, four new `tst_pdfinspect` cases.
+  Next: **#4 attribute editing on the object tree** (a careful, reversible step).
