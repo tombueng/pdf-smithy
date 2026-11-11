@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-11 23:21+0100\n"
+"POT-Creation-Date: 2026-11-11 23:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,176 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: src/cli/CommandsAutofill.cpp:38
+#, kde-format
+msgid ""
+"Say the field and the value: autofill set KEY VALUE. “autofill keys” lists "
+"the fields."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:49 src/cli/CommandsAutofill.cpp:106
+#: src/cli/CommandsAutofill.cpp:187
+#, kde-format
+msgid "Could not write the vault: %1"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:52
+#, kde-format
+msgid "Stored %1."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:54
+#, kde-format
+msgid ""
+"Note: “%1” is not a field autofill recognises, so it is kept but will not be "
+"matched to a form on its own. “autofill keys” lists the ones that are."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:65
+#, kde-format
+msgid "Say which field: autofill get KEY."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:70 src/cli/CommandsAutofill.cpp:102
+#, kde-format
+msgid "Nothing is stored for “%1”."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:80
+#, kde-format
+msgid "The vault is empty. Add a value with: autofill set KEY VALUE."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:97
+#, kde-format
+msgid "Say which field: autofill remove KEY."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:108
+#, kde-format
+msgid "Removed %1."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:114
+#, kde-format
+msgid "The fields autofill recognises on a form:"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:131
+#, kde-format
+msgid ""
+"The vault is empty, so there is nothing to fill from. Add values with: "
+"autofill set KEY VALUE."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:143
+#, kde-format
+msgid "Nothing in the vault matched a field on this form."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:151
+#, kde-format
+msgid "Could not fill the form."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:154
+#, kde-format
+msgctxt "@info"
+msgid "Filled %1 field, saved as %2."
+msgid_plural "Filled %1 fields, saved as %2."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/CommandsAutofill.cpp:183
+#, kde-format
+msgid "Nothing on this form could be placed and stored."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:189
+#, kde-format
+msgctxt "@info"
+msgid "Learned %1 value from this form."
+msgid_plural "Learned %1 values from this form."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/CommandsAutofill.cpp:197
+#, kde-format
+msgid ""
+"Only text and drop-down fields are filled; tick boxes and radio buttons are "
+"left alone."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:198
+#, kde-format
+msgid ""
+"A field is only filled when its name or label names a fact the vault "
+"recognises; “autofill keys” lists them."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:200
+#, kde-format
+msgid "A drop-down is only set to a value it already offers."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:201
+#, kde-format
+msgid "The vault is a plain file on this machine. It is never sent anywhere."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:212
+#, kde-format
+msgid "The vault file to use, instead of the one in your data folder."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:226
+#, kde-format
+msgid ""
+"Say what to do: autofill set, get, list, remove, keys, fill, learn or limits."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:254
+#, kde-format
+msgid ""
+"“autofill %1” is not a command. Try set, get, list, remove, keys, fill, "
+"learn or limits."
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:263
+#, kde-format
+msgid "Remember a value, e.g. autofill set email you@example.org"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:264
+#, kde-format
+msgid "Show what the vault holds"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:265
+#, kde-format
+msgid "Forget one value"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:266
+#, kde-format
+msgid "The fields a form can be filled from"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:267
+#, kde-format
+msgid "Fill a form from the vault, saving a copy"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:268
+#, kde-format
+msgid "Take a filled form's answers into the vault"
+msgstr ""
+
+#: src/cli/CommandsAutofill.cpp:269
+#, kde-format
+msgid "What autofill does not touch"
+msgstr ""
 
 #: src/cli/CommandsColour.cpp:88
 #, kde-format
@@ -2337,7 +2507,7 @@ msgstr ""
 msgid "What working on pictures cannot promise"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:59
+#: src/cli/CommandsInspect.cpp:60
 #, kde-format
 msgctxt "@info a reference to an object, not expanded here"
 msgid "→ %1 %2 R  "
