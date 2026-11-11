@@ -5,6 +5,7 @@
 #include "FormBuilder.h"
 
 #include "Core14Widths.h"
+#include "FormAppearance.h"
 #include "Forms.h"
 #include "PdfFile.h"
 #include "PdfGeometry.h"
@@ -1321,6 +1322,38 @@ bool editField(const QString &in, const QString &out, const QString &fieldName, 
 } // namespace
 
 bool FormBuilder::addFields(const QString &in, const QString &out, const QVector<Field> &fields, int *added,
+void drawFieldValueAppearance(QPDF &pdf, QPDFObjectHandle widget, const FormBuilder::Field &spec, int rotate)
+{
+    // Only enough of a Build to put the font /DA names where the appearance's
+    // /Resources can reach it: the caller has already settled everything else on
+    // the field and the widget, and this must not reconfigure either of them.
+    Build build;
+    build.pdf = &pdf;
+    build.acroForm = pdf.getRoot().getKey("/AcroForm");
+    if (!build.acroForm.isDictionary()) {
+        return;
+    }
+    if (!build.acroForm.getKey("/DR").isDictionary()) {
+        build.acroForm.replaceKey("/DR", QPDFObjectHandle::newDictionary());
+    }
+    QPDFObjectHandle resources = build.acroForm.getKey("/DR");
+    if (!resources.getKey("/Font").isDictionary()) {
+        resources.replaceKey("/Font", QPDFObjectHandle::newDictionary());
+    }
+    build.drFonts = resources.getKey("/Font");
+
+    const double w = spec.rect.width();
+    const double h = spec.rect.height();
+    if (w <= 0.0 || h <= 0.0) {
+        return;
+    }
+    const QString baseFont = baseFontFor(spec.fontName);
+    const std::string content = drawFrame(spec, w, h, false) + drawValue(spec, w, h, spec.defaultValue, baseFont);
+    QPDFObjectHandle appearance = QPDFObjectHandle::newDictionary();
+    appearance.replaceKey("/N", makeForm(build, content, w, h, rotate, { spec.fontName }));
+    widget.replaceKey("/AP", appearance);
+}
+
                             QString *error)
 {
     if (fields.isEmpty()) {

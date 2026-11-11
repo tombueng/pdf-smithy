@@ -4,6 +4,8 @@
 */
 #include "Forms.h"
 
+#include "FormAppearance.h"
+#include "FormBuilder.h"
 #include "PdfFile.h"
 #include "PdfGeometry.h"
 
@@ -271,6 +273,128 @@ QRectF rectOf(QPDFObjectHandle widget)
     const double right = PdfGeometry::boxValue(rect, 2, 0.0);
     const double top = PdfGeometry::boxValue(rect, 3, 0.0);
     return QRectF(std::min(left, right), std::min(bottom, top), std::abs(right - left), std::abs(top - bottom));
+}
+
+QString borderStyleName(FormField::BorderStyle style)
+{
+    switch (style) {
+    case FormField::BorderStyle::Dashed:
+        return QStringLiteral("dashed");
+    case FormField::BorderStyle::Beveled:
+        return QStringLiteral("beveled");
+    case FormField::BorderStyle::Inset:
+        return QStringLiteral("inset");
+    case FormField::BorderStyle::Underline:
+        return QStringLiteral("underline");
+    case FormField::BorderStyle::Solid:
+        break;
+    }
+    return QStringLiteral("solid");
+}
+
+Qt::Alignment alignmentFrom(int quadding)
+{
+    if (quadding == 1) {
+        return Qt::AlignHCenter;
+    }
+    if (quadding == 2) {
+        return Qt::AlignRight;
+    }
+    return Qt::AlignLeft;
+}
+
+/**
+ * The field's own styling, as a spec the drawing engine can use to redraw it.
+ *
+ * Read from exactly where ps::Forms::read reads it: /DA on the field for the
+ * font, its size and its colour; /MK and /BS on the widget for the frame; the
+ * field flags and /MaxLen for how the text is laid out. @p w and @p h are the
+ * widget's box in the page's own orientation, so the appearance is drawn the
+ * size it is shown.
+ */
+FormBuilder::Field fillSpecFor(QPDFFormFieldObjectHelper &field, QPDFObjectHandle styled, FormField::Kind kind,
+                               const QString &value, double w, double h)
+{
+    const int flags = field.getFlags();
+
+    // A FormField is borrowed only as a place to run the same readers read()
+    // uses; what comes out of them is handed straight to the builder's Field.
+    FormField read;
+    QPDFObjectHandle maxLength = field.getInheritableFieldValue("/MaxLen");
+    if (maxLength.isNumber()) {
+        read.maxLength = int(PdfGeometry::numericValue(maxLength, -1.0));
+    }
+    read.multiline = kind == FormField::Kind::Text && (flags & flagMultiline) != 0;
+    read.comb = kind == FormField::Kind::Text && (flags & flagComb) != 0 && read.maxLength > 0 && !read.multiline
+        && (flags & (flagPassword | flagFileSelect)) == 0;
+
+    QPDFObjectHandle characteristics = styled.getKey("/MK");
+    if (characteristics.isDictionary()) {
+        read.background = colourOf(characteristics.getKey("/BG"));
+        read.border = colourOf(characteristics.getKey("/BC"));
+    }
+    QPDFObjectHandle borderStyle = styled.getKey("/BS");
+    QPDFObjectHandle legacyBorder = styled.getKey("/Border");
+    if (borderStyle.isDictionary()) {
+        read.borderWidth = qMax(0.0, PdfGeometry::numericValue(borderStyle.getKey("/W"), 1.0));
+        read.borderStyle = borderStyleOf(borderStyle.getKey("/S"));
+    } else if (legacyBorder.isArray() && legacyBorder.getArrayNItems() >= 3) {
+        read.borderWidth = qMax(0.0, PdfGeometry::numberAt(legacyBorder, 2, 1.0));
+    }
+    readDefaultAppearance(QString::fromStdString(field.getDefaultAppearance()), read);
+    read.alignment = qBound(0, field.getQuadding(), 2);
+
+    FormBuilder::Field spec;
+    spec.kind = kind == FormField::Kind::Text ? FormBuilder::Field::Kind::Text : FormBuilder::Field::Kind::Dropdown;
+    spec.multiline = read.multiline;
+    spec.comb = read.comb;
+    spec.maxLength = read.maxLength > 0 ? read.maxLength : 0;
+    spec.fontName = read.fontResource.isEmpty() ? QStringLiteral("Helv") : read.fontResource;
+    spec.fontSize = read.fontSize;
+    spec.textColour = read.textColour.isValid() ? read.textColour : QColor(Qt::black);
+    spec.backgroundColour = read.background;
+    spec.borderColour = read.border;
+    spec.borderWidth = read.borderWidth;
+    spec.borderStyle = borderStyleName(read.borderStyle);
+    spec.alignment = alignmentFrom(read.alignment);
+    spec.defaultValue = value;
+    spec.rect = QRectF(0, 0, w, h);
+    return spec;
+}
+
+/**
+ * Draws @p value into the appearance of every widget of a text or choice field.
+ *
+ * What a reader that regenerates appearances would do, done here so that one
+ * that does not — and the QPDF that half the distributions ship, which does not
+ * redraw a merged field/widget — still shows the value. See
+ * ps::drawFieldValueAppearance.
+ */
+void drawFilledValue(QPDF &pdf, QPDFFormFieldObjectHelper &field, FormField::Kind kind, const QString &value,
+                     const std::map<QPDFObjGen, int> &rotationOfWidget)
+{
+    QPDFObjectHandle handle = field.getObjectHandle();
+    QVector<QPDFObjectHandle> widgets;
+    QPDFObjectHandle kids = handle.getKey("/Kids");
+    for (int k = 0; kids.isArray() && k < kids.getArrayNItems(); ++k) {
+        widgets.append(kids.getArrayItem(k));
+    }
+    if (widgets.isEmpty()) {
+        widgets.append(handle); // A field that is its own widget, the usual case.
+    }
+
+    for (QPDFObjectHandle widget : std::as_const(widgets)) {
+        const auto onPage = rotationOfWidget.find(widget.getObjGen());
+        const int rotate = onPage == rotationOfWidget.end() ? 0 : onPage->second;
+        const QRectF box = rectOf(widget);
+        const bool turned = rotate == 90 || rotate == 270;
+        const double w = turned ? box.height() : box.width();
+        const double h = turned ? box.width() : box.height();
+        if (w <= 0.0 || h <= 0.0) {
+            continue;
+        }
+        drawFieldValueAppearance(pdf, widget, fillSpecFor(field, widget, kind, value, w, h), rotate);
+    }
 }
 
 } // namespace
@@ -574,6 +698,27 @@ bool Forms::fill(const QString &inputPdf, const QString &outputPdf, const QHash<
         // choice the one before it just made.
         QSet<QString> settled;
 
+        // How each widget's page is turned, so a value drawn into it is drawn the
+        // way the page is shown. Gathered once here rather than per field.
+        std::map<QPDFObjGen, int> rotationOfWidget;
+        for (QPDFPageObjectHelper &page : QPDFPageDocumentHelper(pdf).getAllPages()) {
+            const int rotate = PdfGeometry::rotationOf(page);
+            QPDFObjectHandle annots = page.getObjectHandle().getKey("/Annots");
+            for (int a = 0; annots.isArray() && a < annots.getArrayNItems(); ++a) {
+                rotationOfWidget[annots.getArrayItem(a).getObjGen()] = rotate;
+            }
+        }
+
+        // The text and choice fields a value was set on, to draw once the values
+        // are all in. Drawing is left until after the library has had its turn,
+        // so that ours is what remains whether or not its turn did anything.
+        struct Filled {
+            QPDFObjectHandle field;
+            FormField::Kind kind;
+            QString value;
+        };
+        QVector<Filled> filledText;
+
         for (QPDFFormFieldObjectHelper &field : forms.getFormFields()) {
             const QString name = QString::fromStdString(field.getFullyQualifiedName());
             const auto wanted = values.constFind(name);
@@ -644,13 +789,25 @@ bool Forms::fill(const QString &inputPdf, const QString &outputPdf, const QHash<
                 settled.insert(name);
             } else {
                 field.setV(wanted.value().toStdString(), true);
+                if (kind == FormField::Kind::Text || kind == FormField::Kind::Choice) {
+                    filledText.append({ field.getObjectHandle(), kind, wanted.value() });
+                }
             }
             ++count;
         }
 
         // Values without appearances show up blank in a good half of the readers
-        // in use, printing ones included.
+        // in use, printing ones included. The library is asked to draw them, but
+        // the QPDF several distributions ship (12.2) leaves a merged field/widget
+        // untouched, so the text and choice values are then drawn here as well,
+        // with the same engine that built the form. Drawing last, ours is what
+        // remains whether or not the library's pass did anything, on whichever
+        // QPDF is installed.
         forms.generateAppearancesIfNeeded();
+        for (const Filled &entry : std::as_const(filledText)) {
+            QPDFFormFieldObjectHelper field(entry.field);
+            drawFilledValue(pdf, field, entry.kind, entry.value, rotationOfWidget);
+        }
 
         QPDFWriter writer(pdf, outputPdf.toUtf8().constData());
         writer.setObjectStreamMode(qpdf_o_generate);
