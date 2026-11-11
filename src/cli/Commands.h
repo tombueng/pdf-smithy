@@ -79,5 +79,6 @@ Group formGroup();
 Group typesetGroup();
 Group objectGroup();
 Group convertGroup();
+Group inspectGroup();
 
 } // namespace ps::cli

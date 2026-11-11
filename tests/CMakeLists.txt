@@ -22,6 +22,7 @@ set(PS_CORE_TESTS
     tst_archival
     tst_encryption
     tst_blankpdf
+    tst_pdfinspect
 )
 
 # These need the Poppler backend to look at what was produced, so they are

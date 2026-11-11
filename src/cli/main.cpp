@@ -1860,7 +1860,8 @@ QVector<ps::cli::Group> commandGroups()
 {
     return { ps::cli::preflightGroup(), ps::cli::colourGroup(), ps::cli::fontGroup(),
              ps::cli::imageGroup(),     ps::cli::layoutGroup(), ps::cli::formGroup(),
-             ps::cli::typesetGroup(),   ps::cli::objectGroup(), ps::cli::convertGroup() };
+             ps::cli::typesetGroup(),   ps::cli::objectGroup(), ps::cli::convertGroup(),
+             ps::cli::inspectGroup() };
 }
 
 /**
