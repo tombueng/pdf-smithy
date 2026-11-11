@@ -140,3 +140,11 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   now whole: info, objects, object, find, set, stream, trailer, root. Next: a
   diversifying cycle — likely **#6 preflight-fix surfacing** or a sanitizer pass
   over the four cycles of new code.
+- _cycle 6_ — **consolidation: the new code is sanitizer-clean.** Built the five
+  cycles of new code (PdfInspect, FormVault, their CLI and tests) with the CI's
+  own flags (`-fsanitize=address,undefined`) and ran `tst_pdfinspect` (21) and
+  `tst_formvault` (11) under ASan/UBSan with `detect_leaks=0`: 32 cases, zero
+  address errors, zero undefined behaviour, zero aborts. The memory-safety thesis
+  this project is built on holds for everything added. Next: **inspect diff** —
+  show exactly which objects and keys differ between two PDFs (pairs with inspect
+  set; read-only).
