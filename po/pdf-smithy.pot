@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-12 00:14+0100\n"
+"POT-Creation-Date: 2026-11-12 00:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2507,53 +2507,55 @@ msgstr ""
 msgid "What working on pictures cannot promise"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:61
+#: src/cli/CommandsInspect.cpp:62
 #, kde-format
 msgctxt "@info a reference to an object, not expanded here"
 msgid "→ %1 %2 R  "
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:66
+#: src/cli/CommandsInspect.cpp:67
 #, kde-format
 msgctxt "@info the stream's /Filter"
 msgid "  filter %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:69
+#: src/cli/CommandsInspect.cpp:70
 #, kde-format
 msgctxt "@info stream length in bytes"
 msgid "  %1 bytes"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:138 src/cli/CommandsInspect.cpp:226
-#: src/cli/CommandsInspect.cpp:258 src/cli/CommandsInspect.cpp:286
+#: src/cli/CommandsInspect.cpp:139 src/cli/CommandsInspect.cpp:227
+#: src/cli/CommandsInspect.cpp:259 src/cli/CommandsInspect.cpp:287
 #, kde-format
 msgid "Could not read %1."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:157
+#: src/cli/CommandsInspect.cpp:158
 #, kde-format
 msgid ""
 "Say which object: inspect object FILE --object N. “inspect objects FILE” "
 "lists the numbers."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:163 src/cli/CommandsInspect.cpp:371
+#: src/cli/CommandsInspect.cpp:164 src/cli/CommandsInspect.cpp:368
+#: src/cli/CommandsInspect.cpp:464
 #, kde-format
 msgid "“%1” is not an object number."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:170 src/cli/CommandsInspect.cpp:378
+#: src/cli/CommandsInspect.cpp:171 src/cli/CommandsInspect.cpp:375
+#: src/cli/CommandsInspect.cpp:471
 #, kde-format
 msgid "“%1” is not a generation number."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:177
+#: src/cli/CommandsInspect.cpp:178
 #, kde-format
 msgid "Could not read object %1."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:234
+#: src/cli/CommandsInspect.cpp:235
 #, kde-format
 msgctxt "@info total count of indirect objects"
 msgid "%1 object."
@@ -2561,19 +2563,19 @@ msgid_plural "%1 objects."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/CommandsInspect.cpp:251
+#: src/cli/CommandsInspect.cpp:252
 #, kde-format
 msgid ""
 "Say what to look for: --of-type /Font, --has-key /JavaScript or --matching "
 "TEXT."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:266
+#: src/cli/CommandsInspect.cpp:267
 #, kde-format
 msgid "Nothing matched."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:270
+#: src/cli/CommandsInspect.cpp:271
 #, kde-format
 msgctxt "@info count of matching objects"
 msgid "%1 object matched."
@@ -2581,179 +2583,234 @@ msgid_plural "%1 objects matched."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/CommandsInspect.cpp:306
+#: src/cli/CommandsInspect.cpp:307
 #, kde-format
 msgctxt "@info PDF header version"
 msgid "PDF version: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:307
+#: src/cli/CommandsInspect.cpp:308
 #, kde-format
 msgctxt "@info count of indirect objects"
 msgid "Objects: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:309
+#: src/cli/CommandsInspect.cpp:310
 #, kde-format
 msgctxt "@info page count"
 msgid "Pages: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:312 src/cli/CommandsInspect.cpp:315
+#: src/cli/CommandsInspect.cpp:313 src/cli/CommandsInspect.cpp:316
 #, kde-format
 msgctxt "@info yes"
 msgid "yes"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:312 src/cli/CommandsInspect.cpp:315
+#: src/cli/CommandsInspect.cpp:313 src/cli/CommandsInspect.cpp:316
 #, kde-format
 msgctxt "@info no"
 msgid "no"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:311
+#: src/cli/CommandsInspect.cpp:312
 #, kde-format
 msgctxt "@info whether the file is encrypted"
 msgid "Encrypted: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:314
+#: src/cli/CommandsInspect.cpp:315
 #, kde-format
 msgctxt "@info whether the file is linearized for the web"
 msgid "Linearized: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:318
+#: src/cli/CommandsInspect.cpp:319
 #, kde-format
 msgctxt "@info the /Producer string"
 msgid "Producer: %1"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:366
+#: src/cli/CommandsInspect.cpp:363
+#, kde-format
+msgid "Say which object: inspect stream FILE --object N."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:385
+#, kde-format
+msgid "Could not read the stream."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:393
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The filters on object %1 could not be undone; showing the bytes as stored."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:404
+#, kde-format
+msgctxt "@info"
+msgid "Wrote %1 byte to %2."
+msgid_plural "Wrote %1 bytes to %2."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/CommandsInspect.cpp:418
+#, kde-format
+msgctxt "@info"
+msgid "Object %2 is a binary stream of %1 byte."
+msgid_plural "Object %2 is a binary stream of %1 bytes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/cli/CommandsInspect.cpp:421
+#, kde-format
+msgctxt "@info the stream's /Filter"
+msgid "Filter %1."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:423
+#, kde-format
+msgctxt "@info"
+msgid "Use -o FILE to save it, or --raw for the bytes as stored."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:459
 #, kde-format
 msgid "Say which object: inspect set FILE --object N --key /Foo --new-value X."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:382
+#: src/cli/CommandsInspect.cpp:475
 #, kde-format
 msgid ""
 "Say which key: --key /Foo. “inspect object FILE --object N” shows an "
 "object's keys."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:386
+#: src/cli/CommandsInspect.cpp:479
 #, kde-format
 msgid "Say the new value: --new-value X."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:390
+#: src/cli/CommandsInspect.cpp:483
 #, kde-format
 msgid "“%1” is not a type. Use name, string, int, real or bool."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:401
+#: src/cli/CommandsInspect.cpp:494
 #, kde-format
 msgid "Could not set the value."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:404
+#: src/cli/CommandsInspect.cpp:497
 #, kde-format
 msgctxt "@info the edit that was made, saved to a file"
 msgid "Object %1 %2: %3 → %4, saved as %5."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:414
+#: src/cli/CommandsInspect.cpp:507
 #, kde-format
 msgid "How many levels of the tree to open. Default: 4."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:416
+#: src/cli/CommandsInspect.cpp:509
 #, kde-format
 msgid "The generation number, when an object has more than one."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:418
+#: src/cli/CommandsInspect.cpp:511
 #, kde-format
 msgid "For find: only objects of this /Type or /Subtype."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:420
+#: src/cli/CommandsInspect.cpp:513
 #, kde-format
 msgid "For find: only objects whose dictionary has this key."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:423
+#: src/cli/CommandsInspect.cpp:516
 #, kde-format
 msgid "For find: only objects whose type or summary contains this."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:426
+#: src/cli/CommandsInspect.cpp:519
 #, kde-format
 msgid "For set: the key to change, e.g. /Producer."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:427
+#: src/cli/CommandsInspect.cpp:520
 #, kde-format
 msgid "For set: the value to store."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:429
+#: src/cli/CommandsInspect.cpp:522
 #, kde-format
 msgid ""
 "For set: store it as name, string, int, real or bool. Default: the old "
 "value's type."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:445
+#: src/cli/CommandsInspect.cpp:524
 #, kde-format
-msgid ""
-"Say what to inspect: info, objects, object, find, set, trailer, root or "
-"limits."
+msgid "For stream: the bytes exactly as stored, filters and all."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:474
+#: src/cli/CommandsInspect.cpp:539
 #, kde-format
 msgid ""
-"“inspect %1” is not a command. Try info, objects, object, find, set, "
+"Say what to inspect: info, objects, object, find, set, stream, trailer, root "
+"or limits."
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:570
+#, kde-format
+msgid ""
+"“inspect %1” is not a command. Try info, objects, object, find, set, stream, "
 "trailer, root or limits."
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:483
+#: src/cli/CommandsInspect.cpp:581
 #, kde-format
 msgid "Version, object and page counts, how it is secured"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:484
+#: src/cli/CommandsInspect.cpp:582
 #, kde-format
 msgid "Every indirect object, with its number and type"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:485
+#: src/cli/CommandsInspect.cpp:583
 #, kde-format
 msgid "One object opened out as a tree, by its number"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:486
+#: src/cli/CommandsInspect.cpp:584
 #, kde-format
 msgid "The objects that match a type, a key or some text"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:487
+#: src/cli/CommandsInspect.cpp:585
 #, kde-format
 msgid "Change one value, saving an edited copy"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:488
+#: src/cli/CommandsInspect.cpp:586
+#, kde-format
+msgid "Read a stream object's content, or save it with -o"
+msgstr ""
+
+#: src/cli/CommandsInspect.cpp:587
 #, kde-format
 msgid "The trailer, the way into everything else"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:489
+#: src/cli/CommandsInspect.cpp:588
 #, kde-format
 msgid "The catalogue, the document's own root"
 msgstr ""
 
-#: src/cli/CommandsInspect.cpp:490
+#: src/cli/CommandsInspect.cpp:589
 #, kde-format
 msgid "What this low-level view does not reach"
 msgstr ""
@@ -8234,7 +8291,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/PdfInspect.cpp:106
+#: src/core/PdfInspect.cpp:108
 #, kde-format
 msgctxt "@info number of dictionary keys"
 msgid "%1 key"
@@ -8242,13 +8299,13 @@ msgid_plural "%1 keys"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/PdfInspect.cpp:109
+#: src/core/PdfInspect.cpp:111
 #, kde-format
 msgctxt "@info a stream object follows its dictionary"
 msgid " · stream"
 msgstr ""
 
-#: src/core/PdfInspect.cpp:114
+#: src/core/PdfInspect.cpp:116
 #, kde-format
 msgctxt "@info number of array elements"
 msgid "%1 item"
@@ -8256,76 +8313,82 @@ msgid_plural "%1 items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/PdfInspect.cpp:404 src/core/PdfInspect.cpp:440
+#: src/core/PdfInspect.cpp:406 src/core/PdfInspect.cpp:442
+#: src/core/PdfInspect.cpp:574
 #, kde-format
 msgid "There is no object %1 in this file."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:448
+#: src/core/PdfInspect.cpp:450
 #, kde-format
 msgid "Object %1 is a %2, which has no keys to set."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:457
+#: src/core/PdfInspect.cpp:459
 #, kde-format
 msgid "Object %1 has no key %2."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:465
+#: src/core/PdfInspect.cpp:467
 #, kde-format
 msgid "%1 holds a %2, not a single value this can set."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:502
+#: src/core/PdfInspect.cpp:504
 #, kde-format
 msgid "“%1” is not a whole number."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:514
+#: src/core/PdfInspect.cpp:516
 #, kde-format
 msgid "“%1” is not a number."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:525
+#: src/core/PdfInspect.cpp:527
 #, kde-format
 msgid "“%1” is not true or false."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:588
+#: src/core/PdfInspect.cpp:582
+#, kde-format
+msgid "Object %1 is a %2, not a stream."
+msgstr ""
+
+#: src/core/PdfInspect.cpp:638
 #, kde-format
 msgid ""
 "Only numbered indirect objects are listed; a value written straight into "
 "another object is shown inside it, not on its own."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:590
+#: src/core/PdfInspect.cpp:640
 #, kde-format
 msgid ""
 "Stream contents are summarised by filter and length, not decoded or shown."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:591
+#: src/core/PdfInspect.cpp:641
 #, kde-format
 msgid ""
 "An object kept inside a compressed object stream is shown resolved, not by "
 "its place within that stream."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:593
+#: src/core/PdfInspect.cpp:643
 #, kde-format
 msgid ""
 "Editing (inspect set) changes one existing scalar value at a time; it does "
 "not add keys, nor alter arrays, streams or the document's structure."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:595
+#: src/core/PdfInspect.cpp:645
 #, kde-format
 msgid ""
 "Saving an edit writes the whole file afresh, so object numbers may change; "
 "inspect the saved copy to find them again."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:597
+#: src/core/PdfInspect.cpp:647
 #, kde-format
 msgid ""
 "An encrypted document must be opened with its password before anything here "
