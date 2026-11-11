@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-08-11 08:31+0200\n"
+"POT-Creation-Date: 2026-11-11 21:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,7 @@ msgstr ""
 #: src/cli/CommandsColour.cpp:236 src/cli/CommandsColour.cpp:292
 #: src/cli/CommandsColour.cpp:334 src/cli/CommandsColour.cpp:364
 #: src/cli/CommandsColour.cpp:391 src/cli/CommandsConvert.cpp:276
-#: src/cli/CommandsConvert.cpp:350 src/cli/CommandsFonts.cpp:423
+#: src/cli/CommandsConvert.cpp:350 src/cli/CommandsFonts.cpp:424
 #: src/cli/CommandsLayout.cpp:464 src/cli/CommandsLayout.cpp:609
 #: src/cli/CommandsLayout.cpp:746 src/cli/CommandsLayout.cpp:846
 #: src/cli/CommandsLayout.cpp:920 src/cli/CommandsObjects.cpp:327
@@ -289,8 +289,8 @@ msgstr ""
 msgid "--dpi is a resolution in dots per inch, e.g. 150."
 msgstr ""
 
-#: src/cli/CommandsColour.cpp:476 src/core/Annotation.cpp:1001
-#: src/core/BlankPdf.cpp:87 src/ui/RemoteFile.cpp:98
+#: src/cli/CommandsColour.cpp:476 src/core/Annotation.cpp:1004
+#: src/core/BlankPdf.cpp:88 src/ui/RemoteFile.cpp:98
 #, kde-format
 msgid "“%1” could not be written."
 msgstr ""
@@ -786,7 +786,7 @@ msgstr[1] ""
 msgid "fonts embed needs a font to embed, as --font “DejaVu Sans”."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:360 src/cli/CommandsFonts.cpp:511
+#: src/cli/CommandsFonts.cpp:360 src/cli/CommandsFonts.cpp:512
 #, kde-format
 msgid "“%1” is not a cut. Use bold, italic, bold-italic or regular."
 msgstr ""
@@ -811,152 +811,152 @@ msgctxt "@info page, font, the /Fx name it got, glyph count and size"
 msgid "Page %1: %2 added as %3, %4 glyphs, %5"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:424 src/ui/ToolFontsDialog.cpp:1078
+#: src/cli/CommandsFonts.cpp:425 src/ui/ToolFontsDialog.cpp:1078
 #, kde-format
 msgid ""
 "The text already on those pages still uses the fonts it always did. The new "
 "one is a resource to write with, not a replacement for what is there."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:440
+#: src/cli/CommandsFonts.cpp:441
 #, kde-format
 msgid ""
 "fonts strip needs to know which fonts, as --font-name Helvetica, or --all "
 "for every embedded one."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:452
+#: src/cli/CommandsFonts.cpp:453
 #, kde-format
 msgid "Threw the glyphs of %1 font away."
 msgid_plural "Threw the glyphs of %1 fonts away."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/CommandsFonts.cpp:453 src/cli/CommandsFonts.cpp:478
+#: src/cli/CommandsFonts.cpp:454 src/cli/CommandsFonts.cpp:479
 #: src/cli/CommandsImages.cpp:200 src/ui/ToolImagesDialog.cpp:139
 #, kde-format
 msgid "%1 → %2"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:454 src/ui/ToolFontsDialog.cpp:811
+#: src/cli/CommandsFonts.cpp:455 src/ui/ToolFontsDialog.cpp:811
 #, kde-format
 msgid ""
 "The text is still there and still selectable. What it looks like is now up "
 "to whatever face the reader puts in its place."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:475
+#: src/cli/CommandsFonts.cpp:476
 #, kde-format
 msgid "Reduced %1 duplicate font to the one the pages now share."
 msgid_plural "Reduced %1 duplicate fonts to the ones the pages now share."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/CommandsFonts.cpp:497
+#: src/cli/CommandsFonts.cpp:498
 #, kde-format
 msgid "Wrote a /ToUnicode map for %1 font."
 msgid_plural "Wrote a /ToUnicode map for %1 fonts."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/cli/CommandsFonts.cpp:498 src/ui/ToolFontsDialog.cpp:679
+#: src/cli/CommandsFonts.cpp:499 src/ui/ToolFontsDialog.cpp:679
 #, kde-format
 msgid ""
 "Their text can be copied and searched now, by this program and by any other."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:505
+#: src/cli/CommandsFonts.cpp:506
 #, kde-format
 msgid "fonts find needs one family name, as: fonts find “DejaVu Sans”."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:517 src/core/FontEmbedder.cpp:1601
-#: src/core/FontEmbedder.cpp:2125 src/ui/ToolFontsDialog.cpp:986
+#: src/cli/CommandsFonts.cpp:518 src/core/FontEmbedder.cpp:1601
+#: src/core/FontEmbedder.cpp:2126 src/ui/ToolFontsDialog.cpp:986
 #, kde-format
 msgid "No font called “%1” is installed on this system."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:524
+#: src/cli/CommandsFonts.cpp:525
 #, kde-format
 msgid ""
 "That file was found, but it is not a TrueType or OpenType font, and only "
 "those can be cut down and embedded."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:532 src/ui/ToolFontsDialog.cpp:523
+#: src/cli/CommandsFonts.cpp:533 src/ui/ToolFontsDialog.cpp:523
 #, kde-format
 msgctxt "@title heading before a list"
 msgid "Reading and repairing what a document carries:"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:538 src/ui/ToolFontsDialog.cpp:530
+#: src/cli/CommandsFonts.cpp:539 src/ui/ToolFontsDialog.cpp:530
 #, kde-format
 msgctxt "@title heading before a list"
 msgid "Embedding a font from this system:"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:551
+#: src/cli/CommandsFonts.cpp:552
 #, kde-format
 msgid "Which font to embed, by family name, e.g. “DejaVu Sans”."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:552
+#: src/cli/CommandsFonts.cpp:553
 #, kde-format
 msgid ""
 "Which font in the document to act on, by its /BaseFont name. Repeat for more."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:554
+#: src/cli/CommandsFonts.cpp:555
 #, kde-format
 msgid "Which cut of the family: bold, italic, bold-italic or regular."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:555
+#: src/cli/CommandsFonts.cpp:556
 #, kde-format
 msgid "Act on every embedded font, not a named one."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:565
+#: src/cli/CommandsFonts.cpp:566
 #, kde-format
 msgid "Every font, where it is used and what is wrong with it"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:566
+#: src/cli/CommandsFonts.cpp:567
 #, kde-format
 msgid "Exit non-zero when a font is missing or unreadable"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:567
+#: src/cli/CommandsFonts.cpp:568
 #, kde-format
 msgid "Add a system font, cut down to the characters asked for"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:568
+#: src/cli/CommandsFonts.cpp:569
 #, kde-format
 msgid "Throw embedded glyphs away and keep the text"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:569
+#: src/cli/CommandsFonts.cpp:570
 #, kde-format
 msgid "Join duplicate subsets of the same font into one"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:570
+#: src/cli/CommandsFonts.cpp:571
 #, kde-format
 msgid "Write /ToUnicode maps so the text can be copied"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:571
+#: src/cli/CommandsFonts.cpp:572
 #, kde-format
 msgid "Where this system keeps a font, if it has it"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:572
+#: src/cli/CommandsFonts.cpp:573
 #, kde-format
 msgid "What the font tools cannot promise"
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:582
+#: src/cli/CommandsFonts.cpp:583
 #, kde-format
 msgid ""
 "Cutting an embedded font down to the glyphs a page uses, and swapping one "
@@ -966,14 +966,14 @@ msgid ""
 "strip” drops the glyphs and keeps the text."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:588
+#: src/cli/CommandsFonts.cpp:589
 #, kde-format
 msgid ""
 "“%1” is not something fonts can do. Try list, check, embed, strip, merge, "
 "unicode, find or limits."
 msgstr ""
 
-#: src/cli/CommandsFonts.cpp:604
+#: src/cli/CommandsFonts.cpp:605
 #, kde-format
 msgid "fonts needs to be told what to do:"
 msgstr ""
@@ -1089,8 +1089,8 @@ msgid "“%1” is a kind of field this cannot change."
 msgstr ""
 
 #: src/cli/CommandsForm.cpp:479 src/cli/CommandsForm.cpp:899
-#: src/core/FormBuilder.cpp:1304 src/core/FormBuilder.cpp:1732
-#: src/core/FormBuilder.cpp:1873 src/core/Forms.cpp:668
+#: src/core/FormBuilder.cpp:1306 src/core/FormBuilder.cpp:1770
+#: src/core/FormBuilder.cpp:1911 src/core/Forms.cpp:826
 #, kde-format
 msgid "This document has no field called “%1”."
 msgstr ""
@@ -1100,8 +1100,8 @@ msgstr ""
 msgid "“%1” is not a kind of field."
 msgstr ""
 
-#: src/cli/CommandsForm.cpp:531 src/core/FormBuilder.cpp:873
-#: src/core/FormBuilder.cpp:1351 src/core/FormBuilder.cpp:1663
+#: src/cli/CommandsForm.cpp:531 src/core/FormBuilder.cpp:875
+#: src/core/FormBuilder.cpp:1385 src/core/FormBuilder.cpp:1701
 #, kde-format
 msgid "A field needs a name."
 msgstr ""
@@ -1213,7 +1213,7 @@ msgid "Give the description to build from with --from-json."
 msgstr ""
 
 #: src/cli/CommandsForm.cpp:757 src/cli/CommandsTypeset.cpp:704
-#: src/cli/main.cpp:1432 src/core/Annotation.cpp:1014
+#: src/cli/main.cpp:1432 src/core/Annotation.cpp:1017
 #: src/ui/ToolTypesetDialog.cpp:337
 #, kde-format
 msgid "“%1” could not be read."
@@ -1411,7 +1411,7 @@ msgstr ""
 
 #: src/cli/CommandsForm.cpp:1100 src/cli/CommandsForm.cpp:1160
 #: src/cli/CommandsLayout.cpp:661 src/cli/Common.cpp:50
-#: src/core/FormBuilder.cpp:2220
+#: src/core/FormBuilder.cpp:2258
 #, kde-format
 msgid "“%1” cannot be read."
 msgstr ""
@@ -2541,8 +2541,8 @@ msgid "layout overlay needs two files: the document, then what to lay over it."
 msgstr ""
 
 #: src/cli/CommandsLayout.cpp:658 src/cli/Common.cpp:46 src/cli/main.cpp:74
-#: src/core/Archival.cpp:606 src/core/Compressor.cpp:208
-#: src/core/Convert.cpp:2178 src/core/Convert.cpp:2324
+#: src/core/Archival.cpp:606 src/core/Compressor.cpp:209
+#: src/core/Convert.cpp:2179 src/core/Convert.cpp:2325
 #: src/core/Preflight.cpp:2599
 #, kde-format
 msgid "“%1” does not exist."
@@ -3411,12 +3411,12 @@ msgstr ""
 msgid "Nothing above says anything about these either way."
 msgstr ""
 
-#: src/cli/CommandsPreflight.cpp:278 src/core/Preflight.cpp:2876
+#: src/cli/CommandsPreflight.cpp:278 src/core/Preflight.cpp:2877
 #, kde-format
 msgid "No errors were found among the rules that were checked."
 msgstr ""
 
-#: src/cli/CommandsPreflight.cpp:279 src/core/Preflight.cpp:2877
+#: src/cli/CommandsPreflight.cpp:279 src/core/Preflight.cpp:2878
 #, kde-format
 msgid "One error was found."
 msgid_plural "%1 errors were found."
@@ -5376,27 +5376,27 @@ msgstr ""
 msgid "There is nothing to add."
 msgstr ""
 
-#: src/core/Annotation.cpp:895 src/ui/MainWindow.cpp:1916
+#: src/core/Annotation.cpp:898 src/ui/MainWindow.cpp:1916
 #, kde-format
 msgid "This document has no comments to write out."
 msgstr ""
 
-#: src/core/Annotation.cpp:921
+#: src/core/Annotation.cpp:924
 #, kde-format
 msgid "“%1” could not be opened for writing."
 msgstr ""
 
-#: src/core/Annotation.cpp:1147
+#: src/core/Annotation.cpp:1150
 #, kde-format
 msgid "“%1” is not a valid XFDF file: %2"
 msgstr ""
 
-#: src/core/Annotation.cpp:1153
+#: src/core/Annotation.cpp:1156
 #, kde-format
 msgid "“%1” holds no comments this can use."
 msgstr ""
 
-#: src/core/Annotation.cpp:1159
+#: src/core/Annotation.cpp:1162
 #, kde-format
 msgid "One comment names a page this document does not have and was left out."
 msgid_plural ""
@@ -5484,12 +5484,12 @@ msgid ""
 "assumed."
 msgstr ""
 
-#: src/core/Archival.cpp:536 src/core/Compressor.cpp:292
+#: src/core/Archival.cpp:536 src/core/Compressor.cpp:293
 #: src/core/Convert.cpp:1311 src/core/Convert.cpp:1676
-#: src/core/Encryption.cpp:57 src/core/ImageIO.cpp:166 src/core/Metadata.cpp:72
-#: src/core/Overlay.cpp:125 src/core/PageCrop.cpp:108
-#: src/core/PageLayout.cpp:616 src/core/Preflight.cpp:2308
-#: src/core/ScanProcessor.cpp:582
+#: src/core/Encryption.cpp:57 src/core/ImageIO.cpp:167 src/core/Metadata.cpp:73
+#: src/core/Overlay.cpp:126 src/core/PageCrop.cpp:109
+#: src/core/PageLayout.cpp:617 src/core/Preflight.cpp:2308
+#: src/core/ScanProcessor.cpp:583
 #, kde-format
 msgid "Could not write “%1”."
 msgstr ""
@@ -5542,7 +5542,7 @@ msgid ""
 "archiving. Install the “ghostscript” package."
 msgstr ""
 
-#: src/core/Archival.cpp:630 src/core/Convert.cpp:2343
+#: src/core/Archival.cpp:630 src/core/Convert.cpp:2344
 #, kde-format
 msgid "The colour profile “%1” does not exist."
 msgstr ""
@@ -5555,24 +5555,24 @@ msgid ""
 "may object to. Installing the “icc-profiles-free” package fixes it."
 msgstr ""
 
-#: src/core/Archival.cpp:646 src/core/Convert.cpp:2373
+#: src/core/Archival.cpp:646 src/core/Convert.cpp:2374
 #: src/core/Preflight.cpp:2607
 #, kde-format
 msgid "Could not create a temporary directory."
 msgstr ""
 
 #: src/core/Archival.cpp:661 src/core/BlankPdf.cpp:44
-#: src/core/Compressor.cpp:222 src/core/Convert.cpp:2388
+#: src/core/Compressor.cpp:223 src/core/Convert.cpp:2389
 #: src/core/Encryption.cpp:42 src/core/ImageIO.cpp:70 src/core/Metadata.cpp:42
 #: src/core/Overlay.cpp:90 src/core/PageCrop.cpp:77 src/core/PageLayout.cpp:571
-#: src/core/Preflight.cpp:2646 src/core/Preflight.cpp:2935
+#: src/core/Preflight.cpp:2646 src/core/Preflight.cpp:2936
 #: src/core/ScanProcessor.cpp:319
 #, kde-format
 msgid "Cannot write to “%1”."
 msgstr ""
 
-#: src/core/Archival.cpp:693 src/core/ColourTools.cpp:2957
-#: src/core/Compressor.cpp:252 src/core/Convert.cpp:2428
+#: src/core/Archival.cpp:693 src/core/ColourTools.cpp:2958
+#: src/core/Compressor.cpp:253 src/core/Convert.cpp:2429
 #, kde-format
 msgid "Ghostscript could not be started."
 msgstr ""
@@ -5582,8 +5582,8 @@ msgstr ""
 msgid "Converting took too long and was stopped."
 msgstr ""
 
-#: src/core/Archival.cpp:711 src/core/ColourTools.cpp:2972
-#: src/core/Compressor.cpp:269 src/core/Convert.cpp:2445
+#: src/core/Archival.cpp:711 src/core/ColourTools.cpp:2973
+#: src/core/Compressor.cpp:270 src/core/Convert.cpp:2446
 #, kde-format
 msgid "Ghostscript reported an error."
 msgstr ""
@@ -5600,14 +5600,14 @@ msgid ""
 "strict check may object to them."
 msgstr ""
 
-#: src/core/Archival.cpp:735 src/core/Compressor.cpp:309
-#: src/core/Convert.cpp:1756 src/core/Convert.cpp:2468
-#: src/core/Preflight.cpp:2727 src/core/Preflight.cpp:3020
+#: src/core/Archival.cpp:735 src/core/Compressor.cpp:310
+#: src/core/Convert.cpp:1757 src/core/Convert.cpp:2469
+#: src/core/Preflight.cpp:2728 src/core/Preflight.cpp:3022
 #, kde-format
 msgid "Could not replace “%1”."
 msgstr ""
 
-#: src/core/Archival.cpp:743 src/core/Convert.cpp:2473
+#: src/core/Archival.cpp:743 src/core/Convert.cpp:2474
 #, kde-format
 msgid "The file now identifies itself as %1."
 msgstr ""
@@ -5696,19 +5696,19 @@ msgstr ""
 msgid "None of the pages asked for are in this document."
 msgstr ""
 
-#: src/core/ColourTools.cpp:2947
+#: src/core/ColourTools.cpp:2948
 #, kde-format
 msgid ""
 "Ghostscript is not installed, so this cannot be measured. Install the "
 "“ghostscript” package."
 msgstr ""
 
-#: src/core/ColourTools.cpp:2965
+#: src/core/ColourTools.cpp:2966
 #, kde-format
 msgid "Ghostscript took too long and was stopped."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3136
+#: src/core/ColourTools.cpp:3137
 #, kde-format
 msgid "The document has one inline image, whose colour is not counted here."
 msgid_plural ""
@@ -5716,7 +5716,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ColourTools.cpp:3237
+#: src/core/ColourTools.cpp:3238
 #, kde-format
 msgid ""
 "Ghostscript converted the whole document, because no ICC profile was "
@@ -5725,7 +5725,7 @@ msgid ""
 "has been rebuilt from end to end rather than edited."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3271
+#: src/core/ColourTools.cpp:3272
 #, kde-format
 msgid ""
 "Converting only some pages to CMYK needs an ICC profile, because the only "
@@ -5733,24 +5733,24 @@ msgid ""
 "profile, or convert every page."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3283
+#: src/core/ColourTools.cpp:3284
 #, kde-format
 msgid "Colour was converted to CMYK through the ICC profile “%1”."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3284
+#: src/core/ColourTools.cpp:3285
 #, kde-format
 msgid ""
 "Grey was written as black ink alone rather than as a four-colour build, "
 "which is what a press wants."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3295
+#: src/core/ColourTools.cpp:3296
 #, kde-format
 msgid "CMYK was converted to RGB through the ICC profile “%1”."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3297
+#: src/core/ColourTools.cpp:3298
 #, kde-format
 msgid ""
 "CMYK was converted to RGB with the formula the PDF specification defines. It "
@@ -5758,14 +5758,14 @@ msgid ""
 "ICC profile for that."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3301
+#: src/core/ColourTools.cpp:3302
 #, kde-format
 msgid ""
 "Grey was computed with the weighting the PDF specification defines for it, "
 "which is exact and needs no profile."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3318
+#: src/core/ColourTools.cpp:3319
 #, kde-format
 msgid ""
 "One colour operator was rewritten in place, leaving everything else in the "
@@ -5776,14 +5776,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ColourTools.cpp:3325
+#: src/core/ColourTools.cpp:3326
 #, kde-format
 msgid "One image had its pixels converted and re-encoded."
 msgid_plural "%1 images had their pixels converted and re-encoded."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ColourTools.cpp:3329
+#: src/core/ColourTools.cpp:3330
 #, kde-format
 msgid ""
 "One indexed image had only its palette rewritten, so its pixels and their "
@@ -5794,7 +5794,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ColourTools.cpp:3336
+#: src/core/ColourTools.cpp:3337
 #, kde-format
 msgid "One image could not be decoded and was left in its original colour."
 msgid_plural ""
@@ -5802,71 +5802,71 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ColourTools.cpp:3341
+#: src/core/ColourTools.cpp:3342
 #, kde-format
 msgid ""
 "Nothing needed changing: the pages were already in the colour asked for."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3356
+#: src/core/ColourTools.cpp:3357
 #, kde-format
 msgid "Both colours have to be valid."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3383
+#: src/core/ColourTools.cpp:3384
 #, kde-format
 msgid ""
 "Nothing was asked for: name an ink to rename or one to turn into process "
 "colour."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3492
+#: src/core/ColourTools.cpp:3493
 #, kde-format
 msgid "The minimum width has to be greater than zero."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3532 src/core/NUp.cpp:60
-#: src/core/PageLayout.cpp:904 src/core/PageLayout.cpp:1047
-#: src/core/PageLayout.cpp:1153 src/core/PageRange.cpp:119
+#: src/core/ColourTools.cpp:3533 src/core/NUp.cpp:60
+#: src/core/PageLayout.cpp:905 src/core/PageLayout.cpp:1048
+#: src/core/PageLayout.cpp:1154 src/core/PageRange.cpp:119
 #, kde-format
 msgid "The document has no pages."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3538
+#: src/core/ColourTools.cpp:3539
 #, kde-format
 msgid ""
 "Ink coverage is measured by rendering each page in CMYK, which needs "
 "Ghostscript. Install the “ghostscript” package."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3547 src/core/ColourTools.cpp:3621
+#: src/core/ColourTools.cpp:3548 src/core/ColourTools.cpp:3622
 #, kde-format
 msgid "A temporary folder could not be created."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3605
+#: src/core/ColourTools.cpp:3606
 #, kde-format
 msgid "Page %1 is not in this document."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3611
+#: src/core/ColourTools.cpp:3612
 #, kde-format
 msgid ""
 "A separations preview is produced by Ghostscript. Install the “ghostscript” "
 "package."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3649
+#: src/core/ColourTools.cpp:3650
 #, kde-format
 msgid "Ghostscript did not produce a readable separation."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3693
+#: src/core/ColourTools.cpp:3694
 #, kde-format
 msgid "There is no separation called “%1” on page %2."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3704
+#: src/core/ColourTools.cpp:3705
 #, kde-format
 msgid ""
 "Text and vector colour is rewritten exactly, operator by operator. "
@@ -5874,7 +5874,7 @@ msgid ""
 "structure) comes out untouched."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3706
+#: src/core/ColourTools.cpp:3707
 #, kde-format
 msgid ""
 "Conversion into CMYK needs an ICC profile. Without one, Ghostscript converts "
@@ -5882,14 +5882,14 @@ msgid ""
 "Ghostscript's conversion rather than one you chose."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3709
+#: src/core/ColourTools.cpp:3710
 #, kde-format
 msgid ""
 "Greyscale and RGB conversions use the arithmetic the PDF specification "
 "defines, so they are exact and repeatable, but they are not colour-managed."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3711
+#: src/core/ColourTools.cpp:3712
 #, kde-format
 msgid ""
 "Photographs are decoded, converted and re-encoded, so a JPEG loses a little "
@@ -5897,26 +5897,26 @@ msgid ""
 "nothing at all."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3713
+#: src/core/ColourTools.cpp:3714
 #, kde-format
 msgid ""
 "Fax, JPEG 2000 and four-colour JPEG images cannot be decoded here and are "
 "left in their original colour rather than guessed at."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3715
+#: src/core/ColourTools.cpp:3716
 #, kde-format
 msgid ""
 "Shading patterns and tiling patterns paint from their own colour functions, "
 "which are carried across unchanged."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3717
+#: src/core/ColourTools.cpp:3718
 #, kde-format
 msgid "Inline images keep their original colour."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3718
+#: src/core/ColourTools.cpp:3719
 #, kde-format
 msgid ""
 "A colour replaced by name is written in RGB, or in grey when the replacement "
@@ -5924,14 +5924,14 @@ msgid ""
 "CMYK or into a spot ink would need a profile this has not been given."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3721
+#: src/core/ColourTools.cpp:3722
 #, kde-format
 msgid ""
 "Replacing a colour searches the drawing operators, not the pixels of "
 "photographs."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3722
+#: src/core/ColourTools.cpp:3723
 #, kde-format
 msgid ""
 "Hairline widths are judged after the page's own scaling, but a width set "
@@ -5939,7 +5939,7 @@ msgid ""
 "the fix is applied to everything drawn afterwards at that width."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3725
+#: src/core/ColourTools.cpp:3726
 #, kde-format
 msgid ""
 "Ink coverage and separation previews are measured through Ghostscript's own "
@@ -5947,26 +5947,26 @@ msgid ""
 "an output intent."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3727
+#: src/core/ColourTools.cpp:3728
 #, kde-format
 msgid ""
 "Ink coverage is the highest total found on the page at 72 dots per inch, "
 "which is the number an ink limit is about; it is not an average."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3729
+#: src/core/ColourTools.cpp:3730
 #, kde-format
 msgid ""
 "A multi-ink DeviceN transform stored as a sampled function is read at its "
 "nearest sample rather than interpolated across every ink."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3731
+#: src/core/ColourTools.cpp:3732
 #, kde-format
 msgid "Colour inside a Type 3 font's glyph procedures is not converted."
 msgstr ""
 
-#: src/core/ColourTools.cpp:3734
+#: src/core/ColourTools.cpp:3735
 #, kde-format
 msgid ""
 "This build has no colour management, so conversion into CMYK can only go "
@@ -6013,54 +6013,54 @@ msgctxt "@item document comparison result"
 msgid "Removed"
 msgstr ""
 
-#: src/core/Compressor.cpp:131
+#: src/core/Compressor.cpp:132
 #, kde-format
 msgctxt "@item compression level"
 msgid "Lossless (nothing is re-encoded)"
 msgstr ""
 
-#: src/core/Compressor.cpp:133
+#: src/core/Compressor.cpp:134
 #, kde-format
 msgctxt "@item compression level"
 msgid "Balanced (good for reading and printing)"
 msgstr ""
 
-#: src/core/Compressor.cpp:135
+#: src/core/Compressor.cpp:136
 #, kde-format
 msgctxt "@item compression level"
 msgid "Strong (good for email)"
 msgstr ""
 
-#: src/core/Compressor.cpp:137
+#: src/core/Compressor.cpp:138
 #, kde-format
 msgctxt "@item compression level"
 msgid "Smallest (visibly softer images)"
 msgstr ""
 
-#: src/core/Compressor.cpp:188
+#: src/core/Compressor.cpp:189
 #, kde-format
 msgid "The sample pages could not be measured."
 msgstr ""
 
-#: src/core/Compressor.cpp:241
+#: src/core/Compressor.cpp:242
 #, kde-format
 msgid ""
 "Ghostscript is not installed, so images cannot be downsampled. Install the "
 "“ghostscript” package, or use lossless compression."
 msgstr ""
 
-#: src/core/Compressor.cpp:261
+#: src/core/Compressor.cpp:262
 #, kde-format
 msgid "Compression took too long and was stopped."
 msgstr ""
 
-#: src/core/Compressor.cpp:280
+#: src/core/Compressor.cpp:281
 #, kde-format
 msgid "Compression produced an empty file."
 msgstr ""
 
-#: src/core/Convert.cpp:1106 src/core/Convert.cpp:2217
-#: src/core/FontInventory.cpp:801 src/core/PageObjects.cpp:795
+#: src/core/Convert.cpp:1106 src/core/Convert.cpp:2218
+#: src/core/FontInventory.cpp:802 src/core/PageObjects.cpp:795
 #: src/core/TextEdit.cpp:1258
 #, kde-format
 msgid "The document has no page %1."
@@ -6071,84 +6071,84 @@ msgstr ""
 msgid "Could not write all of “%1”."
 msgstr ""
 
-#: src/core/Convert.cpp:1855
+#: src/core/Convert.cpp:1856
 #, kde-format
 msgid ""
 "The document keeps its objects in compressed object streams, which no reader "
 "older than PDF %1 can unpack."
 msgstr ""
 
-#: src/core/Convert.cpp:1872
+#: src/core/Convert.cpp:1873
 #, kde-format
 msgid "The document is encrypted with AES-256, which needs PDF %1 or newer."
 msgstr ""
 
-#: src/core/Convert.cpp:1876
+#: src/core/Convert.cpp:1877
 #, kde-format
 msgid "The document is encrypted with AES-128, which needs PDF %1 or newer."
 msgstr ""
 
-#: src/core/Convert.cpp:1880
+#: src/core/Convert.cpp:1881
 #, kde-format
 msgid "The document uses encryption with a longer key than PDF %1 allows."
 msgstr ""
 
-#: src/core/Convert.cpp:1887
+#: src/core/Convert.cpp:1888
 #, kde-format
 msgid "The document has layers, which need PDF %1 or newer."
 msgstr ""
 
-#: src/core/Convert.cpp:1919
+#: src/core/Convert.cpp:1920
 #, kde-format
 msgid "The document uses transparency, which needs PDF %1 or newer."
 msgstr ""
 
-#: src/core/Convert.cpp:1923
+#: src/core/Convert.cpp:1924
 #, kde-format
 msgid ""
 "A picture in the document is compressed with JBIG2, which needs PDF %1 or "
 "newer."
 msgstr ""
 
-#: src/core/Convert.cpp:1929
+#: src/core/Convert.cpp:1930
 #, kde-format
 msgid ""
 "A picture in the document is compressed with JPEG 2000, which needs PDF %1 "
 "or newer."
 msgstr ""
 
-#: src/core/Convert.cpp:2208
+#: src/core/Convert.cpp:2209
 #, kde-format
 msgid ""
 "Neither pdftocairo nor Ghostscript is installed, so pages cannot be saved as "
 "SVG. Install the “poppler-utils” package."
 msgstr ""
 
-#: src/core/Convert.cpp:2241
+#: src/core/Convert.cpp:2242
 #, kde-format
 msgid "Saving page %1 as SVG did not finish."
 msgstr ""
 
-#: src/core/Convert.cpp:2248
+#: src/core/Convert.cpp:2249
 #, kde-format
 msgid "Page %1 could not be saved as SVG."
 msgstr ""
 
-#: src/core/Convert.cpp:2288
+#: src/core/Convert.cpp:2289
 #, kde-format
 msgid ""
 "No table was found in this document. There may be none, or its columns may "
 "not line up well enough to be recognised."
 msgstr ""
 
-#: src/core/Convert.cpp:2331
+#: src/core/Convert.cpp:2332
 #, kde-format
 msgid ""
 "Ghostscript is not installed, so documents cannot be prepared for print. "
 "Install the “ghostscript” package."
 msgstr ""
 
-#: src/core/Convert.cpp:2352
+#: src/core/Convert.cpp:2353
 #, kde-format
 msgid ""
 "No CMYK printing profile was found on this system, so the file has no output "
@@ -6156,95 +6156,95 @@ msgid ""
 "name the profile your printer asked for."
 msgstr ""
 
-#: src/core/Convert.cpp:2359
+#: src/core/Convert.cpp:2360
 #, kde-format
 msgid "“%1” is not a colour profile this can read."
 msgstr ""
 
-#: src/core/Convert.cpp:2364
+#: src/core/Convert.cpp:2365
 #, kde-format
 msgid ""
 "“%1” is not a CMYK profile. It has been used as the output intent because it "
 "was the one asked for, but a printer will expect a CMYK printing condition."
 msgstr ""
 
-#: src/core/Convert.cpp:2437
+#: src/core/Convert.cpp:2438
 #, kde-format
 msgid "Preparing the document for print took too long and was stopped."
 msgstr ""
 
-#: src/core/Convert.cpp:2452
+#: src/core/Convert.cpp:2453
 #, kde-format
 msgid "Preparing the document for print produced an empty file."
 msgstr ""
 
-#: src/core/Convert.cpp:2474
+#: src/core/Convert.cpp:2475
 #, kde-format
 msgid ""
 "Fonts were embedded, so the printer sets the text in the faces you chose "
 "rather than in whatever the press happens to have."
 msgstr ""
 
-#: src/core/Convert.cpp:2477
+#: src/core/Convert.cpp:2478
 #, kde-format
 msgid ""
 "An output intent was added from “%1”, so the file states the printing "
 "condition its colours are meant for instead of leaving it to be guessed."
 msgstr ""
 
-#: src/core/Convert.cpp:2482
+#: src/core/Convert.cpp:2483
 #, kde-format
 msgid ""
 "Colours were converted to CMYK and transparency was flattened, neither of "
 "which PDF/X-1a allows to be left as it was."
 msgstr ""
 
-#: src/core/Convert.cpp:2485
+#: src/core/Convert.cpp:2486
 #, kde-format
 msgid ""
 "Colours were kept device-independent where they already were, which is what "
 "PDF/X-3 exists to allow."
 msgstr ""
 
-#: src/core/Convert.cpp:2488
+#: src/core/Convert.cpp:2489
 #, kde-format
 msgid "Transparency was left live, which is what PDF/X-4 exists to allow."
 msgstr ""
 
-#: src/core/Convert.cpp:2492
+#: src/core/Convert.cpp:2493
 #, kde-format
 msgid ""
 "Some colours could not be converted for the stated printing condition, so a "
 "preflight check may object to them."
 msgstr ""
 
-#: src/core/Convert.cpp:2495
+#: src/core/Convert.cpp:2496
 #, kde-format
 msgid ""
 "The colour conversion is Ghostscript's, not a printer's. A proof is still "
 "the only way to know what will come off the press."
 msgstr ""
 
-#: src/core/Convert.cpp:2534
+#: src/core/Convert.cpp:2536
 #, kde-format
 msgid "“%1” is not a PDF version. It looks like “1.7”."
 msgstr ""
 
-#: src/core/Convert.cpp:2562
+#: src/core/Convert.cpp:2564
 #, kde-format
 msgid ""
 "This document cannot claim to be PDF %1: it uses features that need at least "
 "PDF %2. Lowering the number would only mislead a reader that then meets them."
 msgstr ""
 
-#: src/core/Convert.cpp:2571
+#: src/core/Convert.cpp:2573
 #, kde-format
 msgid ""
 "Raising the number from PDF %1 to PDF %2 does not add anything to the "
 "document; it only says that a newer reader is expected."
 msgstr ""
 
-#: src/core/Convert.cpp:2600
+#: src/core/Convert.cpp:2603
 #, kde-format
 msgid ""
 "A PDF holds glyphs at coordinates, not sentences. Reading order, paragraphs "
@@ -6252,14 +6252,14 @@ msgid ""
 "extraction."
 msgstr ""
 
-#: src/core/Convert.cpp:2602
+#: src/core/Convert.cpp:2605
 #, kde-format
 msgid ""
 "Text that is part of a scanned picture is not text and does not come out. "
 "Run the page through text recognition first."
 msgstr ""
 
-#: src/core/Convert.cpp:2604
+#: src/core/Convert.cpp:2607
 #, kde-format
 msgid ""
 "Two columns are found by the white gutter between them. Three or more "
@@ -6268,7 +6268,7 @@ msgid ""
 "order."
 msgstr ""
 
-#: src/core/Convert.cpp:2607
+#: src/core/Convert.cpp:2610
 #, kde-format
 msgid ""
 "A table is read column by column by the plain-text export, because its "
@@ -6276,7 +6276,7 @@ msgid ""
 "tables."
 msgstr ""
 
-#: src/core/Convert.cpp:2609
+#: src/core/Convert.cpp:2612
 #, kde-format
 msgid ""
 "Which paragraph is a heading, which line is a list item and which words are "
@@ -6285,7 +6285,7 @@ msgid ""
 "whose bold face is not called bold, will be guessed wrong."
 msgstr ""
 
-#: src/core/Convert.cpp:2612
+#: src/core/Convert.cpp:2615
 #, kde-format
 msgid ""
 "A word broken by a hyphen at the end of a line is joined back together when "
@@ -6293,7 +6293,7 @@ msgid ""
 "hyphen was real."
 msgstr ""
 
-#: src/core/Convert.cpp:2614
+#: src/core/Convert.cpp:2617
 #, kde-format
 msgid ""
 "Pictures are only carried into HTML when the page draws them itself and they "
@@ -6301,7 +6301,7 @@ msgid ""
 "pictures drawn inside an embedded drawing, are left out."
 msgstr ""
 
-#: src/core/Convert.cpp:2617
+#: src/core/Convert.cpp:2620
 #, kde-format
 msgid ""
 "Table detection needs every row to have the same number of cells, so a table "
@@ -6309,21 +6309,21 @@ msgid ""
 "all."
 msgstr ""
 
-#: src/core/Convert.cpp:2619
+#: src/core/Convert.cpp:2622
 #, kde-format
 msgid ""
 "Confidence is a judgement about how table-like the geometry is, not a "
 "probability. Check the result before relying on it."
 msgstr ""
 
-#: src/core/Convert.cpp:2621
+#: src/core/Convert.cpp:2624
 #, kde-format
 msgid ""
 "PDF/X conversion is Ghostscript's, and this is not a preflight check. A file "
 "that comes out of it still has to pass whatever your printer runs."
 msgstr ""
 
-#: src/core/Convert.cpp:2623
+#: src/core/Convert.cpp:2626
 #, kde-format
 msgid ""
 "The claimed PDF version is only a claim. Lowering it is refused where the "
@@ -6351,7 +6351,7 @@ msgstr ""
 msgid "None of the selected pages could be read."
 msgstr ""
 
-#: src/core/DocumentWriter.cpp:333
+#: src/core/DocumentWriter.cpp:334
 #, kde-format
 msgid "Could not replace “%1”: %2"
 msgstr ""
@@ -6361,7 +6361,7 @@ msgstr ""
 msgid "A password is required."
 msgstr ""
 
-#: src/core/Encryption.cpp:169
+#: src/core/Encryption.cpp:171
 #, kde-format
 msgid "“%1” could not be unlocked: %2"
 msgstr ""
@@ -6411,7 +6411,7 @@ msgid ""
 "This font's licence allows only its bitmaps to be embedded, not its outlines."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:1608 src/core/FontEmbedder.cpp:2133
+#: src/core/FontEmbedder.cpp:1608 src/core/FontEmbedder.cpp:2134
 #, kde-format
 msgid "The font file %1 cannot be read."
 msgstr ""
@@ -6455,7 +6455,7 @@ msgstr ""
 msgid "“%1”'s outlines are in a form this cannot read."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:1794 src/core/FontEmbedder.cpp:2247
+#: src/core/FontEmbedder.cpp:1794 src/core/FontEmbedder.cpp:2248
 #, kde-format
 msgid ""
 "“%1” stores its outlines in compact form, which cannot be cut down, so the "
@@ -6522,110 +6522,110 @@ msgid ""
 "kept for them."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2111
+#: src/core/FontEmbedder.cpp:2112
 #, kde-format
 msgid "No characters were asked for, so there is nothing to embed."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2117
+#: src/core/FontEmbedder.cpp:2118
 #, kde-format
 msgid "This page has no resources for a font to be added to."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2153
+#: src/core/FontEmbedder.cpp:2154
 #, kde-format
 msgid "No bold cut of “%1” is installed, so the ordinary one was embedded."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2157
+#: src/core/FontEmbedder.cpp:2158
 #, kde-format
 msgid "No italic cut of “%1” is installed, so the upright one was embedded."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2183
+#: src/core/FontEmbedder.cpp:2184
 #, kde-format
 msgid "“%1” holds none of the characters asked for."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2188
+#: src/core/FontEmbedder.cpp:2189
 #, kde-format
 msgid "“%1” does not hold %2, so those were left out."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2220
+#: src/core/FontEmbedder.cpp:2221
 #, kde-format
 msgid ""
 "A font of this kind can show at most 255 different characters, and more than "
 "that were asked for."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2242
+#: src/core/FontEmbedder.cpp:2243
 #, kde-format
 msgid "This font's outlines are in a form this cannot read."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2250
+#: src/core/FontEmbedder.cpp:2251
 #, kde-format
 msgid ""
 "A font embedded whole in this form is addressed by glyph name, so a "
 "character with no standard name may not appear."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2385
+#: src/core/FontEmbedder.cpp:2386
 #, kde-format
 msgid "This document has no pages for a font to be added to."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2399 src/core/FormBuilder.cpp:1713
+#: src/core/FontEmbedder.cpp:2400 src/core/FormBuilder.cpp:1751
 #, kde-format
 msgid "This document has no page %1."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2457 src/ui/ToolFontsDialog.cpp:626
+#: src/core/FontEmbedder.cpp:2458 src/ui/ToolFontsDialog.cpp:626
 #, kde-format
 msgid ""
 "Every font this document uses already travels with it, so there is nothing "
 "to embed."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2458
+#: src/core/FontEmbedder.cpp:2459
 #, kde-format
 msgid ""
 "None of the fonts this document is missing could be given a face from this "
 "system."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2485 src/ui/ToolFontsDialog.cpp:859
+#: src/core/FontEmbedder.cpp:2486 src/ui/ToolFontsDialog.cpp:859
 #, kde-format
 msgid ""
 "Replacing a font needs both the font to replace and the family to put in its "
 "place."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2517
+#: src/core/FontEmbedder.cpp:2518
 #, kde-format
 msgid ""
 "No font in this document is called “%1”. “fonts list” says what it does use."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2518
+#: src/core/FontEmbedder.cpp:2519
 #, kde-format
 msgid "“%1” was found but could not be replaced with “%2”."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2552
+#: src/core/FontEmbedder.cpp:2553
 #, kde-format
 msgid "This font's outlines are in compact form, which cannot be cut down."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2573
+#: src/core/FontEmbedder.cpp:2574
 #, kde-format
 msgid ""
 "This font programme says nothing about which glyph draws which character, so "
 "what it holds cannot be worked out from the outside."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2592
+#: src/core/FontEmbedder.cpp:2593
 #, kde-format
 msgid ""
 "Only the characters asked for go into the document, which is what keeps the "
@@ -6633,7 +6633,7 @@ msgid ""
 "too."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2594
+#: src/core/FontEmbedder.cpp:2595
 #, kde-format
 msgid ""
 "A font added this way can hold 255 different characters at most. A document "
@@ -6641,14 +6641,14 @@ msgid ""
 "arrange."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2596
+#: src/core/FontEmbedder.cpp:2597
 #, kde-format
 msgid ""
 "Characters outside the basic multilingual plane (most emoji, and the rarer "
 "Chinese) cannot be embedded."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2598
+#: src/core/FontEmbedder.cpp:2599
 #, kde-format
 msgid ""
 "A font whose outlines are in compact form is embedded whole rather than cut "
@@ -6656,14 +6656,14 @@ msgid ""
 "The file is larger and the reason is reported."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2600
+#: src/core/FontEmbedder.cpp:2601
 #, kde-format
 msgid ""
 "Kerning is not carried over: the characters are spaced by their own widths, "
 "which is what a PDF records anyway."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2602
+#: src/core/FontEmbedder.cpp:2603
 #, kde-format
 msgid ""
 "What a font's licence permits is read from the font and reported, never "
@@ -6671,7 +6671,7 @@ msgid ""
 "something a program can know."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2604
+#: src/core/FontEmbedder.cpp:2605
 #, kde-format
 msgid ""
 "Substituting a face for a font the document is missing keeps every character "
@@ -6680,7 +6680,7 @@ msgid ""
 "metrically compatible ones fill the same space."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2607
+#: src/core/FontEmbedder.cpp:2608
 #, kde-format
 msgid ""
 "A composite font (the kind used for Chinese, and by most modern producers "
@@ -6689,7 +6689,7 @@ msgid ""
 "Those are named rather than guessed at."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2610
+#: src/core/FontEmbedder.cpp:2611
 #, kde-format
 msgid ""
 "A font the document refers to without saying what its codes mean, and which "
@@ -6697,7 +6697,7 @@ msgid ""
 "to give a substitute the same meaning."
 msgstr ""
 
-#: src/core/FontEmbedder.cpp:2612
+#: src/core/FontEmbedder.cpp:2613
 #, kde-format
 msgid ""
 "Only fonts a page can reach are dealt with. A font used solely by a "
@@ -6736,39 +6736,39 @@ msgstr ""
 msgid "Only its bitmaps may be embedded, not its outlines."
 msgstr ""
 
-#: src/core/FontInventory.cpp:872
+#: src/core/FontInventory.cpp:873
 #, kde-format
 msgid "No embedded font in this document matches what was asked for."
 msgstr ""
 
-#: src/core/FontInventory.cpp:952
+#: src/core/FontInventory.cpp:953
 #, kde-format
 msgid ""
 "No two fonts in this document are the same font, so there is nothing to "
 "merge."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1014
+#: src/core/FontInventory.cpp:1015
 #, kde-format
 msgid ""
 "Every font in this document already says what its characters mean, or none "
 "of them says enough to work it out."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1299
+#: src/core/FontInventory.cpp:1300
 #, kde-format
 msgctxt "@item a font with no name of its own"
 msgid "an unnamed font"
 msgstr ""
 
-#: src/core/FontInventory.cpp:1306
+#: src/core/FontInventory.cpp:1307
 #, kde-format
 msgid ""
 "“%1” is not an sfnt programme: a Type 1 or compact outline cannot be cut "
 "down from the outside, so it was left exactly as it was."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1313
+#: src/core/FontInventory.cpp:1314
 #, kde-format
 msgid ""
 "“%1” is a composite font, whose codes are glyph numbers meaningful only "
@@ -6777,7 +6777,7 @@ msgid ""
 "was left alone."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1322
+#: src/core/FontInventory.cpp:1323
 #, kde-format
 msgid ""
 "Nothing on any page draws with “%1”, so there was no set of glyphs to keep "
@@ -6785,39 +6785,39 @@ msgid ""
 "this one."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1328
+#: src/core/FontInventory.cpp:1329
 #, kde-format
 msgid ""
 "Nothing in this document says what “%1”'s character codes mean, so which "
 "glyphs the pages need could not be worked out. It was left alone."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1336
+#: src/core/FontInventory.cpp:1337
 #, kde-format
 msgid ""
 "“%1”'s programme is stored with a filter this cannot undo, so it could not "
 "be read, let alone rewritten."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1349
+#: src/core/FontInventory.cpp:1350
 #, kde-format
 msgid "its glyphs could not be worked out"
 msgstr ""
 
-#: src/core/FontInventory.cpp:1348
+#: src/core/FontInventory.cpp:1349
 #, kde-format
 msgctxt "@info a font that could not be cut down, and the reason"
 msgid "“%1” was left alone: %2"
 msgstr ""
 
-#: src/core/FontInventory.cpp:1353
+#: src/core/FontInventory.cpp:1354
 #, kde-format
 msgid ""
 "“%1” is already no larger than the glyphs the pages use, so nothing was "
 "gained by rewriting it and it was left as it was."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1393
+#: src/core/FontInventory.cpp:1394
 #, kde-format
 msgid ""
 "What a font can show is read from what the document says about it, which for "
@@ -6825,14 +6825,14 @@ msgid ""
 "from may well hold more."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1395
+#: src/core/FontInventory.cpp:1396
 #, kde-format
 msgid ""
 "A font whose /ToUnicode map is present but unreadable is reported as having "
 "none, because that is what it is worth to anyone trying to copy the text."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1397
+#: src/core/FontInventory.cpp:1398
 #, kde-format
 msgid ""
 "Removing an embedded font leaves the text in place but not its appearance: "
@@ -6840,7 +6840,7 @@ msgid ""
 "is not the same width."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1399
+#: src/core/FontInventory.cpp:1400
 #, kde-format
 msgid ""
 "Only subsets that are the same font programme with the same encoding are "
@@ -6848,21 +6848,21 @@ msgid ""
 "those means rewriting every page that uses them."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1401
+#: src/core/FontInventory.cpp:1402
 #, kde-format
 msgid ""
 "A /ToUnicode map can be written for an ordinary font but not for a composite "
 "one, whose codes are glyph numbers with no stated meaning."
 msgstr ""
 
-#: src/core/FontInventory.cpp:1403
+#: src/core/FontInventory.cpp:1404
 #, kde-format
 msgid ""
 "Fonts used only by a document's interactive form, and not by any page, are "
 "not listed."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:231
+#: src/core/FormBuilder.cpp:232
 #, kde-format
 msgid ""
 "This document carries an XFA form, which is a second and incompatible "
@@ -6870,24 +6870,24 @@ msgid ""
 "differently in every reader."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:892
+#: src/core/FormBuilder.cpp:894
 #, kde-format
 msgid "“%1” is already a field of its own and cannot also hold other fields."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1030 src/core/FormBuilder.cpp:1037
+#: src/core/FormBuilder.cpp:1032 src/core/FormBuilder.cpp:1039
 #, kde-format
 msgid "“%1” cannot be written to."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1258
+#: src/core/FormBuilder.cpp:1260
 #, kde-format
 msgid ""
 "This is a JavaScript action, which is how every PDF form does it and which "
 "PDF/A forbids outright. A document that has to be archived cannot carry it."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1260
+#: src/core/FormBuilder.cpp:1262
 #, kde-format
 msgid ""
 "Readers other than Acrobat vary in how much of this they run, and several "
@@ -6895,145 +6895,145 @@ msgid ""
 "guarantee that what arrives back is valid."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1296 src/core/FormBuilder.cpp:1564
-#: src/core/FormBuilder.cpp:1706
+#: src/core/FormBuilder.cpp:1298 src/core/FormBuilder.cpp:1598
+#: src/core/FormBuilder.cpp:1744
 #, kde-format
 msgid "This document has no form."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1328
+#: src/core/FormBuilder.cpp:1362
 #, kde-format
 msgid "There are no fields to add."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1357
+#: src/core/FormBuilder.cpp:1391
 #, kde-format
 msgid "“%1” asks for page %2, which this document does not have."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1363
+#: src/core/FormBuilder.cpp:1397
 #, kde-format
 msgid "“%1” has no size, so nothing could be drawn for it."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1385 src/core/FormBuilder.cpp:1425
-#: src/core/FormBuilder.cpp:1688 src/ui/ToolFormBuilderDialog.cpp:818
+#: src/core/FormBuilder.cpp:1419 src/core/FormBuilder.cpp:1459
+#: src/core/FormBuilder.cpp:1726 src/ui/ToolFormBuilderDialog.cpp:818
 #, kde-format
 msgid "This document already has a field called “%1”."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1471
+#: src/core/FormBuilder.cpp:1505
 #, kde-format
 msgid "There are no fields to change."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1552
+#: src/core/FormBuilder.cpp:1586
 #, kde-format
 msgid "There are no fields to remove."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1676
+#: src/core/FormBuilder.cpp:1714
 #, kde-format
 msgid ""
 "A field can be renamed but not moved into another group, so “%1” cannot "
 "become “%2”."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1720
+#: src/core/FormBuilder.cpp:1758
 #, kde-format
 msgid "There is nothing on page %1 to put in order."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1807
+#: src/core/FormBuilder.cpp:1845
 #, kde-format
 msgid "The smallest value allowed is larger than the largest."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1834
+#: src/core/FormBuilder.cpp:1872
 #, kde-format
 msgid "A calculation needs at least one field to work from."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1921
+#: src/core/FormBuilder.cpp:1959
 #, kde-format
 msgid "A button that submits a form needs an address to submit it to."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1942
+#: src/core/FormBuilder.cpp:1980
 #, kde-format
 msgid "“%1” is not a page of this document."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1956
+#: src/core/FormBuilder.cpp:1994
 #, kde-format
 msgid "A button that opens a link needs an address."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1968
+#: src/core/FormBuilder.cpp:2006
 #, kde-format
 msgid "“%1” has nothing on a page for anyone to press."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:1993
+#: src/core/FormBuilder.cpp:2031
 #, kde-format
 msgid "The form to copy from has no fields."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2019
+#: src/core/FormBuilder.cpp:2057
 #, kde-format
 msgid ""
 "This document already has a field called “%1”; remove it first, or the form "
 "would end up with two fields of one name."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2082
+#: src/core/FormBuilder.cpp:2120
 #, kde-format
 msgid "The form has fields on pages this document does not have."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2137
+#: src/core/FormBuilder.cpp:2175
 #, kde-format
 msgid "This document has no form to take data out of."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2188
+#: src/core/FormBuilder.cpp:2226
 #, kde-format
 msgid ""
 "“%1” is not a kind of data file this can write. Use .fdf, .xfdf or .csv."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2233
+#: src/core/FormBuilder.cpp:2271
 #, kde-format
 msgid "“%1” has a heading row but no data under it."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2246
+#: src/core/FormBuilder.cpp:2284
 #, kde-format
 msgid "“%1” is not a kind of data file this can read. Use .fdf, .xfdf or .csv."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2253
+#: src/core/FormBuilder.cpp:2291
 #, kde-format
 msgid "“%1” holds no field values."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2286
+#: src/core/FormBuilder.cpp:2324
 #, kde-format
 msgid "There are no documents to collect."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2317
+#: src/core/FormBuilder.cpp:2355
 #, kde-format
 msgid "None of these documents has a form."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2323
+#: src/core/FormBuilder.cpp:2361
 #, kde-format
 msgctxt "@title:column the file a row of form answers came from"
 msgid "Document"
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2342
+#: src/core/FormBuilder.cpp:2380
 #, kde-format
 msgid ""
 "Every field is drawn with a border, a background and, for a tick box, its "
@@ -7041,7 +7041,7 @@ msgid ""
 "the readers in use."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2344
+#: src/core/FormBuilder.cpp:2382
 #, kde-format
 msgid ""
 "A font size of zero means the reader fits the text to the box. That is legal "
@@ -7049,35 +7049,35 @@ msgid ""
 "answer, so the two can differ slightly."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2346
+#: src/core/FormBuilder.cpp:2384
 #, kde-format
 msgid ""
 "Only the fourteen fonts every reader already knows can be used. A field in a "
 "font of your own would need that font embedding, which is a separate job."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2348
+#: src/core/FormBuilder.cpp:2386
 #, kde-format
 msgid ""
 "Formatting, validation and calculation are JavaScript, which PDF/A forbids "
 "and which several readers do not run at all."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2350
+#: src/core/FormBuilder.cpp:2388
 #, kde-format
 msgid ""
 "A document with an XFA form is refused rather than added to, because the "
 "result would behave differently in every reader."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2352
+#: src/core/FormBuilder.cpp:2390
 #, kde-format
 msgid ""
 "A field can be renamed but not moved into another group, since anything in "
 "the document referring to it by name would then be pointing at nothing."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2354
+#: src/core/FormBuilder.cpp:2392
 #, kde-format
 msgid ""
 "Data files are read as a flat list of names and values. A file that nests "
@@ -7085,72 +7085,72 @@ msgid ""
 "values."
 msgstr ""
 
-#: src/core/FormBuilder.cpp:2356
+#: src/core/FormBuilder.cpp:2394
 #, kde-format
 msgid ""
 "Signature fields are created empty and ready to be signed; signing itself is "
 "a separate job."
 msgstr ""
 
-#: src/core/Forms.cpp:294 src/ui/FormDesignOverlay.cpp:1158
+#: src/core/Forms.cpp:418 src/ui/FormDesignOverlay.cpp:1158
 #: src/ui/FormDesignOverlay.cpp:1172
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Text"
 msgstr ""
 
-#: src/core/Forms.cpp:296 src/ui/FormDesignOverlay.cpp:1160
+#: src/core/Forms.cpp:420 src/ui/FormDesignOverlay.cpp:1160
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Tick box"
 msgstr ""
 
-#: src/core/Forms.cpp:298
+#: src/core/Forms.cpp:422
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Choice of one"
 msgstr ""
 
-#: src/core/Forms.cpp:300 src/ui/FormDesignOverlay.cpp:1166
+#: src/core/Forms.cpp:424 src/ui/FormDesignOverlay.cpp:1166
 #, kde-format
 msgctxt "@item form field kind"
 msgid "List"
 msgstr ""
 
-#: src/core/Forms.cpp:302 src/ui/FormDesignOverlay.cpp:1168
+#: src/core/Forms.cpp:426 src/ui/FormDesignOverlay.cpp:1168
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Button"
 msgstr ""
 
-#: src/core/Forms.cpp:304 src/ui/FormDesignOverlay.cpp:1170
+#: src/core/Forms.cpp:428 src/ui/FormDesignOverlay.cpp:1170
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Signature"
 msgstr ""
 
-#: src/core/Forms.cpp:308
+#: src/core/Forms.cpp:432
 #, kde-format
 msgctxt "@item form field kind"
 msgid "Unknown"
 msgstr ""
 
-#: src/core/Forms.cpp:551
+#: src/core/Forms.cpp:675
 #, kde-format
 msgid "There is nothing to fill in."
 msgstr ""
 
-#: src/core/Forms.cpp:566
+#: src/core/Forms.cpp:690
 #, kde-format
 msgid "This document has no form to fill in."
 msgstr ""
 
-#: src/core/Forms.cpp:592
+#: src/core/Forms.cpp:737
 #, kde-format
 msgid "“%1” is locked by the form and was left as it is."
 msgstr ""
 
-#: src/core/Forms.cpp:687
+#: src/core/Forms.cpp:845
 #, kde-format
 msgid "This document has no form to make permanent."
 msgstr ""
@@ -7167,150 +7167,150 @@ msgctxt "a DeviceN colour space with a number of colourants"
 msgid "DeviceN(%1)"
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1283 src/core/ImageEdit.cpp:1917
-#: src/core/ImageEdit.cpp:2022 src/core/ImageEdit.cpp:2082
-#: src/core/PageLayout.cpp:758 src/core/PageLayout.cpp:825
-#: src/core/PageLayout.cpp:884 src/core/PageLayout.cpp:966
-#: src/core/PageLayout.cpp:1301 src/core/PageLayout.cpp:1539
+#: src/core/ImageEdit.cpp:1284 src/core/ImageEdit.cpp:1918
+#: src/core/ImageEdit.cpp:2023 src/core/ImageEdit.cpp:2083
+#: src/core/PageLayout.cpp:759 src/core/PageLayout.cpp:826
+#: src/core/PageLayout.cpp:885 src/core/PageLayout.cpp:967
+#: src/core/PageLayout.cpp:1302 src/core/PageLayout.cpp:1540
 #, kde-format
 msgid "There is no page %1 in this document."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1295 src/core/ImageEdit.cpp:1502
-#: src/core/ImageEdit.cpp:1930 src/core/ImageEdit.cpp:2031
-#: src/core/ImageEdit.cpp:2091
+#: src/core/ImageEdit.cpp:1296 src/core/ImageEdit.cpp:1503
+#: src/core/ImageEdit.cpp:1931 src/core/ImageEdit.cpp:2032
+#: src/core/ImageEdit.cpp:2092
 #, kde-format
 msgid "There is no picture called %1 on page %2."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1320
+#: src/core/ImageEdit.cpp:1321
 #, kde-format
 msgid "Page %1 lists a picture called %2 but never draws it."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1328
+#: src/core/ImageEdit.cpp:1329
 #, kde-format
 msgid ""
 "%1 on page %2 is a stencil, painted in whatever colour the page is using. "
 "Its pixels carry no colour of their own, so they cannot be edited here."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1336
+#: src/core/ImageEdit.cpp:1337
 #, kde-format
 msgid ""
 "%1 on page %2 is stored as %3, which this tool cannot open. The picture is "
 "left exactly as it is rather than being replaced by something wrong."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1443
+#: src/core/ImageEdit.cpp:1444
 #, kde-format
 msgid "Each page number needs a picture name to go with it."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1548
+#: src/core/ImageEdit.cpp:1549
 #, kde-format
 msgid "%1 is stored as %2, which this tool cannot open, so it was left alone."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1560 src/core/ImageEdit.cpp:1651
-#: src/core/ImageEdit.cpp:1735 src/core/ImageEdit.cpp:1969
+#: src/core/ImageEdit.cpp:1561 src/core/ImageEdit.cpp:1652
+#: src/core/ImageEdit.cpp:1736 src/core/ImageEdit.cpp:1970
 #, kde-format
 msgid "The pixels of %1 could not be read."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1584
+#: src/core/ImageEdit.cpp:1585
 #, kde-format
 msgid "%1 could not be re-encoded."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1672
+#: src/core/ImageEdit.cpp:1673
 #, kde-format
 msgid "The adjusted pixels of %1 could not be stored."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1691
+#: src/core/ImageEdit.cpp:1692
 #, kde-format
 msgid "Page %1 never draws %2, so there was nothing to change."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1715
+#: src/core/ImageEdit.cpp:1716
 #, kde-format
 msgid "The part to keep must lie inside the picture and cannot be empty."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1747
+#: src/core/ImageEdit.cpp:1748
 #, kde-format
 msgid ""
 "The transparency of %1 is stored in a form this tool cannot open, so "
 "cropping its pixels would leave the see-through parts in the wrong place."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1761
+#: src/core/ImageEdit.cpp:1762
 #, kde-format
 msgid "Cropping %1 would leave nothing behind."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1769
+#: src/core/ImageEdit.cpp:1770
 #, kde-format
 msgid "The cropped pixels of %1 could not be stored."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1783
+#: src/core/ImageEdit.cpp:1784
 #, kde-format
 msgid "The cropped transparency of %1 could not be stored."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1803
+#: src/core/ImageEdit.cpp:1804
 #, kde-format
 msgid "Page %1 never draws %2, so there was nothing to crop."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1826
+#: src/core/ImageEdit.cpp:1827
 #, kde-format
 msgid "There is no replacement picture to put in."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1850
+#: src/core/ImageEdit.cpp:1851
 #, kde-format
 msgid "The replacement picture could not be stored in the document."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1888
+#: src/core/ImageEdit.cpp:1889
 #, kde-format
 msgid "Page %1 never draws %2, so there was nothing to replace."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1945
+#: src/core/ImageEdit.cpp:1946
 #, kde-format
 msgid "%1 could not be opened for writing."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1952 src/core/ImageEdit.cpp:1996
+#: src/core/ImageEdit.cpp:1953 src/core/ImageEdit.cpp:1997
 #, kde-format
 msgid "%1 could not be written."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:1960
+#: src/core/ImageEdit.cpp:1961
 #, kde-format
 msgid "%1 on page %2 is stored as %3, which this tool cannot open."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2044
+#: src/core/ImageEdit.cpp:2045
 #, kde-format
 msgid "Page %1 never draws %2, so there was nothing to remove."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2069
+#: src/core/ImageEdit.cpp:2070
 #, kde-format
 msgid "A turn of %1 degrees leaves the picture where it was."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2100
+#: src/core/ImageEdit.cpp:2101
 #, kde-format
 msgid "Page %1 never draws %2, so there was nothing to turn."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2121
+#: src/core/ImageEdit.cpp:2122
 #, kde-format
 msgid ""
 "One placement has a flattened matrix that cannot be reversed, so it was left "
@@ -7321,26 +7321,26 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/ImageEdit.cpp:2128
+#: src/core/ImageEdit.cpp:2129
 #, kde-format
 msgid ""
 "A turn that is not a quarter, a half or three quarters leaves the picture at "
 "an angle to the page, covering a different area than before."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2135
+#: src/core/ImageEdit.cpp:2136
 #, kde-format
 msgid "Turned, the picture reaches past the edge of the page."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2255
+#: src/core/ImageEdit.cpp:2256
 #, kde-format
 msgid ""
 "Effective resolution comes from the matrix that placed a picture, so a "
 "picture drawn several times on one page is reported at its largest placement."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2257
+#: src/core/ImageEdit.cpp:2258
 #, kde-format
 msgid ""
 "Fax (CCITT, JBIG2) and JPEG 2000 pictures cannot be opened. They are listed "
@@ -7348,34 +7348,34 @@ msgid ""
 "cropped."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2259
+#: src/core/ImageEdit.cpp:2260
 #, kde-format
 msgid ""
 "Stencil masks, which take their colour from the page rather than carrying "
 "their own, are left alone by everything that edits pixels."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2261
+#: src/core/ImageEdit.cpp:2262
 #, kde-format
 msgid ""
 "Pictures drawn inside an embedded drawing rather than straight onto a page "
 "are not listed, and neither are inline images."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2263
+#: src/core/ImageEdit.cpp:2264
 #, kde-format
 msgid ""
 "Recompressing a picture that several pages share changes it for all of them, "
 "sized for the largest place it appears."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2265
+#: src/core/ImageEdit.cpp:2266
 #, kde-format
 msgid ""
 "An operation naming one picture applies to every place that page draws it."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2266
+#: src/core/ImageEdit.cpp:2267
 #, kde-format
 msgid ""
 "Adjusting pixels re-encodes them at high quality, which can leave a "
@@ -7383,14 +7383,14 @@ msgid ""
 "more than the last of the detail."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2268
+#: src/core/ImageEdit.cpp:2269
 #, kde-format
 msgid ""
 "Colour is converted arithmetically: an ICC profile or a spot colour is read "
 "as its nearest device equivalent rather than through a colour engine."
 msgstr ""
 
-#: src/core/ImageEdit.cpp:2270
+#: src/core/ImageEdit.cpp:2271
 #, kde-format
 msgid ""
 "Deduplication compares the stored bytes, so two copies of the same "
@@ -7408,22 +7408,22 @@ msgstr ""
 msgid "None of the files could be read as an image."
 msgstr ""
 
-#: src/core/ImageIO.cpp:190
+#: src/core/ImageIO.cpp:191
 #, kde-format
 msgid "There are no pages to export."
 msgstr ""
 
-#: src/core/ImageIO.cpp:196 src/core/Splitter.cpp:111
+#: src/core/ImageIO.cpp:197 src/core/Splitter.cpp:111
 #, kde-format
 msgid "No output file name was given."
 msgstr ""
 
-#: src/core/ImageIO.cpp:248
+#: src/core/ImageIO.cpp:249
 #, kde-format
 msgid "“%1” could not be written: %2"
 msgstr ""
 
-#: src/core/ImageIO.cpp:259
+#: src/core/ImageIO.cpp:260
 #, kde-format
 msgid "No pages could be rendered."
 msgstr ""
@@ -7440,27 +7440,27 @@ msgid ""
 "sheet."
 msgstr ""
 
-#: src/core/Overlay.cpp:202 src/core/Overlay.cpp:371
+#: src/core/Overlay.cpp:203 src/core/Overlay.cpp:372
 #, kde-format
 msgid "There is nothing to stamp."
 msgstr ""
 
-#: src/core/Overlay.cpp:261
+#: src/core/Overlay.cpp:262
 #, kde-format
 msgid "The stamp image could not be read."
 msgstr ""
 
-#: src/core/Overlay.cpp:396
+#: src/core/Overlay.cpp:397
 #, kde-format
 msgid "The watermark text is empty."
 msgstr ""
 
-#: src/core/PageCrop.cpp:122
+#: src/core/PageCrop.cpp:123
 #, kde-format
 msgid "There are no pages to crop."
 msgstr ""
 
-#: src/core/PageCrop.cpp:128
+#: src/core/PageCrop.cpp:129
 #, kde-format
 msgid "Nothing would be trimmed."
 msgstr ""
@@ -7472,112 +7472,112 @@ msgid ""
 "the one around it."
 msgstr ""
 
-#: src/core/PageLayout.cpp:740 src/core/PageLayout.cpp:804
+#: src/core/PageLayout.cpp:741 src/core/PageLayout.cpp:805
 #, kde-format
 msgid "There are no pages to change."
 msgstr ""
 
-#: src/core/PageLayout.cpp:770
+#: src/core/PageLayout.cpp:771
 #, kde-format
 msgid "Page %1 has no page size of its own, so one has to be given."
 msgstr ""
 
-#: src/core/PageLayout.cpp:810
+#: src/core/PageLayout.cpp:811
 #, kde-format
 msgid "The bleed has to be greater than zero."
 msgstr ""
 
-#: src/core/PageLayout.cpp:864
+#: src/core/PageLayout.cpp:865
 #, kde-format
 msgid "There are no pages to resize."
 msgstr ""
 
-#: src/core/PageLayout.cpp:870
+#: src/core/PageLayout.cpp:871
 #, kde-format
 msgid "The paper size has to be at least one point in each direction."
 msgstr ""
 
-#: src/core/PageLayout.cpp:927
+#: src/core/PageLayout.cpp:928
 #, kde-format
 msgid "None of the pages has a usable size."
 msgstr ""
 
-#: src/core/PageLayout.cpp:945
+#: src/core/PageLayout.cpp:946
 #, kde-format
 msgid "There are no pages to split."
 msgstr ""
 
-#: src/core/PageLayout.cpp:951
+#: src/core/PageLayout.cpp:952
 #, kde-format
 msgid ""
 "The split has to fall between a twentieth and nineteen twentieths of the "
 "page."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1039
+#: src/core/PageLayout.cpp:1040
 #, kde-format
 msgid "The overlay document has no pages."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1122
+#: src/core/PageLayout.cpp:1123
 #, kde-format
 msgid "No printer's marks were asked for."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1252
+#: src/core/PageLayout.cpp:1253
 #, kde-format
 msgctxt "Printer's mark identifying a proof: file, page, and time of output"
 msgid "%1 · page %2 of %3 · %4"
 msgstr ""
 
-#: src/core/PageLayout.cpp:1283
+#: src/core/PageLayout.cpp:1284
 #, kde-format
 msgid "The sheet size has to be at least one point in each direction."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1290
+#: src/core/PageLayout.cpp:1291
 #, kde-format
 msgid ""
 "The overlap has to be less than half the sheet, or the tiles never advance."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1381
+#: src/core/PageLayout.cpp:1382
 #, kde-format
 msgctxt "Label on one sheet of a tiled poster"
 msgid "Sheet %1 of %2, column %3, row %4"
 msgstr ""
 
-#: src/core/PageLayout.cpp:1404
+#: src/core/PageLayout.cpp:1405
 #, kde-format
 msgid "No page-numbering ranges were given."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1421
+#: src/core/PageLayout.cpp:1422
 #, kde-format
 msgid "A numbering range starts at page %1, which this document does not have."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1428
+#: src/core/PageLayout.cpp:1429
 #, kde-format
 msgid "Page numbering has to start at one or more."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1525
+#: src/core/PageLayout.cpp:1526
 #, kde-format
 msgid "There are no pages to remove."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1546
+#: src/core/PageLayout.cpp:1547
 #, kde-format
 msgid "Removing those pages would leave no document at all."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1567
+#: src/core/PageLayout.cpp:1568
 #, kde-format
 msgid "A saddle-stitched booklet needs at least four pages."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1609
+#: src/core/PageLayout.cpp:1610
 #, kde-format
 msgid ""
 "A blank page is found by reading the page's instructions, not by looking at "
@@ -7585,7 +7585,7 @@ msgid ""
 "annotation, counts as painted and is not reported."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1611
+#: src/core/PageLayout.cpp:1612
 #, kde-format
 msgid ""
 "Resizing scales the page's content as a whole. Line widths, hairlines and "
@@ -7593,7 +7593,7 @@ msgid ""
 "too fine for a press to hold."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1613
+#: src/core/PageLayout.cpp:1614
 #, kde-format
 msgid ""
 "Splitting a page gives each half a window onto the same content. Both halves "
@@ -7601,7 +7601,7 @@ msgid ""
 "appears on both."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1615
+#: src/core/PageLayout.cpp:1616
 #, kde-format
 msgid ""
 "Printer's marks are drawn in a /Separation /All colour space. A workflow "
@@ -7609,7 +7609,7 @@ msgid ""
 "still prints but no longer serves for registration."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1617
+#: src/core/PageLayout.cpp:1618
 #, kde-format
 msgid ""
 "Marks are placed around the trim box. A document whose trim box is missing "
@@ -7617,7 +7617,7 @@ msgid ""
 "and wrong for one that was already imposed."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1619
+#: src/core/PageLayout.cpp:1620
 #, kde-format
 msgid ""
 "Page labels are written as far as the specification describes them. Readers "
@@ -7625,14 +7625,14 @@ msgid ""
 "cannot make them agree."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1621
+#: src/core/PageLayout.cpp:1622
 #, kde-format
 msgid ""
 "Reordering for binding changes the page order only. Pairing the pages onto "
 "sheets and adding the fold is a separate step."
 msgstr ""
 
-#: src/core/PageLayout.cpp:1623
+#: src/core/PageLayout.cpp:1624
 #, kde-format
 msgid ""
 "Overlaying two documents draws one over the other; it does not merge their "
@@ -7736,21 +7736,21 @@ msgstr ""
 msgid "There is nothing to change."
 msgstr ""
 
-#: src/core/PageObjects.cpp:1039
+#: src/core/PageObjects.cpp:1040
 #, kde-format
 msgid ""
 "A moved or restyled object is wrapped in the change rather than rewritten, "
 "so everything else on the page keeps its bytes."
 msgstr ""
 
-#: src/core/PageObjects.cpp:1041
+#: src/core/PageObjects.cpp:1042
 #, kde-format
 msgid ""
 "Changing the stacking order is not offered yet. It would mean reordering "
 "operator blocks, which is only safe when each one is properly enclosed."
 msgstr ""
 
-#: src/core/PageObjects.cpp:1043
+#: src/core/PageObjects.cpp:1044
 #, kde-format
 msgid ""
 "Inserted text uses one of the standard fonts and can carry only the "
@@ -8553,126 +8553,126 @@ msgstr ""
 msgid "The document already had a title."
 msgstr ""
 
-#: src/core/Preflight.cpp:2703
+#: src/core/Preflight.cpp:2704
 #, kde-format
 msgid ""
 "The file was reordered so that a reader can show the first page before the "
 "rest has arrived."
 msgstr ""
 
-#: src/core/Preflight.cpp:2711
+#: src/core/Preflight.cpp:2712
 #, kde-format
 msgid "The document needs a password, so it cannot be opened to be changed."
 msgstr ""
 
-#: src/core/Preflight.cpp:2853
+#: src/core/Preflight.cpp:2854
 #, kde-format
 msgctxt "@item preflight severity"
 msgid "Note"
 msgstr ""
 
-#: src/core/Preflight.cpp:2855
+#: src/core/Preflight.cpp:2856
 #, kde-format
 msgctxt "@item preflight severity"
 msgid "Warning"
 msgstr ""
 
-#: src/core/Preflight.cpp:2857
+#: src/core/Preflight.cpp:2858
 #, kde-format
 msgctxt "@item preflight severity"
 msgid "Error"
 msgstr ""
 
-#: src/core/Preflight.cpp:2872
+#: src/core/Preflight.cpp:2873
 #, kde-format
 msgid "Preflight report"
 msgstr ""
 
-#: src/core/Preflight.cpp:2874
+#: src/core/Preflight.cpp:2875
 #, kde-format
 msgid "Checked on %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:2882
+#: src/core/Preflight.cpp:2883
 #, kde-format
 msgid "No warnings."
 msgstr ""
 
-#: src/core/Preflight.cpp:2882
+#: src/core/Preflight.cpp:2883
 #, kde-format
 msgid "One warning."
 msgid_plural "%1 warnings."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/Preflight.cpp:2885 src/core/Preflight.cpp:2888
+#: src/core/Preflight.cpp:2886 src/core/Preflight.cpp:2889
 #, kde-format
 msgid "Findings"
 msgstr ""
 
-#: src/core/Preflight.cpp:2886
+#: src/core/Preflight.cpp:2887
 #, kde-format
 msgid "Nothing to report."
-msgstr ""
-
-#: src/core/Preflight.cpp:2891
-#, kde-format
-msgctxt "@info a finding's location"
-msgid "page %1"
 msgstr ""
 
 #: src/core/Preflight.cpp:2892
 #, kde-format
 msgctxt "@info a finding's location"
-msgid "whole document"
+msgid "page %1"
 msgstr ""
 
 #: src/core/Preflight.cpp:2893
+#, kde-format
+msgctxt "@info a finding's location"
+msgid "whole document"
+msgstr ""
+
+#: src/core/Preflight.cpp:2894
 #, kde-format
 msgctxt "@info severity, rule and place of a preflight finding"
 msgid "%1 · %2 · %3"
 msgstr ""
 
-#: src/core/Preflight.cpp:2896
+#: src/core/Preflight.cpp:2897
 #, kde-format
 msgctxt "@info the resource a finding is about"
 msgid " · %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:2901
+#: src/core/Preflight.cpp:2902
 #, kde-format
 msgid "Fix available (%1): %2"
 msgstr ""
 
-#: src/core/Preflight.cpp:2907
+#: src/core/Preflight.cpp:2908
 #, kde-format
 msgid "Asked for but not checked"
 msgstr ""
 
-#: src/core/Preflight.cpp:2908
+#: src/core/Preflight.cpp:2909
 #, kde-format
 msgid ""
 "The profile names these rules, and this program cannot judge them. Nothing "
 "above says anything about them either way."
 msgstr ""
 
-#: src/core/Preflight.cpp:2911
+#: src/core/Preflight.cpp:2912
 #, kde-format
 msgctxt "@info a rule id followed by what it looks for"
 msgid "%1: %2"
 msgstr ""
 
-#: src/core/Preflight.cpp:2916
+#: src/core/Preflight.cpp:2917
 #, kde-format
 msgid "What this check cannot promise"
 msgstr ""
 
-#: src/core/Preflight.cpp:2999
+#: src/core/Preflight.cpp:3000
 #, kde-format
 msgid "Preflight report for %1"
 msgstr ""
 
-#: src/core/Preflight.cpp:3030
+#: src/core/Preflight.cpp:3032
 #, kde-format
 msgid ""
 "This is a preflight check, not a certification. A file that passes here can "
@@ -8680,7 +8680,7 @@ msgid ""
 "reach for when somebody has to sign the file off."
 msgstr ""
 
-#: src/core/Preflight.cpp:3033
+#: src/core/Preflight.cpp:3035
 #, kde-format
 msgid ""
 "Ink outside the trim box is not measured. Working out whether a mark is "
@@ -8689,7 +8689,7 @@ msgid ""
 "reported as unchecked rather than quietly passed."
 msgstr ""
 
-#: src/core/Preflight.cpp:3036
+#: src/core/Preflight.cpp:3038
 #, kde-format
 msgid ""
 "Only what is drawn on the pages themselves is examined. A font or a picture "
@@ -8697,7 +8697,7 @@ msgid ""
 "not seen."
 msgstr ""
 
-#: src/core/Preflight.cpp:3038
+#: src/core/Preflight.cpp:3040
 #, kde-format
 msgid ""
 "A font's licence is read from the embedding permission field that OpenType "
@@ -8705,7 +8705,7 @@ msgid ""
 "nothing can be said about them either way."
 msgstr ""
 
-#: src/core/Preflight.cpp:3040
+#: src/core/Preflight.cpp:3042
 #, kde-format
 msgid ""
 "Resolution is judged from where a picture is actually placed, so a picture "
@@ -8714,7 +8714,7 @@ msgid ""
 "measured."
 msgstr ""
 
-#: src/core/Preflight.cpp:3043
+#: src/core/Preflight.cpp:3045
 #, kde-format
 msgid ""
 "Whether a page is empty is decided by looking for drawing instructions, so a "
@@ -8722,7 +8722,7 @@ msgid ""
 "counts as having something on it."
 msgstr ""
 
-#: src/core/Preflight.cpp:3045
+#: src/core/Preflight.cpp:3047
 #, kde-format
 msgid ""
 "Tagging is checked for its presence and for pictures without a text "
@@ -8754,32 +8754,32 @@ msgid ""
 "the original still travels with the file. Mark it everywhere it appears."
 msgstr ""
 
-#: src/core/Redaction.cpp:1140
+#: src/core/Redaction.cpp:1141
 #, kde-format
 msgid ""
 "Text is removed character by character, so the rest of a line stays intact."
 msgstr ""
 
-#: src/core/Redaction.cpp:1141
+#: src/core/Redaction.cpp:1142
 #, kde-format
 msgid "Pictures that overlap an area are edited pixel by pixel and re-saved."
 msgstr ""
 
-#: src/core/Redaction.cpp:1142
+#: src/core/Redaction.cpp:1143
 #, kde-format
 msgid ""
 "Text drawn inside an embedded drawing is not searched; the whole drawing is "
 "removed instead when it overlaps."
 msgstr ""
 
-#: src/core/Redaction.cpp:1144
+#: src/core/Redaction.cpp:1145
 #, kde-format
 msgid ""
 "Fax and JPEG 2000 pictures cannot be edited in place. The page is flattened "
 "to an image instead, which loses its selectable text."
 msgstr ""
 
-#: src/core/Redaction.cpp:1148
+#: src/core/Redaction.cpp:1149
 #, kde-format
 msgctxt ""
 "@info a limit of redaction; the quoted name is the “Clean Up Document…” menu "
@@ -8952,14 +8952,14 @@ msgstr ""
 msgid "None of the text to change is on a page of this document."
 msgstr ""
 
-#: src/core/TextEdit.cpp:1379
+#: src/core/TextEdit.cpp:1380
 #, kde-format
 msgid ""
 "Text is replaced in the page's own font, so the result matches everything "
 "around it."
 msgstr ""
 
-#: src/core/TextEdit.cpp:1380
+#: src/core/TextEdit.cpp:1381
 #, kde-format
 msgid ""
 "A replacement that is too wide for its space is squeezed to fit, so that it "
@@ -8967,14 +8967,14 @@ msgid ""
 "shorter."
 msgstr ""
 
-#: src/core/TextEdit.cpp:1382
+#: src/core/TextEdit.cpp:1383
 #, kde-format
 msgid ""
 "Nothing on other lines moves, because a PDF does not record which line "
 "follows which."
 msgstr ""
 
-#: src/core/TextEdit.cpp:1383
+#: src/core/TextEdit.cpp:1384
 #, kde-format
 msgid ""
 "A font embedded in a document usually carries only the characters that "
@@ -8982,7 +8982,7 @@ msgid ""
 "than drawn wrongly."
 msgstr ""
 
-#: src/core/TextEdit.cpp:1385
+#: src/core/TextEdit.cpp:1386
 #, kde-format
 msgid ""
 "Text drawn inside an embedded drawing, and text that is part of a scanned "
@@ -9007,42 +9007,42 @@ msgid ""
 "Something is taller than the column holding it and runs past the margin."
 msgstr ""
 
-#: src/core/Typeset.cpp:1348
+#: src/core/Typeset.cpp:1349
 #, kde-format
 msgid "Cannot write “%1”: %2"
 msgstr ""
 
-#: src/core/Typeset.cpp:1890
+#: src/core/Typeset.cpp:1891
 #, kde-format
 msgid "No file to write to was given."
 msgstr ""
 
-#: src/core/Typeset.cpp:1896
+#: src/core/Typeset.cpp:1897
 #, kde-format
 msgid "The type size has to be greater than zero."
 msgstr ""
 
-#: src/core/Typeset.cpp:1902
+#: src/core/Typeset.cpp:1903
 #, kde-format
 msgid "A page smaller than an inch square cannot hold text."
 msgstr ""
 
-#: src/core/Typeset.cpp:1914
+#: src/core/Typeset.cpp:1915
 #, kde-format
 msgid "The margins and columns leave no room for text on a page this size."
 msgstr ""
 
-#: src/core/Typeset.cpp:1948
+#: src/core/Typeset.cpp:1949
 #, kde-format
 msgid "There is no text to lay out."
 msgstr ""
 
-#: src/core/Typeset.cpp:1999
+#: src/core/Typeset.cpp:2000
 #, kde-format
 msgid "Cannot read “%1”."
 msgstr ""
 
-#: src/core/Typeset.cpp:2030
+#: src/core/Typeset.cpp:2031
 #, kde-format
 msgid ""
 "Only the fourteen standard fonts are used, so the alphabet is the one "
@@ -9050,49 +9050,49 @@ msgid ""
 "an embedded font, and are reported rather than drawn."
 msgstr ""
 
-#: src/core/Typeset.cpp:2033
+#: src/core/Typeset.cpp:2034
 #, kde-format
 msgid ""
 "Lines are broken one at a time from left to right rather than by balancing a "
 "whole paragraph at once, so the spacing is even but not the best possible."
 msgstr ""
 
-#: src/core/Typeset.cpp:2035
+#: src/core/Typeset.cpp:2036
 #, kde-format
 msgid ""
 "Hyphenation follows a spelling pattern rather than a dictionary, and stays "
 "off unless it is asked for."
 msgstr ""
 
-#: src/core/Typeset.cpp:2037
+#: src/core/Typeset.cpp:2038
 #, kde-format
 msgid ""
 "Pictures are not drawn. A Markdown image contributes its description in "
 "italics, because a caption is more use than an empty frame."
 msgstr ""
 
-#: src/core/Typeset.cpp:2039
+#: src/core/Typeset.cpp:2040
 #, kde-format
 msgid ""
 "Tables are a plain ruled grid: no merged cells, no heading repeated on the "
 "following page, and a row is never split across pages."
 msgstr ""
 
-#: src/core/Typeset.cpp:2041
+#: src/core/Typeset.cpp:2042
 #, kde-format
 msgid ""
 "Footnotes, cross-references, an index and a table of contents are not built; "
 "Markdown that describes them is set as ordinary text."
 msgstr ""
 
-#: src/core/Typeset.cpp:2043
+#: src/core/Typeset.cpp:2044
 #, kde-format
 msgid ""
 "Headers and footers are centred and hold one line, so the page number sits "
 "in the middle rather than at the outer edge."
 msgstr ""
 
-#: src/core/Typeset.cpp:2045
+#: src/core/Typeset.cpp:2046
 #, kde-format
 msgid ""
 "Text runs from top to bottom and left to right; right-to-left scripts are "
@@ -14508,7 +14508,7 @@ msgctxt "@title:window"
 msgid "Colour of this line"
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:811
+#: src/ui/TextOverlay.cpp:819
 #, kde-format
 msgctxt "@info %1 is a font family the user chose"
 msgid ""
@@ -14516,13 +14516,13 @@ msgid ""
 "it has. Only fonts in TrueType or OpenType form can travel with a document."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1029
+#: src/ui/TextOverlay.cpp:1037
 #, kde-format
 msgid ""
 "This line now reaches past the edge of the page, where nothing is printed."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1032
+#: src/ui/TextOverlay.cpp:1040
 #, kde-format
 msgctxt "@info:status %1 is the text the edited line has grown over"
 msgid ""
@@ -14530,28 +14530,28 @@ msgid ""
 "beside it moves out of the way."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1041
+#: src/ui/TextOverlay.cpp:1049
 #, kde-format
 msgid ""
 "This line now reaches into the margin, past where the rest of the page's "
 "text stops."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1399
+#: src/ui/TextOverlay.cpp:1407
 #, kde-format
 msgid ""
 "This line cannot be changed: the page does not say enough about the font it "
 "uses."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1730
+#: src/ui/TextOverlay.cpp:1738
 #, kde-format
 msgctxt "@info:status %1 is a list of characters"
 msgid ""
 "This page's font does not contain %1, so the line will be left as it is."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1862
+#: src/ui/TextOverlay.cpp:1870
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -14559,7 +14559,7 @@ msgid ""
 "Click to let the box grow with the text instead."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1865
+#: src/ui/TextOverlay.cpp:1873
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -14567,19 +14567,19 @@ msgid ""
 "keep the box as it is and narrow the type into it instead."
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1867
+#: src/ui/TextOverlay.cpp:1875
 #, kde-format
 msgctxt "@action:button"
 msgid "Box kept, type narrowed to fit"
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:1868
+#: src/ui/TextOverlay.cpp:1876
 #, kde-format
 msgctxt "@action:button"
 msgid "Box grows with the text"
 msgstr ""
 
-#: src/ui/TextOverlay.cpp:2117
+#: src/ui/TextOverlay.cpp:2125
 #, kde-format
 msgctxt "@info %1 is a number of corrections the user had typed"
 msgid ""
