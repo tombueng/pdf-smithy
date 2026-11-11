@@ -26,7 +26,7 @@ jobs:
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that. Everything therefore happens
     # inside an image that has it.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     strategy:
       fail-fast: false
       matrix:
@@ -71,6 +71,10 @@ jobs:
       #                     libgs10-common; it is named here because the
       #                     fixtures depend on the fonts themselves, not on that
       #                     chain staying the way it happens to be
+      #   fonts-liberation  tst_textwysiwyg picks "Liberation Sans" to prove a
+      #                     face the user chooses is embedded and travels with
+      #                     the file; without the font FontEmbedder cannot find
+      #                     it and the test sees an empty family where it set one
       #   tesseract-ocr-*   with no language data ScanProcessor reports itself
       #                     unavailable and the entire OCR suite skips
       #   appstream         appstreamcli backs the two metadata tests, which
@@ -86,7 +90,7 @@ jobs:
       - name: Install what the tests need
         run: |
           apt-get install -y --no-install-recommends \
-            xvfb ghostscript fonts-urw-base35 \
+            xvfb ghostscript fonts-urw-base35 fonts-liberation \
             tesseract-ocr-eng tesseract-ocr-deu \
             appstream python3 libxml2-utils docbook-xml locales
 
@@ -165,7 +169,7 @@ jobs:
     runs-on: ubuntu-latest
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     steps:
       # Before checkout: the action needs git in the image, and a bare Ubuntu
       # image has neither git nor the certificates to fetch over https.
@@ -191,7 +195,7 @@ jobs:
             libkf6configwidgets-dev libkf6guiaddons-dev \
             libpoppler-qt6-dev libqpdf-dev libtesseract-dev libleptonica-dev \
             tesseract-ocr-eng tesseract-ocr-deu ghostscript fonts-urw-base35 \
-            xvfb locales
+            fonts-liberation xvfb locales
 
       # This job runs the same ctest suite, so it needs the same German locale
       # for the second half of it to mean anything. See the build job for why.
@@ -225,7 +229,7 @@ jobs:
     runs-on: ubuntu-latest
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     steps:
       # Before checkout: the action needs git in the image, and a bare
       # Ubuntu image has neither git nor the certificates to fetch over https.
@@ -277,7 +281,7 @@ jobs:
     runs-on: ubuntu-latest
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     steps:
       # Before checkout: the action needs git in the image, and a bare
       # Ubuntu image has neither git nor the certificates to fetch over https.
@@ -300,7 +304,7 @@ jobs:
     runs-on: ubuntu-latest
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     steps:
       # Before checkout: the action needs git in the image, and a bare
       # Ubuntu image has neither git nor the certificates to fetch over https.
@@ -362,7 +366,7 @@ jobs:
     runs-on: ubuntu-latest
     # The runner images do not carry KDE Frameworks 6: it reached Ubuntu in
     # 24.10 and the runners are older than that.
-    container: ubuntu:25.10
+    container: ubuntu:26.04
     steps:
       # Before checkout: the action needs git in the image, and a bare
       # Ubuntu image has neither git nor the certificates to fetch over https.

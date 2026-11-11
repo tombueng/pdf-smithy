@@ -57,7 +57,7 @@ modules:
       # that points at the wrong thing.
       - type: git
         url: https://github.com/qpdf/qpdf.git
-        tag: v12.3.0
+        tag: v12.3.2
 
   # Page rendering and text extraction. The KDE runtime does not carry Poppler,
   # so the Qt 6 frontend that src/render is written against has to be built.

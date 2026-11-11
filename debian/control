@@ -45,6 +45,10 @@ Build-Depends: debhelper-compat (= 13),
 #                     arrives today as a dependency of libgs10-common; it is
 #                     named here because the fixtures depend on the fonts
 #                     themselves, not on that chain staying as it happens to be
+#   fonts-liberation  tst_textwysiwyg picks "Liberation Sans" to prove a face
+#                     the user chooses is embedded and travels with the file;
+#                     without it FontEmbedder finds nothing and the test sees an
+#                     empty family where it set one
 #   tesseract-ocr-*   with no language data ScanProcessor reports itself
 #                     unavailable and the entire OCR suite skips. Both languages,
 #                     because the scan tests recognise German as well as English
@@ -63,6 +67,7 @@ Build-Depends: debhelper-compat (= 13),
                xvfb <!nocheck>,
                ghostscript <!nocheck>,
                fonts-urw-base35 <!nocheck>,
+               fonts-liberation <!nocheck>,
                tesseract-ocr-eng <!nocheck>,
                tesseract-ocr-deu <!nocheck>,
                appstream <!nocheck>,
