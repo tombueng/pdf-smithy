@@ -1858,10 +1858,9 @@ int commandOcr(const QStringList &arguments, const QString &output, const QStrin
 /** Every area of the command line, in the order their help is printed. */
 QVector<ps::cli::Group> commandGroups()
 {
-    return { ps::cli::preflightGroup(), ps::cli::colourGroup(), ps::cli::fontGroup(),
-             ps::cli::imageGroup(),     ps::cli::layoutGroup(), ps::cli::formGroup(),
-             ps::cli::typesetGroup(),   ps::cli::objectGroup(), ps::cli::convertGroup(),
-             ps::cli::inspectGroup(),   ps::cli::autofillGroup(), ps::cli::searchGroup() };
+    return { ps::cli::preflightGroup(), ps::cli::colourGroup(),  ps::cli::fontGroup(),     ps::cli::imageGroup(),
+             ps::cli::layoutGroup(),    ps::cli::formGroup(),    ps::cli::typesetGroup(),  ps::cli::objectGroup(),
+             ps::cli::convertGroup(),   ps::cli::inspectGroup(), ps::cli::autofillGroup(), ps::cli::searchGroup() };
 }
 
 /**
