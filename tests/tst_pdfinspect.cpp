@@ -103,6 +103,7 @@ private Q_SLOTS:
     void streamRefusesANonStream();
     void diffOfIdenticalFilesIsEmpty();
     void diffSeesAChangedValue();
+    void diffSeesALongStringChangePastTheSummaryCutoff();
     void diffSeesAStructuralChange();
     void limitationsAreStated();
 };
@@ -528,6 +529,46 @@ void TestPdfInspect::diffSeesAChangedValue()
         }
     }
     QVERIFY(found);
+}
+
+void TestPdfInspect::diffSeesALongStringChangePastTheSummaryCutoff()
+{
+    QTemporaryDir dir;
+    QVERIFY(dir.isValid());
+    const QString pdf = sample(dir);
+    QVERIFY(!pdf.isEmpty());
+
+    const int page = firstLeafPageObject(pdf);
+    QVERIFY(page >= 0);
+
+    // Two values that are identical for the first eighty characters and differ
+    // only at the very end — past where the readable summary elides them. The
+    // diff must still see them as different.
+    const QString shared(80, u'A');
+    const QString longOne = shared + u"ONE"_s;
+    const QString longTwo = shared + u"TWO"_s;
+
+    const QString fileOne = dir.filePath(u"one.pdf"_s);
+    const QString fileTwo = dir.filePath(u"two.pdf"_s);
+    QString ignore;
+    QString error;
+    QVERIFY2(
+        PdfInspect::setScalar(pdf, fileOne, page, -1, u"/Type"_s, longOne, PdfInspect::Scalar::String, &ignore, &error),
+        qPrintable(error));
+    QVERIFY2(
+        PdfInspect::setScalar(pdf, fileTwo, page, -1, u"/Type"_s, longTwo, PdfInspect::Scalar::String, &ignore, &error),
+        qPrintable(error));
+
+    QVector<PdfInspect::Difference> diffs;
+    QVERIFY2(PdfInspect::diff(fileOne, fileTwo, &diffs, &error), qPrintable(error));
+
+    bool found = false;
+    for (const PdfInspect::Difference &entry : diffs) {
+        if (entry.kind == PdfInspect::Difference::Kind::Changed && entry.path.contains(u"/Type"_s)) {
+            found = true;
+        }
+    }
+    QVERIFY2(found, "a change past the summary's cutoff was not reported");
 }
 
 void TestPdfInspect::diffSeesAStructuralChange()

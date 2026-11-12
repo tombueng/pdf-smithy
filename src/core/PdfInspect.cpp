@@ -337,10 +337,24 @@ void collectDiff(QPDFObjectHandle a, QPDFObjectHandle b, const QString &path, in
         return;
     }
 
-    const QString before = summarize(a);
-    const QString after = summarize(b);
-    if (before != after) {
-        out.push_back({ path.isEmpty() ? u"/"_s : path, Kind::Changed, before, after });
+    const bool aScalar = !(a.isDictionary() || a.isArray() || a.isStream());
+    const bool bScalar = !(b.isDictionary() || b.isArray() || b.isStream());
+    bool changed = false;
+    if (aScalar && bScalar) {
+        // Decide on the exact token, not the summary: summarize() elides a long
+        // string to 70 characters, so two values that differ only past that
+        // cutoff would otherwise compare equal and the change go unreported.
+        // unparseResolved() follows an indirect reference to the value itself,
+        // so this does not mistake two files' differing object numbers for a
+        // change either.
+        changed = a.unparseResolved() != b.unparseResolved();
+    } else {
+        // Different shapes (a dictionary where there was an array, say): the
+        // type named in the summary is enough to tell them apart.
+        changed = summarize(a) != summarize(b);
+    }
+    if (changed) {
+        out.push_back({ path.isEmpty() ? u"/"_s : path, Kind::Changed, summarize(a), summarize(b) });
         --budget;
     }
 }
