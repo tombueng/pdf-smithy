@@ -24,6 +24,7 @@ set(PS_CORE_TESTS
     tst_blankpdf
     tst_pdfinspect
     tst_formvault
+    tst_textfind
 )
 
 # These need the Poppler backend to look at what was produced, so they are

@@ -69,6 +69,7 @@ Impact·Edge·Safe at low Cost.
 | 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
 | 7 | **Search-as-you-type** with a result list + in-page highlight | verify | 4 | 3 | 4 | 3 | 3 | B |
+| 7a | **Full-text search** (`search FILE "term"` — pages, counts, snippets; CLI/core, read-only) | **done ✓** | 4 | 3 | 4 | 5 | 2 | **A** |
 | 8 | **Command palette (Ctrl+K) + action registry** — discoverability *and* structure in one | gap | 5 | 4 | 4 | 2 | 4 | C |
 | 9 | **Design tokens + Welcome / empty state** (type scale, spacing, theme to the page; first impression) | gap | 5 | 4 | 4 | 1 | 3 | C* |
 | 10 | **Dark / sepia reading mode** that recolours the page | gap | 3 | 3 | 4 | 2 | 3 | C |
@@ -157,3 +158,10 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   stream bodies are compared by bytes. Three new `tst_pdfinspect` cases
   (identical→empty, a changed value, a page-count change). Pairs with `inspect
   set`: make an edit, see exactly what it did.
+- _cycle 8_ — **full-text search (`search`).** A new MIT core, `TextFind`, reads
+  each page's text the way the editor does — out of the content stream with QPDF —
+  and reports the pages a term is on, how often, and a snippet of the surrounding
+  text. `search FILE "term"`, case-folded by default (`--case-sensitive`),
+  `--json`. Read-only; consistent with the `text` command's view of text (so a
+  page whose words live only in an image, or in an XObject it does not reach,
+  yields no matches — the same honest scope). Four new `tst_textfind` cases.

@@ -81,5 +81,6 @@ Group objectGroup();
 Group convertGroup();
 Group inspectGroup();
 Group autofillGroup();
+Group searchGroup();
 
 } // namespace ps::cli
