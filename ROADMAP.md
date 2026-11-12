@@ -66,7 +66,7 @@ Impact·Edge·Safe at low Cost.
 | 3c | **Stream content** (`inspect stream` — view decoded operators, extract embedded images; extends #1, read-only) | **done ✓** | 4 | 4 | 5 | 5 | 2 | **A** |
 | 3d | **Structural diff** (`inspect diff` — which objects/keys/values differ between two PDFs, from the catalogue down; pairs with set) | **done ✓** | 4 | 5 | 5 | 5 | 3 | **A** |
 | 4 | **Attribute editing on the object tree** (change what is sensible: metadata, page boxes, annot props) — builds on #1 | **done ✓** | 4 | 5 | 4 | 4 | 4 | B |
-| 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | likely gap | 4 | 3 | 5 | 3 | 4 | B |
+| 5 | **Certificate-file signing** (PKCS#12 from disk, standards ByteRange; verify it is truly absent first) | **confirmed absent — needs a decision** | 4 | 3 | 5 | 3 | 4 | B |
 | 6 | **Preflight fixes, surfaced well** (one-click apply from the report; the engine exists) | partial | 4 | 4 | 5 | 3 | 2 | B |
 | 7 | **Search-as-you-type** with a result list + in-page highlight | verify | 4 | 3 | 4 | 3 | 3 | B |
 | 7a | **Full-text search** (`search FILE "term"` — pages, counts, snippets; CLI/core, read-only) | **done ✓** | 4 | 3 | 4 | 5 | 2 | **A** |
@@ -174,3 +174,16 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   `tst_pdfinspect` case, proven to fail without the fix. Also caught that the
   manual's command table never listed `inspect`, `autofill` or `search` (the
   `manpage-current` check was failing); regenerated it. Full suite green (109).
+- _cycle 10 (investigation, no code)_ — **#5 certificate signing confirmed
+  absent.** A read-only sweep: no crypto library is linked (no OpenSSL / GnuTLS
+  / NSS / Botan), and there is no signature-dictionary machinery anywhere (no
+  `/ByteRange`, PKCS#7, X.509). The `Sign*` classes (`SignEditor`,
+  `SignatureStore`, `SignatureCanvas`) are purely image stamps — a `QImage`
+  drawn or taken from stylus/finger, placed on the page. So the signing spec is
+  half-built: **graphic/stylus signing exists; certificate-file signing does
+  not.** Building it is not an unattended job: it adds a cryptographic
+  dependency (a backend choice — OpenSSL/GnuTLS/NSS, or Poppler's own signing in
+  the GPL layer), carries a licensing implication, is security-sensitive (a
+  wrong signature is worse than none), and must be tested against a real
+  certificate the author holds. Held for a pairing session; the decision is
+  **which crypto backend**.
