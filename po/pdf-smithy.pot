@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-12 01:14+0100\n"
+"POT-Creation-Date: 2026-11-12 22:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8395,82 +8395,82 @@ msgid_plural "%1 bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/core/PdfInspect.cpp:507 src/core/PdfInspect.cpp:543
-#: src/core/PdfInspect.cpp:675
+#: src/core/PdfInspect.cpp:521 src/core/PdfInspect.cpp:557
+#: src/core/PdfInspect.cpp:689
 #, kde-format
 msgid "There is no object %1 in this file."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:551
+#: src/core/PdfInspect.cpp:565
 #, kde-format
 msgid "Object %1 is a %2, which has no keys to set."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:560
+#: src/core/PdfInspect.cpp:574
 #, kde-format
 msgid "Object %1 has no key %2."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:568
+#: src/core/PdfInspect.cpp:582
 #, kde-format
 msgid "%1 holds a %2, not a single value this can set."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:605
+#: src/core/PdfInspect.cpp:619
 #, kde-format
 msgid "“%1” is not a whole number."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:617
+#: src/core/PdfInspect.cpp:631
 #, kde-format
 msgid "“%1” is not a number."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:628
+#: src/core/PdfInspect.cpp:642
 #, kde-format
 msgid "“%1” is not true or false."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:683
+#: src/core/PdfInspect.cpp:697
 #, kde-format
 msgid "Object %1 is a %2, not a stream."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:759
+#: src/core/PdfInspect.cpp:773
 #, kde-format
 msgid ""
 "Only numbered indirect objects are listed; a value written straight into "
 "another object is shown inside it, not on its own."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:761
+#: src/core/PdfInspect.cpp:775
 #, kde-format
 msgid ""
 "Stream contents are summarised by filter and length, not decoded or shown."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:762
+#: src/core/PdfInspect.cpp:776
 #, kde-format
 msgid ""
 "An object kept inside a compressed object stream is shown resolved, not by "
 "its place within that stream."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:764
+#: src/core/PdfInspect.cpp:778
 #, kde-format
 msgid ""
 "Editing (inspect set) changes one existing scalar value at a time; it does "
 "not add keys, nor alter arrays, streams or the document's structure."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:766
+#: src/core/PdfInspect.cpp:780
 #, kde-format
 msgid ""
 "Saving an edit writes the whole file afresh, so object numbers may change; "
 "inspect the saved copy to find them again."
 msgstr ""
 
-#: src/core/PdfInspect.cpp:768
+#: src/core/PdfInspect.cpp:782
 #, kde-format
 msgid ""
 "An encrypted document must be opened with its password before anything here "
