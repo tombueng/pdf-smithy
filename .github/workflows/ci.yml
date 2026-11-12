@@ -161,8 +161,12 @@ jobs:
       - name: Install
         run: |
           cmake --install build
-          test -x /usr/local/bin/pdf-smithy
-          test -x /usr/local/bin/pdf-smithy-cli
+          # Check the binaries are installed and on PATH without naming a
+          # directory: the install prefix is the project's to decide (it is
+          # /usr here, so they land in /usr/bin), and hard-coding /usr/local
+          # made this step fail every run after the prefix changed.
+          command -v pdf-smithy
+          command -v pdf-smithy-cli
 
   sanitizers:
     name: Address and UB sanitizers
