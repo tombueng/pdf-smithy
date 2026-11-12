@@ -108,6 +108,27 @@ Show what changed between two documents
 .BI "archive-check" " FILE"
 Look for what stops a file being archival
 .TP
+.BI "autofill" " fill"
+FILE                         Fill a form from the vault, saving a copy
+.TP
+.BI "autofill" " keys"
+The fields a form can be filled from
+.TP
+.BI "autofill" " learn"
+FILE                         Take a filled form's answers into the vault
+.TP
+.BI "autofill" " limits"
+What autofill does not touch
+.TP
+.BI "autofill" " list"
+Show what the vault holds
+.TP
+.BI "autofill" " remove"
+KEY                          Forget one value
+.TP
+.BI "autofill" " set"
+KEY VALUE                    Remember a value, e.g. autofill set email you@example.org
+.TP
 .BI "colour" " convert FILE"
 Convert to grey, black and white, RGB or CMYK
 .TP
@@ -243,6 +264,36 @@ Bring anything finer than that down to it
 .BI "images" " rotate FILE --angle 90"
 Turn one picture, without re-encoding it
 .TP
+.BI "inspect" " diff"
+OLD.pdf NEW.pdf              What changed between two files, from the catalogue down
+.TP
+.BI "inspect" " find"
+FILE --of-type /Font         The objects that match a type, a key or some text
+.TP
+.BI "inspect" " info"
+FILE                         Version, object and page counts, how it is secured
+.TP
+.BI "inspect" " limits"
+What this low-level view does not reach
+.TP
+.BI "inspect" " object"
+FILE --object N              One object opened out as a tree, by its number
+.TP
+.BI "inspect" " objects"
+FILE                         Every indirect object, with its number and type
+.TP
+.BI "inspect" " root"
+FILE                         The catalogue, the document's own root
+.TP
+.BI "inspect" " set"
+FILE --object N --key K      Change one value, saving an edited copy
+.TP
+.BI "inspect" " stream"
+FILE --object N              Read a stream object's content, or save it with -o
+.TP
+.BI "inspect" " trailer"
+FILE                         The trailer, the way into everything else
+.TP
 .BI "layout" " blanks"
 FILE                 Find pages that paint nothing
 .TP
@@ -335,6 +386,9 @@ Every rule, and whether it is checked
 .TP
 .BI "preflight" " save-profile ID -o FILE"
 Write a profile out as JSON to edit
+.TP
+.BI "search" " FILE "term""
+Find a word across the pages, with where and how often
 .TP
 .BI "set-version" " FILE [-o OUT]"
 Set the PDF version the header claims
