@@ -165,3 +165,12 @@ Design items (#8–#11) are tracked for a pairing session, not built blind.
   `--json`. Read-only; consistent with the `text` command's view of text (so a
   page whose words live only in an image, or in an XObject it does not reach,
   yields no matches — the same honest scope). Four new `tst_textfind` cases.
+- _cycle 9_ — **hardening sweep: a real diff bug, and a stale manual.** Reviewed
+  the new modules for correctness. Found that `inspect diff` decided whether a
+  leaf value had changed by comparing the *elided* summary, so two strings that
+  differ only past the seventy-character cutoff were reported as unchanged —
+  the silent-omission failure this codebase warns against. Now compares the
+  exact resolved token (and still shows the readable summary); a new
+  `tst_pdfinspect` case, proven to fail without the fix. Also caught that the
+  manual's command table never listed `inspect`, `autofill` or `search` (the
+  `manpage-current` check was failing); regenerated it. Full suite green (109).
