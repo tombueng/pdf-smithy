@@ -275,10 +275,17 @@ jobs:
           apt-get install -y ../pdf-smithy_*.deb
           pdf-smithy-cli --version
 
+      # dpkg-buildpackage drops the .deb in the parent directory, but
+      # upload-artifact@v4 rejects '..' paths, so bring it into the workspace.
+      - name: Collect the package into the workspace
+        run: |
+          mkdir -p dist
+          cp ../pdf-smithy_*.deb dist/
+
       - uses: actions/upload-artifact@v4
         with:
           name: debian-package
-          path: ../pdf-smithy_*.deb
+          path: dist/*.deb
 
   format:
     name: Code style
