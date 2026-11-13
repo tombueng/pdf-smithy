@@ -80,6 +80,7 @@
 #include <QStackedWidget>
 #include <QDockWidget>
 #include <QStatusBar>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QUndoStack>
 #include <QTransform>
@@ -3736,6 +3737,15 @@ void MainWindow::reportNotice(const QString &text)
     m_messageBar->setMessageType(KMessageWidget::Information);
     m_messageBar->setText(text);
     m_messageBar->animatedShow();
+    // A notice is a toast, not a standing error: let it fade on its own so it
+    // cannot linger and describe a state a later action has already changed.
+    // Guarded so it only hides itself if it is still the same notice — a newer
+    // message, or an error, keeps the bar up.
+    QTimer::singleShot(8000, m_messageBar, [this, text] {
+        if (m_messageBar->messageType() == KMessageWidget::Information && m_messageBar->text() == text) {
+            m_messageBar->animatedHide();
+        }
+    });
 }
 
 void MainWindow::reportError(const QString &title, const QString &detail)
