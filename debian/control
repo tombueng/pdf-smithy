@@ -68,6 +68,10 @@ Build-Depends: debhelper-compat (= 13),
                ghostscript <!nocheck>,
                fonts-urw-base35 <!nocheck>,
                fonts-liberation <!nocheck>,
+#   fontconfig        provides fc-cache; debian/rules builds the font cache
+#                     before the suite so an uncached "Liberation Sans" lookup
+#                     does not come back empty on a clean builder
+               fontconfig <!nocheck>,
                tesseract-ocr-eng <!nocheck>,
                tesseract-ocr-deu <!nocheck>,
                appstream <!nocheck>,

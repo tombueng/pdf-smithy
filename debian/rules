@@ -12,5 +12,14 @@ override_dh_auto_configure:
 
 # The end-to-end tests drive a real window, so the build needs a display even
 # though nobody is looking at it.
+#
+# fc-cache first: the form and text tests resolve faces like "Liberation Sans"
+# through fontconfig, and in a clean build environment the cache is not always
+# built by the time the suite runs — an uncached lookup then returns nothing and
+# the test sees an empty font family. Building it here is harmless when it is
+# already current. The echo leaves the resolved face in the build log, so if a
+# font ever does go missing the log says so outright.
 override_dh_auto_test:
+	fc-cache -f || true
+	@echo "preflight: fontconfig resolves Liberation Sans to: $$(fc-match 'Liberation Sans' 2>&1 || echo '<none>')"
 	xvfb-run -a --server-args="-screen 0 1400x900x24" dh_auto_test
