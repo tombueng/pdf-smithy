@@ -37,7 +37,6 @@ Build-Depends: debhelper-compat (= 13),
 # itself as passing when its tool is absent, so a shorter list here would turn a
 # real suite into a green tick.
 #
-#   xvfb              the end-to-end tests drive a real window
 #   ghostscript       the scan fixtures are rasterised with gs, and the
 #                     compression and PDF/A cases shell out to it
 #   fonts-urw-base35  gs needs a Helvetica to draw those fixtures with, and OCR
@@ -64,7 +63,6 @@ Build-Depends: debhelper-compat (= 13),
 #                     not exist is not an error: the C locale quietly applies
 #                     instead, so in a clean chroot half the suite would pass
 #                     while testing nothing
-               xvfb <!nocheck>,
                ghostscript <!nocheck>,
                fonts-urw-base35 <!nocheck>,
                fonts-liberation <!nocheck>,

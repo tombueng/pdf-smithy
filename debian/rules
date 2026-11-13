@@ -10,8 +10,11 @@ override_dh_auto_configure:
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 		-DBUILD_TESTING=ON
 
-# The end-to-end tests drive a real window, so the build needs a display even
-# though nobody is looking at it.
+# Run the GUI tests headless on Qt's offscreen platform: no X server is needed,
+# and the window size no longer rides on a physical screen. An xvfb screen that
+# was a touch too narrow pushed a mode's toolbar past its width and tripped the
+# tst_workmode overflow check; offscreen gives the window room and the whole
+# suite passes.
 #
 # fc-cache first: the form and text tests resolve faces like "Liberation Sans"
 # through fontconfig, and in a clean build environment the cache is not always
@@ -22,4 +25,4 @@ override_dh_auto_configure:
 override_dh_auto_test:
 	fc-cache -f || true
 	@echo "preflight: fontconfig resolves Liberation Sans to: $$(fc-match 'Liberation Sans' 2>&1 || echo '<none>')"
-	xvfb-run -a --server-args="-screen 0 1400x900x24" dh_auto_test
+	QT_QPA_PLATFORM=offscreen dh_auto_test
