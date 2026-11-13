@@ -118,7 +118,7 @@ int Document::addSource(const QString &path, QString *error, const QString &pass
 
     const int id = static_cast<int>(m_sources.size());
 
-    if (m_backend && !m_backend->addDocument(id, path, error)) {
+    if (m_backend && !m_backend->addDocument(id, path, error, password)) {
         // Rendering failed but the structure parsed. That is worth surviving:
         // the user can still reorder and save, just without previews.
         qWarning("Render backend rejected %s", qPrintable(path));

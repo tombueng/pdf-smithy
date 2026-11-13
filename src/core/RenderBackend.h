@@ -108,7 +108,8 @@ public:
     }
 
     /** Makes a file available for rendering under the given id. */
-    virtual bool addDocument(int sourceId, const QString &path, QString *error) = 0;
+    virtual bool addDocument(int sourceId, const QString &path, QString *error, const QString &password = QString())
+        = 0;
 
     virtual void removeDocument(int sourceId) = 0;
 

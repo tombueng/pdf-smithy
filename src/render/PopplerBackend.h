@@ -47,7 +47,7 @@ public:
     PopplerBackend();
     ~PopplerBackend() override;
 
-    bool addDocument(int sourceId, const QString &path, QString *error) override;
+    bool addDocument(int sourceId, const QString &path, QString *error, const QString &password = QString()) override;
     void removeDocument(int sourceId) override;
     QImage renderPage(int sourceId, int page, int widthPx) override;
     QImage render(int sourceId, int page, const Request &request) override;

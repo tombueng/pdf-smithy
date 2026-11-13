@@ -91,7 +91,7 @@ private:
 class SizingBackend : public RenderBackend
 {
 public:
-    bool addDocument(int sourceId, const QString &path, QString *error) override
+    bool addDocument(int sourceId, const QString &path, QString *error, const QString & = QString()) override
     {
         Q_UNUSED(sourceId)
         Q_UNUSED(path)

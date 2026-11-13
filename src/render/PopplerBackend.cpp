@@ -95,6 +95,7 @@ private:
  */
 struct PopplerBackend::Entry {
     QString path;
+    QByteArray password; //!< empty for an unprotected file; needed to open more handles
     QMutex mutex;
     QWaitCondition freed;
     std::vector<std::unique_ptr<Poppler::Document>> idle;
@@ -136,9 +137,13 @@ int PopplerBackend::handlesPerDocument()
 PopplerBackend::PopplerBackend() = default;
 PopplerBackend::~PopplerBackend() = default;
 
-bool PopplerBackend::addDocument(int sourceId, const QString &path, QString *error)
+bool PopplerBackend::addDocument(int sourceId, const QString &path, QString *error, const QString &password)
 {
-    std::unique_ptr<Poppler::Document> document = Poppler::Document::load(path);
+    // The same password that opened the structure layer unlocks the renderer;
+    // without it an encrypted document loads locked and every page comes out
+    // blank. Given as both owner and user password so either kind unlocks.
+    const QByteArray secret = password.toUtf8();
+    std::unique_ptr<Poppler::Document> document = Poppler::Document::load(path, secret, secret);
 
     if (!document) {
         if (error) {
@@ -156,6 +161,7 @@ bool PopplerBackend::addDocument(int sourceId, const QString &path, QString *err
 
     auto entry = std::make_shared<Entry>();
     entry->path = path;
+    entry->password = secret;
     entry->ceiling = handlesPerDocument();
     entry->open = 1;
     entry->idle.push_back(std::move(document));
@@ -203,9 +209,10 @@ PopplerBackend::Lease PopplerBackend::lease(int sourceId)
             mayOpen = false;
             ++entry->open;
             const QString path = entry->path;
+            const QByteArray secret = entry->password;
             locker.unlock();
 
-            std::unique_ptr<Poppler::Document> handle = Poppler::Document::load(path);
+            std::unique_ptr<Poppler::Document> handle = Poppler::Document::load(path, secret, secret);
             if (handle && !handle->isLocked()) {
                 configure(handle.get(), false);
                 return { entry, std::move(handle) };

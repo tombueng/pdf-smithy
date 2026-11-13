@@ -80,7 +80,7 @@ private:
 class SizingBackend : public RenderBackend
 {
 public:
-    bool addDocument(int, const QString &, QString *) override { return true; }
+    bool addDocument(int, const QString &, QString *, const QString & = QString()) override { return true; }
 
     void removeDocument(int) override { }
 

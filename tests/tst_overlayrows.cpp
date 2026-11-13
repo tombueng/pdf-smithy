@@ -99,7 +99,7 @@ private:
 class SayingBackend : public RenderBackend
 {
 public:
-    bool addDocument(int sourceId, const QString &path, QString *error) override
+    bool addDocument(int sourceId, const QString &path, QString *error, const QString & = QString()) override
     {
         Q_UNUSED(error)
         m_paths.insert(sourceId, path);
