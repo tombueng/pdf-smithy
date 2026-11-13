@@ -127,9 +127,15 @@ int commandInfo(const QStringList &arguments, bool asJson)
 
     if (document.pageCount() > 0) {
         const QSizeF first = document.pageSizePoints(0);
-        out() << i18n("First page: %1 × %2 mm", QString::number(first.width() * 25.4 / 72.0, 'f', 1),
-                      QString::number(first.height() * 25.4 / 72.0, 'f', 1))
-              << Qt::endl;
+        // A damaged file can recover a degenerate page box (zero or negative),
+        // and "-0.4 × -0.4 mm" reads as a bug rather than the damage it is. The
+        // open-warning above already says the file is not whole, so just leave
+        // the size out when it is not a real one.
+        if (first.width() > 0 && first.height() > 0) {
+            out() << i18n("First page: %1 × %2 mm", QString::number(first.width() * 25.4 / 72.0, 'f', 1),
+                          QString::number(first.height() * 25.4 / 72.0, 'f', 1))
+                  << Qt::endl;
+        }
     }
     return Success;
 }
@@ -532,13 +538,38 @@ int commandExportImages(const QStringList &arguments, const QString &output, con
 
     ps::ImageIO::ExportOptions options;
     options.dpi = dpi > 0 ? dpi : 150;
-    if (!format.isEmpty()) {
-        options.format = format.toLower();
-    }
 
-    const QString target = output.isEmpty() ? QFileInfo(arguments.constFirst()).absolutePath() + QLatin1Char('/')
-            + QFileInfo(arguments.constFirst()).completeBaseName() + QStringLiteral("-%1.") + options.format
-                                            : output;
+    // The file extension decides the format unless --format overrides it; with
+    // neither, PNG. The extension written is the one the user asked for ("jpg"
+    // stays "jpg"), while the encoder is told the canonical name ("jpeg").
+    QString extension = format.toLower();
+    if (extension.isEmpty() && !output.isEmpty()) {
+        extension = QFileInfo(output).suffix().toLower();
+    }
+    if (extension.isEmpty()) {
+        extension = QStringLiteral("png");
+    }
+    options.format = extension == QLatin1String("jpg") ? QStringLiteral("jpeg") : extension;
+
+    // Build a "…-%1.ext" template so every page gets a numbered name with a real
+    // extension. A -o that already holds %1 is taken as given; a -o without one
+    // (a base name, with or without a suffix) becomes the template — which also
+    // fixes the trailing-dot, extension-less name a suffix-less -o used to make,
+    // and the mismatch where -o foo.jpg wrote PNG bytes into a .jpg file.
+    const QFileInfo inputInfo(arguments.constFirst());
+    QString target;
+    if (output.isEmpty()) {
+        target = inputInfo.absolutePath() + QLatin1Char('/') + inputInfo.completeBaseName() + QStringLiteral("-%1.")
+            + extension;
+    } else if (output.contains(QLatin1String("%1"))) {
+        target = output;
+    } else {
+        const QFileInfo outputInfo(output);
+        const QString base = outputInfo.suffix().isEmpty()
+            ? output
+            : outputInfo.absolutePath() + QLatin1Char('/') + outputInfo.completeBaseName();
+        target = base + QStringLiteral("-%1.") + extension;
+    }
 
     // The pages carry the rotation the document gave them, so an export of a
     // sideways scan comes out the way it reads.
@@ -2270,7 +2301,7 @@ int main(int argc, char **argv)
     }
     if (command == QLatin1String("export-images")) {
         return commandExportImages(arguments, output, parser.value(pagesOption), parser.value(dpiOption).toInt(),
-                                   parser.value(formatOption));
+                                   parser.isSet(formatOption) ? parser.value(formatOption) : QString());
     }
     if (command == QLatin1String("meta")) {
         return commandMeta(arguments, output, parser.isSet(sanitizeOption), parser.isSet(jsonOption));
