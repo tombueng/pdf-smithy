@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-14 00:21+0100\n"
+"POT-Creation-Date: 2026-11-14 13:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4941,7 +4941,7 @@ msgstr ""
 msgid "archive needs an output file (-o)."
 msgstr ""
 
-#: src/cli/main.cpp:907 src/ui/MainWindow.cpp:2007 src/ui/MainWindow.cpp:2406
+#: src/cli/main.cpp:907 src/ui/MainWindow.cpp:2081 src/ui/MainWindow.cpp:2480
 #, kde-format
 msgid ""
 "Ghostscript is not installed, and it does the conversion. Install the "
@@ -4999,7 +4999,7 @@ msgstr ""
 msgid "Wrote the comparison of page %1 to %2."
 msgstr ""
 
-#: src/cli/main.cpp:1037 src/ui/MainWindow.cpp:2075
+#: src/cli/main.cpp:1037 src/ui/MainWindow.cpp:2149
 #, kde-format
 msgid "The two documents are the same."
 msgstr ""
@@ -5929,7 +5929,7 @@ msgstr ""
 msgid "There is nothing to add."
 msgstr ""
 
-#: src/core/Annotation.cpp:898 src/ui/MainWindow.cpp:1917
+#: src/core/Annotation.cpp:898 src/ui/MainWindow.cpp:1991
 #, kde-format
 msgid "This document has no comments to write out."
 msgstr ""
@@ -11881,354 +11881,360 @@ msgctxt ""
 msgid "%1: %2"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:130 src/ui/ToolFormBuilderDialog.cpp:1696
+#: src/ui/MainWindow.cpp:133 src/ui/ToolFormBuilderDialog.cpp:1696
 #: src/ui/ToolFormBuilderDialog.cpp:1729 src/ui/ToolLayoutDialog.cpp:1137
 #, kde-format
 msgid "PDF documents (*.pdf);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:135 src/ui/WatermarkEditor.cpp:323
+#: src/ui/MainWindow.cpp:138 src/ui/WatermarkEditor.cpp:323
 #, kde-format
 msgid "Images (%1);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:365
+#: src/ui/MainWindow.cpp:368
 #, kde-format
 msgctxt "@action"
 msgid "Page Thumbnails"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:390
+#: src/ui/MainWindow.cpp:393
 #, kde-format
 msgctxt "@action"
 msgid "Contents Sidebar"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:404
+#: src/ui/MainWindow.cpp:407
 #, kde-format
 msgctxt "@title:window"
 msgid "Tools"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:616
+#: src/ui/MainWindow.cpp:634
 #, kde-format
 msgctxt "@action"
 msgid "Insert File…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:619
+#: src/ui/MainWindow.cpp:637
 #, kde-format
 msgctxt "@action"
 msgid "Add Blank Pages…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:626
+#: src/ui/MainWindow.cpp:644
 #, kde-format
 msgctxt "@action"
 msgid "Undo the Change to This"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:629
+#: src/ui/MainWindow.cpp:647
 #, kde-format
 msgctxt "@action"
 msgid "Delete Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:632
+#: src/ui/MainWindow.cpp:650
 #, kde-format
 msgctxt "@action"
 msgid "Rotate Left"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:635
+#: src/ui/MainWindow.cpp:653
 #, kde-format
 msgctxt "@action"
 msgid "Rotate Right"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:639
+#: src/ui/MainWindow.cpp:657
 #, kde-format
 msgctxt "@action"
 msgid "Duplicate Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:643
+#: src/ui/MainWindow.cpp:661
 #, kde-format
 msgctxt "@action"
 msgid "Extract Pages to New File…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:650
+#: src/ui/MainWindow.cpp:668
 #, kde-format
 msgctxt "@action"
 msgid "Split…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:653
+#: src/ui/MainWindow.cpp:671
 #, kde-format
 msgctxt "@action"
 msgid "Page Numbers…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:656
+#: src/ui/MainWindow.cpp:674
 #, kde-format
 msgctxt "@action"
 msgid "Trim Pages…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:659
+#: src/ui/MainWindow.cpp:677
 #, kde-format
 msgctxt "@action"
 msgid "Redact…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:662
+#: src/ui/MainWindow.cpp:680
 #, kde-format
 msgctxt "@action"
 msgid "Comments…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:665
+#: src/ui/MainWindow.cpp:683
 #, kde-format
 msgctxt "@action"
 msgid "Save Comments to a File…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:668
+#: src/ui/MainWindow.cpp:686
 #, kde-format
 msgctxt "@action"
 msgid "Load Comments from a File…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:675
+#: src/ui/MainWindow.cpp:693
 #, kde-format
 msgctxt "@action"
 msgid "Correct Text…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:678
+#: src/ui/MainWindow.cpp:696
 #, kde-format
 msgctxt "@action"
 msgid "Arrange on Sheets…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:684
+#: src/ui/MainWindow.cpp:703
 #, kde-format
 msgctxt "@action"
 msgid "Fill In the Form as a List…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:687
+#: src/ui/MainWindow.cpp:706
+#, kde-format
+msgctxt "@action:intoolbar short label for document_form"
+msgid "Form List…"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:709
 #, kde-format
 msgctxt "@action"
 msgid "Save for Archiving…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:690
+#: src/ui/MainWindow.cpp:712
 #, kde-format
 msgctxt "@action"
 msgid "Compare with…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:693
+#: src/ui/MainWindow.cpp:715
 #, kde-format
 msgctxt "@action"
 msgid "Document Properties…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:696
+#: src/ui/MainWindow.cpp:718
 #, kde-format
 msgctxt "@action"
 msgid "Clean Up Document…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:699
+#: src/ui/MainWindow.cpp:721
 #, kde-format
 msgctxt "@action"
 msgid "Password…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:704
+#: src/ui/MainWindow.cpp:726
 #, kde-format
 msgctxt "@action"
 msgid "Check the Document…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:708
+#: src/ui/MainWindow.cpp:730
 #, kde-format
 msgctxt "@action"
 msgid "Colour…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:711
+#: src/ui/MainWindow.cpp:733
 #, kde-format
 msgctxt "@action"
 msgid "Fonts…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:714
+#: src/ui/MainWindow.cpp:736
 #, kde-format
 msgctxt "@action"
 msgid "Pictures…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:717
+#: src/ui/MainWindow.cpp:739
 #, kde-format
 msgctxt "@action"
 msgid "Page Setup…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:720
+#: src/ui/MainWindow.cpp:742
 #, kde-format
 msgctxt "@action"
 msgid "Form Behaviour and Answers…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:723
+#: src/ui/MainWindow.cpp:745
 #, kde-format
 msgctxt "@action"
 msgid "The Page as a List…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:726
+#: src/ui/MainWindow.cpp:748
 #, kde-format
 msgctxt "@action"
 msgid "Build a Form…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:732
+#: src/ui/MainWindow.cpp:754
 #, kde-format
 msgctxt "@action"
 msgid "Move What the Page Draws…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:736
+#: src/ui/MainWindow.cpp:758
 #, kde-format
 msgctxt "@action"
 msgid "Set Text as Pages…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:739
+#: src/ui/MainWindow.cpp:761
 #, kde-format
 msgctxt "@action"
 msgid "Import Images…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:742
+#: src/ui/MainWindow.cpp:764
 #, kde-format
 msgctxt "@action"
 msgid "Export as Images…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:749
+#: src/ui/MainWindow.cpp:771
 #, kde-format
 msgctxt "@action"
 msgid "Plain Text…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:752
+#: src/ui/MainWindow.cpp:774
 #, kde-format
 msgctxt "@action"
 msgid "HTML…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:755
+#: src/ui/MainWindow.cpp:777
 #, kde-format
 msgctxt "@action"
 msgid "Markdown…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:758
+#: src/ui/MainWindow.cpp:780
 #, kde-format
 msgctxt "@action"
 msgid "Tables as a Spreadsheet…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:761
+#: src/ui/MainWindow.cpp:783
 #, kde-format
 msgctxt "@action"
 msgid "Save for the Web…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:764
+#: src/ui/MainWindow.cpp:786
 #, kde-format
 msgctxt "@action"
 msgid "Save for Commercial Printing…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:767
+#: src/ui/MainWindow.cpp:789
 #, kde-format
 msgctxt "@action"
 msgid "Sign…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:770
+#: src/ui/MainWindow.cpp:792
 #, kde-format
 msgctxt "@action"
 msgid "Watermark…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:773
+#: src/ui/MainWindow.cpp:795
 #, kde-format
 msgctxt "@action"
 msgid "Recognise Text (OCR)…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:776
+#: src/ui/MainWindow.cpp:798
 #, kde-format
 msgctxt "@action"
 msgid "Make Smaller…"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:792
+#: src/ui/MainWindow.cpp:814
 #, kde-format
 msgctxt "@action"
 msgid "Larger Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:795
+#: src/ui/MainWindow.cpp:817
 #, kde-format
 msgctxt "@action"
 msgid "Smaller Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:854
+#: src/ui/MainWindow.cpp:876
 #, kde-format
 msgctxt "@action"
 msgid "Fit Width"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:857
+#: src/ui/MainWindow.cpp:879
 #, kde-format
 msgctxt "@action"
 msgid "Fit Height"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:860
+#: src/ui/MainWindow.cpp:882
 #, kde-format
 msgctxt "@action"
 msgid "One Whole Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:863
+#: src/ui/MainWindow.cpp:885
 #, kde-format
 msgctxt "@action"
 msgid "Two Pages Side by Side"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:866
+#: src/ui/MainWindow.cpp:888
 #, kde-format
 msgctxt "@action"
 msgid "Free Zoom"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:891
+#: src/ui/MainWindow.cpp:913
 #, kde-format
 msgctxt "@action"
 msgid "Read && Fill In"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:894
+#: src/ui/MainWindow.cpp:916
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -12236,49 +12242,49 @@ msgid ""
 "changed by accident."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:897
+#: src/ui/MainWindow.cpp:919
 #, kde-format
 msgctxt "@action"
 msgid "Edit the Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:899
+#: src/ui/MainWindow.cpp:921
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Correct the words, move the pictures, mark the page up."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:901
+#: src/ui/MainWindow.cpp:923
 #, kde-format
 msgctxt "@action"
 msgid "Edit the Form"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:903
+#: src/ui/MainWindow.cpp:925
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Draw form fields onto the page, move them and set what they do."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:905
+#: src/ui/MainWindow.cpp:927
 #, kde-format
 msgctxt "@action"
 msgid "Arrange the Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:907
+#: src/ui/MainWindow.cpp:929
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Reorder, turn, duplicate and throw away whole pages."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:918
+#: src/ui/MainWindow.cpp:940
 #, kde-format
 msgctxt "@action"
 msgid "Keep the Changes on the Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:922
+#: src/ui/MainWindow.cpp:944
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -12286,295 +12292,319 @@ msgid ""
 "Saving does this for you."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:942
+#: src/ui/MainWindow.cpp:964
 #, kde-format
 msgctxt "@action"
 msgid "Pick"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:944
+#: src/ui/MainWindow.cpp:966
 #, kde-format
 msgctxt "@action"
 msgid "Highlight"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:946
+#: src/ui/MainWindow.cpp:968
 #, kde-format
 msgctxt "@action"
 msgid "Underline"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:948
+#: src/ui/MainWindow.cpp:970
 #, kde-format
 msgctxt "@action"
 msgid "Strikethrough"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:950
+#: src/ui/MainWindow.cpp:972
 #, kde-format
 msgctxt "@action"
 msgid "Rectangle"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:952
+#: src/ui/MainWindow.cpp:974
 #, kde-format
 msgctxt "@action"
 msgid "Ellipse"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:954
+#: src/ui/MainWindow.cpp:976
 #, kde-format
 msgctxt "@action"
 msgid "Line"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:956
+#: src/ui/MainWindow.cpp:978
 #, kde-format
 msgctxt "@action"
 msgid "Freehand"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:958
+#: src/ui/MainWindow.cpp:980
 #, kde-format
 msgctxt "@action"
 msgid "Text Box"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:960
+#: src/ui/MainWindow.cpp:982
 #, kde-format
 msgctxt "@action"
 msgid "Note"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:984
+#: src/ui/MainWindow.cpp:1006
 #, kde-format
 msgctxt "@action"
 msgid "Previous Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:986
+#: src/ui/MainWindow.cpp:1008
 #, kde-format
 msgctxt "@action"
 msgid "Next Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:988
+#: src/ui/MainWindow.cpp:1010
 #, kde-format
 msgctxt "@action"
 msgid "First Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:990
+#: src/ui/MainWindow.cpp:1012
 #, kde-format
 msgctxt "@action"
 msgid "Last Page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1010
-#, kde-format
-msgctxt "@action"
-msgid "Select Text"
-msgstr ""
-
-#: src/ui/MainWindow.cpp:1011
+#: src/ui/MainWindow.cpp:1023
 #, kde-format
 msgctxt "@info:tooltip"
-msgid "Drag across words to select and copy them."
-msgstr ""
-
-#: src/ui/MainWindow.cpp:1013
-#, kde-format
-msgctxt "@action"
-msgid "Select an Area"
-msgstr ""
-
-#: src/ui/MainWindow.cpp:1015
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Drag a box and take the text and the picture inside it."
-msgstr ""
-
-#: src/ui/MainWindow.cpp:1016
-#, kde-format
-msgctxt "@action"
-msgid "Move the Page"
-msgstr ""
-
-#: src/ui/MainWindow.cpp:1017
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Drag the page about. Holding space does this too."
+msgid "Go to a page: type its number."
 msgstr ""
 
 #: src/ui/MainWindow.cpp:1043
 #, kde-format
 msgctxt "@action"
+msgid "Go to Page"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1064
+#, kde-format
+msgctxt "@action"
+msgid "Select Text"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1065
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Drag across words to select and copy them."
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1067
+#, kde-format
+msgctxt "@action"
+msgid "Select an Area"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1069
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Drag a box and take the text and the picture inside it."
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1070
+#, kde-format
+msgctxt "@action"
+msgid "Move the Page"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1071
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Drag the page about. Holding space does this too."
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1097
+#, kde-format
+msgctxt "@action"
 msgid "Pick a Field"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1046
+#: src/ui/MainWindow.cpp:1100
 #, kde-format
 msgctxt "@action"
 msgid "Text Field"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1048
+#: src/ui/MainWindow.cpp:1102
 #, kde-format
 msgctxt "@action"
 msgid "Tick Box"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1050
+#: src/ui/MainWindow.cpp:1104
 #, kde-format
 msgctxt "@action"
 msgid "Radio Group"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1052
+#: src/ui/MainWindow.cpp:1106
 #, kde-format
 msgctxt "@action"
 msgid "Drop-Down"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1054
+#: src/ui/MainWindow.cpp:1108
 #, kde-format
 msgctxt "@action"
 msgid "List"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1056
+#: src/ui/MainWindow.cpp:1110
 #, kde-format
 msgctxt "@action"
 msgid "Push Button"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1058
+#: src/ui/MainWindow.cpp:1112
 #, kde-format
 msgctxt "@action"
 msgid "Signature Field"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1065
+#: src/ui/MainWindow.cpp:1119
 #, kde-format
 msgctxt "@action"
 msgid "Two Pages Side by Side in the Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1072
+#: src/ui/MainWindow.cpp:1126
+#, kde-format
+msgctxt "@action:intoolbar short label for view_facing"
+msgid "Two Pages"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1129
 #, kde-format
 msgctxt "@action"
 msgid "Properties Sidebar"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1085
+#: src/ui/MainWindow.cpp:1142
 #, kde-format
 msgctxt "@action a menu of zoom levels"
 msgid "Zoom"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1090
+#: src/ui/MainWindow.cpp:1147
 #, kde-format
 msgctxt "@action a menu of side panels"
 msgid "Sidebars"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1094
+#: src/ui/MainWindow.cpp:1154
+#, kde-format
+msgctxt "@action a menu of the less-used working modes"
+msgid "More…"
+msgstr ""
+
+#: src/ui/MainWindow.cpp:1158
 #, kde-format
 msgctxt "@action a menu of things to add to the document"
 msgid "Insert"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1098
+#: src/ui/MainWindow.cpp:1162
 #, kde-format
 msgctxt "@action a menu of ways to write pages out"
 msgid "Export"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1105
+#: src/ui/MainWindow.cpp:1169
 #, kde-format
 msgctxt "@action a menu of what dragging does"
 msgid "Drag"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1109
+#: src/ui/MainWindow.cpp:1173
 #, kde-format
 msgctxt "@action a menu of shapes to draw"
 msgid "Shapes"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1232
+#: src/ui/MainWindow.cpp:1296
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Which page is showing. Type a number to go there."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1247
+#: src/ui/MainWindow.cpp:1311
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "What clicking on the page does at the moment"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1253
+#: src/ui/MainWindow.cpp:1317
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Page size in the grid"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1326
+#: src/ui/MainWindow.cpp:1390
 #, kde-format
 msgctxt "@title:window"
 msgid "Password Needed"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1328
+#: src/ui/MainWindow.cpp:1392
 #, kde-format
 msgid ""
 "That password does not open “%1”. Try again, or press Cancel to leave it "
 "closed."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1329
+#: src/ui/MainWindow.cpp:1393
 #, kde-format
 msgid "“%1” is protected. Type the password that opens it."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1347 src/ui/MainWindow.cpp:1383
+#: src/ui/MainWindow.cpp:1411 src/ui/MainWindow.cpp:1447
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Open Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1417
+#: src/ui/MainWindow.cpp:1491
 #, kde-format
 msgctxt "@title:window"
 msgid "Open PDF"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1436
+#: src/ui/MainWindow.cpp:1510
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Start a New Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1442
+#: src/ui/MainWindow.cpp:1516
 #, kde-format
 msgctxt "@info:status"
 msgid "A new document with one blank page."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1462
+#: src/ui/MainWindow.cpp:1536
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Add Blank Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1476
+#: src/ui/MainWindow.cpp:1550
 #, kde-format
 msgctxt "@title:window"
 msgid "Insert PDF"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1518
+#: src/ui/MainWindow.cpp:1592
 #, kde-format
 msgctxt "@action:inmenu undo step"
 msgid "Insert file"
@@ -12582,44 +12612,44 @@ msgid_plural "Insert %1 files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:1537
+#: src/ui/MainWindow.cpp:1611
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Insert Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1590 src/ui/MainWindow.cpp:1598
-#: src/ui/MainWindow.cpp:1624
+#: src/ui/MainWindow.cpp:1664 src/ui/MainWindow.cpp:1672
+#: src/ui/MainWindow.cpp:1698
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Save Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1617
+#: src/ui/MainWindow.cpp:1691
 #, kde-format
 msgctxt "@title:window"
 msgid "Save PDF As"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1664
+#: src/ui/MainWindow.cpp:1738
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Preview"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1674 src/ui/MainWindow.cpp:1732
+#: src/ui/MainWindow.cpp:1748 src/ui/MainWindow.cpp:1806
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Print"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1698
+#: src/ui/MainWindow.cpp:1772
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1716
+#: src/ui/MainWindow.cpp:1790
 #, kde-format
 msgctxt "@info:status print job summary"
 msgid "%1 sheet of paper"
@@ -12627,19 +12657,19 @@ msgid_plural "%1 sheets of paper"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:1736
+#: src/ui/MainWindow.cpp:1810
 #, kde-format
 msgctxt "@info:status"
 msgid "Sent to %1."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1813
+#: src/ui/MainWindow.cpp:1887
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Split Document"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1817
+#: src/ui/MainWindow.cpp:1891
 #, kde-format
 msgctxt "@info:status"
 msgid "Wrote %1 file."
@@ -12647,13 +12677,13 @@ msgid_plural "Wrote %1 files."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:1868
+#: src/ui/MainWindow.cpp:1942
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Arrange"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1874
+#: src/ui/MainWindow.cpp:1948
 #, kde-format
 msgctxt "@info:status"
 msgid "Arranged %1 page onto sheets."
@@ -12661,42 +12691,42 @@ msgid_plural "Arranged %1 pages onto sheets."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:1908
+#: src/ui/MainWindow.cpp:1982
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Comments"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1909 src/ui/MainWindow.cpp:1941
+#: src/ui/MainWindow.cpp:1983 src/ui/MainWindow.cpp:2015
 #, kde-format
 msgid "Comment files (*.xfdf);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1916
+#: src/ui/MainWindow.cpp:1990
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Save Comments"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1924
+#: src/ui/MainWindow.cpp:1998
 #, kde-format
 msgctxt "@info:status"
 msgid "Comments written to %1. The document itself is not in it."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1941
+#: src/ui/MainWindow.cpp:2015
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Comments"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1950
+#: src/ui/MainWindow.cpp:2024
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Load Comments"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1957
+#: src/ui/MainWindow.cpp:2031
 #, kde-format
 msgctxt "@info:status"
 msgid "Brought in %1 comment."
@@ -12704,89 +12734,89 @@ msgid_plural "Brought in %1 comments."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:1972
+#: src/ui/MainWindow.cpp:2046
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Fill In Form"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:1978
+#: src/ui/MainWindow.cpp:2052
 #, kde-format
 msgid "This document has no form fields to fill in."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2006 src/ui/MainWindow.cpp:2034
+#: src/ui/MainWindow.cpp:2080 src/ui/MainWindow.cpp:2108
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Save for Archiving"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2022
+#: src/ui/MainWindow.cpp:2096
 #, kde-format
 msgctxt "@title:window"
 msgid "Save for Archiving"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2046
+#: src/ui/MainWindow.cpp:2120
 #, kde-format
 msgctxt "@info:status"
 msgid "Written as %1."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2063
+#: src/ui/MainWindow.cpp:2137
 #, kde-format
 msgctxt "@title:window"
 msgid "Compare With"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2071
+#: src/ui/MainWindow.cpp:2145
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Compare"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2136
+#: src/ui/MainWindow.cpp:2210
 #, kde-format
 msgctxt "@info:status"
 msgid "Cleaned up. Save to write the result."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2159
+#: src/ui/MainWindow.cpp:2233
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Set a Password"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2160
+#: src/ui/MainWindow.cpp:2234
 #, kde-format
 msgid "Save the document once before protecting it."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2190
+#: src/ui/MainWindow.cpp:2264
 #, kde-format
 msgctxt "@info:status"
 msgid "The password has been removed."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2191
+#: src/ui/MainWindow.cpp:2265
 #, kde-format
 msgctxt "@info:status"
 msgid "Locked with AES-256."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2197
+#: src/ui/MainWindow.cpp:2271
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Images"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2205
+#: src/ui/MainWindow.cpp:2279
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Import Images"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2218
+#: src/ui/MainWindow.cpp:2292
 #, kde-format
 msgctxt "@info:status"
 msgid "Imported %1 image."
@@ -12794,25 +12824,25 @@ msgid_plural "Imported %1 images."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2241
+#: src/ui/MainWindow.cpp:2315
 #, kde-format
 msgctxt "@title:window"
 msgid "Where should the images go?"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2246
+#: src/ui/MainWindow.cpp:2320
 #, kde-format
 msgctxt "@item default file name"
 msgid "page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2265
+#: src/ui/MainWindow.cpp:2339
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Export Images"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2272
+#: src/ui/MainWindow.cpp:2346
 #, kde-format
 msgctxt "@info:status"
 msgid "Wrote %1 image."
@@ -12820,7 +12850,7 @@ msgid_plural "Wrote %1 images."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2278
+#: src/ui/MainWindow.cpp:2352
 #, kde-format
 msgctxt "@info"
 msgid "One page could not be drawn and was left out."
@@ -12828,113 +12858,113 @@ msgid_plural "%1 pages could not be drawn and were left out."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2305
+#: src/ui/MainWindow.cpp:2379
 #, kde-format
 msgctxt "@title:window"
 msgid "Export as Plain Text"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2307
+#: src/ui/MainWindow.cpp:2381
 #, kde-format
 msgid "Text files (*.txt);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2313
+#: src/ui/MainWindow.cpp:2387
 #, kde-format
 msgctxt "@title:window"
 msgid "Export as HTML"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2315
+#: src/ui/MainWindow.cpp:2389
 #, kde-format
 msgid "Web pages (*.html);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2321
+#: src/ui/MainWindow.cpp:2395
 #, kde-format
 msgctxt "@title:window"
 msgid "Export as Markdown"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2323
+#: src/ui/MainWindow.cpp:2397
 #, kde-format
 msgid "Markdown files (*.md);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2329
+#: src/ui/MainWindow.cpp:2403
 #, kde-format
 msgctxt "@title:window"
 msgid "Export the Tables"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2331
+#: src/ui/MainWindow.cpp:2405
 #, kde-format
 msgid "Comma-separated values (*.csv);;All files (*)"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2355
+#: src/ui/MainWindow.cpp:2429
 #, kde-format
 msgid ""
 "A PDF holds letters at positions rather than sentences, so this was worked "
 "out from the layout. Read it over before relying on it."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2357
+#: src/ui/MainWindow.cpp:2431
 #, kde-format
 msgctxt "@info:status"
 msgid "Written to %1."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2373
+#: src/ui/MainWindow.cpp:2447
 #, kde-format
 msgctxt "@title:window"
 msgid "Save for the Web"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2386
+#: src/ui/MainWindow.cpp:2460
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Save for the Web"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2394
+#: src/ui/MainWindow.cpp:2468
 #, kde-format
 msgctxt "@info:status"
 msgid "Written so that a reader on a slow connection sees page one first."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2403
+#: src/ui/MainWindow.cpp:2477
 #, kde-format
 msgctxt "@title:window"
 msgid "Save for Commercial Printing"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2441
+#: src/ui/MainWindow.cpp:2515
 #, kde-format
 msgctxt "@info:status"
 msgid "Written as PDF/X-1a."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2484 src/ui/MainWindow.cpp:2508
+#: src/ui/MainWindow.cpp:2558 src/ui/MainWindow.cpp:2582
 #, kde-format
 msgctxt "@title:window"
 msgid "Text Recognition Unavailable"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2485
+#: src/ui/MainWindow.cpp:2559
 #, kde-format
 msgid ""
 "No recognition languages are installed. Install a package such as “tesseract-"
 "ocr-deu” and try again."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2500
+#: src/ui/MainWindow.cpp:2574
 #, kde-format
 msgctxt "@title:window"
 msgid "Text Recognition Failed"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2506
+#: src/ui/MainWindow.cpp:2580
 #, kde-format
 msgctxt "@info:status"
 msgid "Text recognised on %1 page."
@@ -12942,43 +12972,43 @@ msgid_plural "Text recognised on %1 pages."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2509
+#: src/ui/MainWindow.cpp:2583
 #, kde-format
 msgid "This build has no text recognition support."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2536
+#: src/ui/MainWindow.cpp:2610
 #, kde-format
 msgctxt "@title:window"
 msgid "Compression Failed"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2543
+#: src/ui/MainWindow.cpp:2617
 #, kde-format
 msgctxt "@info:status"
 msgid "Already as small as it gets, so nothing was changed."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2547
+#: src/ui/MainWindow.cpp:2621
 #, kde-format
 msgctxt "@info:status"
 msgid "%1 smaller."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2590
+#: src/ui/MainWindow.cpp:2664
 #, kde-format
 msgid ""
 "This removes every page from the document. The file on disk is not touched "
 "until you save."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2591
+#: src/ui/MainWindow.cpp:2665
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete All Pages?"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2621
+#: src/ui/MainWindow.cpp:2695
 #, kde-format
 msgctxt "@info"
 msgid "Turned the whole document, %1 page. Undo puts it back."
@@ -12986,7 +13016,7 @@ msgid_plural "Turned the whole document, all %1 pages. Undo puts them back."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2658
+#: src/ui/MainWindow.cpp:2732
 #, kde-format
 msgctxt "@title:window"
 msgid "Extract Page To…"
@@ -12994,13 +13024,13 @@ msgid_plural "Extract %1 Pages To…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2665
+#: src/ui/MainWindow.cpp:2739
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Extract Pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2672
+#: src/ui/MainWindow.cpp:2746
 #, kde-format
 msgctxt "@info:status"
 msgid "Extracted one page to %2"
@@ -13008,31 +13038,31 @@ msgid_plural "Extracted %1 pages to %2"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2718
+#: src/ui/MainWindow.cpp:2792
 #, kde-format
 msgctxt "@info:status which mode the window is in"
 msgid "Reading and filling in"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2720
+#: src/ui/MainWindow.cpp:2794
 #, kde-format
 msgctxt "@info:status which mode the window is in"
 msgid "Editing the page"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2722
+#: src/ui/MainWindow.cpp:2796
 #, kde-format
 msgctxt "@info:status which mode the window is in"
 msgid "Editing the form"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2724
+#: src/ui/MainWindow.cpp:2798
 #, kde-format
 msgctxt "@info:status which mode the window is in"
 msgid "Arranging the pages"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2740
+#: src/ui/MainWindow.cpp:2814
 #, kde-format
 msgctxt "@info:status how many pages there are"
 msgid "of %1 page"
@@ -13040,7 +13070,15 @@ msgid_plural "of %1 pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2744
+#: src/ui/MainWindow.cpp:2820
+#, kde-format
+msgctxt "@info total pages beside the toolbar page box"
+msgid "/ %1"
+msgid_plural "/ %1"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/ui/MainWindow.cpp:2824
 #, kde-format
 msgctxt "@info:status"
 msgid "%1 page"
@@ -13048,7 +13086,7 @@ msgid_plural "%1 pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2755
+#: src/ui/MainWindow.cpp:2835
 #, kde-format
 msgctxt "@info:status"
 msgid "%1 selected"
@@ -13056,57 +13094,57 @@ msgid_plural "%1 selected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/MainWindow.cpp:2856
+#: src/ui/MainWindow.cpp:2936
 #, kde-format
 msgid "“%1” has unsaved changes."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2856
+#: src/ui/MainWindow.cpp:2936
 #, kde-format
 msgctxt "@title:window"
 msgid "Unsaved Changes"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2916
+#: src/ui/MainWindow.cpp:2996
 #, kde-format
 msgid "Keep what you have done here?"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2917
+#: src/ui/MainWindow.cpp:2997
 #, kde-format
 msgctxt "@action:button"
 msgid "Keep"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:2918
+#: src/ui/MainWindow.cpp:2998
 #, kde-format
 msgctxt "@action:button"
 msgid "Throw Away"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:3045
+#: src/ui/MainWindow.cpp:3125
 #, kde-format
 msgid "A working directory for the export could not be made."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:3060
+#: src/ui/MainWindow.cpp:3140
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Save"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:3559
+#: src/ui/MainWindow.cpp:3663
 #, kde-format
 msgctxt "@title:window"
 msgid "Cannot Keep the Changes"
 msgstr ""
 
-#: src/ui/MainWindow.cpp:3753
+#: src/ui/MainWindow.cpp:3857
 #, kde-format
 msgid "The operation failed."
 msgstr ""
 
-#: src/ui/MainWindow.cpp:3756
+#: src/ui/MainWindow.cpp:3860
 #, kde-format
 msgctxt "@info error banner, headline then detail"
 msgid "%1: %2"
@@ -13462,39 +13500,17 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ObjectOverlay.cpp:2512
-#, kde-format
-msgctxt "@info why an inline picture cannot be copied"
-msgid ""
-"An inline picture cannot be copied: its pixels are written into the page's "
-"own instructions rather than into an object that can be lifted out of them."
-msgstr ""
-
-#: src/ui/ObjectOverlay.cpp:2523 src/ui/PageView.cpp:2082
+#: src/ui/ObjectOverlay.cpp:2517 src/ui/PageView.cpp:2152
 #, kde-format
 msgctxt "@info"
 msgid ""
 "The file behind this page is not available, so its pictures cannot be read."
 msgstr ""
 
-#: src/ui/ObjectOverlay.cpp:2532 src/ui/PageView.cpp:2129
+#: src/ui/ObjectOverlay.cpp:2561
 #, kde-format
-msgctxt "@info there is nowhere to write a temporary file"
-msgid ""
-"A picture could not be copied: this machine has nowhere to put it while it "
-"is being read out of the file."
-msgstr ""
-
-#: src/ui/ObjectOverlay.cpp:2540 src/ui/PageView.cpp:2140
-#, kde-format
-msgctxt "@info %1 names a picture, %2 says what went wrong"
-msgid "%1 could not be copied: %2"
-msgstr ""
-
-#: src/ui/ObjectOverlay.cpp:2547 src/ui/PageView.cpp:2147
-#, kde-format
-msgctxt "@info %1 names a picture"
-msgid "%1 came out of the file in a form this program cannot read back."
+msgctxt "@info a picture could not be read out of the file at all"
+msgid "This picture could not be copied: it could not be read out of the file."
 msgstr ""
 
 #: src/ui/OperationDialogs.cpp:92
@@ -14142,12 +14158,12 @@ msgctxt "@info stands for a copied shape where only text can go"
 msgid "[line]"
 msgstr ""
 
-#: src/ui/PageModel.cpp:203
+#: src/ui/PageModel.cpp:209
 #, kde-format
 msgid "unknown file"
 msgstr ""
 
-#: src/ui/PageModel.cpp:204
+#: src/ui/PageModel.cpp:210
 #, kde-format
 msgctxt "@info:tooltip page %1 of document, from file %2, original page %3"
 msgid ""
@@ -14155,7 +14171,7 @@ msgid ""
 "From %2, page %3"
 msgstr ""
 
-#: src/ui/PageModel.cpp:318
+#: src/ui/PageModel.cpp:324
 #, kde-format
 msgctxt "@action:inmenu undo step"
 msgid "Insert pages from file"
@@ -14563,7 +14579,13 @@ msgctxt "@info"
 msgid "%1 across and %2 down, on a sheet the size of one page."
 msgstr ""
 
-#: src/ui/PageView.cpp:2117
+#: src/ui/PageView.cpp:1051
+#, kde-format
+msgctxt "@info page while dragging the scroll bar, current then total"
+msgid "Page %1 / %2"
+msgstr ""
+
+#: src/ui/PageView.cpp:2187
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14571,7 +14593,27 @@ msgid ""
 "or a JPEG 2000 image, whose pixels nothing here can read."
 msgstr ""
 
-#: src/ui/PageView.cpp:2167
+#: src/ui/PageView.cpp:2199
+#, kde-format
+msgctxt "@info there is nowhere to write a temporary file"
+msgid ""
+"A picture could not be copied: this machine has nowhere to put it while it "
+"is being read out of the file."
+msgstr ""
+
+#: src/ui/PageView.cpp:2210
+#, kde-format
+msgctxt "@info %1 names a picture, %2 says what went wrong"
+msgid "%1 could not be copied: %2"
+msgstr ""
+
+#: src/ui/PageView.cpp:2217
+#, kde-format
+msgctxt "@info %1 names a picture"
+msgid "%1 came out of the file in a form this program cannot read back."
+msgstr ""
+
+#: src/ui/PageView.cpp:2237
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14579,7 +14621,7 @@ msgid ""
 "it covers, and a picture it is drawn over."
 msgstr ""
 
-#: src/ui/PageView.cpp:2198
+#: src/ui/PageView.cpp:2268
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14587,13 +14629,13 @@ msgid ""
 "and drag a box round what you want to take."
 msgstr ""
 
-#: src/ui/PageView.cpp:2211
+#: src/ui/PageView.cpp:2281
 #, kde-format
 msgctxt "@info"
 msgid "Nothing is chosen to copy. Click something on the page first."
 msgstr ""
 
-#: src/ui/PageView.cpp:2220
+#: src/ui/PageView.cpp:2290
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14601,13 +14643,13 @@ msgid ""
 "to Edit to change the page."
 msgstr ""
 
-#: src/ui/PageView.cpp:2230
+#: src/ui/PageView.cpp:2300
 #, kde-format
 msgctxt "@info"
 msgid "Nothing is chosen to cut. Click something on the page first."
 msgstr ""
 
-#: src/ui/PageView.cpp:2237
+#: src/ui/PageView.cpp:2307
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14615,13 +14657,13 @@ msgid ""
 "to Edit to add something to it."
 msgstr ""
 
-#: src/ui/PageView.cpp:2244
+#: src/ui/PageView.cpp:2314
 #, kde-format
 msgctxt "@info"
 msgid "There is nothing on the clipboard."
 msgstr ""
 
-#: src/ui/PageView.cpp:2253
+#: src/ui/PageView.cpp:2323
 #, kde-format
 msgctxt "@info"
 msgid ""
