@@ -47,6 +47,9 @@ finish-args:
 modules:
   - name: qpdf
     buildsystem: cmake-ninja
+    # qpdf's CMake refuses to configure in the source tree and asks for a build
+    # subdirectory; every CMake module here builds out of source for it.
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_STATIC_LIBS=OFF
@@ -69,6 +72,7 @@ modules:
   # poppler.freedesktop.org and matches the one Flathub's Okular manifest pins.
   - name: poppler
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DENABLE_QT6=ON
@@ -103,6 +107,7 @@ modules:
 
   - name: tesseract
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_TRAINING_TOOLS=OFF
@@ -179,6 +184,7 @@ modules:
   # directory, and none is invented.
   - name: pdf-smithy
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
