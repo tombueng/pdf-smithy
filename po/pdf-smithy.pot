@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDF Smithy\n"
 "Report-Msgid-Bugs-To: tombueng@gmail.com\n"
-"POT-Creation-Date: 2026-11-14 13:23+0100\n"
+"POT-Creation-Date: 2026-11-14 13:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13500,7 +13500,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ui/ObjectOverlay.cpp:2517 src/ui/PageView.cpp:2152
+#: src/ui/ObjectOverlay.cpp:2517 src/ui/PageView.cpp:2151
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14585,7 +14585,7 @@ msgctxt "@info page while dragging the scroll bar, current then total"
 msgid "Page %1 / %2"
 msgstr ""
 
-#: src/ui/PageView.cpp:2187
+#: src/ui/PageView.cpp:2186
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14593,7 +14593,7 @@ msgid ""
 "or a JPEG 2000 image, whose pixels nothing here can read."
 msgstr ""
 
-#: src/ui/PageView.cpp:2199
+#: src/ui/PageView.cpp:2198
 #, kde-format
 msgctxt "@info there is nowhere to write a temporary file"
 msgid ""
@@ -14601,19 +14601,19 @@ msgid ""
 "is being read out of the file."
 msgstr ""
 
-#: src/ui/PageView.cpp:2210
+#: src/ui/PageView.cpp:2209
 #, kde-format
 msgctxt "@info %1 names a picture, %2 says what went wrong"
 msgid "%1 could not be copied: %2"
 msgstr ""
 
-#: src/ui/PageView.cpp:2217
+#: src/ui/PageView.cpp:2216
 #, kde-format
 msgctxt "@info %1 names a picture"
 msgid "%1 came out of the file in a form this program cannot read back."
 msgstr ""
 
-#: src/ui/PageView.cpp:2237
+#: src/ui/PageView.cpp:2236
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14621,7 +14621,7 @@ msgid ""
 "it covers, and a picture it is drawn over."
 msgstr ""
 
-#: src/ui/PageView.cpp:2268
+#: src/ui/PageView.cpp:2267
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14629,13 +14629,13 @@ msgid ""
 "and drag a box round what you want to take."
 msgstr ""
 
-#: src/ui/PageView.cpp:2281
+#: src/ui/PageView.cpp:2280
 #, kde-format
 msgctxt "@info"
 msgid "Nothing is chosen to copy. Click something on the page first."
 msgstr ""
 
-#: src/ui/PageView.cpp:2290
+#: src/ui/PageView.cpp:2289
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14643,13 +14643,13 @@ msgid ""
 "to Edit to change the page."
 msgstr ""
 
-#: src/ui/PageView.cpp:2300
+#: src/ui/PageView.cpp:2299
 #, kde-format
 msgctxt "@info"
 msgid "Nothing is chosen to cut. Click something on the page first."
 msgstr ""
 
-#: src/ui/PageView.cpp:2307
+#: src/ui/PageView.cpp:2306
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -14657,13 +14657,13 @@ msgid ""
 "to Edit to add something to it."
 msgstr ""
 
-#: src/ui/PageView.cpp:2314
+#: src/ui/PageView.cpp:2313
 #, kde-format
 msgctxt "@info"
 msgid "There is nothing on the clipboard."
 msgstr ""
 
-#: src/ui/PageView.cpp:2323
+#: src/ui/PageView.cpp:2322
 #, kde-format
 msgctxt "@info"
 msgid ""
