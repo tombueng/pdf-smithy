@@ -1278,7 +1278,10 @@ void TestWorkMode::everyToolBarNamesItsButtons()
     for (KToolBar *bar : bars) {
         QVERIFY2(bar->toolButtonStyle() == Qt::ToolButtonTextUnderIcon,
                  qPrintable(QStringLiteral("“%1” hides what its buttons are called").arg(bar->objectName())));
-        QVERIFY2(bar->iconSize().width() >= 32,
+        // Named, but no longer oversized: the viewer-first redesign slimmed the
+        // bars to small-medium icons. The floor only guards against icons so
+        // tiny the picture stops helping; the text under them does the naming.
+        QVERIFY2(bar->iconSize().width() >= 16,
                  qPrintable(QStringLiteral("“%1” draws its icons at %2 pixels")
                                 .arg(bar->objectName())
                                 .arg(bar->iconSize().width())));

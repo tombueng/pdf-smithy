@@ -18,6 +18,7 @@
 #include <QDir>
 #include <QGuiApplication>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QPainter>
@@ -69,9 +70,13 @@ constexpr qint64 RenderBudget = 256LL * 1024 * 1024;
  * Deeper than it once was, because the renders now run several at a time: with
  * one page drawing at a time a long queue only delayed the page being waited
  * for, and with eight the queue is what keeps the cores fed.
+ *
+ * Kept behind is deeper too now that a facing spread is the default view: four
+ * pages is two spreads, so paging back up stays as smooth as going down rather
+ * than redrawing the moment the reader turns round. The budget still caps it.
  */
 constexpr int PagesAhead = 6;
-constexpr int PagesBehind = 2;
+constexpr int PagesBehind = 4;
 
 /**
  * How wide the kept stand-in render of a page is, in device pixels.
@@ -416,6 +421,21 @@ PageView::PageView(QWidget *parent)
     verticalScrollBar()->setSingleStep(24);
     horizontalScrollBar()->setSingleStep(24);
 
+    // A wider bar, easy to grab: a flat rounded handle in a bare channel, no
+    // step arrows, the way a reader expects now. It warms to the ember accent
+    // under the pointer, so the one thing you reach for is the one thing that
+    // lights up. Scoped to the scroll bars, so the page itself is untouched.
+    setStyleSheet(QStringLiteral(
+        "QScrollBar:vertical { width: 16px; background: transparent; margin: 0; }"
+        "QScrollBar:horizontal { height: 16px; background: transparent; margin: 0; }"
+        "QScrollBar::handle:vertical { min-height: 40px; margin: 3px; border-radius: 5px;"
+        " background: rgba(150,150,150,0.45); }"
+        "QScrollBar::handle:horizontal { min-width: 40px; margin: 3px; border-radius: 5px;"
+        " background: rgba(150,150,150,0.45); }"
+        "QScrollBar::handle:hover { background: rgba(214,124,42,0.80); }"
+        "QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }"
+        "QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }"));
+
     // As wide as the machine goes, less one so that the thread painting the
     // window always has somewhere to run: renders are the one part of this
     // program that parallelises perfectly, and the backend now holds enough
@@ -429,7 +449,18 @@ PageView::PageView(QWidget *parent)
     // the bar is the one place the view is moved from without going through
     // this class at all.
     connect(verticalScrollBar(), &QAbstractSlider::actionTriggered, this, [this] { stopGlide(); });
-    connect(verticalScrollBar(), &QAbstractSlider::sliderPressed, this, [this] { stopGlide(); });
+    connect(verticalScrollBar(), &QAbstractSlider::sliderPressed, this, [this] {
+        stopGlide();
+        m_scrubbing = true;
+        updateScrubBadge();
+    });
+    connect(verticalScrollBar(), &QAbstractSlider::sliderMoved, this, [this](int) { updateScrubBadge(); });
+    connect(verticalScrollBar(), &QAbstractSlider::sliderReleased, this, [this] {
+        m_scrubbing = false;
+        if (m_scrubBadge) {
+            m_scrubBadge->hide();
+        }
+    });
 
     // Before the rasteriser goes. This view is a child of the window and the
     // window owns the backend, so by the time the view is destroyed the backend
@@ -992,6 +1023,42 @@ void PageView::updateCurrentPage()
         m_current = best;
         Q_EMIT currentPageChanged(m_current);
     }
+    if (m_scrubbing) {
+        updateScrubBadge();
+    }
+}
+
+void PageView::updateScrubBadge()
+{
+    const int total = m_document ? m_document->pageCount() : 0;
+    if (total <= 0) {
+        return;
+    }
+    if (!m_scrubBadge) {
+        m_scrubBadge = new QLabel(viewport());
+        m_scrubBadge->setObjectName(QStringLiteral("scrubBadge"));
+        m_scrubBadge->setAlignment(Qt::AlignCenter);
+        m_scrubBadge->setFocusPolicy(Qt::NoFocus);
+        m_scrubBadge->setAttribute(Qt::WA_TransparentForMouseEvents);
+        m_scrubBadge->setStyleSheet(QStringLiteral(
+            "QLabel#scrubBadge { background: rgba(28,28,28,0.93); color: #f2f2f2;"
+            " border: 1px solid rgba(214,124,42,0.85); border-radius: 7px;"
+            " padding: 6px 12px; font-weight: 600; }"));
+    }
+    m_scrubBadge->setText(i18nc("@info page while dragging the scroll bar, current then total", "Page %1 / %2",
+                                m_current + 1, total));
+    m_scrubBadge->adjustSize();
+
+    // Beside the pointer, which rides the bar at the right edge, so the badge
+    // sits to its left and is kept inside the page the whole way down.
+    const QPoint at = viewport()->mapFromGlobal(QCursor::pos());
+    int x = at.x() - m_scrubBadge->width() - 16;
+    int y = at.y() - m_scrubBadge->height() / 2;
+    x = std::clamp(x, 8, std::max(8, viewport()->width() - m_scrubBadge->width() - 8));
+    y = std::clamp(y, 8, std::max(8, viewport()->height() - m_scrubBadge->height() - 8));
+    m_scrubBadge->move(x, y);
+    m_scrubBadge->raise();
+    m_scrubBadge->show();
 }
 
 // ── Rendering ahead ───────────────────────────────────────────────────────

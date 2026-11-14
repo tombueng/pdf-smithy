@@ -569,6 +569,8 @@ private:
     /** Which page of how many, and the box that jumps to one. */
     QSpinBox *m_pageBox = nullptr;
     QLabel *m_pageTotal = nullptr;
+    QSpinBox *m_toolPageBox = nullptr;
+    QLabel *m_toolPageTotal = nullptr;
 
     ThumbnailDock *m_thumbnails = nullptr;
 };

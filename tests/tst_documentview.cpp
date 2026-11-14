@@ -519,6 +519,9 @@ void TestDocumentView::zoomingChangesHowBigThePageIsDrawn()
 {
     QVERIFY(m_window->openFile(m_file));
     showDocumentView();
+    // Documents now open on a facing spread by default; this test is about one
+    // page's size under zoom, so put it back to a single column first.
+    pageView()->setLayout(PageView::Layout::Single);
 
     const QRect first = pageView()->pageRect(0);
     QVERIFY2(first.isValid() && first.width() > 1, "the first page is not being drawn at any size at all");
@@ -563,6 +566,9 @@ void TestDocumentView::laysThePagesOutSinglyAndFacing()
 {
     QVERIFY(m_window->openFile(m_file));
     showDocumentView();
+    // The default is now a facing spread; this test drives both layouts itself,
+    // so start it from a known single column.
+    pageView()->setLayout(PageView::Layout::Single);
     pageView()->fitPage();
 
     QCOMPARE(pageView()->layout(), PageView::Layout::Single);
@@ -591,6 +597,9 @@ void TestDocumentView::goesToAPageAndSaysWhichOneItIsOn()
 {
     QVERIFY(m_window->openFile(m_file));
     showDocumentView();
+    // Single column, so "go to page five" lands it at the very top rather than
+    // on a spread's second row, which the default facing layout would make.
+    pageView()->setLayout(PageView::Layout::Single);
 
     QSignalSpy pages(pageView(), &PageView::currentPageChanged);
     QVERIFY(pages.isValid());

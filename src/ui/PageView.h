@@ -21,6 +21,7 @@
 #include <compare>
 #include <memory>
 
+class QLabel;
 class QMimeData;
 
 namespace ps {
@@ -529,6 +530,9 @@ private:
     void updateCurrentPage();
     void emitPosition();
 
+    /** Shows "Page n / N" at the pointer while the scroll bar is being dragged. */
+    void updateScrubBadge();
+
     /**
      * Sets the scale without ending the fit, keeping the reader's place.
      *
@@ -665,6 +669,9 @@ private:
     bool m_fitting = false;
 
     int m_current = 0;
+
+    QLabel *m_scrubBadge = nullptr;
+    bool m_scrubbing = false;
 
     QVector<Placement> m_places;
     QSize m_contents;

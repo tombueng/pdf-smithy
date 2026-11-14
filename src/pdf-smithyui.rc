@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gui SYSTEM "kpartgui.dtd">
-<gui name="pdf-smithy" version="19">
+<gui name="pdf-smithy" version="21">
 
 <!--
     NOTHING may be written above this line but the two lines that are there.
@@ -305,9 +305,9 @@
     <Action name="edit_redo"/>
     <Separator/>
     <Action name="mode_view"/>
-    <Action name="mode_edit"/>
-    <Action name="mode_form"/>
-    <Action name="mode_organise"/>
+    <Action name="mode_more"/>
+    <Separator/>
+    <Action name="go_to_page"/>
     <Separator/>
     <Action name="view_zoom"/>
     <Action name="view_sidebars"/>

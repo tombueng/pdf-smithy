@@ -79,8 +79,10 @@
 #include <QSpinBox>
 #include <QStackedWidget>
 #include <QDockWidget>
+#include <QHBoxLayout>
 #include <QStatusBar>
 #include <QTimer>
+#include <QWidgetAction>
 #include <QVBoxLayout>
 #include <QUndoStack>
 #include <QTransform>
@@ -147,7 +149,7 @@ QString imageFilter()
  * So this is the number that says "the arrangement below has changed since the
  * user was last shown one", and raising it undoes the old one exactly once.
  */
-constexpr int LayoutGeneration = 17;
+constexpr int LayoutGeneration = 19;
 
 /** A mode's own toolbar, in the order they sit on their row. */
 struct ModeToolBar {
@@ -448,6 +450,20 @@ MainWindow::MainWindow(QWidget *parent)
     // been laid over them. Both of those have to have happened before the
     // window can say where its bars go and which of them are up.
     applyLayoutDefaults();
+
+    // Smithy-warm: a restrained ember accent marks the live tool and the one
+    // under the pointer, drawn in translucent colour so it sits on whatever
+    // palette the desktop theme hands us rather than fighting it. Scoped to
+    // toolbar buttons, so dialogs and everything else keep the native look.
+    // Size-neutral on purpose: only a background tint and a rounded corner, no
+    // padding, border or spacing that would widen the bars — the mode toolbars
+    // already sit close to the window's width, and a few pixels per button push
+    // their tools behind an overflow arrow.
+    setStyleSheet(QStringLiteral(
+        "QToolBar::separator { background: rgba(140,140,140,0.40); width: 1px; margin: 5px 7px; }"
+        "QToolBar QToolButton:hover { background: rgba(214,124,42,0.14); }"
+        "QToolBar QToolButton:checked { background: rgba(214,124,42,0.26); }"
+        "QToolBar QToolButton:pressed { background: rgba(214,124,42,0.34); }"));
 
     // The menu bar can be hidden, and a window with neither a menu bar nor a
     // way to reach the menus is a trap. This is the modern KDE answer to it and
@@ -990,6 +1006,38 @@ void MainWindow::setupActions()
     addAction(QStringLiteral("go_last_page"), i18nc("@action", "Last Page"), QStringLiteral("go-last"),
               { QKeySequence(Qt::CTRL | Qt::Key_End) }, [this] { m_pageView->goToPage(m_document->pageCount() - 1); });
 
+    // A page box in the toolbar itself, so "jump to page" is a glance up rather
+    // than down in the status line, with "/ N" beside it for where you are of
+    // how many. It mirrors the status-bar box; both follow the view.
+    m_toolPageBox = new QSpinBox(this);
+    m_toolPageBox->setRange(1, 1);
+    m_toolPageBox->setKeyboardTracking(false);
+    m_toolPageBox->setAlignment(Qt::AlignRight);
+    m_toolPageBox->setFixedWidth(58);
+    m_toolPageBox->setToolTip(i18nc("@info:tooltip", "Go to a page: type its number."));
+    m_toolPageTotal = new QLabel(this);
+    connect(m_toolPageBox, &QSpinBox::valueChanged, this, [this](int value) {
+        if (m_document && value - 1 != m_pageView->currentPage()) {
+            m_pageView->goToPage(value - 1);
+        }
+    });
+    connect(m_pageView, &PageView::currentPageChanged, this, [this](int row) {
+        if (m_toolPageBox->value() != row + 1) {
+            QSignalBlocker blocker(m_toolPageBox);
+            m_toolPageBox->setValue(row + 1);
+        }
+    });
+    auto *pageHolder = new QWidget(this);
+    auto *pageRow = new QHBoxLayout(pageHolder);
+    pageRow->setContentsMargins(4, 0, 4, 0);
+    pageRow->setSpacing(3);
+    pageRow->addWidget(m_toolPageBox);
+    pageRow->addWidget(m_toolPageTotal);
+    auto *pageAction = new QWidgetAction(this);
+    pageAction->setText(i18nc("@action", "Go to Page"));
+    pageAction->setDefaultWidget(pageHolder);
+    actionCollection()->addAction(QStringLiteral("go_to_page"), pageAction);
+
     // ── what dragging does while reading ──────────────────────────────────
     // Three answers to one question, and the question is the one the owner
     // asked: what will this drag do. Ctrl, space and the middle button still
@@ -1090,6 +1138,13 @@ void MainWindow::setupActions()
     addGroup(QStringLiteral("view_sidebars"), i18nc("@action a menu of side panels", "Sidebars"),
              QStringLiteral("view-sidetree"),
              { entry("show_thumbnails"), entry("show_outline"), entry("show_inspector") }, false);
+
+    // The two advanced modes — reshaping the page, building the form — and the
+    // page arranger live behind one "More…" button, so the reader's bar leads
+    // with "Read & Fill In" and the rest is a click away rather than in the way.
+    addGroup(QStringLiteral("mode_more"), i18nc("@action a menu of the less-used working modes", "More…"),
+             QStringLiteral("application-menu"),
+             { entry("mode_edit"), entry("mode_form"), nullptr, entry("mode_organise") }, false);
 
     addGroup(QStringLiteral("insert_pages"), i18nc("@action a menu of things to add to the document", "Insert"),
              QStringLiteral("document-import"), { entry("insert_file"), entry("import_images"), entry("tool_typeset") },
@@ -1406,6 +1461,16 @@ bool MainWindow::openFile(const QString &path)
             break;
         }
     }
+
+    // A reader's default: open on a facing spread fitted whole, and give the
+    // page view the keyboard so the arrow and page keys turn pages at once,
+    // without the reader having to click into the document first.
+    m_pageView->setLayout(PageView::Layout::Facing);
+    m_pageView->fitPage();
+    if (QAction *twoUp = m_fitActions.value(static_cast<int>(PageGridView::Fit::TwoPages))) {
+        twoUp->setChecked(true);
+    }
+    m_pageView->setFocus();
     return true;
 }
 
@@ -2738,6 +2803,12 @@ void MainWindow::updateStatusBar()
         m_pageBox->setEnabled(pages > 0);
         m_pageBox->setValue(qBound(1, m_pageView->currentPage() + 1, qMax(1, pages)));
         m_pageTotal->setText(i18ncp("@info:status how many pages there are", "of %1 page", "of %1 pages", pages));
+
+        QSignalBlocker toolBlocker(m_toolPageBox);
+        m_toolPageBox->setRange(1, qMax(1, pages));
+        m_toolPageBox->setEnabled(pages > 0);
+        m_toolPageBox->setValue(qBound(1, m_pageView->currentPage() + 1, qMax(1, pages)));
+        m_toolPageTotal->setText(i18ncp("@info total pages beside the toolbar page box", "/ %1", "/ %1", pages));
     }
 
     const int pages = m_document->pageCount();
@@ -3293,13 +3364,13 @@ void MainWindow::applyToolBarStyle(KToolBar *bar, Qt::ToolButtonStyle style)
     }
 
     bar->setToolButtonStyle(style);
-    bar->setIconDimensions(KIconLoader::SizeMedium);
+    bar->setIconDimensions(KIconLoader::SizeSmallMedium);
 
     // Written as well as set. A KToolBar reads its own group and puts the
     // desktop's smaller default back over anything merely set beforehand, so
     // the entry is what makes the size survive the next pass.
     own.writeEntry("ToolButtonStyle", wanted);
-    own.writeEntry("IconSize", int(KIconLoader::SizeMedium));
+    own.writeEntry("IconSize", int(KIconLoader::SizeSmallMedium));
 }
 
 void MainWindow::showModeToolBar()
