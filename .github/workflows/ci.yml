@@ -222,11 +222,21 @@ jobs:
 
       # Qt and Poppler leak a little at exit by design; the sanitizers are here
       # to catch our own memory errors, not to police library shutdown.
+      #
+      # On the offscreen platform rather than xvfb/xcb. The sanitizers are here
+      # for memory correctness, and the teardown that used to read through a
+      # freed document reproduces under offscreen just as surely (the work mode
+      # tests exercise it either way). Real X fonts, though, lay the text under
+      # the mode-bar icons out wider than offscreen's, so a window at the app's
+      # default width shows an overflow arrow there and the layout assertions
+      # fail for a reason that has nothing to do with memory — the same reason
+      # the package job runs offscreen. One platform decision, one place to look.
       - name: Test
         env:
           ASAN_OPTIONS: detect_leaks=0:abort_on_error=1
           UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
-        run: xvfb-run -a ctest --test-dir build --output-on-failure --no-tests=error
+          QT_QPA_PLATFORM: offscreen
+        run: ctest --test-dir build --output-on-failure --no-tests=error
 
   package:
     name: Debian package
