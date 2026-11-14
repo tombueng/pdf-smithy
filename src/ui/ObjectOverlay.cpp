@@ -2507,12 +2507,6 @@ QImage ObjectOverlay::pixelsOf(int row, const PageObject &object, QString *why)
         return QImage();
     };
 
-    if (object.kind == PageObject::Kind::InlineImage || object.resourceName.isEmpty()) {
-        return refuse(i18nc("@info why an inline picture cannot be copied",
-                            "An inline picture cannot be copied: its pixels are written into the page's own "
-                            "instructions rather than into an object that can be lifted out of them."));
-    }
-
     // The file this row's page really lives in, which is the file the resource
     // name means something in, not whichever file the document was last saved
     // as, and not the same file for every row of a merged document.
@@ -2523,30 +2517,48 @@ QImage ObjectOverlay::pixelsOf(int row, const PageObject &object, QString *why)
         return refuse(i18nc("@info", "The file behind this page is not available, so its pictures cannot be read."));
     }
 
-    // Taken out of the file rather than off the screen: what the page draws is
-    // the stored picture, and a copy cut out of the rendered view would carry
-    // whatever zoom it happened to be at and whatever was drawn behind it.
-    QTemporaryFile file(QDir::tempPath() + u"/pdf-smithy-copy-XXXXXX.png"_s);
-    if (!file.open()) {
-        return refuse(i18nc("@info there is nowhere to write a temporary file",
-                            "A picture could not be copied: this machine has nowhere to put it while it is being "
-                            "read out of the file."));
+    // First choice: lift the stored picture straight out of the file by name.
+    // Taken out of the file rather than off the screen, so it carries the
+    // original pixels with nothing drawn behind them and at no particular zoom.
+    // Only for a named object; an inline image has no name to ask for.
+    if (object.kind != PageObject::Kind::InlineImage && !object.resourceName.isEmpty()) {
+        QTemporaryFile file(QDir::tempPath() + u"/pdf-smithy-copy-XXXXXX.png"_s);
+        if (file.open()) {
+            const QString path = file.fileName();
+            file.close();
+            QString error;
+            if (ImageEdit::extract(holder, page, object.resourceName, path, &error)) {
+                const QImage image(path);
+                if (!image.isNull()) {
+                    return image;
+                }
+            }
+        }
     }
-    const QString path = file.fileName();
-    file.close();
 
-    QString error;
-    if (!ImageEdit::extract(holder, page, object.resourceName, path, &error)) {
-        return refuse(i18nc("@info %1 names a picture, %2 says what went wrong", "%1 could not be copied: %2",
-                            object.resourceName, error));
+    // Fallback: no name to ask for (an inline image), or the name no longer
+    // names what the file holds — a resource an edit renamed, which is what
+    // rotating a picture and saving the document leaves behind. Rather than drop
+    // the copy to the words that describe it, render the patch of the page the
+    // object stands on. tileFor goes through the one point-to-pixel conversion
+    // the view owns, so the patch is the object and not a guess at where it is.
+    const int widthPx = liftWidthOf(row);
+    const QRect tile = tileFor(row, object.bounds);
+    if (widthPx > 0 && !tile.isEmpty()) {
+        PopplerBackend backend;
+        if (backend.addDocument(1, holder, nullptr)) {
+            RenderBackend::Request ask;
+            ask.widthPx = widthPx;
+            ask.tile = tile;
+            const QImage rendered = backend.render(1, page, ask);
+            if (!rendered.isNull()) {
+                return rendered;
+            }
+        }
     }
 
-    const QImage image(path);
-    if (image.isNull()) {
-        return refuse(i18nc("@info %1 names a picture",
-                            "%1 came out of the file in a form this program cannot read back.", object.resourceName));
-    }
-    return image;
+    return refuse(i18nc("@info a picture could not be read out of the file at all",
+                        "This picture could not be copied: it could not be read out of the file."));
 }
 
 PageClipboard::Parcel ObjectOverlay::parcelOfChoice()
