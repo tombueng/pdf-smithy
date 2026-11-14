@@ -4,6 +4,7 @@
 */
 #include "MainWindow.h"
 
+#include "Accent.h"
 #include "DocumentCommands.h"
 #include "DocumentProperties.h"
 #include "EditorMode.h"
@@ -460,10 +461,11 @@ MainWindow::MainWindow(QWidget *parent)
     // already sit close to the window's width, and a few pixels per button push
     // their tools behind an overflow arrow.
     setStyleSheet(QStringLiteral(
-        "QToolBar::separator { background: rgba(140,140,140,0.40); width: 1px; margin: 5px 7px; }"
-        "QToolBar QToolButton:hover { background: rgba(214,124,42,0.14); }"
-        "QToolBar QToolButton:checked { background: rgba(214,124,42,0.26); }"
-        "QToolBar QToolButton:pressed { background: rgba(214,124,42,0.34); }"));
+                      "QToolBar::separator { background: rgba(140,140,140,0.40); width: 1px; margin: 5px 7px; }"
+                      "QToolBar QToolButton:hover { background: %1; }"
+                      "QToolBar QToolButton:checked { background: %2; }"
+                      "QToolBar QToolButton:pressed { background: %3; }")
+                      .arg(accentRgba(0.14), accentRgba(0.26), accentRgba(0.34)));
 
     // The menu bar can be hidden, and a window with neither a menu bar nor a
     // way to reach the menus is a trap. This is the modern KDE answer to it and

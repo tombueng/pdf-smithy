@@ -4,6 +4,7 @@
 */
 #include "PageView.h"
 
+#include "Accent.h"
 #include "PageRows.h"
 #include "core/Document.h"
 #include "core/ImageEdit.h"
@@ -426,15 +427,16 @@ PageView::PageView(QWidget *parent)
     // under the pointer, so the one thing you reach for is the one thing that
     // lights up. Scoped to the scroll bars, so the page itself is untouched.
     setStyleSheet(QStringLiteral(
-        "QScrollBar:vertical { width: 16px; background: transparent; margin: 0; }"
-        "QScrollBar:horizontal { height: 16px; background: transparent; margin: 0; }"
-        "QScrollBar::handle:vertical { min-height: 40px; margin: 3px; border-radius: 5px;"
-        " background: rgba(150,150,150,0.45); }"
-        "QScrollBar::handle:horizontal { min-width: 40px; margin: 3px; border-radius: 5px;"
-        " background: rgba(150,150,150,0.45); }"
-        "QScrollBar::handle:hover { background: rgba(214,124,42,0.80); }"
-        "QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }"
-        "QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }"));
+                      "QScrollBar:vertical { width: 16px; background: transparent; margin: 0; }"
+                      "QScrollBar:horizontal { height: 16px; background: transparent; margin: 0; }"
+                      "QScrollBar::handle:vertical { min-height: 40px; margin: 3px; border-radius: 5px;"
+                      " background: rgba(150,150,150,0.45); }"
+                      "QScrollBar::handle:horizontal { min-width: 40px; margin: 3px; border-radius: 5px;"
+                      " background: rgba(150,150,150,0.45); }"
+                      "QScrollBar::handle:hover { background: %1; }"
+                      "QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }"
+                      "QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }")
+                      .arg(accentRgba(0.80)));
 
     // As wide as the machine goes, less one so that the thread painting the
     // window always has somewhere to run: renders are the one part of this
@@ -1041,9 +1043,10 @@ void PageView::updateScrubBadge()
         m_scrubBadge->setFocusPolicy(Qt::NoFocus);
         m_scrubBadge->setAttribute(Qt::WA_TransparentForMouseEvents);
         m_scrubBadge->setStyleSheet(QStringLiteral(
-            "QLabel#scrubBadge { background: rgba(28,28,28,0.93); color: #f2f2f2;"
-            " border: 1px solid rgba(214,124,42,0.85); border-radius: 7px;"
-            " padding: 6px 12px; font-weight: 600; }"));
+                                        "QLabel#scrubBadge { background: rgba(28,28,28,0.93); color: #f2f2f2;"
+                                        " border: 1px solid %1; border-radius: 7px;"
+                                        " padding: 6px 12px; font-weight: 600; }")
+                                        .arg(accentRgba(0.85)));
     }
     m_scrubBadge->setText(i18nc("@info page while dragging the scroll bar, current then total", "Page %1 / %2",
                                 m_current + 1, total));
