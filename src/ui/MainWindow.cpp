@@ -149,7 +149,7 @@ QString imageFilter()
  * So this is the number that says "the arrangement below has changed since the
  * user was last shown one", and raising it undoes the old one exactly once.
  */
-constexpr int LayoutGeneration = 19;
+constexpr int LayoutGeneration = 20;
 
 /** A mode's own toolbar, in the order they sit on their row. */
 struct ModeToolBar {
@@ -697,8 +697,12 @@ void MainWindow::setupActions()
     // Named for what it adds over Read mode, which fills forms in on the page
     // itself: a list of every field in one place, which is how a long form is
     // worked through and checked without hunting across twelve pages.
-    addAction(QStringLiteral("document_form"), i18nc("@action", "Fill In the Form as a List…"),
-              QStringLiteral("edit-entry"), {}, &MainWindow::fillForm);
+    if (QAction *fillAsList = addAction(QStringLiteral("document_form"),
+                                        i18nc("@action", "Fill In the Form as a List…"),
+                                        QStringLiteral("edit-entry"), {}, &MainWindow::fillForm)) {
+        // The menu says what it does; the reading bar has room only for the gist.
+        fillAsList->setIconText(i18nc("@action:intoolbar short label for document_form", "Form List…"));
+    }
 
     addAction(QStringLiteral("document_archive"), i18nc("@action", "Save for Archiving…"),
               QStringLiteral("document-save-as"), {}, &MainWindow::saveArchival);
@@ -1115,6 +1119,9 @@ void MainWindow::setupActions()
                         m_pageView->setLayout(on ? PageView::Layout::Facing : PageView::Layout::Single);
                     });
     facing->setCheckable(true);
+    // The menu spells the whole thing out; a toolbar has no room for a sentence
+    // under an icon, so the button says the short of it.
+    facing->setIconText(i18nc("@action:intoolbar short label for view_facing", "Two Pages"));
 
     QAction *inspector = m_inspector->toggleViewAction();
     inspector->setText(i18nc("@action", "Properties Sidebar"));
@@ -3345,14 +3352,32 @@ KToolBar *MainWindow::toolBar(const QString &name) const
 void MainWindow::applyToolBarStyle(KToolBar *bar, Qt::ToolButtonStyle style)
 {
     const bool isMain = bar->objectName() == QLatin1String("mainToolBar");
-    const QString wanted = QStringLiteral("TextUnderIcon");
 
-    // What they chose for this bar, from its own context menu. Anything other
-    // than what this program writes is a decision, and is left alone; what this
-    // program wrote is not a decision, so it does not block the next start.
+    // The name KToolBar writes for each style, so what we store round-trips
+    // through its own context menu rather than reading as a stranger's value.
+    const auto styleName = [](Qt::ToolButtonStyle s) -> QString {
+        switch (s) {
+        case Qt::ToolButtonIconOnly:
+            return QStringLiteral("IconOnly");
+        case Qt::ToolButtonTextOnly:
+            return QStringLiteral("TextOnly");
+        case Qt::ToolButtonTextBesideIcon:
+            return QStringLiteral("TextBesideIcon");
+        case Qt::ToolButtonTextUnderIcon:
+        default:
+            return QStringLiteral("TextUnderIcon");
+        }
+    };
+    const QString wanted = styleName(style);
+
+    // What they chose for this bar, from its own context menu, is a decision and
+    // is left alone — but only a style this program did not write. What we wrote
+    // under an older layout generation is last design's default, not a choice,
+    // so a redesign of the bars gets to replace it; see LayoutGeneration.
     KConfigGroup saved = autoSaveConfigGroup();
     KConfigGroup own(&saved, QStringLiteral("Toolbar ") + bar->objectName());
-    if (own.hasKey("ToolButtonStyle") && own.readEntry("ToolButtonStyle", QString()) != wanted) {
+    const bool oursFromBefore = own.readEntry("StyleGeneration", 0) < LayoutGeneration;
+    if (!oursFromBefore && own.hasKey("ToolButtonStyle") && own.readEntry("ToolButtonStyle", QString()) != wanted) {
         return;
     }
 
@@ -3371,6 +3396,9 @@ void MainWindow::applyToolBarStyle(KToolBar *bar, Qt::ToolButtonStyle style)
     // the entry is what makes the size survive the next pass.
     own.writeEntry("ToolButtonStyle", wanted);
     own.writeEntry("IconSize", int(KIconLoader::SizeSmallMedium));
+    // Stamped so the next start can tell this default of ours from a choice the
+    // user made over the top of it, and so a later redesign can supersede it.
+    own.writeEntry("StyleGeneration", LayoutGeneration);
 }
 
 void MainWindow::showModeToolBar()
@@ -3467,11 +3495,14 @@ void MainWindow::applyLayoutDefaults()
     }
 
     // Every time, because KToolBar puts the saved settings back over the top on
-    // each pass. Large icons with their names underneath on every bar: a button
-    // whose picture has to carry the whole meaning is a button people learn by
-    // trial, and this program has ninety of them.
+    // each pass. A button whose picture has to carry the whole meaning is a
+    // button people learn by trial, and this program has ninety of them, so
+    // every bar names its buttons. The top bar, up in every mode and read more
+    // than any other, sets its names beside the icons and so stands only one
+    // row tall; the mode bars keep theirs underneath, where a denser row of
+    // tools has the width for them.
     if (main) {
-        applyToolBarStyle(main, Qt::ToolButtonTextUnderIcon);
+        applyToolBarStyle(main, Qt::ToolButtonTextBesideIcon);
     }
     for (int i = 0; i < modeToolBarCount; ++i) {
         if (KToolBar *bar = toolBar(QLatin1String(modeToolBars[i].name))) {

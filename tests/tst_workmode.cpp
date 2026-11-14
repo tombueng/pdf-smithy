@@ -1276,11 +1276,17 @@ void TestWorkMode::everyToolBarNamesItsButtons()
     QVERIFY2(!bars.isEmpty(), "the window came up with no toolbars at all");
 
     for (KToolBar *bar : bars) {
-        QVERIFY2(bar->toolButtonStyle() == Qt::ToolButtonTextUnderIcon,
+        // Both bars name their buttons; they differ only in where the name sits.
+        // The top bar is up in every mode and so is kept one row tall, with its
+        // names beside the icons; the mode bars put theirs underneath. What must
+        // not happen is a bar that shows a picture and no word at all.
+        const bool isMain = bar->objectName() == QLatin1String("mainToolBar");
+        const Qt::ToolButtonStyle wanted = isMain ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonTextUnderIcon;
+        QVERIFY2(bar->toolButtonStyle() == wanted,
                  qPrintable(QStringLiteral("“%1” hides what its buttons are called").arg(bar->objectName())));
         // Named, but no longer oversized: the viewer-first redesign slimmed the
         // bars to small-medium icons. The floor only guards against icons so
-        // tiny the picture stops helping; the text under them does the naming.
+        // tiny the picture stops helping; the text beside or under them names.
         QVERIFY2(bar->iconSize().width() >= 16,
                  qPrintable(QStringLiteral("“%1” draws its icons at %2 pixels")
                                 .arg(bar->objectName())
