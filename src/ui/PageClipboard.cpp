@@ -66,6 +66,32 @@ QString describeItem(const NewContent &item)
     return {};
 }
 
+/**
+ * The copied text as HTML that carries its face, size and colour, so that a
+ * paste into something that keeps formatting — a word processor, an email —
+ * arrives looking as it did on the page rather than as naked characters. Only
+ * text styles; a shape or a picture has no run of words to dress.
+ */
+QString asHtml(const PageClipboard::Parcel &parcel)
+{
+    QStringList spans;
+    for (const NewContent &item : parcel.items) {
+        if (item.kind != NewContent::Kind::Text || item.text.isEmpty()) {
+            continue;
+        }
+        QString style = QStringLiteral("font-family:'%1'; font-size:%2pt")
+                            .arg(item.fontFamily.toHtmlEscaped(), QString::number(item.fontSize, 'f', 1));
+        if (item.fill.isValid()) {
+            style += QStringLiteral("; color:%1").arg(item.fill.name(QColor::HexRgb));
+        }
+        spans.append(QStringLiteral("<span style=\"%1\">%2</span>").arg(style, item.text.toHtmlEscaped()));
+    }
+    if (spans.isEmpty()) {
+        return {};
+    }
+    return QStringLiteral("<!DOCTYPE html><html><body>%1</body></html>").arg(spans.join(QStringLiteral("<br>\n")));
+}
+
 } // namespace
 
 QString PageClipboard::objectsMimeType()
@@ -105,6 +131,12 @@ QMimeData *PageClipboard::pack(const Parcel &parcel)
     const QString text = asPlainText(parcel);
     if (!text.isEmpty()) {
         data->setText(text);
+    }
+
+    // The same words with their style, for anything that keeps formatting.
+    const QString html = asHtml(parcel);
+    if (!html.isEmpty()) {
+        data->setHtml(html);
     }
 
     // One picture and nothing else also goes on as a picture, so that a logo
