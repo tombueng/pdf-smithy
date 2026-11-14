@@ -460,12 +460,12 @@ MainWindow::MainWindow(QWidget *parent)
     // padding, border or spacing that would widen the bars — the mode toolbars
     // already sit close to the window's width, and a few pixels per button push
     // their tools behind an overflow arrow.
-    setStyleSheet(QStringLiteral(
-                      "QToolBar::separator { background: rgba(140,140,140,0.40); width: 1px; margin: 5px 7px; }"
-                      "QToolBar QToolButton:hover { background: %1; }"
-                      "QToolBar QToolButton:checked { background: %2; }"
-                      "QToolBar QToolButton:pressed { background: %3; }")
-                      .arg(accentRgba(0.14), accentRgba(0.26), accentRgba(0.34)));
+    setStyleSheet(
+        QStringLiteral("QToolBar::separator { background: rgba(140,140,140,0.40); width: 1px; margin: 5px 7px; }"
+                       "QToolBar QToolButton:hover { background: %1; }"
+                       "QToolBar QToolButton:checked { background: %2; }"
+                       "QToolBar QToolButton:pressed { background: %3; }")
+            .arg(accentRgba(0.14), accentRgba(0.26), accentRgba(0.34)));
 
     // The menu bar can be hidden, and a window with neither a menu bar nor a
     // way to reach the menus is a trap. This is the modern KDE answer to it and
@@ -699,9 +699,9 @@ void MainWindow::setupActions()
     // Named for what it adds over Read mode, which fills forms in on the page
     // itself: a list of every field in one place, which is how a long form is
     // worked through and checked without hunting across twelve pages.
-    if (QAction *fillAsList = addAction(QStringLiteral("document_form"),
-                                        i18nc("@action", "Fill In the Form as a List…"),
-                                        QStringLiteral("edit-entry"), {}, &MainWindow::fillForm)) {
+    if (QAction *fillAsList
+        = addAction(QStringLiteral("document_form"), i18nc("@action", "Fill In the Form as a List…"),
+                    QStringLiteral("edit-entry"), {}, &MainWindow::fillForm)) {
         // The menu says what it does; the reading bar has room only for the gist.
         fillAsList->setIconText(i18nc("@action:intoolbar short label for document_form", "Form List…"));
     }
