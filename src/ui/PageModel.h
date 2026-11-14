@@ -80,6 +80,13 @@ private:
     void onThumbnailReady(int sourceId, int sourcePage);
     qreal aspectRatioFor(int row) const;
 
+    // Guarded, not owned. Nulled the moment the Document is destroyed (see
+    // connectDocument), so that if the document dies before this model — which
+    // happens on window teardown, where the document and the panels are sibling
+    // children and the document goes first — the pointer does not dangle. Every
+    // read below already asks `if (!m_document)`; that is what makes the answer
+    // true. A view laying itself out as it is unparented would otherwise call
+    // rowCount through a freed document.
     Document *m_document = nullptr;
     int m_thumbnailWidth = 0;
     RenderCache *m_cache = nullptr;

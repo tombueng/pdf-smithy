@@ -80,6 +80,12 @@ void PageModel::connectDocument()
         m_sizeCache.clear();
         endResetModel();
     });
+
+    // If the document is destroyed out from under the model — on window teardown
+    // the two are sibling children and the document is freed first — let go of
+    // it at once, so the `if (!m_document)` guards above hold and a view laying
+    // itself out on the way to being deleted never reads through a freed pointer.
+    connect(m_document, &QObject::destroyed, this, [this] { m_document = nullptr; });
 }
 
 void PageModel::setThumbnailWidth(int pixels)
